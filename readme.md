@@ -1,3 +1,5 @@
+Build status: [![Build Status](https://buildhive.cloudbees.com/job/if052java/job/if052/badge/icon)](https://buildhive.cloudbees.com/job/if052java/job/if052/)
+
 To run these 2 projects you'll need:
   - Maven 3.0+
   - internet connection to resolve dependencies
