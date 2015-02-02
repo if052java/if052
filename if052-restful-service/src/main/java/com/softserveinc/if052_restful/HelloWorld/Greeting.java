@@ -1,4 +1,4 @@
-package com.softserveinc.if052_restful_service.HelloWorld;
+package com.softserveinc.if052_restful.HelloWorld;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

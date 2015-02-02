@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softserveinc.if052_restful.mappers.IndicatorMapper">
+
+    <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">
+        SELECT
+        indicator_id,
+        date,
+        value,
+        is_paid,
+        is_published,
+        water_meter_id
+        FROM indicator
+        WHERE indicator_id = #{indicatorId}
+    </select>
+    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+    <resultMap type="Indicator" id="IndicatorResult">
+        <id property="indicatorId" column="indicator_id"/>
+        <result property="date" column="date"/>
+        <result property="value" column="value"/>
+        <result property="isPaid" column="is_paid"/>
+        <result property="isPublished" column="is_published"/>
+        <result property="waterMeterId" column="water_meter_id"/>
+    </resultMap>
+
+    <select id="getAllIndicators" resultMap="IndicatorResult">
+        SELECT * FROM indicator
+    </select>
+
+    <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">
+        INSERT INTO indicator(indicator_id, date, value, is_paid, is_published, water_meter_id)
+        VALUES(#{indicatorId}, #{date}, #{value}, #{isPaid}, #{isPublished}, #{waterMeterId})
+    </insert>
+
+    <update id="updateIndicator" parameterType="Indicator">
+        UPDATE indicator
+        SET
+        date= #{date},
+        value = #{value},
+        is_paid = #{isPaid},
+        is_published = #{isPublished},
+        water_meter_id = #{waterMeterId}
+        WHERE indicator_id = #{indicatorId}
+    </update>
+
+    <delete id="deleteIndicator" parameterType="int">
+        DELETE FROM indicator WHERE indicator_id = #{indicatorId}
+    </delete>
+
+</mapper>
