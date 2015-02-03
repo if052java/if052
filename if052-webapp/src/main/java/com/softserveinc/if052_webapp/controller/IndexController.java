@@ -24,7 +24,7 @@ public class IndexController {
     public String greeting(@RequestParam(value = "name",
             required = false, defaultValue = "World") String name){
         RestTemplate restTemplate = new RestTemplate();
-        Greeting greeting = restTemplate.getForObject("http://localhost:8080/restful/greeting?name="+name, Greeting.class);
+        Greeting greeting = restTemplate.getForObject("http://localhost:8080/restful/greeting/"+name, Greeting.class);
         return greeting.getContent();
     }
 }

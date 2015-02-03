@@ -4,7 +4,7 @@ To run these 2 projects you'll need:
   - Maven 3.0+
   - internet connection to resolve dependencies
   - jdk7
-  - tomcat 7
+  - tomcat 7/8
 
 How to run: step by step
   (making war's)
@@ -24,14 +24,14 @@ How to run: step by step
 Finish!
 
 Links to check how it works:
+  http://localhost:8080/restful/
   (should return JSON)
-  http://localhost:8080/restful/greeting
-  http://localhost:8080/restful/greeting?name=<your name>
+  http://localhost:8080/restful/greeting/yourName
   
   (should return "Hello .. !")
-  http://localhost:8080/webapp/ 	
-  http://localhost:8080/webapp/greeting 
-  http://localhost:8080/webapp/greeting?name=<your name>
+  http://localhost:8080/webapp/
+  http://localhost:8080/webapp/greeting
+  http://localhost:8080/webapp/greeting?name=yourName
   
 
     Used guides:
@@ -39,6 +39,3 @@ https://spring.io/guides/gs/rest-hateoas/
 https://spring.io/guides/gs/consuming-rest/
 https://spring.io/guides/gs/serving-web-content/
 https://spring.io/guides/gs/convert-jar-to-war-maven/
-  
-At this moment this is an extremely simple project, i hope it will grow up)
-
