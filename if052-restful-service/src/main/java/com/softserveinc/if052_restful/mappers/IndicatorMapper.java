@@ -4,6 +4,9 @@ import com.softserveinc.if052_restful.domain.Indicator;
 
 import java.util.List;
 
+/**
+ * Created by Maksym Vynnyk on 02.02.2015.
+ */
 public interface IndicatorMapper {
 
     public void insertIndicator(Indicator indicator);
