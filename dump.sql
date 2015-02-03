@@ -18,7 +18,7 @@
 --
 -- Table structure for table `address`
 --
-CREATE DATABESE water;
+CREATE DATABASE water;
 USE water;
 
 DROP TABLE IF EXISTS `address`;
