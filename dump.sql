@@ -18,6 +18,8 @@
 --
 -- Table structure for table `address`
 --
+CREATE DATABESE water;
+USE water;
 
 DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
