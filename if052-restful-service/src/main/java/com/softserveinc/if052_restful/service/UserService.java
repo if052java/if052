@@ -8,9 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-/**
- * Created by valentyn on 2/3/15.
- */
 @Service
 @Transactional
 public class UserService {
