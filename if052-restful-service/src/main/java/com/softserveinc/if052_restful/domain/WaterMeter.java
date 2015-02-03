@@ -8,7 +8,7 @@ public class WaterMeter {
     private int waterMeterId;
     private String name;
     private String description;
-    private int adressId;
+    private int addressId;
     private List<Indicator> indicators;
 
     public WaterMeter() {
@@ -39,12 +39,12 @@ public class WaterMeter {
         this.description = description;
     }
 
-    public int getAdressId() {
-        return adressId;
+    public int getAddressId() {
+        return addressId;
     }
 
-    public void setAdressId(int adressId) {
-        this.adressId = adressId;
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
     public List<Indicator> getIndicators() {
@@ -61,7 +61,7 @@ public class WaterMeter {
                 "id=" + waterMeterId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", adressId=" + adressId +
+                ", addressId=" + addressId +
                 '}';
     }
 }

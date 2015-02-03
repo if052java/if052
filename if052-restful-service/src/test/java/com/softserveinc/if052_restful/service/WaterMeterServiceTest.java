@@ -33,14 +33,6 @@ public class WaterMeterServiceTest {
     }
 
 
-    @Test
-    public void testDeleteWaterMeter() {
-        int lastId = waterMeterService.getAllWaterMeters().get(waterMeterService.getAllWaterMeters().size()-1).getWaterMeterId();
-        WaterMeter waterMeter = waterMeterService.getWaterMeterById(lastId);
-        waterMeterService.deleteWaterMeter(waterMeter.getWaterMeterId());
-        WaterMeter deletedWaterMeter = waterMeterService.getWaterMeterById(lastId);
-        Assert.assertNull(deletedWaterMeter);
-    }
 
     @Test
     public void testGetAllWaterMeters() {
@@ -56,22 +48,6 @@ public class WaterMeterServiceTest {
         }
     }
 
-    @Test
-    public void testUpdateWaterMeter() {
-        long timestamp = System.currentTimeMillis();
-        int lastId = waterMeterService.getAllWaterMeters().get(waterMeterService.getAllWaterMeters().size()-1).getWaterMeterId();
-        WaterMeter waterMeter = waterMeterService.getWaterMeterById(lastId);
-        waterMeter.setName("name" + timestamp);
-        waterMeter.setDescription("des" + timestamp);
-        waterMeter.setAdressId(1);
-        System.out.println(waterMeter);
-        waterMeterService.updateWaterMeter(waterMeter);
-        WaterMeter updatedWaterMeter = waterMeterService.getWaterMeterById(lastId);
-        System.out.println(updatedWaterMeter);
-        Assert.assertEquals(waterMeter.getName(), updatedWaterMeter.getName());
-        Assert.assertEquals(waterMeter.getDescription(), updatedWaterMeter.getDescription());
-        Assert.assertEquals(waterMeter.getAdressId(), updatedWaterMeter.getAdressId());
-    }
 
     @Test
     public void testInsertWaterMeter() {
@@ -80,7 +56,7 @@ public class WaterMeterServiceTest {
         WaterMeter waterMeter = new WaterMeter();
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("des" + timestamp);
-        waterMeter.setAdressId(1);
+        waterMeter.setAddressId(1);
         waterMeterService.insertWaterMeter(waterMeter);
         Assert.assertTrue(waterMeter.getWaterMeterId() != 0);
         WaterMeter createdWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
@@ -88,5 +64,39 @@ public class WaterMeterServiceTest {
         Assert.assertEquals(waterMeter.getName(), createdWaterMeter.getName());
     }
 
+
+    @Test
+    public void testUpdateWaterMeter() {
+        long timestamp = System.currentTimeMillis();
+        int lastId = waterMeterService.getAllWaterMeters().get(waterMeterService.getAllWaterMeters().size()-1).getWaterMeterId();
+        WaterMeter waterMeter = waterMeterService.getWaterMeterById(lastId);
+        waterMeter.setName("name" + timestamp);
+        waterMeter.setDescription("des" + timestamp);
+        waterMeter.setAddressId(1);
+        System.out.println(waterMeter);
+        waterMeterService.updateWaterMeter(waterMeter);
+        WaterMeter updatedWaterMeter = waterMeterService.getWaterMeterById(lastId);
+        System.out.println(updatedWaterMeter);
+        Assert.assertEquals(waterMeter.getName(), updatedWaterMeter.getName());
+        Assert.assertEquals(waterMeter.getDescription(), updatedWaterMeter.getDescription());
+        Assert.assertEquals(waterMeter.getAddressId(), updatedWaterMeter.getAddressId());
+    }
+
+
+
+    @Test
+    public void testDeleteWaterMeter() {
+        /*int lastId = waterMeterService.getAllWaterMeters().get(waterMeterService.getAllWaterMeters().size()-1).getWaterMeterId();
+        WaterMeter waterMeter = waterMeterService.getWaterMeterById(lastId);*/
+        long timestamp = System.currentTimeMillis();
+        WaterMeter waterMeter = new WaterMeter();
+        waterMeter.setName("name" + timestamp);
+        waterMeter.setDescription("des" + timestamp);
+        waterMeter.setAddressId(1);
+        waterMeterService.insertWaterMeter(waterMeter);
+        waterMeterService.deleteWaterMeter(waterMeter.getWaterMeterId());
+        WaterMeter deletedWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
+        Assert.assertNull(deletedWaterMeter);
+    }
 
 }
