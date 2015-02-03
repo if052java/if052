@@ -16,35 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `adress`
+-- Table structure for table `address`
 --
-CREATE DATABASE water;
-USE water;
 
-DROP TABLE IF EXISTS `adress`;
+DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `adress` (
-  `adress_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `address` (
+  `address_id` int(11) NOT NULL AUTO_INCREMENT,
   `city` varchar(45) NOT NULL,
   `street` varchar(45) NOT NULL,
   `building` varchar(45) NOT NULL,
-  `appartment` varchar(45) DEFAULT NULL,
+  `apartment` varchar(45) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`adress_id`),
-  KEY `fk_adress_user_idx` (`user_id`),
-  CONSTRAINT `fk_adress_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON UPDATE CASCADE
+  PRIMARY KEY (`address_id`),
+  KEY `fk_address_user_idx` (`user_id`),
+  CONSTRAINT `fk_address_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `adress`
+-- Dumping data for table `address`
 --
 
-LOCK TABLES `adress` WRITE;
-/*!40000 ALTER TABLE `adress` DISABLE KEYS */;
-INSERT INTO `adress` VALUES (1,'CITY1','STREET1','BUILDING1','APPARTMENT1',1),(2,'CITY2','STREET2','BUILDING2','APPARTMENT2',1),(3,'CITY3','STREET3','BUILDING3','APPARTMENT3',1),(4,'CITY4','STREET4','BUILDING4','APPARTMENT4',2),(5,'CITY5','STREET5','BUILDING5','APPARTMENT5',2),(6,'CITY6','STREET6','BUILDING6','APPARTMENT6',2),(7,'CITY7','STREET7','BUILDING7','APPARTMENT7',3),(8,'CITY8','STREET8','BUILDING8','APPARTMENT8',3);
-/*!40000 ALTER TABLE `adress` ENABLE KEYS */;
+LOCK TABLES `address` WRITE;
+/*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` VALUES (1,'CITY1','STREET1','BUILDING1','APPARTMENT1',1),(2,'CITY2','STREET2','BUILDING2','APPARTMENT2',1),(3,'CITY3','STREET3','BUILDING3','APPARTMENT3',1),(4,'CITY4','STREET4','BUILDING4','APPARTMENT4',2),(5,'CITY5','STREET5','BUILDING5','APPARTMENT5',2),(6,'CITY6','STREET6','BUILDING6','APPARTMENT6',2),(7,'CITY7','STREET7','BUILDING7','APPARTMENT7',3),(8,'CITY8','STREET8','BUILDING8','APPARTMENT8',3);
+/*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -64,7 +62,7 @@ CREATE TABLE `indicator` (
   PRIMARY KEY (`indicator_id`),
   KEY `fk_indicator_water_meter_idx` (`water_meter_id`),
   CONSTRAINT `fk_indicator_water_meter` FOREIGN KEY (`water_meter_id`) REFERENCES `watermeter` (`water_meter_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=303 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=408 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +71,7 @@ CREATE TABLE `indicator` (
 
 LOCK TABLES `indicator` WRITE;
 /*!40000 ALTER TABLE `indicator` DISABLE KEYS */;
-INSERT INTO `indicator` VALUES (1,'2015-01-01 00:00:00',101,'','',1),(2,'2015-02-02 18:02:09',1234,'','\0',1),(3,'2015-01-02 00:00:00',101,'','',2),(4,'2015-01-03 00:00:00',101,'','',3),(5,'2015-01-04 00:00:00',101,'','',4),(6,'2015-01-05 00:00:00',101,'','',5),(7,'2015-01-06 00:00:00',101,'','',6),(11,'2015-01-10 00:00:00',101,'','',10),(12,'2015-01-11 00:00:00',101,'','',11),(13,'2015-01-12 00:00:00',101,'','',12),(14,'2015-01-13 00:00:00',101,'','',13),(15,'2015-01-14 00:00:00',101,'','',14),(16,'2015-01-01 00:00:00',101,'','',15),(17,'2015-01-01 00:00:00',101,'','',16),(18,'2015-01-15 00:00:00',101,'','',17),(19,'2015-01-14 00:00:00',101,'','',18),(20,'2015-01-13 00:00:00',101,'','',19),(21,'2015-01-12 00:00:00',101,'','',20),(22,'2015-01-11 00:00:00',101,'','',21),(23,'2015-01-01 00:00:00',101,'','',22),(24,'2015-01-10 00:00:00',101,'','',23),(25,'2015-01-09 00:00:00',101,'','',24),(26,'2015-01-08 00:00:00',101,'','',25),(27,'2015-01-13 00:00:00',101,'','',24),(28,'2015-01-12 00:00:00',101,'','',23),(29,'2015-01-11 00:00:00',101,'','',22),(30,'2015-01-01 00:00:00',101,'','',22),(31,'2015-01-10 00:00:00',101,'','',22),(32,'2015-01-09 00:00:00',101,'','',21),(33,'2015-01-08 00:00:00',101,'','',20),(34,'2015-01-13 00:00:00',101,'','',19),(35,'2015-01-12 00:00:00',101,'','',11),(36,'2015-01-11 00:00:00',101,'','',12),(37,'2015-01-01 00:00:00',101,'','',13),(38,'2015-01-10 00:00:00',101,'','',14),(39,'2015-01-09 00:00:00',101,'','',15),(40,'2015-01-08 00:00:00',101,'','',16),(41,'2015-01-29 00:00:00',1000,'','\0',1),(42,'2015-01-29 00:00:00',1000,'','\0',1),(43,'2015-01-29 00:00:00',1000,'','\0',1),(300,'2015-01-30 00:00:00',1000,'','\0',2),(301,'2015-01-30 00:00:00',1000,'','\0',2),(302,'2015-01-30 16:34:34',1000,'','\0',2);
+INSERT INTO `indicator` VALUES (1,'2015-01-01 00:00:00',101,'','',1),(2,'2015-02-02 20:03:07',1234,'','\0',1),(3,'2015-01-02 00:00:00',101,'','',2),(4,'2015-01-03 00:00:00',101,'','',3),(5,'2015-01-04 00:00:00',101,'','',4),(6,'2015-01-05 00:00:00',101,'','',5),(7,'2015-01-06 00:00:00',101,'','',6),(11,'2015-01-10 00:00:00',101,'','',10),(12,'2015-01-11 00:00:00',101,'','',11),(13,'2015-01-12 00:00:00',101,'','',12),(14,'2015-01-13 00:00:00',101,'','',13),(15,'2015-01-14 00:00:00',101,'','',14),(16,'2015-01-01 00:00:00',101,'','',15),(17,'2015-01-01 00:00:00',101,'','',16),(18,'2015-01-15 00:00:00',101,'','',17),(19,'2015-01-14 00:00:00',101,'','',18),(20,'2015-01-13 00:00:00',101,'','',19),(21,'2015-01-12 00:00:00',101,'','',20),(22,'2015-01-11 00:00:00',101,'','',21),(23,'2015-01-01 00:00:00',101,'','',22),(24,'2015-01-10 00:00:00',101,'','',23),(25,'2015-01-09 00:00:00',101,'','',24),(26,'2015-01-08 00:00:00',101,'','',25),(27,'2015-01-13 00:00:00',101,'','',24),(28,'2015-01-12 00:00:00',101,'','',23),(29,'2015-01-11 00:00:00',101,'','',22),(30,'2015-01-01 00:00:00',101,'','',22),(31,'2015-01-10 00:00:00',101,'','',22),(32,'2015-01-09 00:00:00',101,'','',21),(33,'2015-01-08 00:00:00',101,'','',20),(34,'2015-01-13 00:00:00',101,'','',19),(35,'2015-01-12 00:00:00',101,'','',11),(36,'2015-01-11 00:00:00',101,'','',12),(38,'2015-01-10 00:00:00',101,'','',14),(39,'2015-01-09 00:00:00',101,'','',15),(40,'2015-01-08 00:00:00',101,'','',16),(41,'2015-01-29 00:00:00',1000,'','\0',1),(42,'2015-01-29 00:00:00',1000,'','\0',1),(43,'2015-01-29 00:00:00',1000,'','\0',1),(300,'2015-01-30 00:00:00',1000,'','\0',2),(301,'2015-01-30 00:00:00',1000,'','\0',2),(302,'2015-01-30 16:34:34',1000,'','\0',2),(400,'2015-02-02 19:51:33',1001,'','\0',2),(401,'2015-02-02 19:52:02',1001,'','\0',2),(402,'2015-02-02 19:54:15',1001,'','\0',2),(403,'2015-02-02 19:57:25',1001,'','\0',2),(404,'2015-02-02 19:57:55',1001,'','\0',2),(405,'2015-02-02 20:01:42',1001,'','\0',2),(406,'2015-02-02 20:02:33',1001,'','\0',2),(407,'2015-02-02 20:03:07',1001,'','\0',2);
 /*!40000 ALTER TABLE `indicator` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,10 +116,10 @@ CREATE TABLE `watermeter` (
   `water_meter_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
-  `adress_id` int(11) NOT NULL,
+  `address_id` int(11) NOT NULL,
   PRIMARY KEY (`water_meter_id`),
-  KEY `fk_WaterMeter_Adress1_idx` (`adress_id`),
-  CONSTRAINT `fk_water_meter_adress` FOREIGN KEY (`adress_id`) REFERENCES `adress` (`adress_id`) ON UPDATE CASCADE
+  KEY `fk_WaterMeter_Address1_idx` (`address_id`),
+  CONSTRAINT `fk_water_meter_address` FOREIGN KEY (`address_id`) REFERENCES `address` (`address_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -144,4 +142,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-02 19:36:19
+-- Dump completed on 2015-02-03 18:19:31
