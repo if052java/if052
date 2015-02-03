@@ -8,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Created by Maksym Vynnyk on 02.02.2015.
+ */
 @Service
 @Transactional
 public class IndicatorService {

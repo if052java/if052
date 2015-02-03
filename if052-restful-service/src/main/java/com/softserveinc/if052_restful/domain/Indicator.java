@@ -2,6 +2,9 @@ package com.softserveinc.if052_restful.domain;
 
 import java.util.Date;
 
+/**
+ * Created by Maksym Vynnyk on 02.02.2015.
+ */
 public class Indicator {
     private int indicatorId;
     private Date date;
