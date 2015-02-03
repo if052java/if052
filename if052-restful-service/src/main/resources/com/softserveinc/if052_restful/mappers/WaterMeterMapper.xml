@@ -43,7 +43,7 @@
     </select>
 
     <update id="updateWaterMeter" parameterType="WaterMeter">
-        UPDATE WaterMeter
+        UPDATE watermeter
         SET
         name = #{name},
         description = #{description},
@@ -52,11 +52,11 @@
     </update>
 
     <delete id="deleteWaterMeter" parameterType="int">
-        DELETE FROM WaterMeter WHERE water_meter_id = #{waterMeterId}
+        DELETE FROM watermeter WHERE water_meter_id = #{waterMeterId}
     </delete>
 
     <insert id="insertWaterMeter" parameterType="WaterMeter" useGeneratedKeys="true" keyProperty="waterMeterId">
-        INSERT INTO WaterMeter(name, description, address_id)
+        INSERT INTO watermeter(name, description, address_id)
         VALUES(#{name}, #{description}, #{addressId})
     </insert>
 
