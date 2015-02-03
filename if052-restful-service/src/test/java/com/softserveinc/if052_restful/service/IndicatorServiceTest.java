@@ -65,15 +65,9 @@ public class IndicatorServiceTest
     @Test
     public void testUpdateIndicator()
     {
-        // searching of last list record for update
+        // searching of last record id for update
         List<Indicator> indicators = indicatorService.getAllIndicators();
-        int lastId=1;  // start point
-        for (Indicator ind : indicators)
-        {
-            if (ind.getIndicatorId()>lastId) {
-                lastId=ind.getIndicatorId();
-            }
-        }
+        int lastId = indicators.get(indicators.size() - 1).getIndicatorId();
 
         Indicator indicator = indicatorService.getIndicatorById(lastId);
         indicator.setDate(new java.util.Date());
@@ -91,15 +85,9 @@ public class IndicatorServiceTest
     @Test
     public void testDeleteIndicator()
     {
-        // searching of last list record for delete
+        // searching of last record id for delete
         List<Indicator> indicators = indicatorService.getAllIndicators();
-        int lastId=1;  // start point
-        for (Indicator ind : indicators)
-        {
-            if (ind.getIndicatorId()>lastId) {
-                lastId=ind.getIndicatorId();
-            }
-        }
+        int lastId = indicators.get(indicators.size() - 1).getIndicatorId();
 
         Indicator indicator = indicatorService.getIndicatorById(lastId);
         indicatorService.deleteIndicator(indicator.getIndicatorId());
