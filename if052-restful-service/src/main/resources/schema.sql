@@ -6,7 +6,7 @@
   CONSTRAINT fk_address_user FOREIGN KEY (user_id) REFERENCES user (user_id) ON UPDATE CASCADE);
 
   CREATE TABLE watermeter(water_meter_id int(11) auto_increment primary key, name varchar(45), description varchar(45),
-  address_id int(11), CONSTRAINT fk_water_meter_adderess FOREIGN KEY (address_id) REFERENCES address (address_id) ON UPDATE CASCADE);
+  address_id int(11), CONSTRAINT fk_water_meter_address FOREIGN KEY (address_id) REFERENCES address (address_id) ON UPDATE CASCADE);
 
   CREATE TABLE indicator(indicator_id int auto_increment primary key, date datetime, value int, is_paid bit(1),
   is_published bit(1), water_meter_id int(11),
