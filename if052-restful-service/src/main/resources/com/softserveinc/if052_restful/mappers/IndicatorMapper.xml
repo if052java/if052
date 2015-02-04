@@ -30,8 +30,8 @@
     </select>
 
     <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">
-        INSERT INTO indicator(indicator_id, date, value, is_paid, is_published, water_meter_id)
-        VALUES(#{indicatorId}, #{date}, #{value}, #{isPaid}, #{isPublished}, #{waterMeterId})
+        INSERT INTO indicator(date, value, is_paid, is_published, water_meter_id)
+        VALUES(#{date}, #{value}, #{isPaid}, #{isPublished}, #{waterMeterId})
     </insert>
 
     <update id="updateIndicator" parameterType="Indicator">
