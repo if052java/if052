@@ -2,6 +2,7 @@ package com.softserveinc.if052_restful.service;
 
 import com.softserveinc.if052_restful.domain.Indicator;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,12 @@ public class IndicatorServiceTest
         indicator.setValue(1001);
         indicator.setPaid(true) ;
         indicator.setPublished(false);
-        indicator.setWaterMeter(waterMeterService.getWaterMeterById(2));
+
+        indicator.setWaterMeter(waterMeterService.getWaterMeterById(1));
 
         indicatorService.insertIndicator(indicator);
+
+        System.out.println(indicator);
 
         Assert.assertTrue(indicator.getIndicatorId() != 0);
         Indicator createdIndicator = indicatorService.getIndicatorById(indicator.getIndicatorId());
@@ -67,6 +71,8 @@ public class IndicatorServiceTest
         Assert.assertEquals(indicator.getWaterMeter().getWaterMeterId(),
                                         createdIndicator.getWaterMeter().getWaterMeterId());
     }
+
+
     @Test
     public void testUpdateIndicator()
     {

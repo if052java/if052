@@ -26,10 +26,10 @@ public class WaterMeterServiceTest {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
         Assert.assertNotNull(waterMeter);
         System.out.println(waterMeter);
-       /* List<Indicator> indicators = waterMeter.getIndicators();
+        List<Indicator> indicators = waterMeter.getIndicators();
         for (Indicator indicator : indicators) {
             System.out.println(indicator);
-        }*/
+        }
     }
 
 

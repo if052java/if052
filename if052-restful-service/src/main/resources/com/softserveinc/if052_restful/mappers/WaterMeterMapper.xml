@@ -9,10 +9,13 @@
         <result property="name" column="name"/>
         <result property="description" column="description"/>
         <result property="addressId" column="address_id"/>
-        <collection property="indicators" ofType="Indicator" resultMap="IndicatorResult" column="indicator_"></collection>
+        <collection property="indicators" ofType="Indicator"
+                    resultMap="IndicatorResultSimple" column="indicator_">
+        </collection>
     </resultMap>
 
-    <resultMap id="IndicatorResult" type="Indicator">
+
+    <resultMap id="IndicatorResultSimple" type="Indicator">
         <id property="indicatorId" column="indicator_id"/>
         <result property="date" column="date"/>
         <result property="value" column="value"/>
@@ -21,15 +24,18 @@
     </resultMap>
 
 
+
+
     <select id="getWaterMeterById" parameterType="int" resultMap="WaterMeterResult">
-        <!-- SELECT
-         wm.water_meter_id, wm.name, wm.description, wm.address_id, i.value
+         SELECT
+         wm.water_meter_id, wm.name, wm.description, wm.address_id,
+         i.indicator_id, i.date, i.value, i.is_paid, i.is_published, i.water_meter_id
          FROM WaterMeter wm left outer join Indicator i on wm.water_meter_id = i.water_meter_id
-         WHERE wm.water_meter_id = #{waterMeterId} -->
-        SELECT
+         WHERE wm.water_meter_id = #{waterMeterId}
+        <!--SELECT
         wm.water_meter_id, wm.name, wm.description, wm.address_id
         FROM watermeter wm
-        WHERE wm.water_meter_id = #{waterMeterId}
+        WHERE wm.water_meter_id = #{waterMeterId}-->
     </select>
 
     <select id="getAllWaterMeters" resultMap="WaterMeterResult">
