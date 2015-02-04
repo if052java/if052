@@ -18,7 +18,7 @@ public class Indicator {
         return "Indicator [id=" + indicatorId
                 + ", date=" + date + ", value=" + value
                 + ", isPaid=" + isPaid + ", isPublished=" + isPublished
-                + ", waterMeterId=" + waterMeter.getWaterMeterId();
+                + ", .";
     }
 
     public int getIndicatorId() {
