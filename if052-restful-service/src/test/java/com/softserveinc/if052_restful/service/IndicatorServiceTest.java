@@ -20,6 +20,9 @@ public class IndicatorServiceTest
     @Autowired
     private IndicatorService indicatorService;
 
+    @Autowired
+    private WaterMeterService waterMeterService;
+
     @Test
     public void testGetIndicatorById()
     {
@@ -44,11 +47,12 @@ public class IndicatorServiceTest
     public void testInsertIndicator() {
         Indicator indicator = new Indicator();
       //  indicator.setIndicatorId(400);
+
         indicator.setDate(new java.util.Date());
         indicator.setValue(1001);
         indicator.setPaid(true) ;
         indicator.setPublished(false);
-        indicator.setWaterMeterId(2);
+        indicator.setWaterMeter(waterMeterService.getWaterMeterById(2));
 
         indicatorService.insertIndicator(indicator);
 
@@ -60,7 +64,8 @@ public class IndicatorServiceTest
         Assert.assertEquals(indicator.getValue(), createdIndicator.getValue());
         Assert.assertEquals(indicator.isPaid(), createdIndicator.isPaid());
         Assert.assertEquals(indicator.isPublished(), createdIndicator.isPublished());
-        Assert.assertEquals(indicator.getWaterMeterId(), createdIndicator.getWaterMeterId());
+        Assert.assertEquals(indicator.getWaterMeter().getWaterMeterId(),
+                                        createdIndicator.getWaterMeter().getWaterMeterId());
     }
     @Test
     public void testUpdateIndicator()

@@ -4,17 +4,6 @@
 
 <mapper namespace="com.softserveinc.if052_restful.mappers.IndicatorMapper">
 
-    <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">
-        SELECT
-        indicator_id,
-        date,
-        value,
-        is_paid,
-        is_published,
-        water_meter_id
-        FROM indicator
-        WHERE indicator_id = #{indicatorId}
-    </select>
     <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
     <resultMap type="Indicator" id="IndicatorResult">
         <id property="indicatorId" column="indicator_id"/>
@@ -22,16 +11,47 @@
         <result property="value" column="value"/>
         <result property="isPaid" column="is_paid"/>
         <result property="isPublished" column="is_published"/>
-        <result property="waterMeterId" column="water_meter_id"/>
+        <association property="waterMeter" resultMap="WaterMeterResult"/>
     </resultMap>
 
+    <resultMap id="WaterMeterResult" type="WaterMeter">
+        <id property="waterMeterId" column="water_meter_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+    </resultMap>
+
+    <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">
+        SELECT
+        i.indicator_id,
+        i.date,
+        i.value,
+        i.is_paid,
+        i.is_published,
+        wm.water_meter_id,
+        wm.name,
+        wm.description
+        FROM indicator i
+        LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
+        WHERE indicator_id = #{indicatorId}
+    </select>
+
     <select id="getAllIndicators" resultMap="IndicatorResult">
-        SELECT * FROM indicator
+        SELECT
+        i.indicator_id,
+        i.date,
+        i.value,
+        i.is_paid,
+        i.is_published,
+        wm.water_meter_id,
+        wm.name,
+        wm.description
+        FROM indicator i
+        LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
     </select>
 
     <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">
         INSERT INTO indicator(indicator_id, date, value, is_paid, is_published, water_meter_id)
-        VALUES(#{indicatorId}, #{date}, #{value}, #{isPaid}, #{isPublished}, #{waterMeterId})
+        VALUES(#{indicatorId}, #{date}, #{value}, #{isPaid}, #{isPublished}, #{waterMeter.waterMeterId})
     </insert>
 
     <update id="updateIndicator" parameterType="Indicator">
@@ -41,7 +61,7 @@
         value = #{value},
         is_paid = #{isPaid},
         is_published = #{isPublished},
-        water_meter_id = #{waterMeterId}
+        water_meter_id = #{waterMeter.waterMeterId}
         WHERE indicator_id = #{indicatorId}
     </update>
 

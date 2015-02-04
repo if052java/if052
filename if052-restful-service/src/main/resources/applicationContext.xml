@@ -31,7 +31,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="com.softserveinc.if052_restful.domain"/>
-        <property name="mapperLocations" value="classpath:com/softserveinc/if052_restful/mappers/IndicatorMapper.xml" />
+        <property name="mapperLocations" value="classpath*:com/softserveinc/if052_restful/mappers/**/*.xml" />
     </bean>
 
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">

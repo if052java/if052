@@ -11,14 +11,14 @@ public class Indicator {
     private int value;
     private boolean isPaid;
     private boolean isPublished;
-    private int waterMeterId;
+    private WaterMeter waterMeter;
 
     @Override
     public String toString() {
         return "Indicator [id=" + indicatorId
                 + ", date=" + date + ", value=" + value
                 + ", isPaid=" + isPaid + ", isPublished=" + isPublished
-                + ", waterMeterId=" + waterMeterId + "]";
+                + ", waterMeterId=" + waterMeter.getWaterMeterId();
     }
 
     public int getIndicatorId() {
@@ -61,11 +61,11 @@ public class Indicator {
         this.isPublished = isPublished;
     }
 
-    public int getWaterMeterId() {
-        return waterMeterId;
+    public WaterMeter getWaterMeter() {
+        return waterMeter;
     }
 
-    public void setWaterMeterId(int waterMeterId) {
-        this.waterMeterId = waterMeterId;
+    public void setWaterMeter(WaterMeter waterMeter) {
+        this.waterMeter = waterMeter;
     }
 }
