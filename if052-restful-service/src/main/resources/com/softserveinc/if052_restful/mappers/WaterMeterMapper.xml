@@ -23,14 +23,14 @@
 
 
     <select id="getWaterMeterById" parameterType="int" resultMap="WaterMeterResult">
-        <!-- SELECT
+         SELECT
          wm.water_meter_id, wm.name, wm.description, wm.address_id, i.value
          FROM WaterMeter wm left outer join Indicator i on wm.water_meter_id = i.water_meter_id
-         WHERE wm.water_meter_id = #{waterMeterId} -->
-        SELECT
+         WHERE wm.water_meter_id = #{waterMeterId}
+        <!--SELECT
         wm.water_meter_id, wm.name, wm.description, wm.address_id
         FROM watermeter wm
-        WHERE wm.water_meter_id = #{waterMeterId}
+        WHERE wm.water_meter_id = #{waterMeterId}-->
     </select>
 
     <select id="getAllWaterMeters" resultMap="WaterMeterResult">
