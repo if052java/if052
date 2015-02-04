@@ -125,8 +125,9 @@ public final class Address {
 
 	@Override
 	public String toString() {
-		return "Address: city=" + city + ", street=" + street
-				+ ", building=" + building + ", apartment="
-				+ apartment + ", userId=" + userId;		
+		return "Address: addressId=" + addressId
+                + ", city=" + city + ", street=" + street
+				+ ", building=" + building + ", apartment=" + apartment
+                + ", userId=" + userId;
 	}
 }

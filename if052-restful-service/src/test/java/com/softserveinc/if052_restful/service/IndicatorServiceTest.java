@@ -47,7 +47,6 @@ public class IndicatorServiceTest
     @Test
     public void testInsertIndicator() {
         Indicator indicator = new Indicator();
-      //  indicator.setIndicatorId(400);
 
         indicator.setDate(new java.util.Date());
         indicator.setValue(1001);
