@@ -1,8 +1,8 @@
 package com.softserveinc.if052_restful.domain;
 
 public class User {
-                //- Properties -//
 
+                //- Properties -//
     private int userId;
     private String name;
     private String surname;
@@ -12,7 +12,6 @@ public class User {
     private double tariff;
     
                 //- Getters -//
-
     public int getId() {
         return userId;
     }
@@ -42,7 +41,6 @@ public class User {
     }
 
                 //- Setters -//
-
     public void setId(int userId) {
         this.userId = userId;
     }
@@ -70,8 +68,8 @@ public class User {
     public void setTariff(double tariff) {
         this.tariff = tariff;
     }
-                //- toString -//
 
+                //- toString -//
     @Override
     public String toString() {
         return "User{" +

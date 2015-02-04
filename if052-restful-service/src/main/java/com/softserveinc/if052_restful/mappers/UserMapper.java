@@ -1,10 +1,18 @@
+/**
+ * Copyright (c) 2015, SoftServe and/or its affiliates. All rights reserved.
+ */
 package com.softserveinc.if052_restful.mappers;
 
 import com.softserveinc.if052_restful.domain.User;
-
 import java.util.List;
 
-
+/**
+ * This is interface of user mapper
+ *
+ * @author Namisnyk Valentyn
+ * @author Danylo Tiahun
+ * @version 1.0
+ */
 public interface UserMapper {
 
     /**
