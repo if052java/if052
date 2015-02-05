@@ -56,7 +56,7 @@ public class WaterMeterServiceTest {
         WaterMeter waterMeter = new WaterMeter();
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("des" + timestamp);
-        waterMeter.setAddressId(1);
+        //waterMeter.setAddressId(1);
         waterMeterService.insertWaterMeter(waterMeter);
         Assert.assertTrue(waterMeter.getWaterMeterId() != 0);
         WaterMeter createdWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
@@ -72,14 +72,14 @@ public class WaterMeterServiceTest {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(lastId);
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("des" + timestamp);
-        waterMeter.setAddressId(1);
+        //waterMeter.setAddressId(1);
         System.out.println(waterMeter);
         waterMeterService.updateWaterMeter(waterMeter);
         WaterMeter updatedWaterMeter = waterMeterService.getWaterMeterById(lastId);
         System.out.println(updatedWaterMeter);
         Assert.assertEquals(waterMeter.getName(), updatedWaterMeter.getName());
         Assert.assertEquals(waterMeter.getDescription(), updatedWaterMeter.getDescription());
-        Assert.assertEquals(waterMeter.getAddressId(), updatedWaterMeter.getAddressId());
+        //Assert.assertEquals(waterMeter.getAddressId(), updatedWaterMeter.getAddressId());
     }
 
 
@@ -92,7 +92,7 @@ public class WaterMeterServiceTest {
         WaterMeter waterMeter = new WaterMeter();
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("des" + timestamp);
-        waterMeter.setAddressId(1);
+       // waterMeter.setAddressId(1);
         waterMeterService.insertWaterMeter(waterMeter);
         waterMeterService.deleteWaterMeter(waterMeter.getWaterMeterId());
         WaterMeter deletedWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());

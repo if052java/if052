@@ -9,6 +9,7 @@
         <result property="name" column="name"/>
         <result property="description" column="description"/>
         <result property="addressId" column="address_id"/>
+        <association property="address" javaType="Address" resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressResult"/>
         <collection property="indicators" ofType="Indicator"
                     resultMap="IndicatorResultSimple" column="indicator_">
         </collection>
@@ -27,15 +28,14 @@
 
 
     <select id="getWaterMeterById" parameterType="int" resultMap="WaterMeterResult">
-         SELECT
-         wm.water_meter_id, wm.name, wm.description, wm.address_id,
-         i.indicator_id, i.date, i.value, i.is_paid, i.is_published, i.water_meter_id
-         FROM WaterMeter wm left outer join Indicator i on wm.water_meter_id = i.water_meter_id
-         WHERE wm.water_meter_id = #{waterMeterId}
-        <!--SELECT
-        wm.water_meter_id, wm.name, wm.description, wm.address_id
+        SELECT
+        wm.water_meter_id, wm.name, wm.description,
+        i.indicator_id, i.date, i.value, i.is_paid, i.is_published,
+        a.address_id, a.city, a.street, a.building, a.apartment
         FROM watermeter wm
-        WHERE wm.water_meter_id = #{waterMeterId}-->
+        LEFT OUTER JOIN indicator i on wm.water_meter_id = i.water_meter_id
+        LEFT OUTER JOIN address a on wm.address_id = a.address_id
+        WHERE wm.water_meter_id = #{waterMeterId}
     </select>
 
     <select id="getAllWaterMeters" resultMap="WaterMeterResult">
@@ -62,7 +62,7 @@
 
     <insert id="insertWaterMeter" parameterType="WaterMeter" useGeneratedKeys="true" keyProperty="waterMeterId">
         INSERT INTO watermeter(name, description, address_id)
-        VALUES(#{name}, #{description}, #{addressId})
+        VALUES(#{name}, #{description}, #{address.addressId})
     </insert>
 
 
