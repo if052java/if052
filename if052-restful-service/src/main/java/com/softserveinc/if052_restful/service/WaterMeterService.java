@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Service for work with User.
- * @see com.softserveinc.if052_restful.domain.User
+ * Service for work with water meter
+ * @see com.softserveinc.if052_restful.domain.WaterMeter
  *
  * @version 1.0
  */
