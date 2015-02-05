@@ -8,7 +8,6 @@
         <id property="waterMeterId" column="water_meter_id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
-        <result property="addressId" column="address_id"/>
         <association property="address" javaType="Address" resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressResult"/>
         <collection property="indicators" ofType="Indicator"
                     resultMap="IndicatorResultSimple" column="indicator_">
@@ -25,13 +24,20 @@
     </resultMap>
 
 
+    <resultMap id="WaterMeterResultSimple" type="WaterMeter">
+        <id property="waterMeterId" column="water_meter_id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+
+
+    </resultMap>
 
 
     <select id="getWaterMeterById" parameterType="int" resultMap="WaterMeterResult">
         SELECT
         wm.water_meter_id, wm.name, wm.description,
-        i.indicator_id, i.date, i.value, i.is_paid, i.is_published,
-        a.address_id, a.city, a.street, a.building, a.apartment
+        a.address_id, a.city, a.street, a.building, a.apartment,
+        i.indicator_id, i.date, i.value, i.is_paid, i.is_published
         FROM watermeter wm
         LEFT OUTER JOIN indicator i on wm.water_meter_id = i.water_meter_id
         LEFT OUTER JOIN address a on wm.address_id = a.address_id
@@ -43,7 +49,7 @@
         wm.water_meter_id, wm.name, wm.description, wm.address_id, i.value
         FROM WaterMeter wm left outer join Indicator i on wm.water_meter_id = i.water_meter_id -->
         SELECT
-        wm.water_meter_id, wm.name, wm.description, wm.address_id
+        wm.water_meter_id, wm.name, wm.description
         FROM watermeter wm
     </select>
 
@@ -51,8 +57,8 @@
         UPDATE watermeter
         SET
         name = #{name},
-        description = #{description},
-        address_id = #{addressId}
+        description = #{description}
+
         WHERE water_meter_id = #{waterMeterId}
     </update>
 
