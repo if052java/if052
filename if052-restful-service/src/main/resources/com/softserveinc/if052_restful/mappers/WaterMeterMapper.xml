@@ -8,7 +8,7 @@
         <id property="waterMeterId" column="water_meter_id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
-        <association property="address" javaType="Address" resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressResult"/>
+        <association property="address" javaType="Address" resultMap="AddressResultSimple"/>
         <collection property="indicators" ofType="Indicator"
                     resultMap="IndicatorResultSimple" column="indicator_">
         </collection>
@@ -28,8 +28,15 @@
         <id property="waterMeterId" column="water_meter_id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
+    </resultMap>
 
-
+    <resultMap type="Address" id="AddressResultSimple">
+        <id property="addressId" column="address_id"/>
+        <result property="city" column="city"/>
+        <result property="street" column="street"/>
+        <result property="building" column="building"/>
+        <result property="apartment" column="apartment"/>
+        <result property="userId" column="user_id"/>
     </resultMap>
 
 
@@ -44,10 +51,7 @@
         WHERE wm.water_meter_id = #{waterMeterId}
     </select>
 
-    <select id="getAllWaterMeters" resultMap="WaterMeterResult">
-        <!--SELECT
-        wm.water_meter_id, wm.name, wm.description, wm.address_id, i.value
-        FROM WaterMeter wm left outer join Indicator i on wm.water_meter_id = i.water_meter_id -->
+    <select id="getAllWaterMeters" resultMap="WaterMeterResultSimple">
         SELECT
         wm.water_meter_id, wm.name, wm.description
         FROM watermeter wm
@@ -57,8 +61,8 @@
         UPDATE watermeter
         SET
         name = #{name},
-        description = #{description}
-
+        description = #{description},
+        address_id = #{address.addressId}
         WHERE water_meter_id = #{waterMeterId}
     </update>
 

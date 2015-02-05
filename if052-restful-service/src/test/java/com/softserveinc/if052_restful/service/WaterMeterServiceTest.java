@@ -1,5 +1,6 @@
 package com.softserveinc.if052_restful.service;
 
+import com.softserveinc.if052_restful.domain.Address;
 import com.softserveinc.if052_restful.domain.Indicator;
 import com.softserveinc.if052_restful.domain.WaterMeter;
 import junit.framework.Assert;
@@ -21,6 +22,9 @@ public class WaterMeterServiceTest {
     @Autowired
     private WaterMeterService waterMeterService;
 
+    @Autowired
+    private AddressService addressService;
+
     @Test
     public void testGetWaterMeterById() {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
@@ -32,68 +36,54 @@ public class WaterMeterServiceTest {
         }
     }
 
-
-
     @Test
     public void testGetAllWaterMeters() {
         List<WaterMeter> waterMeters = waterMeterService.getAllWaterMeters();
-        // List<Indicator> indicators;
         Assert.assertNotNull(waterMeters);
         for(WaterMeter waterMeter : waterMeters) {
             System.out.println(waterMeter);
-            /*indicators = waterMeter.getIndicators();
-            for(Indicator indicator : indicators) {
-                System.out.println(indicator);
-            }*/
         }
     }
 
-
     @Test
     public void testInsertWaterMeter() {
-
         long timestamp = System.currentTimeMillis();
         WaterMeter waterMeter = new WaterMeter();
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("des" + timestamp);
-        //waterMeter.setAddressId(1);
+        waterMeter.setAddress(addressService.getAddressById(1));
         waterMeterService.insertWaterMeter(waterMeter);
         Assert.assertTrue(waterMeter.getWaterMeterId() != 0);
         WaterMeter createdWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
         Assert.assertNotNull(createdWaterMeter);
         Assert.assertEquals(waterMeter.getName(), createdWaterMeter.getName());
+        Assert.assertEquals(waterMeter.getDescription(), createdWaterMeter.getDescription());
+        Assert.assertEquals(waterMeter.getAddress().getAddressId(), createdWaterMeter.getAddress().getAddressId());
     }
 
-
     @Test
-    public void testUpdateWaterMeter() {
+    public void testUpdateWaterMeter(){
         long timestamp = System.currentTimeMillis();
-        int lastId = waterMeterService.getAllWaterMeters().get(waterMeterService.getAllWaterMeters().size()-1).getWaterMeterId();
-//        WaterMeter waterMeter = waterMeterService.getWaterMeterById(lastId);
-        WaterMeter waterMeter = waterMeterService.getAllWaterMeters().get(1);
+        WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
         waterMeter.setName("name" + timestamp);
-        waterMeter.setDescription("des" + timestamp);
-        //waterMeter.setAddressId(1);
+        waterMeter.setDescription("description" + timestamp);
+        waterMeter.setAddress(addressService.getAddressById(1));
         System.out.println(waterMeter);
         waterMeterService.updateWaterMeter(waterMeter);
-        WaterMeter updatedWaterMeter = waterMeterService.getAllWaterMeters().get(1);
+        WaterMeter updatedWaterMeter = waterMeterService.getWaterMeterById(1);
         System.out.println(updatedWaterMeter);
         Assert.assertEquals(waterMeter.getName(), updatedWaterMeter.getName());
         Assert.assertEquals(waterMeter.getDescription(), updatedWaterMeter.getDescription());
-        //Assert.assertEquals(waterMeter.getAddressId(), updatedWaterMeter.getAddressId());
+        Assert.assertEquals(waterMeter.getAddress().getAddressId(), updatedWaterMeter.getAddress().getAddressId());
     }
-
-
 
     @Test
     public void testDeleteWaterMeter() {
-        /*int lastId = waterMeterService.getAllWaterMeters().get(waterMeterService.getAllWaterMeters().size()-1).getWaterMeterId();
-        WaterMeter waterMeter = waterMeterService.getWaterMeterById(lastId);*/
         long timestamp = System.currentTimeMillis();
         WaterMeter waterMeter = new WaterMeter();
         waterMeter.setName("name" + timestamp);
-        waterMeter.setDescription("des" + timestamp);
-       // waterMeter.setAddressId(1);
+        waterMeter.setDescription("description" + timestamp);
+        waterMeter.setAddress(addressService.getAddressById(1));
         waterMeterService.insertWaterMeter(waterMeter);
         waterMeterService.deleteWaterMeter(waterMeter.getWaterMeterId());
         WaterMeter deletedWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
