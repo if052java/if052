@@ -1,18 +1,21 @@
 package com.softserveinc.if052_restful.domain;
 
+import java.util.List;
+
 public class User {
 
-                //- Properties -//
+                        //- Properties -//
     private int userId;
     private String name;
     private String surname;
-    private String middle_name;
+    private String middleName;
     private String login;
     private String password;
     private double tariff;
+    private List < Address > addresses;
     
-                //- Getters -//
-    public int getId() {
+                        //- Getters -//
+    public int getUserId() {
         return userId;
     }
 
@@ -24,8 +27,8 @@ public class User {
         return surname;
     }
 
-    public String getMiddle_name() {
-        return middle_name;
+    public String getMiddleName() {
+        return middleName;
     }
 
     public String getLogin() {
@@ -40,8 +43,12 @@ public class User {
         return tariff;
     }
 
-                //- Setters -//
-    public void setId(int userId) {
+    public List < Address > getAddresses() {
+        return addresses;
+    }
+
+                        //- Setters -//
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -53,8 +60,8 @@ public class User {
         this.surname = surname;
     }
 
-    public void setMiddle_name(String middle_name) {
-        this.middle_name = middle_name;
+    public void setMiddleName(String middlName) {
+        this.middleName = middlName;
     }
 
     public void setLogin(String login) {
@@ -69,14 +76,18 @@ public class User {
         this.tariff = tariff;
     }
 
-                //- toString -//
+    public void setAddresses(List < Address > addresses) {
+        this.addresses = addresses;
+    }
+
+                        //- toString -//
     @Override
     public String toString() {
         return "User{" +
-            "id=" + userId +
+            "userId=" + userId +
             ", name='" + name + '\'' +
             ", surname='" + surname + '\'' +
-            ", middle_name='" + middle_name + '\'' +
+            ", middle_name='" + middleName+ '\'' +
             ", login='" + login + '\'' +
             ", password='" + password + '\'' +
             ", tariff=" + tariff +

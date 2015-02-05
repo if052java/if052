@@ -26,7 +26,7 @@ public class UserService {
     /**
      * Get exists user by id
      *
-     * @param userId
+     * @param userId - Identification of user
      * @return User
      */
     public User getUserById(int userId)  {
@@ -45,7 +45,7 @@ public class UserService {
     /**
      * Create new user
      *  
-     * @param user
+     * @param user - New user
      */
     public void insertUser(User user) {
         userMapper.insertUser(user);
@@ -54,7 +54,7 @@ public class UserService {
     /**
      * Update exists user
      *  
-     * @param user
+     * @param user - Exists user
      */
     public void updateUser(User user) {
         userMapper.updateUser(user);
@@ -63,7 +63,7 @@ public class UserService {
     /**
      * Delete exists user
      *  
-     * @param userId
+     * @param userId - Identification of user
      */
     public void deleteUser(int userId) {
         userMapper.deleteUser(userId);

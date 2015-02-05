@@ -4,7 +4,7 @@
 
 <mapper namespace="com.softserveinc.if052_restful.mappers.UserMapper">
 
-    <select id="getUserById" parameterType="int" resultMap="UserResult">
+    <!--<select id="getUserById" parameterType="int" resultMap="UserResult">
         SELECT
         user_id,
         name,
@@ -15,24 +15,59 @@
         tariff
         FROM user
         WHERE user_id = #{userId}
-    </select>
-    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+    </select> -->
+
+    <select id="getUserById" parameterType="int" resultMap="UserResult">
+        SELECT
+                 u.user_id,
+                 u.name,
+                 u.surname,
+                 u.middle_name,
+                 u.login,
+                 u.password,
+                 u.tariff,
+                 a.city,
+                 a.street,
+                 a.building,
+                 a.apartment,
+                 a.user_id
+                FROM user u LEFT OUTER JOIN address a ON u.user_id = a.user_id
+                WHERE u.user_id = #{userId}
+            </select>
+    <!-- 
+        Result map for representation user
+    -->
     <resultMap type="User" id="UserResult">
         <id property="userId" column="user_id"/>
         <result property="name" column="name"/>
         <result property="surname" column="surname"/>
-        <result property="middle_name" column="middle_name"/>
+        <result property="middleName" column="middle_name"/>
         <result property="login" column="login"/>
+        <result property="password" column="password"/>
         <result property="tariff" column="tariff"/>
+        <collection property="addresses" column="userId" javaType="ArrayList" ofType="Address"
+                         resultMap="AddressSimpleResult">
+        </collection>
     </resultMap>
+
+    <!--
+            Result map for representation element in list of addresses 
+    -->
+    <resultMap type="Address" id="AddressSimpleResult">
+            <id property="addressId" column="address_id"/>
+            <result property="city" column="city"/>
+            <result property="street" column="street"/>
+            <result property="building" column="building"/>
+            <result property="apartment" column="apartment"/>
+            </resultMap>
 
     <select id="getAllUsers" resultMap="UserResult">
         SELECT * FROM user
     </select>
 
-    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
         INSERT INTO user(name, surname, middle_name, login, password, tariff)
-        VALUES( #{name}, #{surname}, #{middle_name}, #{login}, #{password}, #{tariff})
+        VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password}, #{tariff})
     </insert>
 
     <update id="updateUser" parameterType="User">
@@ -40,7 +75,7 @@
         SET
         name = #{name},
         surname = #{surname},
-        middle_name = #{middle_name},
+        middle_name = #{middleName},
         login = #{login},
         password = #{password},
         tariff = #{tariff}
