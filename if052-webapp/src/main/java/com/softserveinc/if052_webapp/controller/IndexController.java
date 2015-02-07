@@ -30,4 +30,6 @@ public class IndexController {
         model.addAttribute("message", greeting.getContent());
         return "hello";
     }
+
+
 }

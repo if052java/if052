@@ -13,5 +13,6 @@
 </head>
 <body>
   <h2>${message}</h2>
+  </div>
 </body>
 </html>
