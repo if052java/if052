@@ -6,13 +6,11 @@
   To change this template use File | Settings | File Templates.
   Author: Nazar Ostryzhniuk
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>JSP Hello</title>
-</head>
-<body>
-  <h2>${message}</h2>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<tiles:insertDefinition name="defaultTemplate">
+    <tiles:putAttribute name="body">
+<div class = body>
+    <h2>${message}</h2>
   </div>
-</body>
-</html>
+    </tiles:putAttribute>
+</tiles:insertDefinition>
