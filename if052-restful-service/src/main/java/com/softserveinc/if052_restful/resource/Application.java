@@ -21,6 +21,7 @@ public class Application extends ResourceConfig{
         register(HelloResource.class); /*service component that exposes the REST API via annotations */
         //register(GreetingResource.class);
 
+        register(WaterMeterResource.class);
     }
 
 }
