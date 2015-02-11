@@ -69,4 +69,8 @@ public class WaterMeterService {
     public void deleteWaterMeter(int waterMeterId) {
         waterMeterMapper.deleteWaterMeter(waterMeterId);
     }
+
+    public List<WaterMeter> getWaterMetersByAddressId(int addressId) {
+        return waterMeterMapper.getWaterMetersByAddressId(addressId);
+    }
 }

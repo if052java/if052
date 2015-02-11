@@ -37,6 +37,15 @@ public class WaterMeterServiceTest {
     }
 
     @Test
+    public void testGetWaterMetersByAddressId() {
+        List<WaterMeter> waterMeters = waterMeterService.getWaterMetersByAddressId(1);
+        Assert.assertNotNull(waterMeters);
+        for(WaterMeter waterMeter : waterMeters) {
+            System.out.println(waterMeter);
+        }
+    }
+
+    @Test
     public void testGetAllWaterMeters() {
         List<WaterMeter> waterMeters = waterMeterService.getAllWaterMeters();
         Assert.assertNotNull(waterMeters);

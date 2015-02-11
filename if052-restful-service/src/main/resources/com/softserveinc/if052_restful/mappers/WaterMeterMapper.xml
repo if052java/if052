@@ -32,6 +32,14 @@
         WHERE wm.water_meter_id = #{waterMeterId}
     </select>
 
+    <select id="getWaterMetersByAddressId" parameterType="int" resultMap="WaterMeterSimpleResult">
+        SELECT
+        wm.water_meter_id, wm.name, wm.description
+        FROM watermeter wm
+        LEFT OUTER JOIN address a on wm.address_id = a.address_id
+        WHERE a.address_id = #{addressId}
+    </select>
+
     <select id="getAllWaterMeters" resultMap="WaterMeterSimpleResult">
         SELECT
         wm.water_meter_id, wm.name, wm.description
