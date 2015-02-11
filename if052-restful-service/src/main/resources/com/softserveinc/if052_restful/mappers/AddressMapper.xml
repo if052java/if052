@@ -10,35 +10,49 @@
         <result property="street" column="street"/>
         <result property="building" column="building"/>
         <result property="apartment" column="apartment"/>
-        <result property="userId" column="user_id"/>
+        <association property="user" resultMap="com.softserveinc.if052_restful.mappers.UserMapper.UserSimpleResult"/>
+        <collection property="waterMeters" ofType="WaterMeter"
+                    resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"
+                    column="watermeter_"/>
     </resultMap>
+
+    <resultMap id="AddressSimpleResult" type="Address">
+        <id property="addressId" column="address_id" />
+        <result property="city" column="city" />
+        <result property="street" column="street" />
+        <result property="building" column="building" />
+        <result property="apartment" column="apartment" />
+    </resultMap>
+
+
 
     <select id="getAddressById" parameterType="int" resultMap="AddressResult">
         SELECT
-        address_id,
-        city,
-        street,
-        building,
-        apartment,
-        user_id
-        FROM address
-        WHERE address_id = #{addressId}
+        a.address_id,
+        a.city,
+        a.street,
+        a.building,
+        a.apartment,
+        a.user_id
+        FROM address a
+        LEFT JOIN watermeter wm ON wm.address_id = a.address_id
+        LEFT JOIN user u ON a.user_id = u.user_id
+        WHERE a.address_id = #{addressId}
     </select>
 
-    <select id="getAllAddresses" resultMap="AddressResult">
+    <select id="getAllAddresses" resultMap="AddressSimpleResult">
         SELECT
         address_id,
         city,
         street,
         building,
-        apartment,
-        user_id
+        apartment
         FROM address
     </select>
 
     <insert id="insertAddress" parameterType="Address" useGeneratedKeys="true" keyProperty="addressId">
         INSERT INTO address(city, street, building, apartment, user_id)
-        VALUES(#{city}, #{street}, #{building}, #{apartment}, #{userId})
+        VALUES(#{city}, #{street}, #{building}, #{apartment}, #{user.userId})
     </insert>
 
     <update id="updateAddress" parameterType="Address">
@@ -48,7 +62,7 @@
         street = #{street},
         building = #{building},
         apartment = #{apartment},
-        user_id = #{userId}
+        user_id = #{user.userId}
         WHERE address_id = #{addressId}
     </update>
 

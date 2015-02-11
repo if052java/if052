@@ -4,17 +4,17 @@
 <html>
 <head>
     <title>TILES TEMPLATE</title>
-    <link type="text/css" rel="stylesheet" href="/resources/css/tiles.css"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/tiles.css"/>"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
 </head>
 <body>
 <div class="page">
-    <tiles:insertAttribute name="header" />
+    <tiles:insertAttribute name="header"/>
     <div class="content">
-        <tiles:insertAttribute name="menu" />
-        <tiles:insertAttribute name="body" />
+        <tiles:insertAttribute name="menu"/>
+        <tiles:insertAttribute name="body"/>
     </div>
-    <tiles:insertAttribute name="footer" />
+    <tiles:insertAttribute name="footer"/>
 </div>
 </body>
 </html>

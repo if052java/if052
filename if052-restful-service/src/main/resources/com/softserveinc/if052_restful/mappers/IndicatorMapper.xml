@@ -11,13 +11,15 @@
         <result property="value" column="value"/>
         <result property="isPaid" column="is_paid"/>
         <result property="isPublished" column="is_published"/>
-        <association property="waterMeter" resultMap="WaterMeterResult"/>
+        <association property="waterMeter" resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"/>
     </resultMap>
 
-    <resultMap id="WaterMeterResult" type="WaterMeter">
-        <id property="waterMeterId" column="water_meter_id"/>
-        <result property="name" column="name"/>
-        <result property="description" column="description"/>
+    <resultMap id="IndicatorSimpleResult" type="Indicator">
+        <id property="indicatorId" column="indicator_id"/>
+        <result property="date" column="date"/>
+        <result property="value" column="value"/>
+        <result property="isPaid" column="is_paid"/>
+        <result property="isPublished" column="is_published"/>
     </resultMap>
 
     <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">

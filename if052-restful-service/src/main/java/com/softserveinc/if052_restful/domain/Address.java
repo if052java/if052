@@ -20,7 +20,7 @@ public final class Address {
 	private String street;
 	private String building;
 	private String apartment;
-	private int userId;
+	private User user;
 	private List<WaterMeter> waterMeters;
 
 
@@ -93,23 +93,16 @@ public final class Address {
 	public void setApartment(String apartment) {
 		this.apartment = apartment;
 	}
-	
 
-	/**
-	 * @return the user_id
-	 */
-	public int getUserId() {
-		return userId;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	/**
-	 * @param user_id the user_id to set
-	 */
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	/**
+    /**
 	 * @return the waterMeters
 	 */
 	public List<WaterMeter> getWaterMeters() {
@@ -127,7 +120,6 @@ public final class Address {
 	public String toString() {
 		return "Address: addressId=" + addressId
                 + ", city=" + city + ", street=" + street
-				+ ", building=" + building + ", apartment=" + apartment
-                + ", userId=" + userId;
+				+ ", building=" + building + ", apartment=" + apartment;
 	}
 }

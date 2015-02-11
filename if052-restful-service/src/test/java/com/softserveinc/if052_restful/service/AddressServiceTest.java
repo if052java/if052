@@ -16,6 +16,8 @@ public class AddressServiceTest
 {
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private UserService userService;
 
     @Test
     public void testGetAddressById()
@@ -44,7 +46,7 @@ public class AddressServiceTest
         address.setStreet("Сахарова");
         address.setBuilding("23");
         address.setApartment("503");
-        address.setUserId(1);
+        address.setUser(userService.getUserById(1));
 
         addressService.insertAddress(address);
         System.out.println(address.getAddressId());
@@ -57,7 +59,7 @@ public class AddressServiceTest
         Assert.assertEquals(address.getStreet(), createdAddress.getStreet());
         Assert.assertEquals(address.getBuilding(), createdAddress.getBuilding());
         Assert.assertEquals(address.getApartment(), createdAddress.getApartment());
-        Assert.assertEquals(address.getUserId(), createdAddress.getUserId());
+        Assert.assertEquals(address.getUser().getUserId(), createdAddress.getUser().getUserId());
     }
     @Test
     public void testUpdateAddress()
@@ -87,7 +89,7 @@ public class AddressServiceTest
         address.setStreet("Сахарова");
         address.setBuilding("23");
         address.setApartment("503");
-        address.setUserId(1);
+        address.setUser(userService.getUserById(1));
         addressService.insertAddress(address);
 
 //        // searching of last record id for update
