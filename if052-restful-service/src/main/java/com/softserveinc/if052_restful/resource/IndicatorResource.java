@@ -23,9 +23,8 @@ public class IndicatorResource {
     @Autowired
     private WaterMeterService waterMeterService;
 
-    // get
     @GET
-    @Path("/wm={waterMeterId}")
+    @Path("{waterMeterId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getIndicators(@PathParam("waterMeterId") String waterMeterId) {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(Integer.valueOf(waterMeterId));
@@ -33,13 +32,11 @@ public class IndicatorResource {
         return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
     }
 
-    // delete
     @DELETE
-    @Path("/delete?id={indicatorId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response deleteIndicator(@PathParam("indicatorId") String indicatorId) {
-        indicatorService.deleteIndicator(Integer.valueOf(indicatorId));
-        return Response.ok().build();
+    @Path("{indicatorId}")
+    public Response deleteIndicator(@PathParam("indicatorId") int indicatorId) {
+        indicatorService.deleteIndicator(indicatorId);
+        return Response.status(Response.Status.ACCEPTED).build();
     }
 
 }

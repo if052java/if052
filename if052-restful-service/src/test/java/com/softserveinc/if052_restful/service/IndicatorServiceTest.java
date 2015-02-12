@@ -44,7 +44,7 @@ public class IndicatorServiceTest
     }
 
     @Test
-    public void testGatIndicatorsByWaterMeter()
+    public void testGetIndicatorsByWaterMeter()
     {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
         List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
