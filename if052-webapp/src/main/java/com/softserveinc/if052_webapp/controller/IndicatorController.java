@@ -10,6 +10,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Created by Maksym on 2/12/2015.
+ */
 @Controller
 public class IndicatorController {
 
