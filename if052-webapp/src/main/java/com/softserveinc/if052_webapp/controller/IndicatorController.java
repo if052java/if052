@@ -22,7 +22,7 @@ public class IndicatorController {
     public String GetIndicators(@RequestParam(value = "waterMeterId",
             required = true, defaultValue = "1") String waterMeterId, ModelMap model) {
         RestTemplate restTemplate = new RestTemplate();
-        Indicator[] temp = restTemplate.getForObject("http://localhost:8080/indicators/"+waterMeterId, Indicator[].class);
+        Indicator[] temp = restTemplate.getForObject("http://localhost:8080/restful/indicators/"+waterMeterId, Indicator[].class);
         List<Indicator> indicators = Arrays.asList(temp);
         this.waterMeterId = waterMeterId;
         model.addAttribute("indicators", indicators);

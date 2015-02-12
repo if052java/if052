@@ -19,7 +19,7 @@ public class UserController {
     @RequestMapping(value = "user/addUser", method = RequestMethod.POST)
     public String addUser(User user) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForEntity("http://localhost:8080/new", user, User.class);
+        restTemplate.postForEntity("http://localhost:8080/restful/new", user, User.class);
 //        model.addAttribute("name");
 //        String str =model.get();
 //        User user;

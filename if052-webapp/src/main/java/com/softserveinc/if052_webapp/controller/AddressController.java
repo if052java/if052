@@ -21,7 +21,7 @@ public class AddressController {
     public String getAddressPage(@RequestParam(value = "userId",
         required = true, defaultValue = "1") String userId, ModelMap model) {
         RestTemplate restTemplate = new RestTemplate();
-        Address[] arrayOfAddresses= restTemplate.getForObject("http://localhost:8080/address/list/" + userId, Address[].class);
+        Address[] arrayOfAddresses= restTemplate.getForObject("http://localhost:8080/restful/address/list/" + userId, Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddresses);
 
         model.addAttribute("addresses", addresses);
@@ -33,7 +33,7 @@ public class AddressController {
     public String deleteAddress(@RequestParam(value = "addressId",
         required = true) int addressId, ModelMap model) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete("http://localhost:8080/address/deleteAddress"+addressId);
+        restTemplate.delete("http://localhost:8080/restful/address/deleteAddress"+addressId);
 
 
         //return "redirect:/addresses?userId=" ;
