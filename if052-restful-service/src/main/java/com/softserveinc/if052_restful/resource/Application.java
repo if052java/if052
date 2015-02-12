@@ -27,6 +27,8 @@ public class Application extends ResourceConfig{
 
         register(UserResource.class);
 
+        register(IndicatorResource.class);
+
     }
 
 }
