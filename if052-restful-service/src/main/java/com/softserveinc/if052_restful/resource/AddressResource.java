@@ -21,14 +21,14 @@ public class AddressResource {
     @GET
     @Path("/list/{userId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response makeWaterMeter(@PathParam("userId") String userId) {
+    public Response makeAddress(@PathParam("userId") String userId) {
         List < Address > addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
         return Response.status(Response.Status.ACCEPTED).entity(addresses).build();
     }
 
     @GET @Path("/list")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response makeWaterMeters() {
+    public Response makeAddresses() {
         List<Address> addresses = addressService.getAllAddresses();
         return Response.status(Response.Status.ACCEPTED).entity(addresses).build();
     }
@@ -36,7 +36,7 @@ public class AddressResource {
     @DELETE
     @Path("deleteAddress/{addressId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response deleteWaterMeter(@PathParam("addressId") int addressId) {
+    public Response deleteAddress(@PathParam("addressId") int addressId) {
         addressService.deleteAddress(addressId);
         return Response.ok().build();
     }

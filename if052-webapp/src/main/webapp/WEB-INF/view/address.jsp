@@ -30,7 +30,7 @@
                         <td><c:out value="${address.building}"/></td>
                         <td><c:out value="${address.apartment}"/></td>
                         <td><a ><button>UPDATE</button></a></td>
-                        <td><a href="/deleteAddress?addressId=${address.addressId}"><button>DELETE</button></a></td>
+                        <td><button>DELETE</button></td>
 
                     </tr>
                 </c:forEach>

@@ -15,12 +15,11 @@
         <div class="body">
 
             <div class="container">
-                <%--<p>Indicators for water meter: name= ${warterMeter.name} description= ${waterMeter.descripton} </p>--%>
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>Назва</th>
-                        <th>Опис</th>
+                        <th>Дата</th>
+                        <th>Значення</th>
                     </tr>
                     </thead>
                     <tbody>
