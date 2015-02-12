@@ -144,6 +144,18 @@
                     <skipTests>false</skipTests>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost:8080/manager/text</url>
+                    <update>true</update>
+                    <username>tomcat</username> <!-- tomcat-users.xml -->
+                    <password>admin</password> <!-- roles="manager-gui, manager-script" -->
+                    <path>/${build.finalName}</path> <!-- mvn tomcat7:deploy (redeploy / undeploy ) -->
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

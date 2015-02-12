@@ -29,18 +29,18 @@
                     <tr>
                         <td><c:out value="${waterMeter.name}"/>  </td>
                         <td><c:out value="${waterMeter.description}"/></td>
-                        <td><a href="/indicators?waterMeterId=${waterMeter.waterMeterId}">
+                        <td><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}"/>">
                             <button>INDICATORS</button></a></td>
-                        <td><a href="/updateWaterMeter?waterMeterId=${waterMeter.waterMeterId}">
+                        <td><a href="<c:url value="/updateWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
                             <button>UPDATE</button></a></td>
-                        <td><a href="/deleteWaterMeter?waterMeterId=${waterMeter.waterMeterId}">
+                        <td><a href="<c:url value="/deleteWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
                             <button>DELETE</button></a></td>
 
                     </tr>
                     </c:forEach>
                 </table>
-
-                        <form:form action="/addWaterMeter" method="post" modelAttribute="waterMeter">
+                        <c:url var="addUrl" value="/addWaterMeter"/>
+                        <form:form action="${addUrl}" method="post" modelAttribute="waterMeter">
                             <table class="box-table-a">
                                 <caption> Додати лічильник</caption>
                                 <thead>

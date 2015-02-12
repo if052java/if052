@@ -11,13 +11,18 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+
+
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
 
         <h1> UPDATE FORM WILL BE HERE </h1>
 
-            <form:form action="/updateWaterMeter" method="post" modelAttribute="waterMeter">
+<c:url var="updateUrl" value="/updateWaterMeter"/>
+
+            <form:form
+                    action="${updateUrl}" method="post" modelAttribute="waterMeter">
                 <table class="box-table-a">
                     <caption> Update Water Meter</caption>
                     <thead>

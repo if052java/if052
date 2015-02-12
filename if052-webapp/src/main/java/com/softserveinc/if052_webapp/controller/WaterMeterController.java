@@ -42,7 +42,7 @@ public class WaterMeterController {
         restTemplate = new RestTemplate();
         Address address = restTemplate.getForObject("http://localhost:8080/restful/watermeter/address/" + addressId, Address.class);
         waterMeter.setAddress(address);
-        restTemplate.postForObject("http://localhost:8080/watermeter/", waterMeter, WaterMeter.class);
+        restTemplate.postForObject("http://localhost:8080/restful/watermeter/", waterMeter, WaterMeter.class);
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
@@ -67,7 +67,7 @@ public class WaterMeterController {
         restTemplate = new RestTemplate();
         Address address = restTemplate.getForObject("http://localhost:8080/restful/watermeter/address/" + addressId, Address.class);
         waterMeter.setAddress(address);
-        restTemplate.put("http://localhost:8080/watermeter/" + waterMeter.getWaterMeterId(), waterMeter);
+        restTemplate.put("http://localhost:8080/restful/watermeter/" + waterMeter.getWaterMeterId(), waterMeter);
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
