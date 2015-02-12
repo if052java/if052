@@ -52,6 +52,18 @@
         WHERE a.address_id = #{addressId}
     </select>
 
+    <select id="getAddressesByUserId" parameterType="int" resultMap="AddressSimpleResult">
+        SELECT
+        address_id,
+        city,
+        street,
+        building,
+        apartment,
+        user_id
+        FROM address
+        WHERE user_id = #{userId}
+    </select>
+
     <select id="getAllAddresses" resultMap="AddressSimpleResult">
         SELECT
         address_id,

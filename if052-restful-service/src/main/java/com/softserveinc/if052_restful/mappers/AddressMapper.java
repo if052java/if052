@@ -41,13 +41,12 @@ public interface AddressMapper {
 	public List<Address> getAllAddresses();
 	
 	/**
-	 * Not realized !!!
 	 * Select all addresses (zero or more) of user
 	 * 
 	 * @param userId
 	 * @return List of addresses
 	 */
-	//public List<Address> getAddressesByUserId(int userId);
+	public List < Address > getAddressesByUserId(int userId);
 	
 	/**
 	 * Update existing address of user

@@ -22,6 +22,11 @@ public class AddressService {
         return addressMapper.getAllAddresses();
     }
 
+    public List < Address > getAllAddressesByUserId(int userId){
+        return addressMapper.getAddressesByUserId( userId );
+        
+    }
+
     public void insertAddress(Address address) {
         addressMapper.insertAddress(address);
     }
