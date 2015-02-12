@@ -22,6 +22,11 @@ public class Application extends ResourceConfig{
         //register(GreetingResource.class);
 
         register(AddressResource.class);
+
+        register(WaterMeterResource.class);
+
+        register(UserResource.class);
+
     }
 
 }
