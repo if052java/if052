@@ -20,35 +20,35 @@ import javax.ws.rs.core.Response;
 
 @Path("/user")
 public class UserResource {
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
 
-    @POST
-    @Path("new/")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response create(
-        @RequestBody
-        User user,
-
-        HttpServletResponse response
-    ){
-        try {
-            //- Set HTTP status -//
-            response.setStatus( HttpStatus.CREATED.value() );
-
-            //- Success. Return created staff-//
-            userService.insertUser(user);
-
-            return Response.status(Response.Status.CREATED).entity(user).build();
-        }
-        catch ( ConstraintViolationException e ) {
-            //- Failure. Can not to create staff-//
-            response.setStatus( HttpStatus.FORBIDDEN.value() );
-        }
-        catch ( Exception e ) {
-            //- Failure. Can not to create staff -//
-            response.setStatus( HttpStatus.FORBIDDEN.value() );
-        }
-        return null;
-    }
+//    @POST
+//    @Path("new/")
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public Response create(
+//        @RequestBody
+//        User user,
+//
+//        HttpServletResponse response
+//    ){
+//        try {
+//            //- Set HTTP status -//
+//            response.setStatus( HttpStatus.CREATED.value() );
+//
+//            //- Success. Return created staff-//
+//            userService.insertUser(user);
+//
+//            return Response.status(Response.Status.CREATED).entity(user).build();
+//        }
+//        catch ( ConstraintViolationException e ) {
+//            //- Failure. Can not to create staff-//
+//            response.setStatus( HttpStatus.FORBIDDEN.value() );
+//        }
+//        catch ( Exception e ) {
+//            //- Failure. Can not to create staff -//
+//            response.setStatus( HttpStatus.FORBIDDEN.value() );
+//        }
+//        return null;
+//    }
 }
