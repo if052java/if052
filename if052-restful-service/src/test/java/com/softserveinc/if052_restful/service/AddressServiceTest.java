@@ -28,6 +28,16 @@ public class AddressServiceTest
     }
 
     @Test
+    public void testGetAddressesByUserId()
+    {
+        List<Address> addresses = addressService.getAllAddressesByUserId(1);
+        Assert.assertNotNull(addresses);
+        for (Address address : addresses)
+        {
+            System.out.println(address);
+        }
+    }
+    @Test
     public void testGetAllAddresses()
     {
         List<Address> addresses = addressService.getAllAddresses();

@@ -2,9 +2,12 @@ package com.softserveinc.if052_webapp.domain;
 
 import java.util.List;
 
+/**
+ *
+ */
 public class User {
 
-                        //- Properties -//
+    //- Properties -//
     private int userId;
     private String name;
     private String surname;
@@ -12,8 +15,8 @@ public class User {
     private String login;
     private String password;
     private double tariff;
-    private List< Address > addresses;
-    
+    private List <Address> addresses;
+
                         //- Getters -//
     public int getUserId() {
         return userId;
@@ -43,7 +46,7 @@ public class User {
         return tariff;
     }
 
-    public List< Address > getAddresses() {
+    public List <Address> getAddresses() {
         return addresses;
     }
 
@@ -76,7 +79,7 @@ public class User {
         this.tariff = tariff;
     }
 
-    public void setAddresses(List< Address > addresses) {
+    public void setAddresses(List <Address> addresses) {
         this.addresses = addresses;
     }
 
