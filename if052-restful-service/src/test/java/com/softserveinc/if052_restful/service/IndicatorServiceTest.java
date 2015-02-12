@@ -1,8 +1,8 @@
 package com.softserveinc.if052_restful.service;
 
 import com.softserveinc.if052_restful.domain.Indicator;
+import com.softserveinc.if052_restful.domain.WaterMeter;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,18 @@ public class IndicatorServiceTest
         {
             System.out.println(indicator);
         }
+    }
 
+    @Test
+    public void testGatIndicatorsByWaterMeter()
+    {
+        WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
+        List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
+        Assert.assertNotNull(indicators);
+        for (Indicator indicator : indicators)
+        {
+            System.out.println(indicator);
+        }
     }
 
     @Test

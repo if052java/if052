@@ -51,6 +51,21 @@
         LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
     </select>
 
+    <select id="getIndicatorsByWaterMeter" resultMap="IndicatorResult">
+        SELECT
+        i.indicator_id,
+        i.date,
+        i.value,
+        i.is_paid,
+        i.is_published,
+        wm.water_meter_id,
+        wm.name,
+        wm.description
+        FROM indicator i
+        RIGHT JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
+        WHERE wm.water_meter_id = #{waterMeterId}
+    </select>
+
     <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">
 
         INSERT INTO indicator(date, value, is_paid, is_published, water_meter_id)
