@@ -1,7 +1,9 @@
 package com.softserveinc.if052_restful.resource;
 
+import com.softserveinc.if052_restful.domain.Address;
 import com.softserveinc.if052_restful.domain.Indicator;
 import com.softserveinc.if052_restful.domain.WaterMeter;
+import com.softserveinc.if052_restful.service.AddressService;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.h2.jdbc.JdbcSQLException;
@@ -25,13 +27,10 @@ public class WaterMeterResource {
     @Autowired
     private IndicatorService indicatorService;
 
-/*
-    @GET @Path("{waterMeterId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getWaterMeter(@PathParam("waterMeterId") int waterMeterId) {
-        WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
-        return Response.status(Response.Status.ACCEPTED).entity(waterMeter).build();
-    }*/
+    @Autowired
+    private AddressService addressService;
+
+
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -40,15 +39,36 @@ public class WaterMeterResource {
     return Response.status(Response.Status.ACCEPTED).entity(waterMeters).build();
     }
 
-    @GET @Path("{addressId}")
+    @GET @Path("{waterMeterId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getWaterMeters(@PathParam("addressId") int addressId) {
-        List<WaterMeter> waterMeters = waterMeterService.getWaterMetersByAddressId(addressId);
-        return Response.status(Response.Status.ACCEPTED).entity(waterMeters).build();
+    public Response getWaterMeter(@PathParam("waterMeterId") int waterMeterId) {
+        WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
+        return Response.status(Response.Status.ACCEPTED).entity(waterMeter).build();
     }
 
-    @DELETE
-    @Path("{waterMeterId}")
+    /* WILL BE MOVED TO ADDRESS RESOURCE*/
+    @GET @Path("address/{addressId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAddress(@PathParam("addressId") int addressId) {
+        Address address = addressService.getAddressById(addressId);
+        return Response.status(Response.Status.ACCEPTED).entity(address).build();
+    }
+
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response insertWaterMeter(WaterMeter waterMeter) {
+        waterMeterService.insertWaterMeter(waterMeter);
+        return Response.status(Response.Status.ACCEPTED).build();
+    }
+
+    @PUT @Path("{waterMeterId}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response updateWaterMeter(@PathParam("waterMeterId") int waterMeterId, WaterMeter waterMeter) {
+        waterMeterService.updateWaterMeter(waterMeter);
+        return Response.status(Response.Status.ACCEPTED).build();
+    }
+
+    @DELETE @Path("{waterMeterId}")
     public Response deleteWaterMeter(@PathParam("waterMeterId") int waterMeterId) {
         for(Indicator i : indicatorService.getAllIndicators()) {
             indicatorService.deleteIndicator(i.getIndicatorId());
@@ -56,6 +76,10 @@ public class WaterMeterResource {
         waterMeterService.deleteWaterMeter(waterMeterId);
             return Response.status(Response.Status.OK).build();
     }
+
+
+
+
 
 
 }

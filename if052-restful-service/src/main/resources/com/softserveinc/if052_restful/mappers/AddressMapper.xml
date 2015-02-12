@@ -13,7 +13,7 @@
         <association property="user" resultMap="com.softserveinc.if052_restful.mappers.UserMapper.UserSimpleResult"/>
         <collection property="waterMeters" ofType="WaterMeter"
                     resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"
-                    column="watermeter_"/>
+                    columnPrefix="watermeter_"/>
     </resultMap>
 
     <resultMap id="AddressSimpleResult" type="Address">
@@ -33,10 +33,22 @@
         a.street,
         a.building,
         a.apartment,
-        a.user_id
+        a.user_id,
+
+        u.user_id,
+        u.name,
+        u.surname,
+        u.middle_name,
+        u.login,
+        u.password,
+        u.tariff,
+
+        wm.water_meter_id as watermeter_water_meter_id,
+        wm.name as watermeter_name,
+        wm.description as watermeter_description
         FROM address a
-        LEFT JOIN watermeter wm ON wm.address_id = a.address_id
-        LEFT JOIN user u ON a.user_id = u.user_id
+        LEFT OUTER JOIN watermeter wm ON a.address_id = wm.address_id
+        LEFT OUTER JOIN user u ON a.user_id = u.user_id
         WHERE a.address_id = #{addressId}
     </select>
 

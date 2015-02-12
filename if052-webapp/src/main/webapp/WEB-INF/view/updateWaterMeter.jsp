@@ -17,6 +17,29 @@
 
         <h1> UPDATE FORM WILL BE HERE </h1>
 
+            <form:form action="/updateWaterMeter" method="post" modelAttribute="waterMeter">
+                <table class="box-table-a">
+                    <caption> Update Water Meter</caption>
+                    <thead>
+                    <tr>
+                        <th> Name </th>
+                        <th> Description </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="waterMeterId" value="${waterMeter.waterMeterId}"/>
+                            <input type="text" name="name" value="${waterMeter.name}"/>
+                        </td>
+                        <td> <input type="text" name="description" value="${waterMeter.description}"/></td>
+                        <td>
+                            <button class="add-button" type="submit">update</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </form:form>
 
 
 

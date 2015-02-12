@@ -1,6 +1,7 @@
 package com.softserveinc.if052_restful.service;
 
 import com.softserveinc.if052_restful.domain.Address;
+import com.softserveinc.if052_restful.domain.WaterMeter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +24,12 @@ public class AddressServiceTest
     public void testGetAddressById()
     {
         Address address = addressService.getAddressById(1);
+        List<WaterMeter> waterMeters = address.getWaterMeters();
+        for(WaterMeter wm : waterMeters) {
+            System.out.println(wm);
+        }
         Assert.assertNotNull(address);
+        System.out.println(address.getUser().getName());
         System.out.println(address);
     }
 
