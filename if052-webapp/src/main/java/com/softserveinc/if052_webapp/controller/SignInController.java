@@ -1,19 +1,30 @@
 package com.softserveinc.if052_webapp.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 /**
- * Created by student on 2/11/2015.
+ * Created by student on 2/12/2015.
  */
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 @Controller
-@RequestMapping("/signin")
 public class SignInController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String signIn(ModelMap modelMap){
-        return "signin";
+    @RequestMapping("signin")
+    public ModelAndView getLoginForm(
+            @RequestParam(required = false) String authfailed, String logout) {
+        String message = "";
+        if (authfailed != null) {
+            message = "Invalid username of password, try again !";
+        } else if (logout != null) {
+            message = "Logged Out successfully, login again to continue !";
+        }
+        return new ModelAndView("signin", "message", message);
+    }
+
+    @RequestMapping("profile")
+    public String geProfilePage() {
+        return "profile";
     }
 }
