@@ -27,13 +27,10 @@ public class WaterMeterController {
     private RestTemplate restTemplate;
 
     @RequestMapping(value = "/watermeter{addressId}")
-    public String getWaterMetersPage(/*@RequestParam(value = "addressId",
-            required = true)*/ int addressId, ModelMap model) {
+    public String getWaterMetersPage(int addressId, ModelMap model) {
         this.addressId = String.valueOf(addressId);
         restTemplate = new RestTemplate();
         Address address = restTemplate.getForObject("http://localhost:8080/watermeter/address/" + addressId, Address.class);
-       // WaterMeter[] temp = restTemplate.getForObject("http://localhost:8080/watermeter/" + addressId, WaterMeter[].class);
-       // List<WaterMeter> waterMeters = Arrays.asList(temp);
         List<WaterMeter> waterMeters = address.getWaterMeters();
         model.addAttribute("address", address);
         model.addAttribute("waterMeters", waterMeters);
@@ -50,8 +47,7 @@ public class WaterMeterController {
     }
 
     @RequestMapping(value = "/deleteWaterMeter{waterMeterId}")
-    public String deleteWaterMeter(/*@RequestParam(value = "waterMeterId", required = true)*/
-                                   int waterMeterId, ModelMap model) {
+    public String deleteWaterMeter(int waterMeterId, ModelMap model) {
         restTemplate = new RestTemplate();
         restTemplate.delete("http://localhost:8080/watermeter/" + waterMeterId);
         return "redirect:/watermeter?addressId=" + this.addressId;
@@ -59,8 +55,7 @@ public class WaterMeterController {
 
 
     @RequestMapping(value = "/updateWaterMeter{waterMeterId}")
-    public String getUpdateWaterMeterPage(/*@RequestParam(value = "waterMeterId", required = true)*/
-                                          int waterMeterId, ModelMap model) {
+    public String getUpdateWaterMeterPage(int waterMeterId, ModelMap model) {
         restTemplate = new RestTemplate();
         WaterMeter waterMeter = restTemplate.getForObject("http://localhost:8080/watermeter/" + waterMeterId, WaterMeter.class);
         model.addAttribute("waterMeter", waterMeter);
