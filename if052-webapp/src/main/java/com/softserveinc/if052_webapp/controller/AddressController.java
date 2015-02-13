@@ -1,6 +1,8 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.domain.Address;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +19,14 @@ import java.util.List;
 @Controller
 public class AddressController {
 
+    @Autowired @Qualifier("restUrl")
+    private String restUrl;
+
     @RequestMapping("/addresses")
     public String getAddressPage(@RequestParam(value = "userId",
         required = true, defaultValue = "1") String userId, ModelMap model) {
         RestTemplate restTemplate = new RestTemplate();
-        Address[] arrayOfAddresses= restTemplate.getForObject("http://localhost:8080/restful/address/list/" + userId, Address[].class);
+        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "address/list/" + userId, Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddresses);
 
         model.addAttribute("addresses", addresses);
@@ -33,7 +38,7 @@ public class AddressController {
     public String deleteAddress(@RequestParam(value = "addressId",
         required = true) int addressId, ModelMap model) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete("http://localhost:8080/restful/address/deleteAddress"+addressId);
+        restTemplate.delete(restUrl + "address/deleteAddress"+addressId);
 
 
         //return "redirect:/addresses?userId=" ;

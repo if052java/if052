@@ -1,6 +1,8 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +13,11 @@ import org.springframework.web.client.RestTemplate;
  */
 @Controller
 public class UserController {
+
+    @Autowired
+    @Qualifier("restUrl")
+    private String restUrl;
+
     @RequestMapping("user/registration")
     public String registration(){
         return "registration";
@@ -19,7 +26,7 @@ public class UserController {
     @RequestMapping(value = "user/addUser", method = RequestMethod.POST)
     public String addUser(User user) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForEntity("http://localhost:8080/restful/new", user, User.class);
+        restTemplate.postForEntity(restUrl + "user/new", user, User.class);
 //        model.addAttribute("name");
 //        String str =model.get();
 //        User user;

@@ -2,6 +2,8 @@ package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.WaterMeter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +24,10 @@ import java.util.List;
 @Controller
 public class WaterMeterController {
 
+    @Autowired
+    @Qualifier("restUrl")
+    private String restUrl;
+
     private String addressId = "";
 
     private RestTemplate restTemplate;
@@ -30,7 +36,7 @@ public class WaterMeterController {
     public String getWaterMetersPage(int addressId, ModelMap model) {
         this.addressId = String.valueOf(addressId);
         restTemplate = new RestTemplate();
-        Address address = restTemplate.getForObject("http://localhost:8080/restful/watermeter/address/" + addressId, Address.class);
+        Address address = restTemplate.getForObject(restUrl + "watermeter/address/" + addressId, Address.class);
         List<WaterMeter> waterMeters = address.getWaterMeters();
         model.addAttribute("address", address);
         model.addAttribute("waterMeters", waterMeters);
@@ -40,16 +46,16 @@ public class WaterMeterController {
     @RequestMapping(value = "/addWaterMeter", method = RequestMethod.POST)
     public String addWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model) {
         restTemplate = new RestTemplate();
-        Address address = restTemplate.getForObject("http://localhost:8080/restful/watermeter/address/" + addressId, Address.class);
+        Address address = restTemplate.getForObject(restUrl + "watermeter/address/" + addressId, Address.class);
         waterMeter.setAddress(address);
-        restTemplate.postForObject("http://localhost:8080/restful/watermeter/", waterMeter, WaterMeter.class);
+        restTemplate.postForObject(restUrl + "watermeter/", waterMeter, WaterMeter.class);
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
     @RequestMapping(value = "/deleteWaterMeter{waterMeterId}")
     public String deleteWaterMeter(int waterMeterId, ModelMap model) {
         restTemplate = new RestTemplate();
-        restTemplate.delete("http://localhost:8080/restful/watermeter/" + waterMeterId);
+        restTemplate.delete(restUrl + "watermeter/" + waterMeterId);
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
@@ -57,7 +63,7 @@ public class WaterMeterController {
     @RequestMapping(value = "/updateWaterMeter{waterMeterId}")
     public String getUpdateWaterMeterPage(int waterMeterId, ModelMap model) {
         restTemplate = new RestTemplate();
-        WaterMeter waterMeter = restTemplate.getForObject("http://localhost:8080/restful/watermeter/" + waterMeterId, WaterMeter.class);
+        WaterMeter waterMeter = restTemplate.getForObject(restUrl + "watermeter/" + waterMeterId, WaterMeter.class);
         model.addAttribute("waterMeter", waterMeter);
         return "updateWaterMeter";
     }
@@ -65,9 +71,9 @@ public class WaterMeterController {
     @RequestMapping(value = "/updateWaterMeter", method = RequestMethod.POST)
     public String updateWaterMeter(@ModelAttribute WaterMeter waterMeter) {
         restTemplate = new RestTemplate();
-        Address address = restTemplate.getForObject("http://localhost:8080/restful/watermeter/address/" + addressId, Address.class);
+        Address address = restTemplate.getForObject(restUrl + "watermeter/address/" + addressId, Address.class);
         waterMeter.setAddress(address);
-        restTemplate.put("http://localhost:8080/restful/watermeter/" + waterMeter.getWaterMeterId(), waterMeter);
+        restTemplate.put(restUrl + "watermeter/" + waterMeter.getWaterMeterId(), waterMeter);
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
