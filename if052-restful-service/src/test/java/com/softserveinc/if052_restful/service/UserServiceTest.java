@@ -69,8 +69,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUser()
-    {
+    public void testUpdateUser() {
         int lastElement = userService.getAllUsers().get(userService.getAllUsers().size() - 1).getUserId();
         User user = userService.getUserById(lastElement);
         user.setName("Valentyn");
@@ -93,8 +92,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testDeleteUser()
-    {
+    public void testDeleteUser() {
         int lastElement = userService.getAllUsers().get(userService.getAllUsers().size() - 1).getUserId();
 
         User user = userService.getUserById(lastElement);
