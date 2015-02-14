@@ -24,8 +24,6 @@
         <result property="apartment" column="apartment" />
     </resultMap>
 
-
-
     <select id="getAddressById" parameterType="int" resultMap="AddressResult">
         SELECT
         a.address_id,

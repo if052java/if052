@@ -11,9 +11,9 @@
     <tiles:putAttribute name="body">
         <div class="container">
             <div class="row">
-                <form role="form" action="/addUser" method="post" id="user">
+                <form role="form" action="/user/addUser" method="post">
                     <div class="col-lg-6">
-                        <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+                        <div class="well well-sm"><strong> <span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
                         <div class="form-group">
                             <label >Enter Name</label>
                             <div class="input-group">
@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label >Last Name</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="lastName" id="InputLastName" placeholder="Enter Last Name" required>
+                                <input type="text" class="form-control" name="surname" id="InputLastName" placeholder="Enter Last Name" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
