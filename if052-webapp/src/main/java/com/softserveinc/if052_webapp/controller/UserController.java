@@ -23,14 +23,4 @@ public class UserController {
         return "registration";
     }
 
-    @RequestMapping(value = "user/addUser", method = RequestMethod.POST)
-    public String addUser(User user) {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForEntity(restUrl + "user/new", user, User.class);
-//        model.addAttribute("name");
-//        String str =model.get();
-//        User user;
-//        restTemplate.postForObject("http://localhost:8080/new", user, User.class)
-        return "registrationDetails";
-    }
 }

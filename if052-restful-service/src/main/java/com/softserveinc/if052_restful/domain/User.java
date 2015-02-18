@@ -1,20 +1,56 @@
 package com.softserveinc.if052_restful.domain;
 
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 import java.util.List;
 
 public class User {
 
                         //- Properties -//
     private int userId;
+
+    @NotNull
+    @NotEmpty
+    @Length( min = 2 , max = 32)
     private String name;
+
+    @NotNull
+    @NotEmpty
+    @Length( min = 2 , max = 32)
     private String surname;
+
+    @NotNull
+    @NotEmpty
+    @Length( min = 2 , max = 32)
     private String middleName;
+
+    @NotNull
+    @NotEmpty
+    @Length( min = 8 , max = 32)
     private String login;
+
+    @NotNull
+    @NotEmpty
+    @Length( min = 8 , max = 32)
     private String password;
+
     private double tariff;
+
     private List < Address > addresses;
-    
-                        //- Getters -//
+
+    public User(){
+
+    }
+    public User(String name, String surname, String middleName, String login, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.middleName = middleName;
+        this.login = login;
+        this.password = password;
+    }
+
+    //- Getters -//
     public int getUserId() {
         return userId;
     }
