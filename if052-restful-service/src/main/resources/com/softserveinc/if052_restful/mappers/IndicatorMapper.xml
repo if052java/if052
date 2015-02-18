@@ -9,8 +9,8 @@
         <id property="indicatorId" column="indicator_id"/>
         <result property="date" column="date"/>
         <result property="value" column="value"/>
-        <result property="isPaid" column="is_paid"/>
-        <result property="isPublished" column="is_published"/>
+        <result property="paid" column="is_paid"/>
+        <result property="published" column="is_published"/>
         <association property="waterMeter" resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"/>
     </resultMap>
 
@@ -18,8 +18,8 @@
         <id property="indicatorId" column="indicator_id"/>
         <result property="date" column="date"/>
         <result property="value" column="value"/>
-        <result property="isPaid" column="is_paid"/>
-        <result property="isPublished" column="is_published"/>
+        <result property="paid" column="is_paid"/>
+        <result property="published" column="is_published"/>
     </resultMap>
 
     <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">
@@ -69,7 +69,7 @@
     <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">
 
         INSERT INTO indicator(date, value, is_paid, is_published, water_meter_id)
-        VALUES(#{date}, #{value}, #{isPaid}, #{isPublished}, #{waterMeter.waterMeterId})
+        VALUES(#{date}, #{value}, #{paid}, #{published}, #{waterMeter.waterMeterId})
 
     </insert>
 
@@ -78,8 +78,8 @@
         SET
         date= #{date},
         value = #{value},
-        is_paid = #{isPaid},
-        is_published = #{isPublished},
+        is_paid = #{paid},
+        is_published = #{published},
         water_meter_id = #{waterMeter.waterMeterId}
         WHERE indicator_id = #{indicatorId}
     </update>

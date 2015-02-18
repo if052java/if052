@@ -9,15 +9,15 @@ public class Indicator {
     private int indicatorId;
     private Date date;
     private int value;
-    private boolean isPaid;
-    private boolean isPublished;
+    private boolean paid;
+    private boolean published;
     private WaterMeter waterMeter;
 
     @Override
     public String toString() {
         return "Indicator [id=" + indicatorId
                 + ", date=" + date + ", value=" + value
-                + ", isPaid=" + isPaid + ", isPublished=" + isPublished
+                + ", paid=" + paid + ", published=" + published
                 + ", .";
     }
 
@@ -46,19 +46,19 @@ public class Indicator {
     }
 
     public boolean isPaid() {
-        return isPaid;
+        return paid;
     }
 
-    public void setPaid(boolean isPaid) {
-        this.isPaid = isPaid;
+    public void setPaid(boolean paid) {
+        this.paid = paid;
     }
 
     public boolean isPublished() {
-        return isPublished;
+        return published;
     }
 
-    public void setPublished(boolean isPublished) {
-        this.isPublished = isPublished;
+    public void setPublished(boolean published) {
+        this.published = published;
     }
 
     public WaterMeter getWaterMeter() {

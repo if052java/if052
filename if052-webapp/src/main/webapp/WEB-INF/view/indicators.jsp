@@ -29,8 +29,8 @@
                             <tr>
                                 <td><c:out value="${indicators.date}"/></td>
                                 <td><c:out value="${indicators.value}"/></td>
-                                <td><c:out value="${indicators.isPaid() ? 'Yes': 'No'}"/></td>
-                                <td><c:out value="${indicators.isPublished() ? 'Yes': 'No'}"/></td>
+                                <td><c:out value="${indicators.paid ? 'Yes': 'No'}"/></td>
+                                <td><c:out value="${indicators.published ? 'Yes': 'No'}"/></td>
                                 <td>
                                     <a href="<c:url value="/deleteIndicator?indicatorId=${indicators.indicatorId}"/>">
                                         <button>DELETE</button>
@@ -55,7 +55,7 @@
                         <tbody>
                         <tr>
                             <td><input type="text" name="value" /></td>
-                            <td><input type="checkbox" name="isPaid" /></td><%-- doesn't work--%>
+                            <td><input type="checkbox" name="paid" /></td><%-- doesn't work--%>
                             <td>
                                 <button class="add-button" type="submit">Add</button>
                             </td>

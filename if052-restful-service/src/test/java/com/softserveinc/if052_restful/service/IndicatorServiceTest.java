@@ -64,7 +64,7 @@ public class IndicatorServiceTest
         indicator.setPaid(true) ;
         indicator.setPublished(false);
 
-       indicator.setWaterMeter(waterMeterService.getWaterMeterById(1));
+        indicator.setWaterMeter(waterMeterService.getWaterMeterById(1));
 
         indicatorService.insertIndicator(indicator);
 
