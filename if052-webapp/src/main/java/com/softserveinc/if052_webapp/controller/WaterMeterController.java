@@ -36,7 +36,7 @@ public class WaterMeterController {
     public String getWaterMetersPage(int addressId, ModelMap model) {
         this.addressId = String.valueOf(addressId);
         restTemplate = new RestTemplate();
-        Address address = restTemplate.getForObject(restUrl + "address/" + addressId, Address.class);
+        Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
         List<WaterMeter> waterMeters = address.getWaterMeters();
         model.addAttribute("address", address);
         model.addAttribute("waterMeters", waterMeters);
@@ -46,7 +46,7 @@ public class WaterMeterController {
     @RequestMapping(value = "/addWaterMeter", method = RequestMethod.POST)
     public String addWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model) {
         restTemplate = new RestTemplate();
-        Address address = restTemplate.getForObject(restUrl + "address/" + addressId, Address.class);
+        Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
         waterMeter.setAddress(address);
         restTemplate.postForObject(restUrl + "watermeters/", waterMeter, WaterMeter.class);
         return "redirect:/watermeter?addressId=" + this.addressId;
@@ -71,7 +71,7 @@ public class WaterMeterController {
     @RequestMapping(value = "/updateWaterMeter", method = RequestMethod.POST)
     public String updateWaterMeter(@ModelAttribute WaterMeter waterMeter) {
         restTemplate = new RestTemplate();
-        Address address = restTemplate.getForObject(restUrl + "address/" + addressId, Address.class);
+        Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
         waterMeter.setAddress(address);
         restTemplate.put(restUrl + "watermeters/" + waterMeter.getWaterMeterId(), waterMeter);
         return "redirect:/watermeter?addressId=" + this.addressId;

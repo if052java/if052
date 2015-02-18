@@ -37,7 +37,7 @@ public class AddressController {
         this.userId = String.valueOf(userId);
         RestTemplate restTemplate = new RestTemplate();
 
-        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "address/list/" + userId, Address[].class);
+        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddresses);
 
         model.addAttribute("addresses", addresses);
@@ -58,7 +58,7 @@ public class AddressController {
         User user = restTemplate.getForObject(restUrl+ "user/" + this.userId, User.class);
         address.setUser(user);
 
-        restTemplate.postForObject(restUrl + "address/", address, Address.class);
+        restTemplate.postForObject(restUrl + "addresses/", address, Address.class);
 
         return "redirect:/addresses?userId=" + this.userId;
     }
@@ -74,7 +74,7 @@ public class AddressController {
     public String getUpdateAddressPage(int addressId, ModelMap model){
         RestTemplate restTemplate = new RestTemplate();
 
-        Address address = restTemplate.getForObject(restUrl + "address/" + addressId, Address.class);
+        Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
 
         model.addAttribute("address", address);
 
@@ -93,7 +93,7 @@ public class AddressController {
 
         User user = restTemplate.getForObject(restUrl+ "user/" + this.userId, User.class);
         address.setUser(user);
-        restTemplate.put(restUrl + "address/" + address.getAddressId(), address);
+        restTemplate.put(restUrl + "addresses/" + address.getAddressId(), address);
 
         return "redirect:/addresses?userId=" + this.userId;
     }
@@ -108,7 +108,7 @@ public class AddressController {
     public String deleteAddress(int addressId) {
         RestTemplate restTemplate = new RestTemplate();
 
-        restTemplate.delete(restUrl + "address/" +addressId);
+        restTemplate.delete(restUrl + "addresses/" +addressId);
 
         return "redirect:/addresses?userId=" + this.userId;
     }

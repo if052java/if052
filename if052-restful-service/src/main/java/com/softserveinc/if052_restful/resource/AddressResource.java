@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by valentyn on 2/11/15.
  */
-@Path("/address")
+@Path("/addresses")
 public class AddressResource {
 
     @Autowired
@@ -33,28 +33,28 @@ public class AddressResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddressesByUserId(@PathParam("userId") String userId) {
         List < Address > addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
-        return Response.status(Response.Status.ACCEPTED).entity(addresses).build();
+        return Response.status(Response.Status.OK).entity(addresses).build();
     }
 
     @GET @Path("/{addressId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddress(@PathParam("addressId") int addressId) {
         Address address = addressService.getAddressById(addressId);
-        return Response.status(Response.Status.ACCEPTED).entity(address).build();
+        return Response.status(Response.Status.OK).entity(address).build();
     }
 
     @GET @Path("/list")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddresses() {
         List < Address > addresses = addressService.getAllAddresses();
-        return Response.status(Response.Status.ACCEPTED).entity(addresses).build();
+        return Response.status(Response.Status.OK).entity(addresses).build();
     }
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     public Response createAddress(Address address){
         addressService.insertAddress(address);
-        return Response.status(Response.Status.ACCEPTED).build();
+        return Response.status(Response.Status.CREATED).build();
     }
 
     @PUT @Path("{addressId}")
@@ -63,7 +63,7 @@ public class AddressResource {
         @PathParam("addressId") int addressId,
         Address address){
         addressService.updateAddress(address);
-        return Response.status(Response.Status.ACCEPTED).build();
+        return Response.status(Response.Status.OK).build();
     }
 
     @DELETE
