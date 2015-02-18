@@ -52,7 +52,7 @@ public class IndicatorController {
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
     public String createIndicator(@ModelAttribute Indicator indicator){
         RestTemplate restTemplate = new RestTemplate();
-        WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeter/" + this.waterMeterId, WaterMeter.class);
+        WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + this.waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
         indicator.setDate(new Date());
         restTemplate.postForObject(restUrl + "indicators/", indicator, Indicator.class);
@@ -73,7 +73,7 @@ public class IndicatorController {
     @RequestMapping(value = "/updateIndicator", method = RequestMethod.POST)
     public String updateIndicator(@ModelAttribute Indicator indicator){
         RestTemplate restTemplate = new RestTemplate();
-        WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeter/" + waterMeterId, WaterMeter.class);
+        WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
         indicator.setDate(new Date());
         restTemplate.put(restUrl + "indicators/" + indicator.getIndicatorId(), indicator);

@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Danylo Tiahun on 11.02.2015.
  */
 
-@Path("/watermeter")
+@Path("/watermeters")
 public class WaterMeterResource {
 
     @Autowired
@@ -44,14 +44,6 @@ public class WaterMeterResource {
     public Response getWaterMeter(@PathParam("waterMeterId") int waterMeterId) {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
         return Response.status(Response.Status.ACCEPTED).entity(waterMeter).build();
-    }
-
-    /* WILL BE MOVED TO ADDRESS RESOURCE*/
-    @GET @Path("address/{addressId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getAddress(@PathParam("addressId") int addressId) {
-        Address address = addressService.getAddressById(addressId);
-        return Response.status(Response.Status.ACCEPTED).entity(address).build();
     }
 
     @POST
