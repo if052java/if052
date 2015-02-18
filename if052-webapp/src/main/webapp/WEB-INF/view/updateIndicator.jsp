@@ -33,7 +33,7 @@
                                 <input type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
                                 <input type="text" name="value" value="${indicator.value}"/>
                             </td>
-                            <%--<td><input type="checkbox" name="isPaid" /></td>&lt;%&ndash; doesn't work&ndash;%&gt;--%>
+                            <td><input type="checkbox" name="setPaid()" /></td><%-- doesn't work--%>
                             <td><button class="add-button" type="submit">UPDATE</button></td>
                         </tr>
                     </tbody>

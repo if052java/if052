@@ -64,7 +64,7 @@ public class IndicatorController {
     @RequestMapping(value = "/updateIndicator{indicatorId}")
     public String getUpdateIndicatorPage(int indicatorId, ModelMap model){
         RestTemplate restTemplate = new RestTemplate();
-        Indicator indicator = restTemplate.getForObject(restUrl + "indicators/get/" + indicatorId, Indicator.class);
+        Indicator indicator = restTemplate.getForObject(restUrl + "indicators/getone/" + indicatorId, Indicator.class);
         model.addAttribute("indicator", indicator);
 
         return "updateIndicator";
@@ -75,7 +75,8 @@ public class IndicatorController {
         RestTemplate restTemplate = new RestTemplate();
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeter/" + waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
-        restTemplate.put(restUrl + "indicators/get/" + indicator.getIndicatorId(), indicator);
+        indicator.setDate(new Date());
+        restTemplate.put(restUrl + "indicators/" + indicator.getIndicatorId(), indicator);
 
         return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
     }

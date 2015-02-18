@@ -29,14 +29,16 @@ public class IndicatorResource {
     public Response getIndicators(@PathParam("waterMeterId") int waterMeterId) {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
         List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
+
         return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
     }
 
     @GET
-    @Path("/get/{indicatorId}")
+    @Path("/getone/{indicatorId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getIndicator(@PathParam("indicatorId") int indicatorId) {
         Indicator indicator = indicatorService.getIndicatorById(indicatorId);
+
         return Response.status(Response.Status.ACCEPTED).entity(indicator).build();
     }
 
@@ -44,6 +46,7 @@ public class IndicatorResource {
     @Path("{indicatorId}")
     public Response deleteIndicator(@PathParam("indicatorId") int indicatorId) {
         indicatorService.deleteIndicator(indicatorId);
+
         return Response.status(Response.Status.ACCEPTED).build();
     }
 
@@ -51,6 +54,7 @@ public class IndicatorResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response createIndicator(Indicator indicator){
         indicatorService.insertIndicator(indicator);
+
         return Response.status(Response.Status.ACCEPTED).build();
     }
 
@@ -59,6 +63,7 @@ public class IndicatorResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response updateIndicator(@PathParam("indicatorId") int indicatorId, Indicator indicator){
         indicatorService.updateIndicator(indicator);
+
         return Response.status(Response.Status.ACCEPTED).build();
     }
 }
