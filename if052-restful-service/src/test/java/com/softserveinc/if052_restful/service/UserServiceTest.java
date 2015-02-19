@@ -51,7 +51,6 @@ public class UserServiceTest {
         user.setMiddleName("middle_name" + generateOrigin);
         user.setLogin("login" + generateOrigin);
         user.setPassword("password" + generateOrigin);
-        user.setTariff( generateOrigin / 1000000000 );
 
         userService.insertUser(user);
 
@@ -65,7 +64,6 @@ public class UserServiceTest {
         Assert.assertEquals(user.getMiddleName(), createdUser.getMiddleName());
         Assert.assertEquals(user.getLogin(), createdUser.getLogin());
         Assert.assertEquals(user.getPassword(), createdUser.getPassword());
-        Assert.assertEquals(user.getTariff(), createdUser.getTariff(), 0.0001);
     }
 
     @Test
@@ -77,7 +75,6 @@ public class UserServiceTest {
         user.setMiddleName("YA");
         user.setLogin("55555");
         user.setPassword("1111");
-        user.setTariff(50);
 
         userService.updateUser(user);
 
@@ -88,7 +85,6 @@ public class UserServiceTest {
         Assert.assertEquals(user.getMiddleName(), updatedUser.getMiddleName());
         Assert.assertEquals(user.getLogin(), updatedUser.getLogin());
         Assert.assertEquals(user.getPassword(), updatedUser.getPassword());
-        Assert.assertEquals(user.getTariff(), updatedUser.getTariff(), 0.1);
     }
 
     @Test

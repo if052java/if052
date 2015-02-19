@@ -20,6 +20,7 @@ public final class Address {
 	private String street;
 	private String building;
 	private String apartment;
+    private double tariff;
 	private User user;
 	private List<WaterMeter> waterMeters;
 
@@ -94,6 +95,14 @@ public final class Address {
 		this.apartment = apartment;
 	}
 
+    public double getTariff() {
+        return tariff;
+    }
+
+    public void setTariff(double tariff) {
+        this.tariff = tariff;
+    }
+
     public User getUser() {
         return user;
     }
@@ -116,10 +125,15 @@ public final class Address {
 		this.waterMeters = waterMeters;
 	}
 
-	@Override
-	public String toString() {
-		return "Address: addressId=" + addressId
-                + ", city=" + city + ", street=" + street
-				+ ", building=" + building + ", apartment=" + apartment;
-	}
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressId=" + addressId +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", building='" + building + '\'' +
+                ", apartment='" + apartment + '\'' +
+                ", tariff=" + tariff +
+                '}';
+    }
 }

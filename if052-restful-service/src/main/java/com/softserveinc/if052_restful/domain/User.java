@@ -1,8 +1,9 @@
 package com.softserveinc.if052_restful.domain;
 
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class User {
@@ -34,8 +35,6 @@ public class User {
     @NotEmpty
     @Length( min = 8 , max = 32)
     private String password;
-
-    private double tariff;
 
     private List < Address > addresses;
 
@@ -75,10 +74,6 @@ public class User {
         return password;
     }
 
-    public double getTariff() {
-        return tariff;
-    }
-
     public List < Address > getAddresses() {
         return addresses;
     }
@@ -108,25 +103,21 @@ public class User {
         this.password = password;
     }
 
-    public void setTariff(double tariff) {
-        this.tariff = tariff;
-    }
-
     public void setAddresses(List < Address > addresses) {
         this.addresses = addresses;
     }
 
                         //- toString -//
+
     @Override
     public String toString() {
         return "User{" +
-            "userId=" + userId +
-            ", name='" + name + '\'' +
-            ", surname='" + surname + '\'' +
-            ", middle_name='" + middleName+ '\'' +
-            ", login='" + login + '\'' +
-            ", password='" + password + '\'' +
-            ", tariff=" + tariff +
-            '}';
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

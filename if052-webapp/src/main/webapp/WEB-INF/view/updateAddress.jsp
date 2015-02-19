@@ -28,6 +28,7 @@
                         <th> Street</th>
                         <th> Building</th>
                         <th> Apartment </th>
+                        <th> Tariff </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,6 +45,9 @@
                         </td>
                         <td>
                             <input type="text" name="apartment" value="${address.apartment}"/>
+                        </td>
+                        <td>
+                            <input type="number" step="0.1" name="tariff" value="${address.tariff}"/>
                         </td>
                         <td>
                             <button class="add-button" type="submit">UPDATE</button>

@@ -14,7 +14,6 @@
         <result property="middleName" column="middle_name"/>
         <result property="login" column="login"/>
         <result property="password" column="password"/>
-        <result property="tariff" column="tariff"/>
         <collection property="addresses" column="userId" javaType="ArrayList" ofType="Address"
                          resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressSimpleResult">
         </collection>
@@ -25,7 +24,6 @@
         <result property="name" column="name"/>
         <result property="surname" column="surname"/>
         <result property="middleName" column="middle_name"/>
-        <result property="tariff" column="tariff"/>
     </resultMap>
 
 
@@ -37,11 +35,11 @@
         u.middle_name,
         u.login,
         u.password,
-        u.tariff,
         a.city,
         a.street,
         a.building,
         a.apartment,
+        a.tariff,
         a.user_id
         FROM user u LEFT OUTER JOIN address a ON u.user_id = a.user_id
         WHERE u.user_id = #{userId}
@@ -52,8 +50,8 @@
     </select>
 
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO user(name, surname, middle_name, login, password, tariff)
-        VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password}, #{tariff})
+        INSERT INTO user(name, surname, middle_name, login, password)
+        VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password})
     </insert>
 
     <update id="updateUser" parameterType="User">
@@ -63,8 +61,7 @@
         surname = #{surname},
         middle_name = #{middleName},
         login = #{login},
-        password = #{password},
-        tariff = #{tariff}
+        password = #{password}
         WHERE user_id = #{userId}
     </update>
 

@@ -57,11 +57,14 @@ public class AddressServiceTest
 
     @Test
     public void testInsertAddress() {
+        long generateOrigin = System.currentTimeMillis();
+
         Address address = new Address();
         address.setCity("Івано-Франківськ");
         address.setStreet("Сахарова");
         address.setBuilding("23");
         address.setApartment("503");
+        address.setTariff( generateOrigin / 1000000000 );
         address.setUser(userService.getUserById(1));
 
         addressService.insertAddress(address);
@@ -75,6 +78,7 @@ public class AddressServiceTest
         Assert.assertEquals(address.getStreet(), createdAddress.getStreet());
         Assert.assertEquals(address.getBuilding(), createdAddress.getBuilding());
         Assert.assertEquals(address.getApartment(), createdAddress.getApartment());
+        Assert.assertEquals(address.getTariff(), createdAddress.getTariff(), 0.0001);
         Assert.assertEquals(address.getUser().getUserId(), createdAddress.getUser().getUserId());
     }
     @Test
@@ -89,12 +93,14 @@ public class AddressServiceTest
         address.setStreet("Садова");
         address.setBuilding("2а");
         address.setApartment("1");
+        address.setTariff(50);
         addressService.updateAddress(address);
         Address updatedAddress = addressService.getAddressById(lastId);
         Assert.assertEquals(address.getCity(), updatedAddress.getCity());
         Assert.assertEquals(address.getStreet(), updatedAddress.getStreet());
         Assert.assertEquals(address.getBuilding(), updatedAddress.getBuilding());
         Assert.assertEquals(address.getApartment(), updatedAddress.getApartment());
+        Assert.assertEquals(address.getTariff(), updatedAddress.getTariff(), 0.1);
     }
 
     @Test
@@ -105,6 +111,7 @@ public class AddressServiceTest
         address.setStreet("Сахарова");
         address.setBuilding("23");
         address.setApartment("503");
+        address.setTariff(0.23);
         address.setUser(userService.getUserById(1));
         addressService.insertAddress(address);
 

@@ -22,6 +22,7 @@
                         <th>Вулиця</th>
                         <th>Будинок</th>
                         <th>Квартира</th>
+                        <th>Тариф</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,6 +32,7 @@
                             <td><c:out value="${address.street}"/></td>
                             <td><c:out value="${address.building}"/></td>
                             <td><c:out value="${address.apartment}"/></td>
+                            <td><c:out value="${address.tariff}"/></td>
                             <td><a href="<c:url value="/watermeter?addressId=${address.addressId}"/>">
                                 <button>Water Meter</button></a></td>
                             <td><a href="<c:url value="/updateAddress?addressId=${address.addressId}"/>">
@@ -51,6 +53,7 @@
                             <th>Вулиця</th>
                             <th>Будинок</th>
                             <th>Квартира</th>
+                            <th>Тариф</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -66,6 +69,9 @@
                             </td>
                             <td>
                                 <input type="text" name="apartment" />
+                            </td>
+                            <td>
+                                <input type="number" step="0.1" name="tariff" />
                             </td>
                             <td>
                                 <button class="add-button" type="submit">Add</button>

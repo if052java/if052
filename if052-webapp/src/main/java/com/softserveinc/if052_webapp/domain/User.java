@@ -14,7 +14,6 @@ public class User {
     private String middleName;
     private String login;
     private String password;
-    private double tariff;
     private List <Address> addresses;
 
                         //- Getters -//
@@ -40,10 +39,6 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public double getTariff() {
-        return tariff;
     }
 
     public List <Address> getAddresses() {
@@ -75,25 +70,21 @@ public class User {
         this.password = password;
     }
 
-    public void setTariff(double tariff) {
-        this.tariff = tariff;
-    }
-
     public void setAddresses(List <Address> addresses) {
         this.addresses = addresses;
     }
 
                         //- toString -//
+
     @Override
     public String toString() {
         return "User{" +
-            "userId=" + userId +
-            ", name='" + name + '\'' +
-            ", surname='" + surname + '\'' +
-            ", middle_name='" + middleName+ '\'' +
-            ", login='" + login + '\'' +
-            ", password='" + password + '\'' +
-            ", tariff=" + tariff +
-            '}';
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
