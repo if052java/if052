@@ -34,4 +34,9 @@
           <constructor-arg value="http://localhost:8080/restful/" type="java.lang.String" />
     </bean>
 
+    <bean class="org.springframework.web.client.RestTemplate"/>
+
+
+
+
 </beans>

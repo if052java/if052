@@ -15,7 +15,7 @@
         <div class="body">
 
             <div class="container">
-                    <%--<p>Усі лічильники для адреси м.${address.city} вул. ${address.street} ${addrses.building}, кв. ${address.apartment}</p>--%>
+
                 <table class="table table-hover">
                     <thead>
                     <h4>Лічильники для адреси м. ${address.city}, вул. ${address.street} ${address.building}, кв. ${address.apartment}: </h4>
