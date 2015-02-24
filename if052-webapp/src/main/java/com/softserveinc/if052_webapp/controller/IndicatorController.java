@@ -54,7 +54,7 @@ public class IndicatorController {
         RestTemplate restTemplate = new RestTemplate();
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + this.waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
-        indicator.setDate(new Date());
+//        indicator.setDate(new Date());
         restTemplate.postForObject(restUrl + "indicators/", indicator, Indicator.class);
 
         return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
