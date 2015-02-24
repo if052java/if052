@@ -9,6 +9,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
 <script src="<c:url value="/resources/js/jquery.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
@@ -30,7 +32,7 @@
                     <tbody>
                         <c:forEach var="indicators" items="${indicators}">
                             <tr>
-                                <td><c:out value="${indicators.date}"/></td>
+                                <td><fmt:formatDate value="${indicators.date}" pattern="MM/dd/yyyy" /></td>
                                 <td><c:out value="${indicators.value}"/></td>
                                 <td><c:out value="${indicators.paid ? 'Yes': 'No'}"/></td>
                                 <td><c:out value="${indicators.published ? 'Yes': 'No'}"/></td>
@@ -70,7 +72,7 @@
                                 </script>
                                 <input type="text" id="datepicker" name="date">
                             </td>
-                            <td><input type="number" step="1" name="value" /></td>
+                            <td><input type="number" step="1" name="value" value="0"/></td>
                             <td><input type="checkbox" name="paid" /></td>
                             <td>
                                 <button class="add-button" type="submit">Add</button>

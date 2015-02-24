@@ -9,6 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
+<link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
+<script src="<c:url value="/resources/js/jquery.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
@@ -22,6 +28,7 @@
                     <caption> Update Indicator</caption>
                     <thead>
                         <tr>
+                            <th>Дата</th>
                             <th>Значення</th>
                             <th>Оплачено</th>
                             <th>Дії</th>
@@ -31,6 +38,14 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
+                                <script>
+                                    $(function() {
+                                        $( "#datepicker" ).datepicker();
+                                    });
+                                </script>
+                                <input type="text" id="datepicker" name="date"/>
+                            </td>
+                            <td>
                                 <input type="number" step="1" name="value" value="${indicator.value}"/>
                             </td>
                             <td><input type="checkbox" name="paid" /></td>
