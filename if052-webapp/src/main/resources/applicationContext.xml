@@ -31,9 +31,9 @@
     </bean>
 
     <bean id="restUrl" class="java.lang.String">
-          <!--<constructor-arg value="http://localhost:8080/restful/" type="java.lang.String" />-->
+          <constructor-arg value="http://localhost:8080/restful/" type="java.lang.String" />
             <!--use following for heroku-restful app-->
-          <constructor-arg value="http://if052-restful.herokuapp.com/" type="java.lang.String" />
+          <!--<constructor-arg value="http://if052-restful.herokuapp.com/" type="java.lang.String" />-->
     </bean>
 
 </beans>
