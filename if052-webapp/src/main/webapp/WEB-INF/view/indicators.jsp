@@ -33,10 +33,14 @@
                                 <td><c:out value="${indicators.published ? 'Yes': 'No'}"/></td>
                                 <td>
                                     <a href="<c:url value="/deleteIndicator?indicatorId=${indicators.indicatorId}"/>">
-                                        <button>DELETE</button>
+                                        <button <c:if test="${indicators.published}">disabled="true"</c:if> >
+                                            DELETE
+                                        </button>
                                     </a>
                                     <a href="<c:url value="/updateIndicator?indicatorId=${indicators.indicatorId}"/>">
-                                        <button>UPDATE</button>
+                                        <button <c:if test="${indicators.published}">disabled="true"</c:if> >
+                                            UPDATE
+                                        </button>
                                     </a>
                                 </td>
                             </tr>
@@ -54,8 +58,12 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td><input type="text" name="value" /></td>
-                            <td><input type="checkbox" name="paid" /></td><%-- doesn't work--%>
+                            <td>
+                                <field:datetime dateTimePattern="${activity_startdate_date_format}" field="startDate" id="c_org_crc83_activity_domain_Activity_startDate" required="true" z="+yRXOA+9aL72l6bhGPxdSLqf69k="/>
+                                <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"/>
+                            </td>
+                            <td><input type="number" step="1" name="value" /></td>
+                            <td><input type="checkbox" name="paid" /></td>
                             <td>
                                 <button class="add-button" type="submit">Add</button>
                             </td>
