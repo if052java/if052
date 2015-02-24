@@ -8,11 +8,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class ="body">
-            <form id="registrationForm" class="form-horizontal">
+            <c:url var="addUrl" value="/addUser"/>
+            <form:form 
+                    action="${addUrl}" method="post" modelAttribute="user" id="registrationForm" class="form-horizontal">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">First name</label>
                     <div class="col-xs-5">
@@ -34,7 +37,7 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Login</label>
                     <div class="col-xs-5">
-                        <input type="text" class="form-control" name="login" placeholder="login"/>
+                        <input id="login" type="text" class="form-control" name="login" placeholder="login"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,11 +59,65 @@
                         <button type="submit" class="btn btn-primary" name="signup" value="Sign up">Submit</button>
                     </div>
                 </div>
-            </form>
+            </form:form>
         </div>
         
         <script src="/resources/js/jquery.js"></script>
         <script src="/resources/js/jquery-validate.js"></script>
-        <script src="/resources/js/registration.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#registrationForm').validate({
+                    rules: {
+                        "firstName": {
+                            required : true,
+                            rangelength:[2, 32]
+                        },
+                        "surname": {
+                            required : true,
+                            rangelength:[2, 32]
+                        },
+                        "middleName": {
+                            required : true,
+                            rangelength:[2, 32]
+                        },
+                        "login": {
+                            required : true,
+                            rangelength:[8, 32]
+                        },
+                        "password": {
+                            required : true,
+                            rangelength:[8, 32]
+                        },
+                        "confirmPassword":{
+                            required : true,
+                            rangelength:[8, 32],
+                            equalTo:"#password"
+                        }
+                    },
+                    messages: {
+                        firstName:{
+                        }
+                    }
+                });
+
+                // Username check
+                $('#login').focusout(function() {
+                    var restUrl = "${restUrl}";
+
+                    if($('#login').val().length >= 8) {
+                        $.ajax({
+                            url: restUrl + 'users/login/' + $('#login').val(),
+                            success: function (Xhr) {
+                                alert("This login already exist");
+
+                            },
+                            error: function (Xhr) {
+                                alert('OK');
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

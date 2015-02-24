@@ -21,9 +21,11 @@ public class UserServiceTest {
     @Test
     public void testGetUserById() {
         User user = userService.getUserById(1);
+        
         List <Address> addresses;
         addresses = user.getAddresses();
         Assert.assertNotNull(user);
+
         System.out.println(user);
 
         for(Address address : addresses) {
@@ -31,6 +33,14 @@ public class UserServiceTest {
         }
     }
 
+    @Test
+    public void testGetUserByLogin() {
+        User user = userService.getUserByLogin("LOGIN111");
+
+        Assert.assertNotNull(user);
+        System.out.println("!!!!!!!!!!!!!!!!");
+        System.out.println(user);
+    }
     @Test
     public void testGetAllUser() {
         List < User > users = userService.getAllUsers();

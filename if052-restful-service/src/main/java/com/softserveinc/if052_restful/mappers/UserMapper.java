@@ -38,6 +38,13 @@ public interface UserMapper {
     public List < User > getAllUsers();
 
     /**
+     * Get user by login 
+     *
+     * @return user
+     */
+    public User getUserByLogin(String login);
+
+    /**
      * Update exists user
      * 
      * @param user

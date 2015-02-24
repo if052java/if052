@@ -26,6 +26,16 @@
         <result property="middleName" column="middle_name"/>
     </resultMap>
 
+    <select id="getUserByLogin" parameterType="String" resultMap="UserSimpleResult">
+        SELECT
+        user_id,
+        name,
+        surname,
+        middle_name,
+        login
+        FROM user
+        WHERE login = #{login}
+    </select>
 
     <select id="getUserById" parameterType="int" resultMap="UserResult">
         SELECT

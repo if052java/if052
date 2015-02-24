@@ -24,11 +24,11 @@
                     <caption> Update Address</caption>
                     <thead>
                     <tr>
-                        <th> City </th>
-                        <th> Street</th>
-                        <th> Building</th>
-                        <th> Apartment </th>
-                        <th> Tariff </th>
+                        <th> Місто </th>
+                        <th> Вулиця </th>
+                        <th> Будинок </th>
+                        <th> Квартира </th>
+                        <th> Тариф </th>
                     </tr>
                     </thead>
                     <tbody>
