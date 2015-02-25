@@ -38,12 +38,12 @@
                                 <td><c:out value="${indicators.published ? 'Yes': 'No'}"/></td>
                                 <td>
                                     <a href="<c:url value="/deleteIndicator?indicatorId=${indicators.indicatorId}"/>">
-                                        <button <c:if test="${indicators.published}">disabled="true"</c:if> >
+                                        <button <c:if test="${indicators.published}">disabled="disabled"</c:if> >
                                             DELETE
                                         </button>
                                     </a>
                                     <a href="<c:url value="/updateIndicator?indicatorId=${indicators.indicatorId}"/>">
-                                        <button <c:if test="${indicators.published}">disabled="true"</c:if> >
+                                        <button <c:if test="${indicators.published}">disabled="disabled"</c:if> >
                                             UPDATE
                                         </button>
                                     </a>
@@ -67,10 +67,10 @@
                             <td>
                                 <script>
                                     $(function() {
-                                        $( "#datepicker" ).datepicker();
+                                        $( "#datepicker" ).datepicker("setDate", new Date());
                                     });
                                 </script>
-                                <input type="text" id="datepicker" name="date">
+                                <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${currentDate}' pattern='MM/dd/yyyy' />" />
                             </td>
                             <td><input type="number" step="1" name="value" value="0"/></td>
                             <td><input type="checkbox" name="paid" /></td>

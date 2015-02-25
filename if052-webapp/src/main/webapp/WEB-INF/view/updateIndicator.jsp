@@ -43,12 +43,14 @@
                                         $( "#datepicker" ).datepicker();
                                     });
                                 </script>
-                                <input type="text" id="datepicker" name="date"/>
+                                <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${indicator.date}' pattern='MM/dd/yyyy' />" />
                             </td>
                             <td>
                                 <input type="number" step="1" name="value" value="${indicator.value}"/>
                             </td>
-                            <td><input type="checkbox" name="paid" /></td>
+                            <td>
+                                <input type="checkbox" name="paid" <c:if test="${indicator.paid}">checked="checked"</c:if> />
+                            </td>
                             <td><button class="add-button" type="submit">UPDATE</button></td>
                         </tr>
                     </tbody>

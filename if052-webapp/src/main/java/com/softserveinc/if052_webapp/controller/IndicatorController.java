@@ -9,11 +9,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +32,11 @@ public class IndicatorController {
         RestTemplate restTemplate = new RestTemplate();
         Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ waterMeterId, Indicator[].class);
         List<Indicator> indicators = Arrays.asList(arrayOfIndicators);
+
+        java.util.Date currentDate = new java.util.Date();
+
         model.addAttribute("indicators", indicators);
+        model.addAttribute("currentDate", currentDate);
 
         return "indicators";
     }
@@ -54,7 +56,6 @@ public class IndicatorController {
         RestTemplate restTemplate = new RestTemplate();
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + this.waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
-//        indicator.setDate(new Date());
         restTemplate.postForObject(restUrl + "indicators/", indicator, Indicator.class);
 
         return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
@@ -75,7 +76,6 @@ public class IndicatorController {
         RestTemplate restTemplate = new RestTemplate();
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
-        indicator.setDate(new Date());
         restTemplate.put(restUrl + "indicators/" + indicator.getIndicatorId(), indicator);
 
         return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
