@@ -67,7 +67,7 @@
                             <td>
                                 <script>
                                     $(function() {
-                                        $( "#datepicker" ).datepicker("setDate", new Date());
+                                        $( "#datepicker" ).datepicker();
                                     });
                                 </script>
                                 <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${currentDate}' pattern='MM/dd/yyyy' />" />
