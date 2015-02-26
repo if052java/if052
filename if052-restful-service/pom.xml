@@ -176,6 +176,49 @@
                     <path>/${build.finalName}</path> <!-- mvn tomcat7:deploy (redeploy / undeploy ) -->
                 </configuration>
             </plugin>
+            <!--for heroku-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeScope>compile</includeScope>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.mortbay.jetty</groupId>
+                                    <artifactId>jetty-runner</artifactId>
+                                    <version>7.4.5.v20110725</version>
+                                    <destFileName>jetty-runner.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>0.3.4</version>
+                <configuration>
+                    <appName>if052-restful</appName>
+                    <jdkVersion>1.7</jdkVersion>
+                </configuration>
+            </plugin>
+            <!--for heroku-->
         </plugins>
     </build>
 

@@ -55,7 +55,7 @@ public class AddressController {
     public String createAddress(@ModelAttribute Address address){
         RestTemplate restTemplate = new RestTemplate();
 
-        User user = restTemplate.getForObject(restUrl+ "user/" + this.userId, User.class);
+        User user = restTemplate.getForObject(restUrl+ "users/" + this.userId, User.class);
         address.setUser(user);
 
         restTemplate.postForObject(restUrl + "addresses/", address, Address.class);
@@ -91,7 +91,7 @@ public class AddressController {
     public String updateAddress(@ModelAttribute Address address){
         RestTemplate restTemplate = new RestTemplate();
 
-        User user = restTemplate.getForObject(restUrl+ "user/" + this.userId, User.class);
+        User user = restTemplate.getForObject(restUrl+ "users/" + this.userId, User.class);
         address.setUser(user);
         restTemplate.put(restUrl + "addresses/" + address.getAddressId(), address);
 

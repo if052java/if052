@@ -3,37 +3,65 @@ $(document).ready(function() {
         rules: {
             "firstName": {
                 required : true,
-                minlength: 2,
-                maxlength:32
+                rangelength:[2, 32]
             },
             "surname": {
                 required : true,
-                minlength: 2,
-                maxlength:32
+                rangelength:[2, 32]
             },
             "middleName": {
                 required : true,
-                minlength: 2,
-                maxlength:32
+                rangelength:[2, 32]
             },
             "login": {
                 required : true,
-                minlength: 8,
-                maxlength:32
+                rangelength:[8, 32]
             },
             "password": {
                 required : true,
-                minlength: 8,
-                maxlength:32
+                rangelength:[8, 32]
             },
             "confirmPassword":{
                 required : true,
-                minlength: 8,
-                maxlength:32,
+                rangelength:[8, 32],
                 equalTo:"#password"
             }
         },
         messages: {
         }
     });
-});
+
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
+
+        // Username check
+        $('#login').keyup(function() {
+            delay(
+                function() {
+                    if ($('#login').val().length >= 8) {
+                        $.ajax({
+                            url: restURL + 'users/login/' + $('#login').val(),
+                            success: function (Xhr) {
+                                $('#login-errors').html(
+                                    'This login has already exist'
+                                );
+                                $("#submit").attr('disabled', 'disabled');
+                            },
+                            error: function (Xhr) {
+                                $('#login-errors').html(
+                                    'OK'
+                                );
+                                $("#submit").removeAttr('disabled');
+                            }
+                        });
+                    }
+                }, 
+                500
+            );
+        });
+    });

@@ -79,6 +79,7 @@ public class AddressResource {
             waterMeterService.deleteWaterMeter(waterMeter.getWaterMeterId());
         }
         addressService.deleteAddress(addressId);
+
         return Response.status(Response.Status.OK).build();
     }
 }

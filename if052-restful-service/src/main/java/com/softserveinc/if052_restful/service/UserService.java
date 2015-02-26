@@ -29,10 +29,20 @@ public class UserService {
      * @param userId - Identification of user
      * @return User
      */
-    public User getUserById(int userId)  {
+    public User getUserById(int userId) {
         return userMapper.getUserById(userId);
     }
 
+    /**
+     * Get exists user by id
+     *
+     * @param login - Identification of user
+     * @return User
+     */
+    public User getUserByLogin(String login) {
+        
+        return userMapper.getUserByLogin(login);
+    }
     /**
      * Get all users
      * 
