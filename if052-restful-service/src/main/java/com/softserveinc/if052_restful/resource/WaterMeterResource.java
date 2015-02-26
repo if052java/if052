@@ -6,7 +6,6 @@ import com.softserveinc.if052_restful.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.AddressService;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
-import com.sun.xml.internal.ws.client.sei.ResponseBuilder;
 import org.apache.log4j.Logger;
 import org.h2.jdbc.JdbcSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
