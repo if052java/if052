@@ -39,20 +39,21 @@ public class WaterMeterResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAllWaterMeters() {
-    logger.info("INFO: Searching for the whole collection of watermeters.");
-    List<WaterMeter> waterMeters = waterMeterService.getAllWaterMeters();
-    logger.info("INFO: The whole collection of watermeter has been found.");
-    return Response
-            .status(Response.Status.OK)
-            .entity(waterMeters)
-            .build();
+        logger.info("INFO: Searching for the whole collection of watermeters.");
+        List<WaterMeter> waterMeters = waterMeterService.getAllWaterMeters();
+        logger.info("INFO: The whole collection of watermeter has been found.");
+        return Response
+                .status(Response.Status.OK)
+                .entity(waterMeters)
+                .build();
     }
 
-    @GET @Path("{waterMeterId}")
+    @GET
+    @Path("{waterMeterId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getWaterMeter(@PathParam("waterMeterId") int waterMeterId) {
-        logger.info("INFO: Searching for the watermeter with id " + waterMeterId + "." );
-        if(waterMeterService.getWaterMeterById(waterMeterId) == null) {
+        logger.info("INFO: Searching for the watermeter with id " + waterMeterId + ".");
+        if (waterMeterService.getWaterMeterById(waterMeterId) == null) {
             logger.info("INFO: Watermeter with requested id " + waterMeterId + " has not been found.");
             return Response
                     .status(Response.Status.NOT_FOUND)
@@ -64,20 +65,29 @@ public class WaterMeterResource {
                 .status(Response.Status.OK)
                 .entity(waterMeter)
                 .build();
+
     }
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     public Response insertWaterMeter(WaterMeter waterMeter) {
         logger.info("INFO: Adding a new watermeter.");
-        waterMeterService.insertWaterMeter(waterMeter);
-        logger.info("INFO: Watermeter has been successfully added with id " + waterMeter.getWaterMeterId() + ".");
+        try {
+            waterMeterService.insertWaterMeter(waterMeter);
+            logger.info("INFO: Watermeter has been successfully added with id " + waterMeter.getWaterMeterId() + ".");
+            return Response
+                    .status(Response.Status.CREATED)
+                    .build();
+        } catch (DataIntegrityViolationException e) {
+            logger.warn("WARNING: Sended entity is not full.", e);
+        }
         return Response
-                .status(Response.Status.CREATED)
+                .status(Response.Status.BAD_REQUEST)
                 .build();
     }
 
-    @POST @Path("{waterMeterId}")
+    @POST
+    @Path("{waterMeterId}")
     @Consumes({MediaType.APPLICATION_JSON})
     public Response insertWaterMeter(@PathParam("waterMeterId") int waterMeterId, WaterMeter waterMeter) {
         logger.info("INFO: Watermeter id cannot be provided by the request.");
@@ -95,20 +105,28 @@ public class WaterMeterResource {
                 .build();
     }
 
-    @PUT @Path("{waterMeterId}")
+    @PUT
+    @Path("{waterMeterId}")
     @Consumes({MediaType.APPLICATION_JSON})
     public Response updateWaterMeter(@PathParam("waterMeterId") int waterMeterId, WaterMeter waterMeter) {
         logger.info("INFO: Updating a watermeter with id " + waterMeterId + ".");
-        if(waterMeterService.getWaterMeterById(waterMeterId) == null) {
+        if (waterMeterService.getWaterMeterById(waterMeterId) == null) {
             logger.info("INFO: Watermeter with requested id " + waterMeterId + " is not found.");
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .build();
         }
-        waterMeterService.updateWaterMeter(waterMeter);
-        logger.info("INFO: Watermeter with id " + waterMeterId + " has been successfully updated.");
+        try {
+            waterMeterService.updateWaterMeter(waterMeter);
+            logger.info("INFO: Watermeter with id " + waterMeterId + " has been successfully updated.");
+            return Response
+                    .status(Response.Status.NO_CONTENT)
+                    .build();
+        } catch (DataIntegrityViolationException e) {
+            logger.warn("WARNING: Sended object is not valid.", e);
+        }
         return Response
-                .status(Response.Status.NO_CONTENT)
+                .status(Response.Status.BAD_REQUEST)
                 .build();
     }
 
@@ -120,11 +138,12 @@ public class WaterMeterResource {
                 .build();
     }
 
-    @DELETE @Path("{waterMeterId}")
+    @DELETE
+    @Path("{waterMeterId}")
     public Response deleteWaterMeter(@PathParam("waterMeterId") int waterMeterId) {
         logger.info("INFO: Deleting a watermeter with id " + waterMeterId + ".");
-        if(waterMeterService.getWaterMeterById(waterMeterId) == null) {
-            logger.info("INFO : Watermeter with requested id " + waterMeterId + " is not found.");
+        if (waterMeterService.getWaterMeterById(waterMeterId) == null) {
+            logger.info("INFO: Watermeter with requested id " + waterMeterId + " is not found.");
             return Response
                     .status(Response.Status.NOT_FOUND)
                     .build();
