@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.net.URL;
+
 /**
  * Created by valentyn on 2/11/15.
  */
@@ -30,10 +33,11 @@ public class UserController {
     public String createAddress(@ModelAttribute User user){
         RestTemplate restTemplate = new RestTemplate();
 
-        restTemplate.postForObject(restUrl + "users/", user, User.class);
+        user = restTemplate.postForObject(restUrl + "users/", user, User.class);
 
-        User createdUser = restTemplate.getForObject(restUrl+ "users/login/" + user.getLogin(), User.class);
+        //URI uri = restTemplate.postForLocation(restUrl + "users/", user, User.class);
+        //User createdUser = restTemplate.getForObject(restUrl + "users/login/" + user.getLogin(), User.class);
         
-        return "redirect:/addresses?userId=" + createdUser.getUserId();
+        return "redirect:/addresses?userId=" + user.getUserId();
     }
 }

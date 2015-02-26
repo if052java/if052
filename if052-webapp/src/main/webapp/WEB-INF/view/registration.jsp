@@ -38,6 +38,7 @@
                     <label class="col-xs-3 control-label">Login</label>
                     <div class="col-xs-5">
                         <input id="login" type="text" class="form-control" name="login" placeholder="login"/>
+                        <div id="login-errors" class = "has-error"></div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -56,7 +57,7 @@
 
                 <div class="form-group">
                     <div class="col-xs-9 col-xs-offset-3">
-                        <button type="submit" class="btn btn-primary" name="signup" value="Sign up">Submit</button>
+                        <button id="submit" type="submit" class="btn btn-primary" name="signup" value="Sign up">Submit</button>
                     </div>
                 </div>
             </form:form>
@@ -64,60 +65,9 @@
         
         <script src="/resources/js/jquery.js"></script>
         <script src="/resources/js/jquery-validate.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#registrationForm').validate({
-                    rules: {
-                        "firstName": {
-                            required : true,
-                            rangelength:[2, 32]
-                        },
-                        "surname": {
-                            required : true,
-                            rangelength:[2, 32]
-                        },
-                        "middleName": {
-                            required : true,
-                            rangelength:[2, 32]
-                        },
-                        "login": {
-                            required : true,
-                            rangelength:[8, 32]
-                        },
-                        "password": {
-                            required : true,
-                            rangelength:[8, 32]
-                        },
-                        "confirmPassword":{
-                            required : true,
-                            rangelength:[8, 32],
-                            equalTo:"#password"
-                        }
-                    },
-                    messages: {
-                        firstName:{
-                        }
-                    }
-                });
-
-                // Username check
-                $('#login').focusout(function() {
-                    var restUrl = "${restUrl}";
-
-                    if($('#login').val().length >= 8) {
-                        $.ajax({
-                            url: restUrl + 'users/login/' + $('#login').val(),
-                            success: function (Xhr) {
-                                alert("This login already exist");
-
-                            },
-                            error: function (Xhr) {
-                                alert('OK');
-                            }
-                        });
-                    }
-                });
-            });
+        <script type="text/javascript">
+            var restURL = '${restUrl}';
         </script>
+        <script src="/resources/js/registration.js"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

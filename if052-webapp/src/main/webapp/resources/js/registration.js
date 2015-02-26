@@ -1,51 +1,67 @@
-    $(document).ready(function() {
-        $('#registrationForm').validate({
-            rules: {
-                "firstName": {
-                    required : true,
-                    rangelength:[2, 32]
-                },
-                "surname": {
-                    required : true,
-                    rangelength:[2, 32]
-                },
-                "middleName": {
-                    required : true,
-                    rangelength:[2, 32]
-                },
-                "login": {
-                    required : true,
-                    rangelength:[8, 32]
-                },
-                "password": {
-                    required : true,
-                    rangelength:[8, 32]
-                },
-                "confirmPassword":{
-                    required : true,
-                    rangelength:[8, 32],
-                    equalTo:"#password"
-                }
+$(document).ready(function() {
+    $('#registrationForm').validate({
+        rules: {
+            "firstName": {
+                required : true,
+                rangelength:[2, 32]
             },
-            messages: {
+            "surname": {
+                required : true,
+                rangelength:[2, 32]
+            },
+            "middleName": {
+                required : true,
+                rangelength:[2, 32]
+            },
+            "login": {
+                required : true,
+                rangelength:[8, 32]
+            },
+            "password": {
+                required : true,
+                rangelength:[8, 32]
+            },
+            "confirmPassword":{
+                required : true,
+                rangelength:[8, 32],
+                equalTo:"#password"
             }
-        });
+        },
+        messages: {
+        }
+    });
+
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, ms){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
 
         // Username check
-        $('#login').focusout(function() {
-            var restUrl = "${restUrl}";
-            alert(restUrl);
-
-            if($('#login').val().length >= 8) {
-                $.ajax({
-                    url: 'http://localhost:8080/user/login/' + $('#login').val(),
-                    success: function (Xhr) {
-                        alert("This login already exist");
-                    },
-                    error: function (Xhr) {
-                        alert('OK');
+        $('#login').keyup(function() {
+            delay(
+                function() {
+                    if ($('#login').val().length >= 8) {
+                        $.ajax({
+                            url: restURL + 'users/login/' + $('#login').val(),
+                            success: function (Xhr) {
+                                $('#login-errors').html(
+                                    'This login has already exist'
+                                );
+                                $("#submit").attr('disabled', 'disabled');
+                            },
+                            error: function (Xhr) {
+                                $('#login-errors').html(
+                                    'OK'
+                                );
+                                $("#submit").removeAttr('disabled');
+                            }
+                        });
                     }
-                });
-            }
+                }, 
+                500
+            );
         });
     });

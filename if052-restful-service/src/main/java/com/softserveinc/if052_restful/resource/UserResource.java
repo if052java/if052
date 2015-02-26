@@ -31,6 +31,7 @@ public class UserResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getUser(@PathParam("userId") int userId) {
         User user = userService.getUserById(userId);
+
         return Response.status(Response.Status.OK).entity(user).build();
     }
 
@@ -44,14 +45,13 @@ public class UserResource {
             if (user == null ) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
-            
             return Response.status(Response.Status.OK).entity(user).build();
         }
         catch (ConstraintViolationException e){
             return Response.status(Response.Status.FORBIDDEN).build();
         }
         catch (Exception e){
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
 
@@ -63,8 +63,8 @@ public class UserResource {
         try {
             userService.insertUser(user);
 
-            return Response.status(Response.Status.CREATED).build();
-        } 
+            return Response.status(Response.Status.CREATED).entity(user).build();
+        }
         catch (ConstraintViolationException e){
 
             return Response.status(Response.Status.FORBIDDEN).build();
@@ -77,7 +77,7 @@ public class UserResource {
 
     @PUT @Path("{userId}")
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response updateAddress(
+    public Response updateUser(
         @PathParam("userId") int userId,
         @Valid
         User user){
@@ -95,4 +95,20 @@ public class UserResource {
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
+
+    @DELETE
+    @Path("{userId}")
+    public Response deleteUser(
+        @PathParam("userId") int  userId
+    ){
+        try {
+            userService.deleteUser(userId);
+
+            return Response.status(Response.Status.OK).build();
+        }
+        catch (Exception e){
+
+            return Response.status(Response.Status.FORBIDDEN).build();
+        }
+    } 
 }
