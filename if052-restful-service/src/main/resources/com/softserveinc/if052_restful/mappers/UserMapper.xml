@@ -4,68 +4,78 @@
 
 <mapper namespace="com.softserveinc.if052_restful.mappers.UserMapper">
 
-    <!-- 
-        Result map for representation user
-    -->
-    <resultMap type="User" id="UserResult">
+    <!-- Result map for representation of user with addresses -->
+    <resultMap id="UserResult" type="User">
         <id property="userId" column="user_id"/>
         <result property="name" column="name"/>
         <result property="surname" column="surname"/>
         <result property="middleName" column="middle_name"/>
         <result property="login" column="login"/>
         <result property="password" column="password"/>
-        <collection property="addresses" column="userId" javaType="ArrayList" ofType="Address"
-                         resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressSimpleResult">
+        <collection property="addresses" column="user_id"
+                    javaType="ArrayList" ofType="Address"
+                    resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressSimpleResult">
         </collection>
     </resultMap>
 
+    <!-- Result map for representation of user -->
     <resultMap id="UserSimpleResult" type="User">
         <id property="userId" column="user_id"/>
         <result property="name" column="name"/>
         <result property="surname" column="surname"/>
         <result property="middleName" column="middle_name"/>
+        <result property="login" column="login"/>
+        <result property="password" column="password"/>
     </resultMap>
 
     <select id="getUserByLogin" parameterType="String" resultMap="UserSimpleResult">
         SELECT
-        user_id,
-        name,
-        surname,
-        middle_name,
-        login
-        FROM user
-        WHERE login = #{login}
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.password
+        FROM consumer c
+        WHERE c.login = #{login}
     </select>
 
     <select id="getUserById" parameterType="int" resultMap="UserResult">
         SELECT
-        u.user_id,
-        u.name,
-        u.surname,
-        u.middle_name,
-        u.login,
-        u.password,
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.password,
         a.city,
         a.street,
         a.building,
         a.apartment,
         a.tariff,
         a.user_id
-        FROM user u LEFT OUTER JOIN address a ON u.user_id = a.user_id
-        WHERE u.user_id = #{userId}
+        FROM consumer c LEFT OUTER JOIN address a ON c.user_id = a.user_id
+        WHERE c.user_id = #{userId}
     </select>
 
     <select id="getAllUsers" resultMap="UserResult">
-        SELECT * FROM user
+        SELECT
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.password
+        FROM consumer c
     </select>
 
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO user(name, surname, middle_name, login, password)
+        INSERT INTO consumer (name, surname, middle_name, login, password)
         VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password})
     </insert>
 
     <update id="updateUser" parameterType="User">
-        UPDATE user
+        UPDATE consumer
         SET
         name = #{name},
         surname = #{surname},
@@ -76,7 +86,7 @@
     </update>
 
     <delete id="deleteUser" parameterType="int">
-        DELETE FROM user WHERE user_id = #{userId}
+        DELETE FROM consumer WHERE user_id = #{userId}
     </delete>
 
 </mapper>

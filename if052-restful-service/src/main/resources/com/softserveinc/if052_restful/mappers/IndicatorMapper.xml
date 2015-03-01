@@ -4,16 +4,18 @@
 
 <mapper namespace="com.softserveinc.if052_restful.mappers.IndicatorMapper">
 
-    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
-    <resultMap type="Indicator" id="IndicatorResult">
+    <!-- Result map for representation of water meter indicators -->
+    <resultMap id="IndicatorResult" type="Indicator">
         <id property="indicatorId" column="indicator_id"/>
         <result property="date" column="date"/>
         <result property="value" column="value"/>
         <result property="paid" column="is_paid"/>
         <result property="published" column="is_published"/>
-        <association property="waterMeter" resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"/>
+        <association property="waterMeter"
+                     resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"/>
     </resultMap>
 
+    <!-- Result map for representation of indicator -->
     <resultMap id="IndicatorSimpleResult" type="Indicator">
         <id property="indicatorId" column="indicator_id"/>
         <result property="date" column="date"/>
@@ -67,10 +69,8 @@
     </select>
 
     <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">
-
         INSERT INTO indicator(date, value, is_paid, is_published, water_meter_id)
         VALUES(#{date}, #{value}, #{paid}, #{published}, #{waterMeter.waterMeterId})
-
     </insert>
 
     <update id="updateIndicator" parameterType="Indicator">

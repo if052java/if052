@@ -3,25 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.softserveinc</groupId>
     <artifactId>if052-restful-service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
     <properties>
         <spring.version>3.2.13.RELEASE</spring.version>
         <jersey.version>2.15</jersey.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
             <version>0.16.0.RELEASE</version>
         </dependency>
-
-        <dependency>    <!-- Spring framework dependencies -->
+        <dependency> <!-- Spring framework dependencies -->
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
@@ -52,7 +48,6 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -64,29 +59,21 @@
             <artifactId>validation-api</artifactId>
             <version>1.1.0.Final</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.0.1.Final</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
         <dependency> <!-- dataSource -->
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.31</version>
         </dependency>
 
         <dependency> <!-- MyBatis -->
@@ -99,26 +86,22 @@
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.2</version>
         </dependency>
-
-            <!-- Jersey -->
+        <!-- Jersey -->
         <dependency>
             <groupId>org.glassfish.jersey.ext</groupId>
             <artifactId>jersey-spring3</artifactId>
             <version>${jersey.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet</artifactId>
             <version>${jersey.version}</version>
         </dependency>
-
-        <dependency>	<!-- Jackson JSON providers -->
+        <dependency> <!-- Jackson JSON providers -->
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jersey.version}</version>
         </dependency>
-
         <!-- these 2 dependencies are neeeded for successful tests run -->
         <dependency>
             <groupId>javax.el</groupId>
@@ -130,10 +113,17 @@
             <artifactId>javax.el</artifactId>
             <version>2.2.4</version>
         </dependency>
+        <!-- Need for connection to H2 DB only -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.3.171</version>
+        </dependency>
+        <!-- Need for connection to PostgreSQL DB only -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4-1200-jdbc41</version>
         </dependency>
 
         <dependency>
@@ -141,11 +131,7 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-
     </dependencies>
-
-
-
     <build>
         <finalName>restful</finalName>
         <plugins>
@@ -221,7 +207,6 @@
             <!--for heroku-->
         </plugins>
     </build>
-
     <repositories>
         <repository>
             <id>spring-releases</id>
@@ -234,5 +219,4 @@
             <url>https://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
-
 </project>

@@ -4,19 +4,22 @@
 
 <mapper namespace="com.softserveinc.if052_restful.mappers.AddressMapper">
 
-    <resultMap type="Address" id="AddressResult">
+    <!-- Result map for representation of address with water meters -->
+    <resultMap id="AddressResult" type="Address">
         <id property="addressId" column="address_id"/>
         <result property="city" column="city"/>
         <result property="street" column="street"/>
         <result property="building" column="building"/>
         <result property="apartment" column="apartment"/>
         <result property="tariff" column="tariff"/>
-        <association property="user" resultMap="com.softserveinc.if052_restful.mappers.UserMapper.UserSimpleResult"/>
-        <collection property="waterMeters" ofType="WaterMeter"
-                    resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"
-                    columnPrefix="watermeter_"/>
+        <association property="user"
+                     resultMap="com.softserveinc.if052_restful.mappers.UserMapper.UserSimpleResult"/>
+        <collection property="waterMeters" column="address_id"
+                    javaType="ArrayList" ofType="WaterMeter"
+                    resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"/>
     </resultMap>
 
+    <!-- Result map for representation of address -->
     <resultMap id="AddressSimpleResult" type="Address">
         <id property="addressId" column="address_id" />
         <result property="city" column="city" />
@@ -35,45 +38,43 @@
         a.apartment,
         a.tariff,
         a.user_id,
-
-        u.user_id,
-        u.name,
-        u.surname,
-        u.middle_name,
-        u.login,
-        u.password,
-
-        wm.water_meter_id as watermeter_water_meter_id,
-        wm.name as watermeter_name,
-        wm.description as watermeter_description
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.password,
+        wm.water_meter_id,
+        wm.name,
+        wm.description
         FROM address a
         LEFT OUTER JOIN watermeter wm ON a.address_id = wm.address_id
-        LEFT OUTER JOIN user u ON a.user_id = u.user_id
+        LEFT OUTER JOIN consumer c ON a.user_id = c.user_id
         WHERE a.address_id = #{addressId}
     </select>
 
     <select id="getAddressesByUserId" parameterType="int" resultMap="AddressSimpleResult">
         SELECT
-        address_id,
-        city,
-        street,
-        building,
-        apartment,
-        tariff,
-        user_id
-        FROM address
-        WHERE user_id = #{userId}
+        a.address_id,
+        a.city,
+        a.street,
+        a.building,
+        a.apartment,
+        a.tariff,
+        a.user_id
+        FROM address a
+        WHERE a.user_id = #{userId}
     </select>
 
     <select id="getAllAddresses" resultMap="AddressSimpleResult">
         SELECT
-        address_id,
-        city,
-        street,
-        building,
-        apartment,
-        tariff
-        FROM address
+        a.address_id,
+        a.city,
+        a.street,
+        a.building,
+        a.apartment,
+        a.tariff
+        FROM address a
     </select>
 
     <insert id="insertAddress" parameterType="Address" useGeneratedKeys="true" keyProperty="addressId">

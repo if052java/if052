@@ -13,14 +13,6 @@ public class Indicator {
     private boolean published;
     private WaterMeter waterMeter;
 
-    @Override
-    public String toString() {
-        return "Indicator [id=" + indicatorId
-                + ", date=" + date + ", value=" + value
-                + ", paid=" + paid + ", published=" + published
-                + ", .";
-    }
-
     public int getIndicatorId() {
         return indicatorId;
     }
@@ -68,4 +60,13 @@ public class Indicator {
     public void setWaterMeter(WaterMeter waterMeter) {
         this.waterMeter = waterMeter;
     }
+
+    @Override
+    public String toString() {
+        return "Indicator [id=" + indicatorId
+                + ", date=" + date + ", value=" + value
+                + ", paid=" + paid + ", published=" + published
+                + ", .";
+    }
+
 }

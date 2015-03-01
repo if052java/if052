@@ -36,7 +36,7 @@ public class User {
     @Length( min = 8 , max = 32)
     private String password;
 
-    private List < Address > addresses;
+    private List<Address> addresses;
 
     public User(){
 
