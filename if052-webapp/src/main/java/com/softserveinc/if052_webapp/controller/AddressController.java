@@ -4,6 +4,7 @@ import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,6 +37,8 @@ public class AddressController {
     public String getAddressPage(int userId, ModelMap model){
         this.userId = String.valueOf(userId);
         RestTemplate restTemplate = new RestTemplate();
+
+
 
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddresses);

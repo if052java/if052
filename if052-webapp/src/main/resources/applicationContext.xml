@@ -36,9 +36,9 @@
           <!--<constructor-arg value="http://if052-restful.herokuapp.com/" type="java.lang.String" />-->
     </bean>
 
-    <bean class="org.springframework.web.client.RestTemplate"/>
+    <bean class="org.springframework.web.client.RestTemplate" primary="true" />
 
-
+    <!--<bean class="com.softserveinc.if052_webapp.oauth.ResourceConfig"/>-->
 
 
 </beans>
