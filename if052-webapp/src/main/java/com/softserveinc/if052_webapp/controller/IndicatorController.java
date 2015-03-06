@@ -45,7 +45,10 @@ public class IndicatorController {
     @RequestMapping("/deleteIndicator{indicatorId}")
     public String deleteIndicator(int indicatorId) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete(restUrl + "indicators/" +indicatorId);
+        Indicator indicator = restTemplate.getForObject(restUrl + "indicators/getone/"+ indicatorId, Indicator.class);
+        if (!indicator.isPublished()) {
+            restTemplate.delete(restUrl + "indicators/" + indicatorId);
+        }
 
         return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
     }
@@ -66,7 +69,9 @@ public class IndicatorController {
     public String getUpdateIndicatorPage(int indicatorId, ModelMap model){
         RestTemplate restTemplate = new RestTemplate();
         Indicator indicator = restTemplate.getForObject(restUrl + "indicators/getone/" + indicatorId, Indicator.class);
-        model.addAttribute("indicator", indicator);
+        if (!indicator.isPublished()) {
+            model.addAttribute("indicator", indicator);
+        }
 
         return "updateIndicator";
     }
@@ -76,6 +81,7 @@ public class IndicatorController {
         RestTemplate restTemplate = new RestTemplate();
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
+        indicator.setPublished(true);
         restTemplate.put(restUrl + "indicators/" + indicator.getIndicatorId(), indicator);
 
         return "redirect:/indicators?waterMeterId=" + this.waterMeterId;

@@ -18,7 +18,7 @@ public class IndexController {
     @Qualifier("restUrl")
     private String restUrl;
 
-    @RequestMapping("/")
+    @RequestMapping("/g")
     @ResponseBody
     public String helloWorld(){
         return "Hello World!";

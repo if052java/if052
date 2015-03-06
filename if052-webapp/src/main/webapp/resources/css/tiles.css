@@ -1,46 +1,109 @@
-body {
+/*-----------------------------------PAGE--------------*/
+
+html, body {
     margin:0px;
     padding:0px;
     height:100%;
-    overflow:hidden;
+    overflow: hidden;
 }
 
-.page {
-    min-height:100%;
-    position:relative;
+body .page {
+    min-height: 100%;
+    position: relative;
+    background: linear-gradient(#37dcff, #5effee);
 }
 
-.header {
-    padding:10px;
-    width:100%;
-    text-align:center;
+/*-----------------------------------HEADER------------*/
+
+div#header-center {
+    padding: 0;
+}
+
+body .page .header nav {
+    background: linear-gradient(#5c6976, #535c5c);
+    margin-bottom: 0;
+}
+
+.navbar-default .navbar-brand {
+    padding: 3% 5% 1%;
+}
+
+.navbar-brand img{
+    max-height: 90%;
+}
+
+/*----*/
+/*div#header-center a{*/
+/*color: #ffffff;*/
+
+/*}*/
+
+/*div#header-center .active a{*/
+/*color: #000000;*/
+/*}*/
+/*-----*/
+
+div#header-center li{
+    /*background-color: #aaaaaa;*/
+}
+
+/*.navbar-default .navbar-nav>li>a:hover,*/
+/*.navbar-default .navbar-nav>li>a:focus*/
+/*{*/
+    /*background-color: #EEE;*/
+/*}*/
+
+/*--------------------------------BODY-----*/
+
+div#body-center {
+    background-color: #ffffff;
+    height: 100%;
+}
+.body {
+    padding: 2% 2% 5%;
+    height: 100%;
+    background-color: #ffffff;
 }
 
 .content {
-    padding:10px;
-    padding-bottom:20px; /* Height of the footer element */
-    overflow:hidden;
+    margin: 0 auto -30px;
+    overflow:visible;
 }
 
-.menu {
-    padding:50px 10px 0px 10px;
-    width:200px;
-    float:left;
-}
-
-.body {
-    margin:50px 10px 0px 250px;
-}
+/*-------------------------------FOOTER-----*/
 
 .footer {
+    color: #ffffff;
+    background: linear-gradient(#5c6976, #505959);
     clear:both;
     position:absolute;
     bottom:0;
     left:0;
     text-align:center;
     width:100%;
-    height:20px;
+    height:30px;
 }
+
+/*------------------------------OVERALL------*/
+
+.container {
+    width: auto;
+}
+
+.box-table-a input{
+    width: 100%;
+}
+
+.box-table-a {
+    /*margin-left: auto;*/
+    margin-right: auto;
+}
+
+/*.menu {*/
+    /*padding:50px 10px 0px 10px;*/
+    /*width:200px;*/
+    /*float:left;*/
+/*}*/
 
 .login {
     width:250px;

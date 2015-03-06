@@ -7,5 +7,5 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="footer">
-    FOOTER
+    <p> &copy; IF-052.Java 2015</p>
 </div>
