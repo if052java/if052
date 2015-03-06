@@ -28,7 +28,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/Dispatcher-servlet.xml
-            /WEB-INF/security-config.xml
+            <!--/WEB-INF/security-config.xml-->
         </param-value>
     </context-param>
 
