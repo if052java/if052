@@ -41,6 +41,7 @@ public class UserServiceTest {
         System.out.println("!!!!!!!!!!!!!!!!");
         System.out.println(user);
     }
+
     @Test
     public void testGetAllUser() {
         List < User > users = userService.getAllUsers();
