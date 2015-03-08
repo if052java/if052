@@ -10,7 +10,7 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
-            <h1>Hello Index</h1>
+
         </div>
 
     </tiles:putAttribute>

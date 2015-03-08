@@ -8,6 +8,8 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/tiles.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/pace.css"/>"/>
+    <script type="text/javascript" src="<c:url value="/resources/js/pace.min.js"/>"></script>
 </head>
 <body>
 <div class="page">

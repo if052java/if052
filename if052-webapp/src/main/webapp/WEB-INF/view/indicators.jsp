@@ -17,6 +17,28 @@
 
             <div class="container">
 
+                <div class="text-center">
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <c:forEach begin="1" end="${pageCount}" var="page">
+                                <li><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}&currentPage=${page}"/>">
+                                    <c:out value="${page}"/>
+                                </a></li>
+                            </c:forEach>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
                 <table class="table table-hover" >
 
                     <thead>
@@ -35,13 +57,13 @@
                                 <td><c:out value="${indicator.value}"/></td>
                                 <td>
                                     <span <c:if test="${indicator.paid}">class="glyphicon glyphicon-ok" </c:if>
-                                          <c:if test="${!indicator.paid}">class="glyphicon glyphicon-remove" </c:if>
+                                          <c:if test="${!indicator.paid}">class="glyphicon glyphicon-minus" </c:if>
                                           aria-hidden="true">
                                     </span>
                                 </td>
                                 <td>
                                     <span <c:if test="${indicator.published}">class="glyphicon glyphicon-ok" </c:if>
-                                            <c:if test="${!indicator.published}">class="glyphicon glyphicon-remove" </c:if>
+                                            <c:if test="${!indicator.published}">class="glyphicon glyphicon-minus" </c:if>
                                             aria-hidden="true">
                                     </span>
                                 </td>
@@ -78,7 +100,7 @@
                             <td>
                                 <script src="<c:url value="/resources/js/jquery.js"/>" type="text/javascript"></script>
                                 <script src="<c:url value="/resources/js/jquery-ui.js"/>" type="text/javascript"></script>
-                                <script>
+                                <script type="text/javascript">
                                     $(function() {
                                         $( "#datepicker" ).datepicker();
                                     });

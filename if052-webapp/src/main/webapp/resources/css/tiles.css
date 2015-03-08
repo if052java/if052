@@ -102,11 +102,11 @@ div#body-center .container {
 .login {
     width:250px;
 }
-.glyphicon-remove {
-    color: red;
+.glyphicon-minus {
+    color: #a9a9a9;
 }
 .glyphicon-ok {
-    color: green;
+    color: #3bcaff;
 }
 button:disabled {
     color: #888888;
