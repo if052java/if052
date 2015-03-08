@@ -71,7 +71,7 @@ public class UserResource {
         } 
         catch (Exception e) {
 
-            return Response.status(Response.Status.FORBIDDEN).build();
+             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
 

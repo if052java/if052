@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#registrationForm').validate({
         rules: {
-            "firstName": {
+            "name": {
                 required : true,
                 rangelength:[2, 32]
             },
