@@ -42,15 +42,15 @@ public class IndicatorController {
         this.currentPage = currentPage;
         WaterMeter waterMeter = restTemplate.getForObject(restUrl + "watermeters/" + waterMeterId, WaterMeter.class);
         Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ waterMeterId, Indicator[].class);
-        List<Indicator> indicators = Arrays.asList(arrayOfIndicators);
 
-        int listSize = indicators.size();
-        int pageCount = (int)Math.ceil(listSize/rowsPerPage);
-        int cp = Integer.parseInt(currentPage);
-        int count = ((listSize - (cp * 10)) > 0) ? 10 : (listSize - (cp - 1)*10);
+        int arraySize = arrayOfIndicators.length;
+        int pageCount = (arraySize/rowsPerPage)+1;
+        int cp = Integer.parseInt(this.currentPage);
+        int pageElementsCount = ((arraySize - (cp * 10)) > 0) ? 10 : (arraySize - (cp - 1)*10);
+
         List<Indicator> pageOfIndicators = new ArrayList<Indicator>();
-        for (int i=0;i<count;i++){
-            pageOfIndicators.add(indicators.get((cp-1)*10+i));
+        for (int i=0;i<pageElementsCount;i++){
+            pageOfIndicators.add(arrayOfIndicators[(cp-1)*10+i]);
         }
 
         model.addAttribute("pageCount", pageCount);
