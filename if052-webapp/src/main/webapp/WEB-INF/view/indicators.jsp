@@ -11,15 +11,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
-<script src="<c:url value="/resources/js/jquery.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
-
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
+
             <div class="container">
+
                 <table class="table table-hover">
+
                     <thead>
                         <tr>
                             <th>Дата</th>
@@ -34,8 +33,16 @@
                             <tr>
                                 <td><fmt:formatDate value="${indicators.date}" pattern="MM/dd/yyyy" /></td>
                                 <td><c:out value="${indicators.value}"/></td>
-                                <td><c:out value="${indicators.paid ? 'Yes': 'No'}"/></td>
-                                <td><c:out value="${indicators.published ? 'Yes': 'No'}"/></td>
+                                <td>
+                                    <span <c:if test="${indicators.paid}">class="glyphicon glyphicon-ok" </c:if>
+                                          <c:if test="${!indicators.paid}">class="glyphicon glyphicon-remove" </c:if>
+                                          aria-hidden="true"/>
+                                </td>
+                                <td>
+                                    <span <c:if test="${indicators.published}">class="glyphicon glyphicon-ok" </c:if>
+                                            <c:if test="${!indicators.published}">class="glyphicon glyphicon-remove" </c:if>
+                                            aria-hidden="true"/>
+                                </td>
                                 <td>
                                     <a href="<c:url value="/deleteIndicator?indicatorId=${indicators.indicatorId}"/>">
                                         <button <c:if test="${indicators.published}">disabled="disabled"</c:if> >
@@ -50,7 +57,9 @@
                                 </td>
                             </tr>
                         </c:forEach>
+                    </tbody>
                 </table>
+
                 <c:url var="addUrl" value="/addIndicator"/>
                 <form:form action="${addUrl}" method="post" modelAttribute="indicator">
                     <table class="box-table-a">
@@ -65,6 +74,8 @@
                         <tbody>
                         <tr>
                             <td>
+                                <script src="<c:url value="/resources/js/jquery.js"/>" type="text/javascript"></script>
+                                <script src="<c:url value="/resources/js/jquery-ui.js"/>" type="text/javascript"></script>
                                 <script>
                                     $(function() {
                                         $( "#datepicker" ).datepicker();

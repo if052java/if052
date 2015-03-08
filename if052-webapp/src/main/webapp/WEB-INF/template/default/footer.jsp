@@ -7,5 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="footer">
-    <p> &copy; IF-052.Java 2015</p>
+    <div class="footer-content">
+        <p>
+            <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"/> IF-052.Java 2015
+        </p>
+    </div>
 </div>
