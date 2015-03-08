@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="header">
     <nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -42,18 +43,26 @@
                 </div>
                 <div class="col-lg-2" id="header-right">
                     <ul class="nav navbar-nav">
-                        <li class="sign-up" ><a href="/signup">
-                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                            Sign Up
-                        </a></li>
-                        <li class="log-in"><a href="/login">
-                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-                            Log In
-                        </a></li>
-                        <li class="log-out"><a href="#">
-                            <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                            Log Out
-                        </a></li>
+                        <c:if test="${empty pageContext.request.userPrincipal}">
+                            <li class="sign-up" ><a href="/signup">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                Sign Up
+                            </a></li>
+                            <li class="log-in"><a href="/login">
+                                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                                Log In
+                            </a></li>
+                        </c:if>
+                        <c:if test="${not empty pageContext.request.userPrincipal}">
+                            <li class="log-out"><a href="/profile">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                <c:out value="${pageContext.request.userPrincipal.name}" />
+                            </a></li>
+                            <li class="log-out"><a href="/logout">
+                                <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                Log Out
+                            </a></li>
+                        </c:if>
                     </ul>
                 </div>
             </div>

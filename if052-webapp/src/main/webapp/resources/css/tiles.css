@@ -46,10 +46,6 @@ body .page .header nav li>a{
 body .page .header nav li>a:focus{
     color: #37dcff;
 }
-body .page .header nav .log-out {
-    display: none;
-}
-
 /*--------------------------------BODY--------------*/
 
 div#body-center {
