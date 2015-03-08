@@ -36,12 +36,14 @@
                                 <td>
                                     <span <c:if test="${indicator.paid}">class="glyphicon glyphicon-ok" </c:if>
                                           <c:if test="${!indicator.paid}">class="glyphicon glyphicon-remove" </c:if>
-                                          aria-hidden="true"/>
+                                          aria-hidden="true">
+                                    </span>
                                 </td>
                                 <td>
                                     <span <c:if test="${indicator.published}">class="glyphicon glyphicon-ok" </c:if>
                                             <c:if test="${!indicator.published}">class="glyphicon glyphicon-remove" </c:if>
-                                            aria-hidden="true"/>
+                                            aria-hidden="true">
+                                    </span>
                                 </td>
                                 <td>
                                     <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
