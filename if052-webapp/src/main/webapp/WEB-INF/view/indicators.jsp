@@ -17,7 +17,7 @@
 
             <div class="container">
 
-                <table class="table table-hover">
+                <table class="table table-hover" >
 
                     <thead>
                         <tr>
@@ -29,28 +29,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="indicators" items="${indicators}">
+                        <c:forEach var="indicator" items="${indicators}">
                             <tr>
-                                <td><fmt:formatDate value="${indicators.date}" pattern="MM/dd/yyyy" /></td>
-                                <td><c:out value="${indicators.value}"/></td>
+                                <td><fmt:formatDate value="${indicator.date}" pattern="MM/dd/yyyy" /></td>
+                                <td><c:out value="${indicator.value}"/></td>
                                 <td>
-                                    <span <c:if test="${indicators.paid}">class="glyphicon glyphicon-ok" </c:if>
-                                          <c:if test="${!indicators.paid}">class="glyphicon glyphicon-remove" </c:if>
+                                    <span <c:if test="${indicator.paid}">class="glyphicon glyphicon-ok" </c:if>
+                                          <c:if test="${!indicator.paid}">class="glyphicon glyphicon-remove" </c:if>
                                           aria-hidden="true"/>
                                 </td>
                                 <td>
-                                    <span <c:if test="${indicators.published}">class="glyphicon glyphicon-ok" </c:if>
-                                            <c:if test="${!indicators.published}">class="glyphicon glyphicon-remove" </c:if>
+                                    <span <c:if test="${indicator.published}">class="glyphicon glyphicon-ok" </c:if>
+                                            <c:if test="${!indicator.published}">class="glyphicon glyphicon-remove" </c:if>
                                             aria-hidden="true"/>
                                 </td>
                                 <td>
-                                    <a href="<c:url value="/deleteIndicator?indicatorId=${indicators.indicatorId}"/>">
-                                        <button <c:if test="${indicators.published}">disabled="disabled"</c:if> >
+                                    <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
+                                        <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
                                             DELETE
                                         </button>
                                     </a>
-                                    <a href="<c:url value="/updateIndicator?indicatorId=${indicators.indicatorId}"/>">
-                                        <button <c:if test="${indicators.published}">disabled="disabled"</c:if> >
+                                    <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>">
+                                        <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
                                             UPDATE
                                         </button>
                                     </a>
