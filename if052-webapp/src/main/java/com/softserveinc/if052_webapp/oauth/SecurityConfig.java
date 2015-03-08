@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -29,14 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
             .logout()
-                .logoutSuccessUrl("/login.jsp")
-                .logoutUrl("/logout.do")
+                .logoutSuccessUrl("/login")
+                //.logoutUrl("/logout") // by the default logoutUrl requires POST method
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .permitAll()
                 .and()
             .formLogin()
-                .loginPage("/login.jsp")
+                .loginPage("/login")
                 .loginProcessingUrl("/login.do")
-                .failureUrl("/login.jsp?authentication_error=true")
+                .failureUrl("/login?authentication_error=true")
                 .usernameParameter("j_username")
                 .passwordParameter("j_password")
                 .permitAll();

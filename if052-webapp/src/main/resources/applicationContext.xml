@@ -21,6 +21,18 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
+    <bean id="contentViewResolver"
+          class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json" />
+            </map>
+        </property>
+        <property name="defaultViews">
+            <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+        </property>
+    </bean>
+
     <bean id="tilesConfigurer"
           class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions">

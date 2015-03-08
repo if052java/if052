@@ -46,7 +46,7 @@
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                             Sign Up
                         </a></li>
-                        <li class="log-in"><a href="/signin">
+                        <li class="log-in"><a href="/login">
                             <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                             Log In
                         </a></li>
