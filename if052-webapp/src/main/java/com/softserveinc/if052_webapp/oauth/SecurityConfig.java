@@ -13,8 +13,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("marissa").password("wombat").roles("USER").and().withUser("sam")
-				.password("kangaroo").roles("USER");
+		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
 	}
 
 	@Override
@@ -26,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
     	    http.authorizeRequests()
-                .antMatchers("/sparklr/**","/facebook/**").hasRole("USER")
+                .antMatchers("/profile").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
             .logout()
