@@ -9,6 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="<c:url value="/resources/css/jquery.css"/>"/>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
@@ -38,7 +39,7 @@
                     <label class="col-xs-3 control-label">Login</label>
                     <div class="col-xs-5">
                         <input id="login" type="text" class="form-control" name="login" placeholder="login"/>
-                        <div id="login-errors" class = "has-error"></div>
+                        <div id="login-errors" ></div>
                     </div>
                 </div>
                 <div class="form-group">

@@ -8,7 +8,7 @@ $(document).ready(function() {
             "surname": {
                 required : true,
                 rangelength:[2, 32]
-            },
+            }, 
             "middleName": {
                 required : true,
                 rangelength:[2, 32]
@@ -26,6 +26,12 @@ $(document).ready(function() {
                 rangelength:[8, 32],
                 equalTo:"#password"
             }
+        },
+        tooltip_options: {
+            "name": {
+                trigger:'focus',
+                placement:'right',html:true
+                        }
         },
         messages: {
         }
@@ -53,9 +59,6 @@ $(document).ready(function() {
                                 $("#submit").attr('disabled', 'disabled');
                             },
                             error: function (Xhr) {
-                                $('#login-errors').html(
-                                    'OK'
-                                );
                                 $("#submit").removeAttr('disabled');
                             }
                         });
