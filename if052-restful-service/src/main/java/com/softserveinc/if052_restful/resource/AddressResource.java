@@ -40,6 +40,9 @@ public class AddressResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddress(@PathParam("addressId") int addressId) {
         Address address = addressService.getAddressById(addressId);
+        if (address == null) {
+            return Response.status(Response.Status.NOT_FOUND).entity(address).build();
+        }
         return Response.status(Response.Status.OK).entity(address).build();
     }
 

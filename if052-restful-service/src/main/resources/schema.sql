@@ -24,7 +24,7 @@ CREATE TABLE address
 CREATE TABLE watermeter
 (
   water_meter_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(45) NOT NULL,
+  name VARCHAR(45) NOT NULL UNIQUE,
   description VARCHAR(45),
   address_id INT(11) NOT NULL,
   CONSTRAINT fk_water_meter_address FOREIGN KEY (address_id)
