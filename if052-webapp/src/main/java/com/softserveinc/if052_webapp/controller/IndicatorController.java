@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,31 +32,14 @@ public class IndicatorController {
 
     private String waterMeterId = "";
 
-    private String currentPage = "";
-
-    private int rowsPerPage=10;
-
     @RequestMapping(value = "/indicators{waterMeterId}")
-    public String getIndicatorsPage(int waterMeterId,@RequestParam(value = "currentPage",
-            required = true, defaultValue = "1") String currentPage, ModelMap model) {
+    public String getIndicatorsPage(int waterMeterId, ModelMap model) {
         this.waterMeterId = String.valueOf(waterMeterId);
-        this.currentPage = currentPage;
         WaterMeter waterMeter = restTemplate.getForObject(restUrl + "watermeters/" + waterMeterId, WaterMeter.class);
         Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ waterMeterId, Indicator[].class);
-
-        int arraySize = arrayOfIndicators.length;
-        int pageCount = (arraySize/rowsPerPage)+1;
-        int cp = Integer.parseInt(this.currentPage);
-        int pageElementsCount = ((arraySize - (cp * 10)) > 0) ? 10 : (arraySize - (cp - 1)*10);
-
-        List<Indicator> pageOfIndicators = new ArrayList<Indicator>();
-        for (int i=0;i<pageElementsCount;i++){
-            pageOfIndicators.add(arrayOfIndicators[(cp-1)*10+i]);
-        }
-
-        model.addAttribute("pageCount", pageCount);
-        model.addAttribute("indicators", pageOfIndicators);
+        List<Indicator> indicators = Arrays.asList(arrayOfIndicators);
         model.addAttribute("waterMeter", waterMeter);
+        model.addAttribute("indicators", indicators);
 
         java.util.Date currentDate = new java.util.Date();
         model.addAttribute("currentDate", currentDate);
@@ -70,7 +54,7 @@ public class IndicatorController {
             restTemplate.delete(restUrl + "indicators/" + indicatorId);
         }
 
-        return "redirect:/indicators?waterMeterId=" + this.waterMeterId + "&currentPage=" + this.currentPage;
+        return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
     }
 
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
@@ -79,7 +63,7 @@ public class IndicatorController {
         indicator.setWaterMeter(waterMeter);
         restTemplate.postForObject(restUrl + "indicators/", indicator, Indicator.class);
 
-        return "redirect:/indicators?waterMeterId=" + this.waterMeterId + "&currentPage=" + this.currentPage;
+        return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
     }
 
     @RequestMapping(value = "/updateIndicator{indicatorId}")
@@ -98,6 +82,6 @@ public class IndicatorController {
         indicator.setWaterMeter(waterMeter);
         restTemplate.put(restUrl + "indicators/" + indicator.getIndicatorId(), indicator);
 
-        return "redirect:/indicators?waterMeterId=" + this.waterMeterId + "&currentPage=" + this.currentPage;
+        return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
     }
 }

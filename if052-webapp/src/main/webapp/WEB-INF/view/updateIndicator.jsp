@@ -33,7 +33,6 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
-                                <script src="<c:url value="/resources/js/jquery.js"/>"></script>
                                 <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
                                 <script type="text/javascript">
                                     $(function() {

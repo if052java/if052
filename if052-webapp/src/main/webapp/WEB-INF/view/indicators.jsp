@@ -17,73 +17,53 @@
 
             <div class="container">
 
-                <div class="text-center">
-                    <nav>
-                        <ul class="pagination">
-                            <li>
-                                <a href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <c:forEach begin="1" end="${pageCount}" var="page">
-                                <li><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}&currentPage=${page}"/>">
-                                    <c:out value="${page}"/>
-                                </a></li>
-                            </c:forEach>
-                            <li>
-                                <a href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-
-                <table class="table table-hover" >
+                <table class="table table-hover" id="paginated">
 
                     <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Значення</th>
-                            <th>Оплачено</th>
-                            <th>Опубліковано</th>
-                            <th>Дії</th>
-                        </tr>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Значення</th>
+                        <th>Оплачено</th>
+                        <th>Опубліковано</th>
+                        <th>Дії</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="indicator" items="${indicators}">
-                            <tr>
-                                <td><fmt:formatDate value="${indicator.date}" pattern="MM/dd/yyyy" /></td>
-                                <td><c:out value="${indicator.value}"/></td>
-                                <td>
+                    <c:forEach var="indicator" items="${indicators}">
+                        <tr>
+                            <td><fmt:formatDate value="${indicator.date}" pattern="MM/dd/yyyy" /></td>
+                            <td><c:out value="${indicator.value}"/></td>
+                            <td>
                                     <span <c:if test="${indicator.paid}">class="glyphicon glyphicon-ok" </c:if>
                                           <c:if test="${!indicator.paid}">class="glyphicon glyphicon-minus" </c:if>
                                           aria-hidden="true">
                                     </span>
-                                </td>
-                                <td>
+                            </td>
+                            <td>
                                     <span <c:if test="${indicator.published}">class="glyphicon glyphicon-ok" </c:if>
-                                            <c:if test="${!indicator.published}">class="glyphicon glyphicon-minus" </c:if>
-                                            aria-hidden="true">
+                                          <c:if test="${!indicator.published}">class="glyphicon glyphicon-minus" </c:if>
+                                          aria-hidden="true">
                                     </span>
-                                </td>
-                                <td>
-                                    <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
-                                        <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
-                                            DELETE
-                                        </button>
-                                    </a>
-                                    <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>">
-                                        <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
-                                            UPDATE
-                                        </button>
-                                    </a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                            </td>
+                            <td>
+                                <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
+                                    <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
+                                        DELETE
+                                    </button>
+                                </a>
+                                <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>">
+                                    <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
+                                        UPDATE
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
+            </div>
 
+            <div class="container" >
                 <c:url var="addUrl" value="/addIndicator"/>
                 <form:form action="${addUrl}" method="post" modelAttribute="indicator">
                     <table class="box-table-a">
@@ -98,7 +78,6 @@
                         <tbody>
                         <tr>
                             <td>
-                                <script src="<c:url value="/resources/js/jquery.js"/>" type="text/javascript"></script>
                                 <script src="<c:url value="/resources/js/jquery-ui.js"/>" type="text/javascript"></script>
                                 <script type="text/javascript">
                                     $(function() {
@@ -117,6 +96,7 @@
                     </table>
                 </form:form>
             </div>
+
         </div>
     </tiles:putAttribute>
 </tiles:insertDefinition>
