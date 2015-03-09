@@ -9,18 +9,18 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="<c:url value="/resources/css/graphs.css"/>"/>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div>
-            <div id="container" style="min-width: 110px; height: 300px; margin: 10 auto"></div>
+            <div id="container" class="graphs-size"></div>
         
             <c:url var="drawByMonth" value="/graphByMonth" />
 
-            <div id="chooseMonth" style="margin: 70">
+            <div id="chooseMonth" class = "check-box">
                 <form:form >
                         Please choose an option :
-                    <%--<form:select path="month" items="${monthsList}" />--%>
                         <div>
                             <button id = 'submit' type="submit" name="draw" >Draw</button>
                         </div>
