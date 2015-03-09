@@ -45,15 +45,6 @@
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.softserveinc.if052_restful.resource.Application</param-value>
         </init-param>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.JSPTemplatesBasePath</param-name>
-            <param-value>/WEB-INF/jsp</param-value>
-        </init-param>
-        <init-param>
-            <!--And with the WebPageContentRegex you are able to serve static resources.-->
-            <param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name>
-            <param-value>/(resources|(WEB-INF/jsp))/.*</param-value>
-        </init-param>
     </filter>
 
 
