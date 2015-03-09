@@ -52,3 +52,10 @@ INSERT INTO `indicator`
            (8, '2015-01-15 03:03:03', 131, 0, 0, 1),
            (9, '2015-01-20 05:05:05', 151, 0, 0, 1),
            (10,'2015-01-25 23:00:00', 181, 0, 0, 1);
+
+INSERT INTO `role`
+    VALUES (1, 'USER', 'First role in the app');
+
+INSERT INTO `role_consumer`
+    VALUES  (1, 1, 1),
+            (2, 1, 2);
