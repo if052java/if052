@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by valentyn on 2/18/15.

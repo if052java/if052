@@ -6,23 +6,23 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations="classpath:applicationContext.xml")
-public class AddressServiceTest
-{
+@ContextConfiguration(locations={"classpath:applicationContext.xml",
+                                 "classpath:h2-datasource.xml"})
+@ActiveProfiles(profiles = "h2")
+public class AddressServiceTest {
     @Autowired
     private AddressService addressService;
     @Autowired
     private UserService userService;
 
     @Test
-    public void testGetAddressById()
-    {
+    public void testGetAddressById() {
         Address address = addressService.getAddressById(1);
         List<WaterMeter> waterMeters = address.getWaterMeters();
         for(WaterMeter wm : waterMeters) {
@@ -34,31 +34,26 @@ public class AddressServiceTest
     }
 
     @Test
-    public void testGetAddressesByUserId()
-    {
+    public void testGetAddressesByUserId() {
         List<Address> addresses = addressService.getAllAddressesByUserId(1);
         Assert.assertNotNull(addresses);
-        for (Address address : addresses)
-        {
+        for (Address address : addresses) {
             System.out.println(address);
         }
     }
+
     @Test
-    public void testGetAllAddresses()
-    {
+    public void testGetAllAddresses() {
         List<Address> addresses = addressService.getAllAddresses();
         Assert.assertNotNull(addresses);
-        for (Address address : addresses)
-        {
+        for (Address address : addresses) {
             System.out.println(address);
         }
-
     }
 
     @Test
     public void testInsertAddress() {
         long generateOrigin = System.currentTimeMillis();
-
         Address address = new Address();
         address.setCity("Івано-Франківськ");
         address.setStreet("Сахарова");
@@ -66,12 +61,14 @@ public class AddressServiceTest
         address.setApartment("503");
         address.setTariff( generateOrigin / 1000000000 );
         address.setUser(userService.getUserById(1));
-
         addressService.insertAddress(address);
+
         System.out.println(address.getAddressId());
 
         Assert.assertTrue(address.getAddressId() != 0);
+
         Address createdAddress = addressService.getAddressById(address.getAddressId());
+
         Assert.assertNotNull(createdAddress);
         Assert.assertEquals(address.getAddressId(), createdAddress.getAddressId());
         Assert.assertEquals(address.getCity(), createdAddress.getCity());
@@ -81,9 +78,9 @@ public class AddressServiceTest
         Assert.assertEquals(address.getTariff(), createdAddress.getTariff(), 0.0001);
         Assert.assertEquals(address.getUser().getUserId(), createdAddress.getUser().getUserId());
     }
+
     @Test
-    public void testUpdateAddress()
-    {
+    public void testUpdateAddress() {
         // searching of last record id for update
         List<Address> addresses = addressService.getAllAddresses();
         int lastId = addresses.get(addresses.size() - 1).getAddressId();
@@ -96,6 +93,7 @@ public class AddressServiceTest
         address.setTariff(50);
         addressService.updateAddress(address);
         Address updatedAddress = addressService.getAddressById(lastId);
+
         Assert.assertEquals(address.getCity(), updatedAddress.getCity());
         Assert.assertEquals(address.getStreet(), updatedAddress.getStreet());
         Assert.assertEquals(address.getBuilding(), updatedAddress.getBuilding());
@@ -104,8 +102,7 @@ public class AddressServiceTest
     }
 
     @Test
-    public void testDeleteAddress()
-    {
+    public void testDeleteAddress() {
         Address address = new Address();
         address.setCity("Івано-Франківськ");
         address.setStreet("Сахарова");
@@ -115,15 +112,13 @@ public class AddressServiceTest
         address.setUser(userService.getUserById(1));
         addressService.insertAddress(address);
 
-//        // searching of last record id for update
-//        List<Address> addresses = addressService.getAllAddresses();
-//        int lastId = addresses.get(addresses.size() - 1).getAddressId();
+        // searching of last record id for update
+        // List<Address> addresses = addressService.getAllAddresses();
+        // int lastId = addresses.get(addresses.size() - 1).getAddressId();
 
-//        Address address = addressService.getAddressById(lastId);
+        // Address address = addressService.getAddressById(lastId);
         addressService.deleteAddress(address.getAddressId());
         Address deletedAddress = addressService.getAddressById(address.getAddressId());
         Assert.assertNull(deletedAddress);
     }
 }
-
-

@@ -6,18 +6,19 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import java.util.List;
 
 /**
  * Created by Maksym Vynnyk on 02.02.2015.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:applicationContext.xml")
-public class IndicatorServiceTest
-{
+@ContextConfiguration(locations={"classpath:applicationContext.xml",
+                                 "classpath:h2-datasource.xml"})
+@ActiveProfiles(profiles = "h2")
+public class IndicatorServiceTest {
     @Autowired
     private IndicatorService indicatorService;
 
@@ -25,32 +26,27 @@ public class IndicatorServiceTest
     private WaterMeterService waterMeterService;
 
     @Test
-    public void testGetIndicatorById()
-    {
+    public void testGetIndicatorById() {
         Indicator indicator = indicatorService.getIndicatorById(3);
         Assert.assertNotNull(indicator);
         System.out.println(indicator);
     }
 
     @Test
-    public void testGetAllIndicators()
-    {
+    public void testGetAllIndicators() {
         List<Indicator> indicators = indicatorService.getAllIndicators();
         Assert.assertNotNull(indicators);
-        for (Indicator indicator : indicators)
-        {
+        for (Indicator indicator : indicators) {
             System.out.println(indicator);
         }
     }
 
     @Test
-    public void testGetIndicatorsByWaterMeter()
-    {
+    public void testGetIndicatorsByWaterMeter() {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
         List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
         Assert.assertNotNull(indicators);
-        for (Indicator indicator : indicators)
-        {
+        for (Indicator indicator : indicators) {
             System.out.println(indicator);
         }
     }
@@ -58,14 +54,11 @@ public class IndicatorServiceTest
     @Test
     public void testInsertIndicator() {
         Indicator indicator = new Indicator();
-
         indicator.setDate(new java.util.Date());
         indicator.setValue(1001);
         indicator.setPaid(true) ;
         indicator.setPublished(false);
-
         indicator.setWaterMeter(waterMeterService.getWaterMeterById(1));
-
         indicatorService.insertIndicator(indicator);
 
         System.out.println(indicator);
@@ -74,18 +67,17 @@ public class IndicatorServiceTest
         Indicator createdIndicator = indicatorService.getIndicatorById(indicator.getIndicatorId());
         Assert.assertNotNull(createdIndicator);
         Assert.assertEquals(indicator.getIndicatorId(), createdIndicator.getIndicatorId());
-  //    Assert.assertEquals(indicator.getDate().getTime(), createdIndicator.getDate().);
+        // Assert.assertEquals(indicator.getDate().getTime(), createdIndicator.getDate().);
         Assert.assertEquals(indicator.getValue(), createdIndicator.getValue());
         Assert.assertEquals(indicator.isPaid(), createdIndicator.isPaid());
         Assert.assertEquals(indicator.isPublished(), createdIndicator.isPublished());
         Assert.assertEquals(indicator.getWaterMeter().getWaterMeterId(),
-                                        createdIndicator.getWaterMeter().getWaterMeterId());
+                createdIndicator.getWaterMeter().getWaterMeterId());
     }
 
 
     @Test
-    public void testUpdateIndicator()
-    {
+    public void testUpdateIndicator() {
         // searching of last record id for update
         List<Indicator> indicators = indicatorService.getAllIndicators();
         int lastId = indicators.get(indicators.size() - 1).getIndicatorId();
@@ -97,15 +89,14 @@ public class IndicatorServiceTest
         indicator.setPublished(false);
         indicatorService.updateIndicator(indicator);
         Indicator updatedIndicator = indicatorService.getIndicatorById(lastId);
-        //    Assert.assertEquals(indicator.getDate(), updatedIndicator.getDate());
+        // Assert.assertEquals(indicator.getDate(), updatedIndicator.getDate());
         Assert.assertEquals(indicator.isPaid(), updatedIndicator.isPaid());
         Assert.assertEquals(indicator.isPublished(), updatedIndicator.isPublished());
         Assert.assertEquals(indicator.getValue(), updatedIndicator.getValue());
     }
 
     @Test
-    public void testDeleteIndicator()
-    {
+    public void testDeleteIndicator() {
         // searching of last record id for delete
         List<Indicator> indicators = indicatorService.getAllIndicators();
         int lastId = indicators.get(indicators.size() - 1).getIndicatorId();
@@ -116,5 +107,3 @@ public class IndicatorServiceTest
         Assert.assertNull(deletedIndicator);
     }
 }
-
-

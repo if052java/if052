@@ -3,11 +3,12 @@ package com.softserveinc.if052_restful.service;
 import com.softserveinc.if052_restful.domain.Address;
 import com.softserveinc.if052_restful.domain.Indicator;
 import com.softserveinc.if052_restful.domain.WaterMeter;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -16,9 +17,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:applicationContext.xml")
+@ContextConfiguration(locations={"classpath:applicationContext.xml",
+                                 "classpath:h2-datasource.xml"})
+@ActiveProfiles(profiles = "h2")
 public class WaterMeterServiceTest {
-
     @Autowired
     private WaterMeterService waterMeterService;
 
@@ -71,7 +73,7 @@ public class WaterMeterServiceTest {
     }
 
     @Test
-    public void testUpdateWaterMeter(){
+    public void testUpdateWaterMeter() {
         long timestamp = System.currentTimeMillis();
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
         waterMeter.setName("name" + timestamp);
@@ -98,5 +100,4 @@ public class WaterMeterServiceTest {
         WaterMeter deletedWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
         Assert.assertNull(deletedWaterMeter);
     }
-
 }
