@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .formLogin()
                     .usernameParameter("j_username")
                     .passwordParameter("j_password")
-                    .failureUrl("/login?authentication_error=true")
+                    .failureUrl("/login/authentication_error")
                     .loginPage("/login")
                     .loginProcessingUrl("/login/do");
         // @formatter:on

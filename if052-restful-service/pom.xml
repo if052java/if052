@@ -125,6 +125,12 @@
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jersey.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.ext</groupId>
+            <artifactId>jersey-mvc-jsp</artifactId>
+            <version>2.16</version>
+        </dependency>
+
         <!-- these 2 dependencies are neeeded for successful tests run -->
         <dependency>
             <groupId>javax.el</groupId>

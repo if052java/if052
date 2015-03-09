@@ -18,20 +18,41 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <servlet>
-        <servlet-name>jersey-serlvet</servlet-name>
-        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <!--<servlet>-->
+        <!--<servlet-name>jersey-serlvet</servlet-name>-->
+        <!--<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>-->
+        <!--<init-param>-->
+            <!--<param-name>javax.ws.rs.Application</param-name>-->
+            <!--<param-value>com.softserveinc.if052_restful.resource.Application</param-value>-->
+        <!--</init-param>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>jersey-serlvet</servlet-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <filter>
+        <filter-name>jersey</filter-name>
+        <filter-class>org.glassfish.jersey.servlet.ServletContainer</filter-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
             <param-value>com.softserveinc.if052_restful.resource.Application</param-value>
         </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>jersey-serlvet</servlet-name>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.JSPTemplatesBasePath</param-name>
+            <param-value>/WEB-INF/jsp</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name>
+            <param-value>/(resources|(WEB-INF/jsp))/.*</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>jersey</filter-name>
         <url-pattern>/*</url-pattern>
-    </servlet-mapping>
+    </filter-mapping>
 
     <filter>
         <filter-name>CORS</filter-name>
