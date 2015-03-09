@@ -21,7 +21,11 @@ import java.util.List;
 @Controller
 public class AddressController {
 
-    @Autowired @Qualifier("restUrl")
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired 
+    @Qualifier("restUrl")
     private String restUrl;
 
     private String userId = "";
@@ -35,7 +39,6 @@ public class AddressController {
     @RequestMapping(value = "/addresses{userId}")
     public String getAddressPage(int userId, ModelMap model){
         this.userId = String.valueOf(userId);
-        RestTemplate restTemplate = new RestTemplate();
 
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddresses);
@@ -53,8 +56,6 @@ public class AddressController {
      */
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST)
     public String createAddress(@ModelAttribute Address address){
-        RestTemplate restTemplate = new RestTemplate();
-
         User user = restTemplate.getForObject(restUrl+ "users/" + this.userId, User.class);
         address.setUser(user);
 
@@ -72,8 +73,6 @@ public class AddressController {
      */
     @RequestMapping(value = "/updateAddress{addressId}")
     public String getUpdateAddressPage(int addressId, ModelMap model){
-        RestTemplate restTemplate = new RestTemplate();
-
         Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
 
         model.addAttribute("address", address);
@@ -89,8 +88,6 @@ public class AddressController {
      */
     @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
     public String updateAddress(@ModelAttribute Address address){
-        RestTemplate restTemplate = new RestTemplate();
-
         User user = restTemplate.getForObject(restUrl+ "users/" + this.userId, User.class);
         address.setUser(user);
         restTemplate.put(restUrl + "addresses/" + address.getAddressId(), address);
@@ -106,8 +103,6 @@ public class AddressController {
      */
     @RequestMapping("/deleteAddress{addressId}")
     public String deleteAddress(int addressId) {
-        RestTemplate restTemplate = new RestTemplate();
-
         restTemplate.delete(restUrl + "addresses/" +addressId);
 
         return "redirect:/addresses?userId=" + this.userId;

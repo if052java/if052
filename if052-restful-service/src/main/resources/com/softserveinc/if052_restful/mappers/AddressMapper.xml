@@ -16,7 +16,8 @@
                      resultMap="com.softserveinc.if052_restful.mappers.UserMapper.UserSimpleResult"/>
         <collection property="waterMeters" column="address_id"
                     javaType="ArrayList" ofType="WaterMeter"
-                    resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"/>
+                    resultMap="com.softserveinc.if052_restful.mappers.WaterMeterMapper.WaterMeterSimpleResult"
+                columnPrefix="watermeter_"/>
     </resultMap>
 
     <!-- Result map for representation of address -->
@@ -44,9 +45,9 @@
         c.middle_name,
         c.login,
         c.password,
-        wm.water_meter_id,
-        wm.name,
-        wm.description
+        wm.water_meter_id as watermeter_water_meter_id,
+        wm.name as watermeter_name,
+        wm.description as watermeter_description
         FROM address a
         LEFT OUTER JOIN watermeter wm ON a.address_id = wm.address_id
         LEFT OUTER JOIN consumer c ON a.user_id = c.user_id

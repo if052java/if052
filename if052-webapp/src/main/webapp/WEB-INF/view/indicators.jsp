@@ -11,15 +11,36 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
-<script src="<c:url value="/resources/js/jquery.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
-
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
+
             <div class="container">
-                <table class="table table-hover">
+
+                <div class="text-center">
+                    <nav>
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <c:forEach begin="1" end="${pageCount}" var="page">
+                                <li><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}&currentPage=${page}"/>">
+                                    <c:out value="${page}"/>
+                                </a></li>
+                            </c:forEach>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <table class="table table-hover" >
+
                     <thead>
                         <tr>
                             <th>Дата</th>
@@ -30,27 +51,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="indicators" items="${indicators}">
+                        <c:forEach var="indicator" items="${indicators}">
                             <tr>
-                                <td><fmt:formatDate value="${indicators.date}" pattern="MM/dd/yyyy" /></td>
-                                <td><c:out value="${indicators.value}"/></td>
-                                <td><c:out value="${indicators.paid ? 'Yes': 'No'}"/></td>
-                                <td><c:out value="${indicators.published ? 'Yes': 'No'}"/></td>
+                                <td><fmt:formatDate value="${indicator.date}" pattern="MM/dd/yyyy" /></td>
+                                <td><c:out value="${indicator.value}"/></td>
                                 <td>
-                                    <a href="<c:url value="/deleteIndicator?indicatorId=${indicators.indicatorId}"/>">
-                                        <button <c:if test="${indicators.published}">disabled="disabled"</c:if> >
+                                    <span <c:if test="${indicator.paid}">class="glyphicon glyphicon-ok" </c:if>
+                                          <c:if test="${!indicator.paid}">class="glyphicon glyphicon-minus" </c:if>
+                                          aria-hidden="true">
+                                    </span>
+                                </td>
+                                <td>
+                                    <span <c:if test="${indicator.published}">class="glyphicon glyphicon-ok" </c:if>
+                                            <c:if test="${!indicator.published}">class="glyphicon glyphicon-minus" </c:if>
+                                            aria-hidden="true">
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
+                                        <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
                                             DELETE
                                         </button>
                                     </a>
-                                    <a href="<c:url value="/updateIndicator?indicatorId=${indicators.indicatorId}"/>">
-                                        <button <c:if test="${indicators.published}">disabled="disabled"</c:if> >
+                                    <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>">
+                                        <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
                                             UPDATE
                                         </button>
                                     </a>
                                 </td>
                             </tr>
                         </c:forEach>
+                    </tbody>
                 </table>
+
                 <c:url var="addUrl" value="/addIndicator"/>
                 <form:form action="${addUrl}" method="post" modelAttribute="indicator">
                     <table class="box-table-a">
@@ -65,7 +98,9 @@
                         <tbody>
                         <tr>
                             <td>
-                                <script>
+                                <script src="<c:url value="/resources/js/jquery.js"/>" type="text/javascript"></script>
+                                <script src="<c:url value="/resources/js/jquery-ui.js"/>" type="text/javascript"></script>
+                                <script type="text/javascript">
                                     $(function() {
                                         $( "#datepicker" ).datepicker();
                                     });

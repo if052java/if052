@@ -1,16 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
-  User: student
-  Date: 2/6/2015
-  Time: 12:48 PM
+  User: Java
+  Date: 27.02.2015
+  Time: 18:21
   To change this template use File | Settings | File Templates.
-  Author: Nazar Ostryzhniuk
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
-<div class = body>
-    <h2>${message}</h2>
-  </div>
+        <div class="body">
+
+        </div>
+
     </tiles:putAttribute>
 </tiles:insertDefinition>

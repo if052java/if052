@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label">First name</label>
                     <div class="col-xs-5">
-                        <input type="text" class="form-control" name="firstName" placeholder="First name" />
+                        <input type="text" class="form-control" name="name" placeholder="First name" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -69,5 +69,6 @@
             var restURL = '${restUrl}';
         </script>
         <script src="/resources/js/registration.js"></script>
+        
     </tiles:putAttribute>
 </tiles:insertDefinition>

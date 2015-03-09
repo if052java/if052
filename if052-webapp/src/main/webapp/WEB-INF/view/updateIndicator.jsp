@@ -11,11 +11,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-<link rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
-<script src="<c:url value="/resources/js/jquery.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
-
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
@@ -38,7 +33,9 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
-                                <script>
+                                <script src="<c:url value="/resources/js/jquery.js"/>"></script>
+                                <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
+                                <script type="text/javascript">
                                     $(function() {
                                         $( "#datepicker" ).datepicker();
                                     });

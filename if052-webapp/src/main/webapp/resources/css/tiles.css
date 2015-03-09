@@ -1,47 +1,113 @@
-body {
+/*-----------------------------------PAGE--------------*/
+
+html, body {
     margin:0px;
     padding:0px;
     height:100%;
-    overflow:hidden;
+    overflow: hidden;
+}
+body .page {
+    min-height: 100%;
+    position: relative;
+    background: linear-gradient(#37dcff, #5effee);
 }
 
-.page {
-    min-height:100%;
-    position:relative;
+/*-----------------------------------HEADER------------*/
+
+div#header-center {
+     padding: 0;
+ }
+div#header-right {
+    padding: 0;
+}
+body .page .header nav {
+    background: linear-gradient(#5c6976, #535c5c);
+    margin-bottom: 0;
+}
+body .page .header nav li{
+    display: inline;
+}
+.navbar-default .navbar-brand {
+    padding: 3% 5% 1%;
+}
+.navbar-brand img{
+    max-height: 90%;
+}
+body .page .header nav li:hover {
+    background: linear-gradient(#4d5863, #3d4444);
+}
+body .page .header nav li>a:hover {
+    color: #ffffff;
+    text-shadow: 1px 1px #787878;
+}
+body .page .header nav li>a{
+    color: #ffffff;
+}
+body .page .header nav li>a:focus{
+    color: #37dcff;
+}
+body .page .header nav .log-out {
+    display: none;
 }
 
-.header {
-    padding:10px;
-    width:100%;
-    text-align:center;
-}
+/*--------------------------------BODY--------------*/
 
-.content {
-    padding:10px;
-    padding-bottom:20px; /* Height of the footer element */
-    overflow:hidden;
+div#body-center {
+    background-color: rgba(255,255,255, .5);
+    height: 100%;
+    padding: 0 15px 15px;
 }
-
-.menu {
-    padding:50px 10px 0px 10px;
-    width:200px;
-    float:left;
-}
-
 .body {
-    margin:50px 10px 0px 250px;
+    background-color: #ffffff;
+    padding: 2% 2% 5%;
+    height: 100%;
 }
+.content {
+    margin: 0 auto -30px;
+    overflow:visible;
+}
+
+/*-------------------------------FOOTER------------*/
 
 .footer {
+    color: #ffffff;
+    background: #ffffff;
     clear:both;
     position:absolute;
     bottom:0;
     left:0;
     text-align:center;
     width:100%;
-    height:20px;
+    height:30px;
+}
+.footer .footer-content {
+    width:100%;
+    height:29px;
+    position:absolute;
+    bottom:0;
+    background: linear-gradient(#5c6976, #505959);
 }
 
+/*------------------------------OVERALL------------*/
+
+div#body-center .container {
+    width: inherit;
+}
+.box-table-a input{
+    width: 100%;
+}
+.box-table-a {
+    margin-right: auto;
+}
 .login {
     width:250px;
+}
+.glyphicon-minus {
+    color: #a9a9a9;
+}
+.glyphicon-ok {
+    color: #3bcaff;
+}
+button:disabled {
+    color: #888888;
 }
