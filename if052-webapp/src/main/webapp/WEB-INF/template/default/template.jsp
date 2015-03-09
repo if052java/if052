@@ -5,11 +5,25 @@
 <html>
 <head>
     <title>Water Consumption Tracker</title>
+
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/tiles.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/pace.css"/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables_themeroller.css"/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables.min.css"/>"/>
+
     <script type="text/javascript" src="<c:url value="/resources/js/pace.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
+    <script>
+        $(document).ready(function() {
+            $('#paginated').dataTable({
+                "lengthMenu":[ [5, 10, 15, 25, -1], [5, 10, 15, 25, "All"]],
+                "info":     false
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="page">
