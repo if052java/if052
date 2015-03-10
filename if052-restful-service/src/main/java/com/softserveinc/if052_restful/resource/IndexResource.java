@@ -23,9 +23,17 @@ public class IndexResource {
     @GET
     @Path("login")
     @Produces(MediaType.TEXT_HTML)
-    public Response displayHello() {
+    public Response displayLoginPage() {
         return Response.ok(new Viewable("/login")).build();
     }
+
+    @GET
+    @Path("login/{authentication_error}")
+    @Produces(MediaType.TEXT_HTML)
+    public Response LoginPageError(@PathParam("authentication_error") boolean authentication_error){
+        return Response.ok(new Viewable("/login", authentication_error)).build();
+    }
+
 
     private static final String TEMPLATE = "Hello, %s from Jersey REST! ";
 

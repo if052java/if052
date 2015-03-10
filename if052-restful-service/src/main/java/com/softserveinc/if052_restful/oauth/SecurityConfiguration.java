@@ -19,10 +19,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/oauth/uncache_approvals", "/oauth/cache_approvals");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/oauth/uncache_approvals", "/oauth/cache_approvals");
+//    }
 
     @Override
     @Bean
@@ -40,21 +40,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .anyRequest().hasRole("USER")
 //                .and()
             .exceptionHandling()
-                .accessDeniedPage("/login/authorization_error")
+                .accessDeniedPage("/login/false")
                 .and()
             // TODO: put CSRF protection back into this endpoint
             .csrf()
                 .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize")).disable()
             .logout()
-                .logoutSuccessUrl("/index")
+                .logoutSuccessUrl("/login")
                 .logoutUrl("/logout")
                 .and()
             .formLogin()
                     .usernameParameter("j_username")
                     .passwordParameter("j_password")
-                    .failureUrl("/login/authentication_error")
+                    .failureUrl("/login/true")
                     .loginPage("/login")
-                    .loginProcessingUrl("/login/do");
+                    .loginProcessingUrl("/login.do");
         // @formatter:on
     }
 }
