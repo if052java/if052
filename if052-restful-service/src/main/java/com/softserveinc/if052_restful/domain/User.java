@@ -1,6 +1,8 @@
 package com.softserveinc.if052_restful.domain;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -36,17 +38,24 @@ public class User {
     @Length( min = 8 , max = 32)
     private String password;
 
+    @NotBlank
+    @Length( min = 8 , max = 32)
+    @Email
+    private String email;
+
     private List<Address> addresses;
 
     public User(){
 
     }
-    public User(String name, String surname, String middleName, String login, String password) {
+    public User(String name, String surname, String middleName, String login,
+                String password, String email) {
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
         this.login = login;
         this.password = password;
+        this.email = email;
     }
 
     //- Getters -//
@@ -73,6 +82,8 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public String getEmail() { return email; }
 
     public List < Address > getAddresses() {
         return addresses;
@@ -103,6 +114,8 @@ public class User {
         this.password = password;
     }
 
+    public void setEmail(String email) { this.email = email; }
+
     public void setAddresses(List < Address > addresses) {
         this.addresses = addresses;
     }
@@ -118,6 +131,6 @@ public class User {
                 ", middleName='" + middleName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                '}';
+                ", email ='" + email + '}';
     }
 }

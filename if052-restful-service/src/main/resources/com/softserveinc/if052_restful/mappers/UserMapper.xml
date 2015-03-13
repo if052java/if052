@@ -12,6 +12,7 @@
         <result property="middleName" column="middle_name"/>
         <result property="login" column="login"/>
         <result property="password" column="password"/>
+        <result property="email" column="email"/>
         <collection property="addresses" column="user_id"
                     javaType="ArrayList" ofType="Address"
                     resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressSimpleResult">
@@ -26,6 +27,7 @@
         <result property="middleName" column="middle_name"/>
         <result property="login" column="login"/>
         <result property="password" column="password"/>
+        <result property="email" column="email"/>
     </resultMap>
 
     <select id="getUserByLogin" parameterType="String" resultMap="UserSimpleResult">
@@ -35,7 +37,8 @@
         c.surname,
         c.middle_name,
         c.login,
-        c.password
+        c.password,
+        c.email
         FROM consumer c
         WHERE c.login = #{login}
     </select>
@@ -48,6 +51,7 @@
         c.middle_name,
         c.login,
         c.password,
+        c.email,
         a.city,
         a.street,
         a.building,
@@ -58,20 +62,21 @@
         WHERE c.user_id = #{userId}
     </select>
 
-    <select id="getAllUsers" resultMap="UserResult">
+    <select id="getAllUsers" resultMap="UserSimpleResult">
         SELECT
         c.user_id,
         c.name,
         c.surname,
         c.middle_name,
         c.login,
-        c.password
+        c.password,
+        c.email
         FROM consumer c
     </select>
 
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO consumer (name, surname, middle_name, login, password)
-        VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password})
+        INSERT INTO consumer (name, surname, middle_name, login, password, email)
+        VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password}, #{email})
     </insert>
 
     <update id="updateUser" parameterType="User">
@@ -81,7 +86,8 @@
         surname = #{surname},
         middle_name = #{middleName},
         login = #{login},
-        password = #{password}
+        password = #{password},
+        email = #{email}
         WHERE user_id = #{userId}
     </update>
 

@@ -45,6 +45,7 @@
         c.middle_name,
         c.login,
         c.password,
+        c.email,
         wm.water_meter_id as watermeter_water_meter_id,
         wm.name as watermeter_name,
         wm.description as watermeter_description

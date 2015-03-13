@@ -112,7 +112,7 @@
             <version>${jersey.version}</version>
         </dependency>
 
-        <!-- these 2 dependencies are neeeded for successful tests run -->
+        <!-- JSR 341 Unified Expression Language -->
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>

@@ -14,6 +14,7 @@ public class User {
     private String middleName;
     private String login;
     private String password;
+    private String email;
     private List <Address> addresses;
 
                         //- Getters -//
@@ -40,6 +41,8 @@ public class User {
     public String getPassword() {
         return password;
     }
+
+    public String getEmail() { return email; }
 
     public List <Address> getAddresses() {
         return addresses;
@@ -70,6 +73,8 @@ public class User {
         this.password = password;
     }
 
+    public void setEmail(String email) { this.email = email; }
+
     public void setAddresses(List <Address> addresses) {
         this.addresses = addresses;
     }
@@ -85,6 +90,6 @@ public class User {
                 ", middleName='" + middleName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                '}';
+                ", email ='" + email + '}';
     }
 }

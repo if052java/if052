@@ -4,7 +4,8 @@ CREATE TABLE consumer
   name VARCHAR(45), surname VARCHAR(45),
   middle_name VARCHAR(45),
   login VARCHAR(45),
-  password VARCHAR(45)
+  password VARCHAR(45),
+  email VARCHAR(45)
 );
 
 CREATE TABLE address

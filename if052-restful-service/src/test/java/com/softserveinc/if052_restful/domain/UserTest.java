@@ -1,6 +1,8 @@
 package com.softserveinc.if052_restful.domain;
 
 import com.softserveinc.if052_restful.model.AbstractModel;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 import org.junit.Test;
@@ -31,7 +33,8 @@ public class UserTest extends AbstractModel{
             "Namisnyk",
             "Yaroslavovuch",
             "Valentine1996",
-            "Valentine1996"
+            "Valentine1996",
+            "valentine@gmail.com"
         );
         //- Validate -//
         constraintViolationSet = validator.validate( userSuccess );
@@ -53,12 +56,13 @@ public class UserTest extends AbstractModel{
             null,
             null,
             null,
+            null,
             null
         );
         //- Validate -//
         constraintViolationSet = validator.validate(userFailureNotNull);
 
-        assertEquals( 10, constraintViolationSet.size() );
+        assertEquals( 11, constraintViolationSet.size() );
 
         for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
             //- Property name -//
@@ -69,6 +73,7 @@ public class UserTest extends AbstractModel{
                     add("middleName");
                     add("login");
                     add("password");
+                    add("email");
                 }}.contains(
                     this.getPropertyName(
                         constraintViolation.getPropertyPath()
@@ -80,6 +85,8 @@ public class UserTest extends AbstractModel{
                 new ArrayList < Class > () {{
                     add(NotNull.class);
                     add(NotEmpty.class);
+                    add(NotBlank.class);
+                    add(Email.class);
                 }}.contains(
                     constraintViolation.getConstraintDescriptor().getAnnotation().annotationType()
                 )
@@ -108,7 +115,8 @@ public class UserTest extends AbstractModel{
             "",
             "",
             "Valentine1996",
-            "Valentine1996"
+            "Valentine1996",
+            "valentine@gmail.com"
         );
         //- Validate -//
         constraintViolationSet = validator.validate(userFailureNotEmpty);
@@ -147,10 +155,11 @@ public class UserTest extends AbstractModel{
         }
 
         //- Failure: Empty login, password-//
-        //- Set correct full name, incorrect login, password-//
+        //- Set correct full name and email, incorrect login and password-//
         userFailureNotEmpty.setName("Valentyn");
         userFailureNotEmpty.setSurname("Namisnyk");
         userFailureNotEmpty.setMiddleName("Yaroslavovuch");
+        userFailureNotEmpty.setEmail("valentine@gmail.com");
         userFailureNotEmpty.setLogin("");
         userFailureNotEmpty.setPassword("");
 
@@ -203,7 +212,8 @@ public class UserTest extends AbstractModel{
             "123456789012345678901234567890123",
             "123456789012345678901234567890123",
             "Valentine1996",
-            "valentine1996"
+            "valentine1996",
+            "valentine@gmail.com"
         );
         //- Validate -//
         constraintViolationSet = validator.validate(userFailureMaxLength);
@@ -246,6 +256,7 @@ public class UserTest extends AbstractModel{
         userFailureMaxLength.setMiddleName("Yaroslavovuch");
         userFailureMaxLength.setLogin("123456789012345678901234567890123");
         userFailureMaxLength.setPassword("123456789012345678901234567890123");
+        userFailureMaxLength.setEmail("valentine@gmail.com");
         //- Validate -//
         constraintViolationSet = validator.validate(userFailureMaxLength);
 

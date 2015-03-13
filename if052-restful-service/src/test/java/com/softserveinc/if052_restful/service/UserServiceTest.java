@@ -60,6 +60,7 @@ public class UserServiceTest {
         user.setMiddleName("middle_name" + generateOrigin);
         user.setLogin("login" + generateOrigin);
         user.setPassword("password" + generateOrigin);
+        user.setEmail("email" + generateOrigin + "@i.ua");
 
         userService.insertUser(user);
 
@@ -73,6 +74,7 @@ public class UserServiceTest {
         Assert.assertEquals(user.getMiddleName(), createdUser.getMiddleName());
         Assert.assertEquals(user.getLogin(), createdUser.getLogin());
         Assert.assertEquals(user.getPassword(), createdUser.getPassword());
+        Assert.assertEquals(user.getEmail(), createdUser.getEmail());
     }
 
     @Test
@@ -84,6 +86,7 @@ public class UserServiceTest {
         user.setMiddleName("YA");
         user.setLogin("55555");
         user.setPassword("1111");
+        user.setEmail("origin@mail.ru");
 
         userService.updateUser(user);
 
