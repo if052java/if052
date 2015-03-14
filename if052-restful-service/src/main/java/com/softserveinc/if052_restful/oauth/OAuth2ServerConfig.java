@@ -49,7 +49,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @Configuration
 public class OAuth2ServerConfig {
 
-	private static final String RESOURCE_ID = "restful";
+	private static final String RESOURCE_ID = "rest";
 
 	@Configuration
 	@EnableResourceServer //adds a filter of type OAuth2AuthenticationProcessingFilter automatically to the Spring Security filter chain.
@@ -95,8 +95,8 @@ public class OAuth2ServerConfig {
 		@Autowired
 		private TokenStore tokenStore;
 
-//		@Autowired
-//		private UserApprovalHandler userApprovalHandler;
+		@Autowired
+		private UserApprovalHandler userApprovalHandler;
 
 		@Autowired
 		@Qualifier("authenticationManagerBean")
@@ -134,7 +134,8 @@ public class OAuth2ServerConfig {
 
 		@Override
 		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-            endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager);
+            endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler).
+                    authenticationManager(authenticationManager);
 		}
 
 		@Override
@@ -160,16 +161,16 @@ public class OAuth2ServerConfig {
 			return store;
 		}
 
-//		@Bean
-//		@Lazy
-//		@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-//		public SparklrUserApprovalHandler userApprovalHandler() throws Exception {
-//			SparklrUserApprovalHandler handler = new SparklrUserApprovalHandler();
-//			handler.setApprovalStore(approvalStore());
-//			handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
-//			handler.setClientDetailsService(clientDetailsService);
-//			handler.setUseApprovalStore(true);
-//			return handler;
-//		}
+		@Bean
+		@Lazy
+		@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
+		public RestfulUserApprovalHandler userApprovalHandler() throws Exception {
+			RestfulUserApprovalHandler handler = new RestfulUserApprovalHandler();
+			handler.setApprovalStore(approvalStore());
+			handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
+			handler.setClientDetailsService(clientDetailsService);
+			handler.setUseApprovalStore(true);
+			return handler;
+		}
     }
 }
