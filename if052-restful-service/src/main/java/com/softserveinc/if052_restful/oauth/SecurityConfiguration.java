@@ -35,10 +35,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // @formatter:off
                  http
             .authorizeRequests().antMatchers("/login").permitAll().and()
-            .authorizeRequests().antMatchers("/getRoles/**").hasRole("USER").and()
-//            .authorizeRequests()
-//                .anyRequest().hasRole("USER")
-//                .and()
+            .authorizeRequests()
+                .anyRequest().hasRole("USER")
+                .and()
             .exceptionHandling()
                 .accessDeniedPage("/login/false")
                 .and()

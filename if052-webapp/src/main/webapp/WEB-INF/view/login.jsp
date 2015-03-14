@@ -1,4 +1,4 @@
-<<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -16,7 +16,7 @@
 		<form action="${base}login.do" method="post" role="form">
 			<fieldset>
 				<legend>
-					<h2>Login</h2>
+					<h2>Login in webapp</h2>
 				</legend>
 				<div class="form-group">
 					<label for="j_username">Username:</label> <input id="j_username"

@@ -68,9 +68,10 @@ public class OAuth2ServerConfig {
 				// session creation to be allowed (it's disabled by default in 2.0.6)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 			.and()
-				.requestMatchers().antMatchers("/photos/**", "/oauth/users/**", "/oauth/clients/**","/me")
+				.requestMatchers().antMatchers("/photos/**", "/oauth/users/**", "/oauth/clients/**","/me", "/getRoles/**")
 			.and()
 				.authorizeRequests()
+                    .antMatchers("/getRoles/**").access("hasRole('ROLE_USER')")
 					.antMatchers("/me").access("#oauth2.hasScope('read')")					
 					.antMatchers("/photos").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")                                        
 					.antMatchers("/photos/trusted/**").access("#oauth2.hasScope('trust')")
@@ -101,8 +102,8 @@ public class OAuth2ServerConfig {
 		@Qualifier("authenticationManagerBean")
 		private AuthenticationManager authenticationManager;
 
-		@Value("${tonr.redirect:http://localhost:8080/tonr2/sparklr/redirect}")
-		private String tonrRedirectUri;
+		@Value("${redirect:http://localhost:8090/profile/redirect}")
+		private String RedirectUri;
 
 		@Override
 		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -110,19 +111,19 @@ public class OAuth2ServerConfig {
             // @formatter:off
             clients.inMemory()
                     .withClient("webapp")
-                    .resourceIds(RESOURCE_ID)
-			 		.authorizedGrantTypes("authorization_code", "implicit")
-                    .authorities("ROLE_CLIENT")
-                    .scopes("read", "write")
-                    .secret("secret")
-			 		    .and()
+                        .resourceIds(RESOURCE_ID)
+                        .authorizedGrantTypes("authorization_code")
+                        .authorities("ROLE_CLIENT")
+                        .scopes("read", "write")
+                        .secret("secret")
+                    .and()
                     .withClient("webapp-with-redirect")
-                    .resourceIds(RESOURCE_ID)
-			 		.authorizedGrantTypes("authorization_code", "implicit")
-                    .authorities("ROLE_CLIENT")
-			 		.scopes("read", "write")
-			 		.secret("secret")
-			 		.redirectUris(tonrRedirectUri);
+                        .resourceIds(RESOURCE_ID)
+                        .authorizedGrantTypes("authorization_code", "implicit")
+                        .authorities("ROLE_CLIENT")
+                        .scopes("read", "write")
+                        .secret("secret")
+                        .redirectUris(RedirectUri);
 			// @formatter:on
 		}
 
@@ -138,7 +139,8 @@ public class OAuth2ServerConfig {
 
 		@Override
 		public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-			oauthServer.realm("restful/client");
+			oauthServer.realm("rest/client");
+            //oauthServer.allowFormAuthenticationForClients();
 		}
 
 	}
@@ -169,6 +171,5 @@ public class OAuth2ServerConfig {
 //			handler.setUseApprovalStore(true);
 //			return handler;
 //		}
-	}
-
+    }
 }

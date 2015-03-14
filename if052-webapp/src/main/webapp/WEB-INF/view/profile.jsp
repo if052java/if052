@@ -12,6 +12,7 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <body>
+        ${role.roleName}
         <c:url value="/logout" var="logoutUrl" />
             <h2>Profile Page | You are now logged in</h2>
             <h3><a href="${logoutUrl}">Logout</a></h3>
