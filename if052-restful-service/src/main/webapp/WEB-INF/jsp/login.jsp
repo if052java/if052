@@ -19,7 +19,7 @@
         </c:if>
 
 		<div class="form-horizontal">
-			<form action="<c:url value="/login.do"/>" method="post" role="form">
+			<form action="<c:url value="/rest/login.do"/>" method="post" role="form">
 				<fieldset>
 					<legend>
 						<h2>Login</h2>

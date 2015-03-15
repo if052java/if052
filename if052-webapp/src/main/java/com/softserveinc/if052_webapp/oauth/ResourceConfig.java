@@ -68,7 +68,7 @@ public class ResourceConfig {
     }
 
     @Bean
-    public RestServiceTest restService(@Qualifier("oAuth2restTemplateRedirect") RestOperations restOperations) {
+    public RestServiceTest restService(@Qualifier("oAuth2restTemplate") RestOperations restOperations) {
         RestServiceTest restServiceTest = new RestServiceTest();
         restServiceTest.setRestTemplate(restOperations);
         return restServiceTest;

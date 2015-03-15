@@ -34,26 +34,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
                  http
-            .authorizeRequests().antMatchers("/login").permitAll().and()
+            .authorizeRequests().antMatchers("/rest/login").permitAll().and()
             .authorizeRequests()
                 .anyRequest().hasRole("USER")
                 .and()
             .exceptionHandling()
-                .accessDeniedPage("/login/false")
+                .accessDeniedPage("/rest/login/false")
                 .and()
             // TODO: put CSRF protection back into this endpoint
             .csrf()
                 .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize")).disable()
             .logout()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl("/rest/login")
                 .logoutUrl("/logout")
                 .and()
             .formLogin()
                     .usernameParameter("j_username")
                     .passwordParameter("j_password")
-                    .failureUrl("/login/true")
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login.do");
+                    .failureUrl("/rest/login/true")
+                    .loginPage("/rest/login")
+                    .loginProcessingUrl("/rest/login.do")
+                    .defaultSuccessUrl("/rest/", true);
         // @formatter:on
     }
 }

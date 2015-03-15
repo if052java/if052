@@ -141,7 +141,6 @@ public class OAuth2ServerConfig {
 		@Override
 		public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 			oauthServer.realm("rest/client");
-            //oauthServer.allowFormAuthenticationForClients();
 		}
 
 	}
