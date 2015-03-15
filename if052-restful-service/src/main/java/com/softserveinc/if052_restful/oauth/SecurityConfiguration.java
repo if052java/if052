@@ -53,8 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .passwordParameter("j_password")
                     .failureUrl("/rest/login/true")
                     .loginPage("/rest/login")
-                    .loginProcessingUrl("/rest/login.do")
-                    .defaultSuccessUrl("/rest/", true);
+                    .loginProcessingUrl("/rest/login.do");
+//                    .defaultSuccessUrl("/rest/", true);
         // @formatter:on
     }
 }

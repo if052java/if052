@@ -136,6 +136,13 @@ public class OAuth2ServerConfig {
 		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
             endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler).
                     authenticationManager(authenticationManager);
+
+            endpoints.pathMapping("/oauth/authorize",   "/authorize");
+            endpoints.pathMapping("/oauth/token",       "/token");
+            //endpoints.pathMapping("/oauth/confirm_access", "/confirm_access");
+            //endpoints.pathMapping("/oauth/error",       "/error");
+            endpoints.pathMapping("/oauth/check_token", "/check_token");
+            endpoints.pathMapping("/oauth/token_key",   "/token_key");
 		}
 
 		@Override

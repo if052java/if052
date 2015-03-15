@@ -21,7 +21,7 @@ public class RestServiceTest {
     }
 
     public UserRole getUserRole(){
-        UserRole userRole = restTemplate.getForObject(URI.create("http://localhost:8080/getRoles/1"), UserRole.class);
+        UserRole userRole = restTemplate.getForObject(URI.create("http://localhost:8080/rest/getRoles/1"), UserRole.class);
         return userRole;
     }
     public UserRole getUserRole1(){
