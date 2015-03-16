@@ -134,7 +134,9 @@ public class OAuth2ServerConfig {
 
 		@Override
 		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-            endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler).
+            endpoints.
+                    tokenStore(tokenStore).
+                    userApprovalHandler(userApprovalHandler).
                     authenticationManager(authenticationManager);
 
             endpoints.pathMapping("/oauth/authorize",   "/authorize");
