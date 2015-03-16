@@ -143,8 +143,8 @@ public class OAuth2ServerConfig {
             endpoints.pathMapping("/oauth/token",       "/token");
             //endpoints.pathMapping("/oauth/confirm_access", "/confirm_access");
             //endpoints.pathMapping("/oauth/error",       "/error");
-            endpoints.pathMapping("/oauth/check_token", "/check_token");
-            endpoints.pathMapping("/oauth/token_key",   "/token_key");
+            //endpoints.pathMapping("/oauth/check_token", "/check_token");
+            //endpoints.pathMapping("/oauth/token_key",   "/token_key");
 		}
 
 		@Override

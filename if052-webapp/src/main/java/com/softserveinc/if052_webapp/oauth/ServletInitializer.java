@@ -13,6 +13,7 @@
 
 package com.softserveinc.if052_webapp.oauth;
 
+import com.softserveinc.if052_webapp.WebMvcConfig;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -47,7 +48,7 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
-//		registerProxyFilter(servletContext, "springSecurityFilterChain");
+		//registerProxyFilter(servletContext, "springSecurityFilterChain");
 		registerProxyFilter(servletContext, "oauth2ClientContextFilter");
 	}
 

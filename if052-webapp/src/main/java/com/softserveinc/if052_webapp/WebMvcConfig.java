@@ -1,14 +1,13 @@
-package com.softserveinc.if052_webapp.oauth;
+package com.softserveinc.if052_webapp;
 
 import com.softserveinc.if052_webapp.controller.IndexController;
 import com.softserveinc.if052_webapp.controller.OauthTestController;
+import com.softserveinc.if052_webapp.oauth.AccessTokenRequestConverter;
 import com.softserveinc.if052_webapp.service.RestServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.MediaType;
@@ -41,6 +40,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Configuration
+@ComponentScan
 @EnableWebMvc
 @PropertySource("classpath:rest.properties")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
@@ -57,15 +57,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return tilesConfigurer;
     }
 
-    @Bean
-    public IndexController indexController(){
-        return new IndexController();
-    }
-
-    @Bean
-    public OauthTestController oauthTestController(){
-        return new OauthTestController();
-    }
+//    @Bean
+//    public IndexController indexController(){
+//        return new IndexController();
+//    }
+//
+//    @Bean
+//    public OauthTestController oauthTestController(){
+//        return new OauthTestController();
+//    }
 
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -153,6 +153,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         private OAuth2ClientContext oauth2Context;
 
         @Bean
+        @Primary
         public OAuth2RestTemplate oAuthRestTemplate() {
             return new OAuth2RestTemplate(rest(), oauth2Context);
         }

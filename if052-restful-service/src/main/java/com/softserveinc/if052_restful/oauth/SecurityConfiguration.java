@@ -42,8 +42,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .accessDeniedPage("/rest/login/false")
                 .and()
             // TODO: put CSRF protection back into this endpoint
-//            .csrf()
-//                .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize")).disable()
+            .csrf()
+                .requireCsrfProtectionMatcher(new AntPathRequestMatcher("/oauth/authorize")).disable()
             .logout()
                 .logoutSuccessUrl("/rest/login")
                 .logoutUrl("/logout")
