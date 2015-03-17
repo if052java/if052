@@ -62,7 +62,7 @@ public class UserTest extends AbstractModel{
         //- Validate -//
         constraintViolationSet = validator.validate(userFailureNotNull);
 
-        assertEquals( 11, constraintViolationSet.size() );
+        assertEquals( 12, constraintViolationSet.size() );
 
         for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
             //- Property name -//
@@ -85,7 +85,6 @@ public class UserTest extends AbstractModel{
                 new ArrayList < Class > () {{
                     add(NotNull.class);
                     add(NotEmpty.class);
-                    add(NotBlank.class);
                     add(Email.class);
                 }}.contains(
                     constraintViolation.getConstraintDescriptor().getAnnotation().annotationType()
@@ -159,13 +158,13 @@ public class UserTest extends AbstractModel{
         userFailureNotEmpty.setName("Valentyn");
         userFailureNotEmpty.setSurname("Namisnyk");
         userFailureNotEmpty.setMiddleName("Yaroslavovuch");
-        userFailureNotEmpty.setEmail("valentine@gmail.com");
+        userFailureNotEmpty.setEmail("");
         userFailureNotEmpty.setLogin("");
         userFailureNotEmpty.setPassword("");
 
         constraintViolationSet = validator.validate(userFailureNotEmpty);
 
-        assertEquals( 4, constraintViolationSet.size() );
+        assertEquals( 6, constraintViolationSet.size() );
 
         for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
             //- Property name -//
@@ -173,6 +172,7 @@ public class UserTest extends AbstractModel{
                 new ArrayList<String>() {{
                     add("login");
                     add("password");
+                    add("email");
                 }}.contains(
                     this.getPropertyName(
                         constraintViolation.getPropertyPath()
@@ -256,11 +256,11 @@ public class UserTest extends AbstractModel{
         userFailureMaxLength.setMiddleName("Yaroslavovuch");
         userFailureMaxLength.setLogin("123456789012345678901234567890123");
         userFailureMaxLength.setPassword("123456789012345678901234567890123");
-        userFailureMaxLength.setEmail("valentine@gmail.com");
+        userFailureMaxLength.setEmail("12345678901234567890123@gmail.com");
         //- Validate -//
         constraintViolationSet = validator.validate(userFailureMaxLength);
 
-        assertEquals( 2, constraintViolationSet.size() );
+        assertEquals( 3, constraintViolationSet.size() );
 
         for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
             //- Property name -//
@@ -268,6 +268,7 @@ public class UserTest extends AbstractModel{
                 new ArrayList<String>() {{
                     add("login");
                     add("password");
+                    add("email");
                 }}.contains(
                     this.getPropertyName(
                         constraintViolation.getPropertyPath()

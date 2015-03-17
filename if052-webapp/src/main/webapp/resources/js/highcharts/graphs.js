@@ -42,8 +42,18 @@ $(function () {
 
         series: [{
             name: 'Indicator',
-            data: indicators
+            data: indicatorsData
         }
         ]
     });
+
+});
+
+$   (function () {
+    var selectIndicators = document.getElementsById("indicator");
+    for(var i = 0; i< indicators.length; i++) {
+        var option = document.createElement("option");
+        option.text = indicators[i];
+        selectIndicators.appendChild(option)
+    }
 });

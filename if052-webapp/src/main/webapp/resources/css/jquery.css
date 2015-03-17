@@ -2,3 +2,8 @@ label.error {
     color:red;
     font-weight: bold;
 }
+
+.login-error{
+    color:red;
+    font-weight: bold;
+}

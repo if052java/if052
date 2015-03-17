@@ -38,7 +38,8 @@ public class User {
     @Length( min = 8 , max = 32)
     private String password;
 
-    @NotBlank
+    @NotNull
+    @NotEmpty
     @Length( min = 8 , max = 32)
     @Email
     private String email;

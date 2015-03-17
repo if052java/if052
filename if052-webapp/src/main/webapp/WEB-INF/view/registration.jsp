@@ -39,7 +39,7 @@
                     <label class="col-xs-3 control-label">Login</label>
                     <div class="col-xs-5">
                         <input id="login" type="text" class="form-control" name="login" placeholder="login"/>
-                        <div id="login-errors" ></div>
+                        <div id="login-errors" class ='login-error'></div>
                     </div>
                 </div>
                 <div class="form-group">

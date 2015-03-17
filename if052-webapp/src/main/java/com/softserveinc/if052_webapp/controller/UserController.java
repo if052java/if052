@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.net.URI;
-import java.net.URL;
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -55,10 +52,12 @@ public class UserController {
     public String getMainGraph(ModelMap model){
 
         Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ 1, Indicator[].class);
+        
         List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
         List<Integer> indicatorValues = new ArrayList<Integer>();
         List<Long> indicatorsDate = new ArrayList<Long>();
-        long[][] arrayOfDates = new long[indicators.size()][2];
+        
+        long[][] arrayOfData = new long[indicators.size()][2];
         
         for(Indicator indicator : indicators){
             indicatorValues.add((indicator.getValue()));
@@ -69,29 +68,120 @@ public class UserController {
         }
         
         for (int i = 0; i < indicators.size(); i++) {
-                arrayOfDates[ i ] [ 0 ] = indicatorsDate.get(i);
-                arrayOfDates[ i ] [ 1 ] = indicatorValues.get(i);
+                arrayOfData[ i ] [ 0 ] = indicatorsDate.get(i);
+                arrayOfData[ i ] [ 1 ] = indicatorValues.get(i);
         }
 
-        String a = Arrays.deepToString(arrayOfDates);
+        String masAsString = Arrays.deepToString(arrayOfData);
         
-        model.addAttribute("indicatorsData", a);
+        model.addAttribute("indicatorsData", masAsString);
 
-        ModelAndView mav = new ModelAndView("graphs");
-        
-        Map< String, String > month = new HashMap<String, String>();
-        month.put("January", "Jan");
-        month.put("February", "Feb");
-        month.put("March", "Mar");
-
-        mav.addObject("monthsList", month);
         return "graphs";
     }
 
     @RequestMapping(value="graphByMonth", method=RequestMethod.POST)
-    public String getGraphByDate(@RequestParam("month") String month, ModelMap model){
+    public String getGraphByDate(@RequestParam("month") Integer month,
+                                 @RequestParam("year") Integer year,
+                                 ModelMap model) throws ParseException {
+        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ 1, Indicator[].class);
+        List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
+        List < Indicator > indicatorsData = new ArrayList<Indicator>();
 
+        Date startDate = null;
+        Date endDate = null;
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+        GregorianCalendar cal =
+            (GregorianCalendar) GregorianCalendar.getInstance();
+        boolean isLeapYear = cal.isLeapYear(year);
+        
+        switch (month){
+            case 1: {
+                startDate = sdf.parse(year+"/01/01 00:00:00");
+                endDate = sdf.parse(year+"/01/31 23:59:59");
+                break;
+            }
+            case 2: {
+                if(!isLeapYear) {
+                    startDate = sdf.parse(year + "/02/01 00:00:00");
+                    endDate = sdf.parse(year + "/02/28 23:59:59");
+                } else{
+                    startDate = sdf.parse(year + "/02/01 00:00:00");
+                    endDate = sdf.parse(year + "/02/29 23:59:59");
+                }
+                break;
+            }
+            case 3: {
+                startDate = sdf.parse(year+"/03/01 00:00:00");
+                endDate = sdf.parse(year+"/03/31 23:59:59");
+                break;
+            }
+            case 4: {
+                startDate = sdf.parse(year+"/04/01 00:00:00");
+                endDate = sdf.parse(year+"/04/30 23:59:59");
+                break;
+            }
+            case 5: {
+                startDate = sdf.parse(year+"/05/01 00:00:00");
+                endDate = sdf.parse(year+"/05/31 23:59:59");
+                break;
+            }
+            case 6: {
+                startDate = sdf.parse(year+"/06/01 00:00:00");
+                endDate = sdf.parse(year+"/06/30 23:59:59");
+                break;
+            }
+            case 7: {
+                startDate = sdf.parse(year+"/07/01 00:00:00");
+                endDate = sdf.parse(year+"/07/31 23:59:59");
+                break;
+            }
+            case 8: {
+                startDate = sdf.parse(year+"/08/01 00:00:00");
+                endDate = sdf.parse(year+"/08/31 23:59:59");
+                break;
+            }
+            case 9: {
+                startDate = sdf.parse(year+"/09/01 00:00:00");
+                endDate = sdf.parse(year+"/09/30 23:59:59");
+                break;
+            }
+            case 10: {
+                startDate = sdf.parse(year+"/10/01 00:00:00");
+                endDate = sdf.parse(year+"/10/31 23:59:59");
+                break;
+            }
+            case 11: {
+                startDate = sdf.parse(year+"/11/01 00:00:00");
+                endDate = sdf.parse(year+"/11/30 23:59:59");
+                break;
+            }
+            case 12: {
+                startDate = sdf.parse(year+"/12/01 00:00:00");
+                endDate = sdf.parse(year+"/12/31 23:59:59");
+                break;
+            }
+            
+        }
+        //GET DATA 
+        for(Indicator indicator : indicators){
+            if(indicator.getDate().compareTo(startDate) >= 0
+                && indicator.getDate().compareTo(endDate) <= 0) {
+                    indicatorsData.add(indicator);
+            }
+        }
+
+        long[][] arrayOfData = new long[indicatorsData.size()][2];
+
+        for (int i = 0; i < indicatorsData.size(); i++) {
+            arrayOfData[ i ] [ 0 ] = indicatorsData.get(i).getDate().getTime() + 7200000;
+            arrayOfData[ i ] [ 1 ] = indicatorsData.get(i).getValue();
+        }
+        String masAsString = Arrays.deepToString(arrayOfData);
+        
         model.addAttribute("month", month);
+        model.addAttribute("indicatorsData", masAsString);
         
         return "graphs";
     }
