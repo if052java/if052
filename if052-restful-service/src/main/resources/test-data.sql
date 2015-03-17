@@ -21,7 +21,7 @@ INSERT INTO `meter_type`
            (3, 'natural gas'),
            (4, 'electroenergy');
 
-
+INSERT INTO 'watermeter'
 VALUES (1, 'WM_NAME1', 'DESCRIPTION1', 1, 1),
 (2, 'WM_NAME2', 'DESCRIPTION2', 1, 1),
 (3, 'WM_NAME3', 'DESCRIPTION3', 1, 1),
