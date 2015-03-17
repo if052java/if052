@@ -1,7 +1,9 @@
 package com.softserveinc.if052_webapp.controller;
 
+import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.Indicator;
 import com.softserveinc.if052_webapp.domain.User;
+import com.softserveinc.if052_webapp.domain.WaterMeter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -52,6 +54,9 @@ public class UserController {
     public String getMainGraph(ModelMap model){
 
         Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ 1, Indicator[].class);
+
+//        Address address = restTemplate.getForObject(restUrl + "/addresses/" + 1, Address.class);
+//        List<WaterMeter> list = address.getWaterMeters();
         
         List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
         List<Integer> indicatorValues = new ArrayList<Integer>();

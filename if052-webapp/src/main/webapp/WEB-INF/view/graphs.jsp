@@ -40,22 +40,21 @@
                         <option value="2016">2016</option>
                         <option value="2017">2017</option>
                     </select>
-                    <select id="indicator">
+                    <select id="waterMeter">
                     </select>
                         <div>
                             <button id = 'submit' type="submit" name="draw" >Draw</button>
                         </div>
                     </div>
                 </form:form>
-            <script src="/resources/js/jquery-1.9.1.js" type="text/javascript"></script>
-            <script src="/resources/js/highcharts/highcharts.js" type="text/javascript"></script>
-            <script src="/resources/js/highcharts/exporting.js" type="text/javascript"></script>
-            <script type="text/javascript">
-                var indicatorsData = ${indicatorsData}
-                var indicators =["bath","garage","toilet"]
-            </script>
-            <script src="/resources/js/highcharts/graphs.js"></script>
         </div>
+        <script src="/resources/js/highcharts/highcharts.js" type="text/javascript"></script>
+        <script src="/resources/js/highcharts/exporting.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var indicatorsData = ${indicatorsData}
+            var waterMeters =["bath","garage","toilet"]
+        </script>
+        <script src="/resources/js/highcharts/graphs.js"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>
 
