@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,7 +44,7 @@ public class IndicatorServiceTest {
     @Test
     public void testGetIndicatorsByWaterMeter() {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
-        List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
+        List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeterId(waterMeter.getWaterMeterId());
         Assert.assertNotNull(indicators);
         for (Indicator indicator : indicators) {
             System.out.println(indicator);
@@ -104,4 +106,13 @@ public class IndicatorServiceTest {
         Indicator deletedIndicator = indicatorService.getIndicatorById(lastId);
         Assert.assertNull(deletedIndicator);
     }
+
+    @Test
+    public void testGetMinDate() {
+        Date date = indicatorService.getMinDate();
+        System.out.println(date);
+        Assert.assertNotNull(date);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.softserveinc.if052_restful.resource;
 
+
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
@@ -28,6 +29,8 @@ public class Application extends ResourceConfig{
         register(UserResource.class);
 
         register(IndicatorResource.class);
+
+        register(ReportResource.class);
 
     }
 

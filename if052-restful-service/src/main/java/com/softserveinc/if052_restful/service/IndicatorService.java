@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Maksym Vynnyk on 02.02.2015.
  */
+
 @Service
 @Transactional
 public class IndicatorService {
+
     @Autowired
     private IndicatorMapper indicatorMapper;
 
@@ -26,8 +29,8 @@ public class IndicatorService {
         return indicatorMapper.getAllIndicators();
     }
 
-    public List<Indicator> getIndicatorsByWaterMeter(WaterMeter waterMeter) {
-        return indicatorMapper.getIndicatorsByWaterMeter(waterMeter.getWaterMeterId());
+    public List<Indicator> getIndicatorsByWaterMeterId(int waterMeterId) {
+        return indicatorMapper.getIndicatorsByWaterMeterId(waterMeterId);
     }
 
     public void insertIndicator(Indicator indicator) {
@@ -40,6 +43,10 @@ public class IndicatorService {
 
     public void deleteIndicator(int indicatorId) {
             indicatorMapper.deleteIndicator(indicatorId);
+    }
+
+    public Date getMinDate() {
+        return indicatorMapper.getMinDate();
     }
 }
 

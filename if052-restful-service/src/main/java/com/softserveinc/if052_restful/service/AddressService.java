@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
+
 public class AddressService {
     @Autowired
     private AddressMapper addressMapper;

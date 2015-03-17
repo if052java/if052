@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.softserveinc.if052_restful.mappers.ReportMapper">
+
+    <resultMap id="ReportResult" type="Report">
+        <id property="reportId" column="report_id"/>
+        <result property="reportRequest" column="request"/>
+        <result property="xmlReport" column="xml_report"/>
+    </resultMap>
+
+    <select id="getReportById" parameterType="int" resultMap="ReportResult">
+        SELECT
+        r.report_id,
+        r.request,
+        r.xml_report
+        FROM report r
+        WHERE r.report_id = #{reportId}
+    </select>
+
+    <insert id="insertReport" parameterType="Report" useGeneratedKeys="true" keyProperty="reportId">
+        INSERT INTO report(request, xml_report)
+        VALUES(#{reportRequest}, #{xmlReport})
+    </insert>
+
+
+
+
+
+
+</mapper>

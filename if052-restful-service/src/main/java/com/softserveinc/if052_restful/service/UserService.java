@@ -17,7 +17,8 @@ import java.util.List;
  *
  * @version 1.0
  */
-@Service
+
+@Service("userService")
 @Transactional
 public class UserService {
     @Autowired

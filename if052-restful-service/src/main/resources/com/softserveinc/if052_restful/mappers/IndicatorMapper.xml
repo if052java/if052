@@ -24,6 +24,10 @@
         <result property="published" column="is_published"/>
     </resultMap>
 
+    <resultMap id="DateResult" type="java.util.Date">
+        <result property="date" column="min_date"/>
+    </resultMap>
+
     <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">
         SELECT
         i.indicator_id,
@@ -53,7 +57,7 @@
         LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
     </select>
 
-    <select id="getIndicatorsByWaterMeter" resultMap="IndicatorResult">
+    <select id="getIndicatorsByWaterMeterId" parameterType="int" resultMap="IndicatorResult">
         SELECT
         i.indicator_id,
         i.date,
@@ -64,8 +68,14 @@
         wm.name,
         wm.description
         FROM indicator i
-        RIGHT JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
+        LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
         WHERE wm.water_meter_id = #{waterMeterId}
+    </select>
+
+    <select id="getMinDate" resultMap="DateResult">
+        SELECT
+        min(date) as min_date
+        FROM indicator
     </select>
 
     <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">

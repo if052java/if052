@@ -16,6 +16,7 @@
     <script type="text/javascript" src="<c:url value="/resources/js/pace.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
     <script>
         $(document).ready(function() {
             $('#paginated').dataTable({

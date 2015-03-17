@@ -45,3 +45,10 @@ CREATE TABLE indicator
       REFERENCES watermeter (water_meter_id)
       ON UPDATE CASCADE ON DELETE RESTRICT
 );
+
+CREATE TABLE report
+(
+  report_id INT AUTO_INCREMENT PRIMARY KEY,
+  request varchar(255),
+  xml_report mediumtext
+);

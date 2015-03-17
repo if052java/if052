@@ -55,7 +55,7 @@
         WHERE a.address_id = #{addressId}
     </select>
 
-    <select id="getAddressesByUserId" parameterType="int" resultMap="AddressSimpleResult">
+    <select id="getAddressesByUserId" parameterType="int" resultMap="AddressResult">
         SELECT
         a.address_id,
         a.city,
@@ -63,20 +63,45 @@
         a.building,
         a.apartment,
         a.tariff,
-        a.user_id
+        a.user_id,
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.password,
+        c.email,
+        wm.water_meter_id as watermeter_water_meter_id,
+        wm.name as watermeter_name,
+        wm.description as watermeter_description
         FROM address a
+        LEFT OUTER JOIN watermeter wm ON a.address_id = wm.address_id
+        LEFT OUTER JOIN consumer c ON a.user_id = c.user_id
         WHERE a.user_id = #{userId}
     </select>
 
-    <select id="getAllAddresses" resultMap="AddressSimpleResult">
+    <select id="getAllAddresses" resultMap="AddressResult">
         SELECT
         a.address_id,
         a.city,
         a.street,
         a.building,
         a.apartment,
-        a.tariff
+        a.tariff,
+        a.user_id,
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.password,
+        c.email,
+        wm.water_meter_id as watermeter_water_meter_id,
+        wm.name as watermeter_name,
+        wm.description as watermeter_description
         FROM address a
+        LEFT OUTER JOIN watermeter wm ON a.address_id = wm.address_id
+        LEFT OUTER JOIN consumer c ON a.user_id = c.user_id
     </select>
 
     <insert id="insertAddress" parameterType="Address" useGeneratedKeys="true" keyProperty="addressId">

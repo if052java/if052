@@ -11,6 +11,7 @@
     <tiles:putAttribute name="body">
         <div class="body">
             <div class="container">
+                ${xml}
                 <br>
                 <br>
                 <br>

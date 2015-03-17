@@ -75,7 +75,7 @@ public class AddressResource {
 
         for(WaterMeter waterMeter : waterMeterService.getWaterMetersByAddressId(addressId)){
 
-            for(Indicator indicator : indicatorService.getIndicatorsByWaterMeter(waterMeter)){
+            for(Indicator indicator : indicatorService.getIndicatorsByWaterMeterId(waterMeter.getWaterMeterId())){
                 indicatorService.deleteIndicator(indicator.getIndicatorId());
             }
 

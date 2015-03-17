@@ -17,6 +17,7 @@ import java.util.List;
  *
  * @version 1.0
  */
+
 @Service
 @Transactional
 public class WaterMeterService {

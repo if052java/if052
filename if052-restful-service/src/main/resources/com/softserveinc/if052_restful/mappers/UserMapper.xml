@@ -62,7 +62,7 @@
         WHERE c.user_id = #{userId}
     </select>
 
-    <select id="getAllUsers" resultMap="UserSimpleResult">
+    <select id="getAllUsers" resultMap="UserResult">
         SELECT
         c.user_id,
         c.name,
@@ -70,8 +70,14 @@
         c.middle_name,
         c.login,
         c.password,
-        c.email
-        FROM consumer c
+        c.email,
+        a.city,
+        a.street,
+        a.building,
+        a.apartment,
+        a.tariff,
+        a.user_id
+        FROM consumer c LEFT OUTER JOIN address a ON c.user_id = a.user_id
     </select>
 
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">

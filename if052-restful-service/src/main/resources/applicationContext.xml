@@ -36,4 +36,6 @@
         <property name="mapperLocations" value="classpath*:com/softserveinc/if052_restful/mappers/**/*.xml" />
     </bean>
 
+    <bean id="userService" class="com.softserveinc.if052_restful.service.UserService"></bean>
+
 </beans>

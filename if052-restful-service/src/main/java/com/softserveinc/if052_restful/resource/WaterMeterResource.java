@@ -161,6 +161,6 @@ public class WaterMeterResource {
                 .status(Response.Status.BAD_REQUEST)
                 .build();
     }
-
+public void test() {System.out.println("SDFSDFDSFDFF" + waterMeterService.getWaterMeterById(1).getName());}
 
 }

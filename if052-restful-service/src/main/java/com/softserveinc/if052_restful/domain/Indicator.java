@@ -66,7 +66,7 @@ public class Indicator {
         return "Indicator [id=" + indicatorId
                 + ", date=" + date + ", value=" + value
                 + ", paid=" + paid + ", published=" + published
-                + ", .";
+                + "]";
     }
 
 }

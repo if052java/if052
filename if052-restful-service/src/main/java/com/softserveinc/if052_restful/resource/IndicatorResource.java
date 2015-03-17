@@ -27,8 +27,8 @@ public class IndicatorResource {
     @Path("{waterMeterId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getIndicators(@PathParam("waterMeterId") int waterMeterId) {
-        WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
-        List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
+
+        List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeterId(waterMeterId);
 
         return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
     }
@@ -66,4 +66,5 @@ public class IndicatorResource {
 
         return Response.status(Response.Status.ACCEPTED).build();
     }
+
 }
