@@ -22,15 +22,23 @@ CREATE TABLE address
       ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+CREATE TABLE meter_type (
+    meter_type_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(45)
+);
+
 CREATE TABLE watermeter
 (
   water_meter_id INT(11) AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(45) NOT NULL UNIQUE,
   description VARCHAR(45),
   address_id INT(11) NOT NULL,
+  meter_type_id INT(11) NOT NULL,
   CONSTRAINT fk_water_meter_address FOREIGN KEY (address_id)
       REFERENCES address (address_id)
-      ON UPDATE CASCADE ON DELETE RESTRICT
+      ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_meter_type FOREIGN KEY (meter_type_id)
+      REFERENCES meter_type (meter_type_id)
 );
 
 CREATE TABLE indicator

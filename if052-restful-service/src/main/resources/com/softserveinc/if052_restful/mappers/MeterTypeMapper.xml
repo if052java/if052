@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softserveinc.if052_restful.mappers.MeterTypeMapper">
+
+    <!-- Result map for representation of meter type -->
+    <resultMap id="MeterTypeSimpleResult" type="MeterType">
+        <id property="meterTypeId" column="meter_type_id"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <select id="getMeterTypeById" parameterType="int" resultMap="MeterTypeSimpleResult">
+        SELECT
+        mt.meter_type_id,
+        mt.type
+        FROM meter_type mt
+        WHERE mt.meter_type_id = #{meterTypeId}
+    </select>
+
+    <select id="getAllMeterTypes" resultMap="MeterTypeSimpleResult">
+        SELECT
+        mt.meter_type_id,
+        mt.type
+        FROM meter_type mt
+    </select>
+
+    <insert id="insertMeterType" parameterType="MeterType" useGeneratedKeys="true" keyProperty="meterTypeId">
+        INSERT INTO meter_type(type)
+        VALUES(#{type})
+    </insert>
+
+    <update id="updateMeterType" parameterType="MeterType">
+        UPDATE meter_type
+        SET
+        type = #{type}
+        WHERE meter_type_id = #{meterTypeId}
+    </update>
+
+    <delete id="deleteMeterType" parameterType="int">
+        DELETE FROM meter_type WHERE meter_type_id = #{meterTypeId}
+    </delete>
+
+</mapper>

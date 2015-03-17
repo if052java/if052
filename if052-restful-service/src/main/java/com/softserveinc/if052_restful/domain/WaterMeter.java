@@ -9,6 +9,7 @@ public class WaterMeter {
     private String name;
     private String description;
     private Address address;
+    private MeterType meterType;
     private List<Indicator> indicators;
 
     public WaterMeter() {
@@ -46,6 +47,10 @@ public class WaterMeter {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public MeterType getMeterType() { return meterType; }
+
+    public void setMeterType(MeterType meterType) { this.meterType = meterType; }
 
     public List<Indicator> getIndicators() {
         return indicators;
