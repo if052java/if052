@@ -54,7 +54,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .failureUrl("/rest/login/true")
                     .loginPage("/rest/login")
                     .loginProcessingUrl("/rest/login.do");
-//                    .defaultSuccessUrl("/rest/", true);
         // @formatter:on
     }
 }

@@ -19,7 +19,7 @@
                 </div>
                 <div class = "col-lg-8" id="header-center">
                     <ul class="nav navbar-nav">
-                        <li class="home"><a href="/">
+                        <li class="home"><a href="<c:url value="/" />">
                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             Головна
                         </a></li>
@@ -44,21 +44,21 @@
                 <div class="col-lg-2" id="header-right">
                     <ul class="nav navbar-nav">
                         <c:if test="${empty pageContext.request.userPrincipal}">
-                            <li class="sign-up" ><a href="/signup">
+                            <li class="sign-up" ><a href="<c:url value="/signup" />">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                 Sign Up
                             </a></li>
-                            <li class="log-in"><a href="/login">
+                            <li class="log-in"><a href="<c:url value="/login" />">
                                 <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                                 Log In
                             </a></li>
                         </c:if>
                         <c:if test="${not empty pageContext.request.userPrincipal}">
-                            <li class="log-out"><a href="/profile">
+                            <li class="log-out"><a href="<c:url value="/profile" />">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                                 <c:out value="${pageContext.request.userPrincipal.name}" />
                             </a></li>
-                            <li class="log-out"><a href="/logout">
+                            <li class="log-out"><a href="<c:url value="/logout" />">
                                 <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                                 Log Out
                             </a></li>
