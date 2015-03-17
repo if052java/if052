@@ -11,6 +11,8 @@
         <result property="description" column="description"/>
         <association property="address" javaType="Address"
                      resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressSimpleResult"/>
+        <association property="meterType" javaType="MeterType"
+                     resultMap="com.softserveinc.if052_restful.mappers.MeterTypeMapper.MeterTypeSimpleResult"/>
         <collection property="indicators" column="water_meter_id"
                     javaType="ArrayList" ofType="Indicator"
                     resultMap="com.softserveinc.if052_restful.mappers.IndicatorMapper.IndicatorSimpleResult"/>
@@ -37,10 +39,12 @@
         a.city,
         a.street,
         a.building,
-        a.apartment
+        a.apartment,
+        mt.type
         FROM watermeter wm
         LEFT OUTER JOIN indicator i on wm.water_meter_id = i.water_meter_id
         LEFT OUTER JOIN address a on wm.address_id = a.address_id
+        LEFT OUTER JOIN meter_type mt on wm.meter_type_id = mt.meter_type_id
         WHERE wm.water_meter_id = #{waterMeterId}
     </select>
 
@@ -63,8 +67,8 @@
     </select>
 
     <insert id="insertWaterMeter" parameterType="WaterMeter" useGeneratedKeys="true" keyProperty="waterMeterId">
-        INSERT INTO watermeter(name, description, address_id)
-        VALUES(#{name}, #{description}, #{address.addressId})
+        INSERT INTO watermeter(name, description, address_id, meter_type_id)
+        VALUES(#{name}, #{description}, #{address.addressId}, #{meterType.meterTypeId})
     </insert>
 
     <update id="updateWaterMeter" parameterType="WaterMeter">
@@ -72,7 +76,8 @@
         SET
         name = #{name},
         description = #{description},
-        address_id = #{address.addressId}
+        address_id = #{address.addressId},
+        meter_type_id = #{meterType.meterTypeId}
         WHERE water_meter_id = #{waterMeterId}
     </update>
 

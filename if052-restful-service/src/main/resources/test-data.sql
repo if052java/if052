@@ -14,32 +14,41 @@ INSERT INTO `address`
            (7, 'CITY7', 'STREET7', 'BUILDING7', 'APARTMENT7', 0.19, 3),
            (8, 'CITY8', 'STREET8', 'BUILDING8', 'APARTMENT8', 0.1, 3);
 
+
+INSERT INTO `meter_type`
+    VALUES (1, 'cold water'),
+           (2, 'hot water'),
+           (3, 'natural gas'),
+           (4, 'electroenergy');
+
+
 INSERT INTO `watermeter`
-    VALUES (1, 'WM_NAME1', 'DESCRIPTION1', 1),
-           (2, 'WM_NAME2', 'DESCRIPTION2', 1),
-           (3, 'WM_NAME3', 'DESCRIPTION3', 1),
-           (4, 'WM_NAME4', 'DESCRIPTION4', 2),
-           (5, 'WM_NAME5', 'DESCRIPTION5', 2),
-           (6, 'WM_NAME6', 'DESCRIPTION6', 3),
-           (7, 'WM_NAME7', 'DESCRIPTION7', 3),
-           (8, 'WM_NAME8', 'DESCRIPTION8', 4),
-           (9, 'WM_NAME9', 'DESCRIPTION9', 4),
-           (10, 'WM_NAME10', 'DESCRIPTION10', 5),
-           (11, 'WM_NAME11', 'DESCRIPTION11', 5),
-           (12, 'WM_NAME12', 'DESCRIPTION12', 6),
-           (13, 'WM_NAME13', 'DESCRIPTION13', 6),
-           (14, 'WM_NAME14', 'DESCRIPTION14', 7),
-           (15, 'WM_NAME15', 'DESCRIPTION15', 7),
-           (16, 'WM_NAME16', 'DESCRIPTION16', 8),
-           (17, 'WM_NAME17', 'DESCRIPTION17', 8),
-           (18, 'WM_NAME18', 'DESCRIPTION18', 8),
-           (19, 'WM_NAME19', 'DESCRIPTION19', 7),
-           (20, 'WM_NAME20', 'DESCRIPTION20', 6),
-           (21, 'WM_NAME21', 'DESCRIPTION21', 5),
-           (22, 'WM_NAME22', 'DESCRIPTION22', 4),
-           (23, 'WM_NAME23', 'DESCRIPTION23', 3),
-           (24, 'WM_NAME24', 'DESCRIPTION24', 2),
-           (25, 'WM_NAME25', 'DESCRIPTION25', 1);
+    VALUES (1, 'WM_NAME1', 'DESCRIPTION1', 1, 1),
+           (2, 'WM_NAME2', 'DESCRIPTION2', 1, 1),
+           (3, 'WM_NAME3', 'DESCRIPTION3', 1, 1),
+           (4, 'WM_NAME4', 'DESCRIPTION4', 2, 1),
+           (5, 'WM_NAME5', 'DESCRIPTION5', 2, 1),
+           (6, 'WM_NAME6', 'DESCRIPTION6', 3, 1),
+           (7, 'WM_NAME7', 'DESCRIPTION7', 3, 1),
+           (8, 'WM_NAME8', 'DESCRIPTION8', 4, 1),
+           (9, 'WM_NAME9', 'DESCRIPTION9', 4, 1),
+           (10, 'WM_NAME10', 'DESCRIPTION10', 5, 1),
+           (11, 'WM_NAME11', 'DESCRIPTION11', 5, 1),
+           (12, 'WM_NAME12', 'DESCRIPTION12', 6, 1),
+           (13, 'WM_NAME13', 'DESCRIPTION13', 6, 1),
+           (14, 'WM_NAME14', 'DESCRIPTION14', 7, 1),
+           (15, 'WM_NAME15', 'DESCRIPTION15', 7, 1),
+           (16, 'WM_NAME16', 'DESCRIPTION16', 8, 1),
+           (17, 'WM_NAME17', 'DESCRIPTION17', 8, 1),
+           (18, 'WM_NAME18', 'DESCRIPTION18', 8, 1),
+           (19, 'WM_NAME19', 'DESCRIPTION19', 7, 1),
+           (20, 'WM_NAME20', 'DESCRIPTION20', 6, 1),
+           (21, 'WM_NAME21', 'DESCRIPTION21', 5, 1),
+           (22, 'WM_NAME22', 'DESCRIPTION22', 4, 1),
+           (23, 'WM_NAME23', 'DESCRIPTION23', 3, 1),
+           (24, 'WM_NAME24', 'DESCRIPTION24', 2, 1),
+           (25, 'WM_NAME25', 'DESCRIPTION25', 1, 1);
+
 
 INSERT INTO `indicator`
     VALUES (1, '2015-01-01 00:00:00', 51, 0, 0, 1),

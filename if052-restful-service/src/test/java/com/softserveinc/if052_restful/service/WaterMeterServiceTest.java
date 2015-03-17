@@ -21,6 +21,9 @@ public class WaterMeterServiceTest {
     @Autowired
     private AddressService addressService;
 
+    @Autowired
+    private MeterTypeService meterTypeService;
+
     @Test
     public void testGetWaterMeterById() {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
@@ -57,6 +60,7 @@ public class WaterMeterServiceTest {
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("des" + timestamp);
         waterMeter.setAddress(addressService.getAddressById(1));
+        waterMeter.setMeterType(meterTypeService.getMeterTypeById(1));
         waterMeterService.insertWaterMeter(waterMeter);
         Assert.assertTrue(waterMeter.getWaterMeterId() != 0);
         WaterMeter createdWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
@@ -73,6 +77,7 @@ public class WaterMeterServiceTest {
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("description" + timestamp);
         waterMeter.setAddress(addressService.getAddressById(1));
+        waterMeter.setMeterType(meterTypeService.getMeterTypeById(1));
         System.out.println(waterMeter);
         waterMeterService.updateWaterMeter(waterMeter);
         WaterMeter updatedWaterMeter = waterMeterService.getWaterMeterById(1);
@@ -89,6 +94,7 @@ public class WaterMeterServiceTest {
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("description" + timestamp);
         waterMeter.setAddress(addressService.getAddressById(1));
+        waterMeter.setMeterType(meterTypeService.getMeterTypeById(1));
         waterMeterService.insertWaterMeter(waterMeter);
         waterMeterService.deleteWaterMeter(waterMeter.getWaterMeterId());
         WaterMeter deletedWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
