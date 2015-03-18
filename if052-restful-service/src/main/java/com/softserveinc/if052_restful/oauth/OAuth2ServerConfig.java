@@ -68,11 +68,11 @@ public class OAuth2ServerConfig {
 				// session creation to be allowed (it's disabled by default in 2.0.6)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 			.and()
-				.requestMatchers().antMatchers("/photos/**", "/oauth/users/**", "/oauth/clients/**","/me", "/getRoles/**")
+				.requestMatchers().antMatchers("/photos/**", "/oauth/users/**", "/oauth/clients/**","/me", "/rest/getRoles/**")
 			.and()
 				.authorizeRequests()
-                    .antMatchers("/getRoles/**").access("hasRole('ROLE_USER')")
-					.antMatchers("/me").access("#oauth2.hasScope('read')")					
+                    .antMatchers("/rest/getRoles/**").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
+                    .antMatchers("/me").access("#oauth2.hasScope('read')")
 					.antMatchers("/photos").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")                                        
 					.antMatchers("/photos/trusted/**").access("#oauth2.hasScope('trust')")
 					.antMatchers("/photos/user/**").access("#oauth2.hasScope('trust')")					
@@ -141,10 +141,6 @@ public class OAuth2ServerConfig {
 
             endpoints.pathMapping("/oauth/authorize",   "/authorize");
             endpoints.pathMapping("/oauth/token",       "/token");
-            //endpoints.pathMapping("/oauth/confirm_access", "/confirm_access");
-            //endpoints.pathMapping("/oauth/error",       "/error");
-            endpoints.pathMapping("/oauth/check_token", "/check_token");
-            endpoints.pathMapping("/oauth/token_key",   "/token_key");
 		}
 
 		@Override
