@@ -22,6 +22,7 @@
                     <tr>
                         <th>Назва</th>
                         <th>Опис</th>
+                        <th>Тариф</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,6 +30,7 @@
                     <tr>
                         <td><c:out value="${waterMeter.name}"/>  </td>
                         <td><c:out value="${waterMeter.description}"/></td>
+                        <td><c:out value="${waterMeter.tariff}"/></td>
                         <td><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}"/>">
                             <button>INDICATORS</button></a></td>
                         <td><a href="<c:url value="/updateWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
@@ -45,8 +47,9 @@
                                 <caption> Додати лічильник</caption>
                                 <thead>
                                 <tr>
-                                    <th> Назва </th>
-                                    <th> Опис </th>
+                                    <th>Назва</th>
+                                    <th>Опис</th>
+                                    <th>Тариф</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -56,6 +59,9 @@
                                         <input type="text" name="name" />
                                     </td>
                                     <td> <input type="text" name="description" /></td>
+                                    <td>
+                                        <input type="number" step="0.1" name="tariff" />
+                                    </td>
                                     <td>
                                         <button class="add-button" type="submit">Add</button>
                                     </td>

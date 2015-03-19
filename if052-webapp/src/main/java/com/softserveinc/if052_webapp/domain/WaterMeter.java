@@ -8,6 +8,7 @@ public class WaterMeter {
     private int waterMeterId;
     private String name;
     private String description;
+    private double tariff;
     private Address address;
     private MeterType meterType;
     private List<Indicator> indicators;
@@ -40,6 +41,10 @@ public class WaterMeter {
         this.description = description;
     }
 
+    public double getTariff() { return tariff; }
+
+    public void setTariff(double tariff) { this.tariff = tariff; }
+
     public Address getAddress() {
         return address;
     }
@@ -63,9 +68,10 @@ public class WaterMeter {
     @Override
     public String toString() {
         return "WaterMeter{" +
-                "id=" + waterMeterId +
+                "waterMeterId=" + waterMeterId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", tariff=" + tariff +
                 '}';
     }
 }

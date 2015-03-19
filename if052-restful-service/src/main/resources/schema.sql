@@ -15,7 +15,6 @@ CREATE TABLE address
   street VARCHAR(45),
   building VARCHAR(45),
   apartment VARCHAR(45),
-  tariff FLOAT,
   user_id INT(11),
   CONSTRAINT fk_address_user FOREIGN KEY (user_id)
       REFERENCES consumer (user_id)
@@ -34,6 +33,7 @@ CREATE TABLE watermeter
   description VARCHAR(45),
   address_id INT(11) NOT NULL,
   meter_type_id INT(11) NOT NULL,
+  tariff FLOAT,
   CONSTRAINT fk_water_meter_address FOREIGN KEY (address_id)
       REFERENCES address (address_id)
       ON UPDATE CASCADE ON DELETE RESTRICT,

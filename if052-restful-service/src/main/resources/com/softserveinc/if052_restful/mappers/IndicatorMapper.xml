@@ -48,7 +48,8 @@
         i.is_published,
         wm.water_meter_id,
         wm.name,
-        wm.description
+        wm.description,
+        wm.tariff
         FROM indicator i
         LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
     </select>
@@ -62,7 +63,8 @@
         i.is_published,
         wm.water_meter_id,
         wm.name,
-        wm.description
+        wm.description,
+        wm.tariff
         FROM indicator i
         RIGHT JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
         WHERE wm.water_meter_id = #{waterMeterId}
@@ -79,8 +81,7 @@
         date= #{date},
         value = #{value},
         is_paid = #{paid},
-        is_published = #{published},
-        water_meter_id = #{waterMeter.waterMeterId}
+        is_published = #{published}
         WHERE indicator_id = #{indicatorId}
     </update>
 

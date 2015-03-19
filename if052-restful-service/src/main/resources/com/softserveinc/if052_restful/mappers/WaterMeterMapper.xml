@@ -9,6 +9,7 @@
         <id property="waterMeterId" column="water_meter_id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
+        <result property="tariff" column="tariff"/>
         <association property="address" javaType="Address"
                      resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressSimpleResult"/>
         <association property="meterType" javaType="MeterType"
@@ -23,6 +24,7 @@
         <id property="waterMeterId" column="water_meter_id"/>
         <result property="name" column="name"/>
         <result property="description" column="description"/>
+        <result property="tariff" column="tariff"/>
     </resultMap>
 
     <select id="getWaterMeterById" parameterType="int" resultMap="WaterMeterResult">
@@ -30,6 +32,7 @@
         wm.water_meter_id,
         wm.name,
         wm.description,
+        wm.tariff,
         i.indicator_id,
         i.date,
         i.value,
@@ -52,7 +55,8 @@
         SELECT
         wm.water_meter_id,
         wm.name,
-        wm.description
+        wm.description,
+        wm.tariff
         FROM watermeter wm
         LEFT OUTER JOIN address a on wm.address_id = a.address_id
         WHERE a.address_id = #{addressId}
@@ -62,13 +66,14 @@
         SELECT
         wm.water_meter_id,
         wm.name,
-        wm.description
+        wm.description,
+        wm.tariff
         FROM watermeter wm
     </select>
 
     <insert id="insertWaterMeter" parameterType="WaterMeter" useGeneratedKeys="true" keyProperty="waterMeterId">
-        INSERT INTO watermeter(name, description, address_id, meter_type_id)
-        VALUES(#{name}, #{description}, #{address.addressId}, #{meterType.meterTypeId})
+        INSERT INTO watermeter(name, description, tariff, address_id, meter_type_id)
+        VALUES(#{name}, #{description}, #{tariff}, #{address.addressId}, #{meterType.meterTypeId})
     </insert>
 
     <update id="updateWaterMeter" parameterType="WaterMeter">
@@ -76,8 +81,7 @@
         SET
         name = #{name},
         description = #{description},
-        address_id = #{address.addressId},
-        meter_type_id = #{meterType.meterTypeId}
+        tariff = #{tariff}
         WHERE water_meter_id = #{waterMeterId}
     </update>
 
