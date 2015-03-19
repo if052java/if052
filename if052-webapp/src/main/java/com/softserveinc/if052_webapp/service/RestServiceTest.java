@@ -31,4 +31,9 @@ public class RestServiceTest {
     public UserRole getUserRole1(){
         return new UserRole("USER");
     }
+
+
+    public String getResource() {
+        return restTemplate.getForObject("http://localhost:8080/provider/resource", String.class);
+    }
 }

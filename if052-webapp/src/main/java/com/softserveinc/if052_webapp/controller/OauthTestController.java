@@ -22,6 +22,14 @@ public class OauthTestController {
     @Autowired
     RestServiceTest restServiceTest;
 
+    @RequestMapping("/getResource")
+    public String getResource(Model model){
+        String resource = restServiceTest.getResource();
+        model.addAttribute("resource", "Received " + resource);
+        //return "getResource";
+        return resource;
+    }
+
     @RequestMapping("/profile")
     public String getProfilePage(Model model){
         UserRole userRole = restServiceTest.getUserRole();
