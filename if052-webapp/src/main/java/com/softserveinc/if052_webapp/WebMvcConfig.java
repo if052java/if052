@@ -136,19 +136,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
             return details;
         }
 
-        @Bean
-        public OAuth2ProtectedResourceDetails restRedirect() {
-            AuthorizationCodeResourceDetails details = new AuthorizationCodeResourceDetails();
-            details.setId("rest/webapp-redirect");
-            details.setClientId("webapp-with-redirect");
-            details.setClientSecret("secret");
-            details.setAccessTokenUri(restAddress + accessTokenUri);
-            details.setUserAuthorizationUri(restAddress + userAuthorizationUri);
-            details.setScope(Arrays.asList("read", "write"));
-            details.setUseCurrentUri(false);
-            return details;
-        }
-
         @Autowired
         private OAuth2ClientContext oauth2Context;
 
@@ -156,11 +143,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         @Primary
         public OAuth2RestTemplate oAuthRestTemplate() {
             return new OAuth2RestTemplate(rest(), oauth2Context);
-        }
-
-        @Bean
-        public OAuth2RestTemplate oAuth2restTemplateRedirect(OAuth2ClientContext clientContext) {
-            return new OAuth2RestTemplate(restRedirect(), clientContext);
         }
 
         @Bean
