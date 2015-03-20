@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 /**
  * Created by Hata on 09.03.2015.
  */
-@Path("/getRoles")
+@Path("/rest/getRoles")
 public class RoleProviderResource {
 
     @GET

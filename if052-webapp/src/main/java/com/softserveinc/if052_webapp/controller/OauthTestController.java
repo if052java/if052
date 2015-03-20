@@ -22,12 +22,20 @@ public class OauthTestController {
     @Autowired
     RestServiceTest restServiceTest;
 
+    @RequestMapping("/getJersey")
+    public String getJersey(Model model){
+        String resource = restServiceTest.getJersey();
+        model.addAttribute("resource", "Received " + resource);
+        //return "getResource";
+        return "resource";
+    }
+
     @RequestMapping("/getResource")
     public String getResource(Model model){
         String resource = restServiceTest.getResource();
         model.addAttribute("resource", "Received " + resource);
         //return "getResource";
-        return resource;
+        return "resource";
     }
 
     @RequestMapping("/profile")

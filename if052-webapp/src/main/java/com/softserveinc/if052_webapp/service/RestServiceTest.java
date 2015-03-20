@@ -36,4 +36,8 @@ public class RestServiceTest {
     public String getResource() {
         return restTemplate.getForObject("http://localhost:8080/provider/resource", String.class);
     }
+
+    public String getJersey(){
+        return restTemplate.getForObject("http://localhost:8080/provider/rest/jersey-hello", String.class);
+    }
 }

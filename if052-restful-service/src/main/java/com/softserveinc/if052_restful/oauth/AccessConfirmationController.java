@@ -40,7 +40,7 @@ public class AccessConfirmationController {
     @Autowired
 	private ApprovalStore approvalStore;
 
-	@RequestMapping("/confirm_access")
+	@RequestMapping("/oauth/confirm_access")
 	public ModelAndView getAccessConfirmation(Map<String, Object> model, Principal principal) throws Exception {
 		AuthorizationRequest clientAuth = (AuthorizationRequest) model.remove("authorizationRequest");
 		ClientDetails client = clientDetailsService.loadClientByClientId(clientAuth.getClientId());

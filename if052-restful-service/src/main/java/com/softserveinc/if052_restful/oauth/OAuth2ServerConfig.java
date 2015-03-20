@@ -49,132 +49,120 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @Configuration
 public class OAuth2ServerConfig {
 
-	private static final String RESOURCE_ID = "rest";
+    private static final String RESOURCE_ID = "provider";
 
-	@Configuration
-	@EnableResourceServer //adds a filter of type OAuth2AuthenticationProcessingFilter automatically to the Spring Security filter chain.
-	protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
+    @Configuration
+    @EnableResourceServer
+    protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-		@Override
-		public void configure(ResourceServerSecurityConfigurer resources) {
-			resources.resourceId(RESOURCE_ID).stateless(false);
-		}
+        @Override
+        public void configure(ResourceServerSecurityConfigurer resources) {
+            resources.resourceId(RESOURCE_ID).stateless(false);
+        }
 
-		@Override
-		public void configure(HttpSecurity http) throws Exception {
-			// @formatter:off
-			http
-				// Since we want the protected resources to be accessible in the UI as well we need 
-				// session creation to be allowed (it's disabled by default in 2.0.6)
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-			.and()
-				.requestMatchers().antMatchers("/photos/**", "/oauth/users/**", "/oauth/clients/**","/me", "/rest/getRoles/**")
-			.and()
-				.authorizeRequests()
-                    .antMatchers("/rest/getRoles/**").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
+        @Override
+        public void configure(HttpSecurity http) throws Exception {
+            // @formatter:off
+            http
+                    // Since we want the protected resources to be accessible in the UI as well we need
+                    // session creation to be allowed (it's disabled by default in 2.0.6)
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                    .and()
+                    .requestMatchers().antMatchers("/photos/**", "/oauth/users/**", "/oauth/clients/**","/me", "/resource")
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers("/resource").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
                     .antMatchers("/me").access("#oauth2.hasScope('read')")
-					.antMatchers("/photos").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")                                        
-					.antMatchers("/photos/trusted/**").access("#oauth2.hasScope('trust')")
-					.antMatchers("/photos/user/**").access("#oauth2.hasScope('trust')")					
-					.antMatchers("/photos/**").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
-					.regexMatchers(HttpMethod.DELETE, "/oauth/users/([^/].*?)/tokens/.*")
-						.access("#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('write')")
-					.regexMatchers(HttpMethod.GET, "/oauth/clients/([^/].*?)/users/.*")
-						.access("#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('read')")
-					.regexMatchers(HttpMethod.GET, "/oauth/clients/.*")
-						.access("#oauth2.clientHasRole('ROLE_CLIENT') and #oauth2.isClient() and #oauth2.hasScope('read')");
-			// @formatter:on
-		}
+                    .antMatchers("/photos").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
+                    .antMatchers("/photos/trusted/**").access("#oauth2.hasScope('trust')")
+                    .antMatchers("/photos/user/**").access("#oauth2.hasScope('trust')")
+                    .antMatchers("/photos/**").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
+                    .regexMatchers(HttpMethod.DELETE, "/oauth/users/([^/].*?)/tokens/.*")
+                    .access("#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('write')")
+                    .regexMatchers(HttpMethod.GET, "/oauth/clients/([^/].*?)/users/.*")
+                    .access("#oauth2.clientHasRole('ROLE_CLIENT') and (hasRole('ROLE_USER') or #oauth2.isClient()) and #oauth2.hasScope('read')")
+                    .regexMatchers(HttpMethod.GET, "/oauth/clients/.*")
+                    .access("#oauth2.clientHasRole('ROLE_CLIENT') and #oauth2.isClient() and #oauth2.hasScope('read')");
+            // @formatter:on
+        }
 
-	}
+    }
 
-	@Configuration
-	@EnableAuthorizationServer
-	protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+    @Configuration
+    @EnableAuthorizationServer
+    protected static class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
-		@Autowired
-		private TokenStore tokenStore;
+        @Autowired
+        private TokenStore tokenStore;
 
-		@Autowired
-		private UserApprovalHandler userApprovalHandler;
+        @Autowired
+        private UserApprovalHandler userApprovalHandler;
 
-		@Autowired
-		@Qualifier("authenticationManagerBean")
-		private AuthenticationManager authenticationManager;
+        @Autowired
+        @Qualifier("authenticationManagerBean")
+        private AuthenticationManager authenticationManager;
 
-		@Value("${redirect:http://localhost:8090/profile/redirect}")
-		private String RedirectUri;
+//		@Value("${tonr.redirect:http://localhost:8080/tonr2/sparklr/redirect}")
+//		private String tonrRedirectUri;
 
-		@Override
-		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        @Override
+        public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
             // @formatter:off
             clients.inMemory()
                     .withClient("webapp")
-                        .resourceIds(RESOURCE_ID)
-                        .authorizedGrantTypes("authorization_code", "implicit")
-                        .authorities("ROLE_CLIENT")
-                        .scopes("read", "write")
-                        .secret("secret")
-                    .and()
-                    .withClient("webapp-with-redirect")
-                        .resourceIds(RESOURCE_ID)
-                        .authorizedGrantTypes("authorization_code", "implicit")
-                        .authorities("ROLE_CLIENT")
-                        .scopes("read", "write")
-                        .secret("secret")
-                        .redirectUris(RedirectUri);
-			// @formatter:on
-		}
+                    .resourceIds(RESOURCE_ID)
+                    .authorizedGrantTypes("authorization_code", "implicit")
+                    .authorities("ROLE_CLIENT")
+                    .scopes("read", "write")
+                    .secret("secret");
+            // @formatter:on
+        }
 
-		@Bean
-		public TokenStore tokenStore() {
-			return new InMemoryTokenStore();
-		}
+        @Bean
+        public TokenStore tokenStore() {
+            return new InMemoryTokenStore();
+        }
 
-		@Override
-		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-            endpoints.
-                    tokenStore(tokenStore).
-                    userApprovalHandler(userApprovalHandler).
-                    authenticationManager(authenticationManager);
+        @Override
+        public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+            endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
+                    .authenticationManager(authenticationManager);
+        }
 
-            endpoints.pathMapping("/oauth/authorize",   "/authorize");
-            endpoints.pathMapping("/oauth/token",       "/token");
-		}
+        @Override
+        public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+            oauthServer.realm("provider/client");
+        }
 
-		@Override
-		public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-			oauthServer.realm("rest/client");
-		}
-
-	}
-
-	protected static class Stuff {
-
-		@Autowired
-		private ClientDetailsService clientDetailsService;
-
-		@Autowired
-		private TokenStore tokenStore;
-
-		@Bean
-		public ApprovalStore approvalStore() throws Exception {
-			TokenApprovalStore store = new TokenApprovalStore();
-			store.setTokenStore(tokenStore);
-			return store;
-		}
-
-		@Bean
-		@Lazy
-		@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-		public RestfulUserApprovalHandler userApprovalHandler() throws Exception {
-			RestfulUserApprovalHandler handler = new RestfulUserApprovalHandler();
-			handler.setApprovalStore(approvalStore());
-			handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
-			handler.setClientDetailsService(clientDetailsService);
-			handler.setUseApprovalStore(true);
-			return handler;
-		}
     }
+
+    protected static class Stuff {
+
+        @Autowired
+        private ClientDetailsService clientDetailsService;
+
+        @Autowired
+        private TokenStore tokenStore;
+
+        @Bean
+        public ApprovalStore approvalStore() throws Exception {
+            TokenApprovalStore store = new TokenApprovalStore();
+            store.setTokenStore(tokenStore);
+            return store;
+        }
+
+        @Bean
+        @Lazy
+        @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
+        public RestfulUserApprovalHandler userApprovalHandler() throws Exception {
+            RestfulUserApprovalHandler handler = new RestfulUserApprovalHandler();
+            handler.setApprovalStore(approvalStore());
+            handler.setRequestFactory(new DefaultOAuth2RequestFactory(clientDetailsService));
+            handler.setClientDetailsService(clientDetailsService);
+            handler.setUseApprovalStore(true);
+            return handler;
+        }
+    }
+
 }
