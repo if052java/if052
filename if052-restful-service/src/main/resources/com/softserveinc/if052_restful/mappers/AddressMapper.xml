@@ -46,10 +46,13 @@
         wm.water_meter_id as watermeter_water_meter_id,
         wm.name as watermeter_name,
         wm.description as watermeter_description,
-        wm.tariff as watermeter_tariff
+        wm.tariff as watermeter_tariff,
+        mt.meter_type_id AS watermeter_meter_type_id,
+        mt.type AS watermeter_type
         FROM address a
         LEFT OUTER JOIN watermeter wm ON a.address_id = wm.address_id
         LEFT OUTER JOIN consumer c ON a.user_id = c.user_id
+        LEFT OUTER JOIN meter_type mt ON wm.meter_type_id = mt.meter_type_id
         WHERE a.address_id = #{addressId}
     </select>
 

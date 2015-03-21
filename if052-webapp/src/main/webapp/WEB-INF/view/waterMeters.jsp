@@ -22,6 +22,7 @@
                     <tr>
                         <th>Назва</th>
                         <th>Опис</th>
+                        <th>Тип</th>
                         <th>Тариф</th>
                     </tr>
                     </thead>
@@ -30,6 +31,7 @@
                     <tr>
                         <td><c:out value="${waterMeter.name}"/>  </td>
                         <td><c:out value="${waterMeter.description}"/></td>
+                        <td><c:out value="${waterMeter.meterType.type}"/></td>
                         <td><c:out value="${waterMeter.tariff}"/></td>
                         <td><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}"/>">
                             <button>INDICATORS</button></a></td>

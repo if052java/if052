@@ -25,6 +25,8 @@
         <result property="name" column="name"/>
         <result property="description" column="description"/>
         <result property="tariff" column="tariff"/>
+        <association property="meterType" javaType="MeterType"
+                     resultMap="com.softserveinc.if052_restful.mappers.MeterTypeMapper.MeterTypeSimpleResult"/>
     </resultMap>
 
     <select id="getWaterMeterById" parameterType="int" resultMap="WaterMeterResult">
@@ -33,6 +35,8 @@
         wm.name,
         wm.description,
         wm.tariff,
+        mt.meter_type_id,
+        mt.type,
         i.indicator_id,
         i.date,
         i.value,
@@ -42,8 +46,7 @@
         a.city,
         a.street,
         a.building,
-        a.apartment,
-        mt.type
+        a.apartment
         FROM watermeter wm
         LEFT OUTER JOIN indicator i on wm.water_meter_id = i.water_meter_id
         LEFT OUTER JOIN address a on wm.address_id = a.address_id
@@ -56,9 +59,12 @@
         wm.water_meter_id,
         wm.name,
         wm.description,
-        wm.tariff
+        wm.tariff,
+        mt.meter_type_id,
+        mt.type
         FROM watermeter wm
         LEFT OUTER JOIN address a on wm.address_id = a.address_id
+        LEFT OUTER JOIN meter_type mt on wm.meter_type_id = mt.meter_type_id
         WHERE a.address_id = #{addressId}
     </select>
 
@@ -67,8 +73,11 @@
         wm.water_meter_id,
         wm.name,
         wm.description,
-        wm.tariff
+        wm.tariff,
+        mt.meter_type_id,
+        mt.type
         FROM watermeter wm
+        LEFT OUTER JOIN meter_type mt on wm.meter_type_id = mt.meter_type_id
     </select>
 
     <insert id="insertWaterMeter" parameterType="WaterMeter" useGeneratedKeys="true" keyProperty="waterMeterId">

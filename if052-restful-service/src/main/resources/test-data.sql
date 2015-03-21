@@ -23,7 +23,7 @@ INSERT INTO `meter_type`
 
 INSERT INTO `watermeter`
     VALUES (1,  'WM_NAME1',  'DESCRIPTION1',  1, 1, 0.1),
-           (2,  'WM_NAME2',  'DESCRIPTION2',  1, 1, 0.1),
+           (2,  'WM_NAME2',  'DESCRIPTION2',  1, 2, 0.5),
            (3,  'WM_NAME3',  'DESCRIPTION3',  1, 1, 0.1),
            (4,  'WM_NAME4',  'DESCRIPTION4',  2, 1, 0.2),
            (5,  'WM_NAME5',  'DESCRIPTION5',  2, 1, 0.2),
