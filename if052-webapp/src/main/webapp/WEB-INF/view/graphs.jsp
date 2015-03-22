@@ -10,10 +10,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="<c:url value="/resources/css/graphs.css"/>"/>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
-        <div>
+        <div class="body">
             <div id="container" class="graphs-size"></div>
         
             <c:url var="drawByMonth" value="/graphByMonth" />

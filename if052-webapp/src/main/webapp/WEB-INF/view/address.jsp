@@ -34,9 +34,9 @@
                             <td><a href="<c:url value="/watermeter?addressId=${address.addressId}"/>">
                                 <button>Water Meter</button></a></td>
                             <td><a href="<c:url value="/updateAddress?addressId=${address.addressId}"/>">
-                                <button>UPDATE</button></a></td>
+                                <button><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
                             <td><a href="<c:url value="/deleteAddress?addressId=${address.addressId}"/>">
-                                <button>DELETE</button></a></td>
+                                <button><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
         
                         </tr>
                     </c:forEach>
@@ -68,7 +68,9 @@
                                 <input type="text" name="apartment" />
                             </td>
                             <td>
-                                <button class="add-button" type="submit">Add</button>
+                                <button class="add-button" type="submit">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
                             </td>
                         </tr>
                         </tbody>

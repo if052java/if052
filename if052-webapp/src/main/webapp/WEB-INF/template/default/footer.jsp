@@ -12,7 +12,7 @@
             <div class="col-lg-2" id="footer-left"></div>
             <div class = "col-lg-8" id="footer-center">
                 <p>
-                    <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"/> IF-052.Java 2015
+                    2015 IF-052.Java
                 </p>
             </div>
             <div class="col-lg-2" id="footer-right"></div>

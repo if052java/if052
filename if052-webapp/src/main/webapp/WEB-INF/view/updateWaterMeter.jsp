@@ -43,7 +43,9 @@
                             <input type="number" step="0.1" name="tariff" value="${waterMeter.tariff}"/>
                         </td>
                         <td>
-                            <button class="add-button" type="submit">update</button>
+                            <button class="add-button" type="submit">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </button>
                         </td>
                     </tr>
                     </tbody>

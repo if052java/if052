@@ -15,30 +15,22 @@
     <tiles:putAttribute name="body">
         <div class="body">
 
-            <h1> UPDATE FORM FOR INDICATOR </h1>
+            <h1>Редагування показника</h1>
 
             <c:url var="updateUrl" value="/updateIndicator"/>
             <form:form action="${updateUrl}" method="post" modelAttribute="indicator">
                 <table class="box-table-a">
-                    <caption> Update Indicator</caption>
                     <thead>
                         <tr>
                             <th>Дата</th>
                             <th>Значення</th>
                             <th>Оплачено</th>
-                            <th>Дії</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
                                 <input type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
-                                <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
-                                <script type="text/javascript">
-                                    $(function() {
-                                        $( "#datepicker" ).datepicker();
-                                    });
-                                </script>
                                 <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${indicator.date}' pattern='MM/dd/yyyy' />" />
                             </td>
                             <td>
@@ -47,11 +39,20 @@
                             <td>
                                 <input type="checkbox" name="paid" <c:if test="${indicator.paid}">checked="checked"</c:if> />
                             </td>
-                            <td><button class="add-button" type="submit">UPDATE</button></td>
+                            <td><button class="add-button" type="submit">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </button></td>
                         </tr>
                     </tbody>
                 </table>
             </form:form>
         </div>
+
+        <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
+        <script type="text/javascript">
+            $(function() {
+                $( "#datepicker" ).datepicker();
+            });
+        </script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

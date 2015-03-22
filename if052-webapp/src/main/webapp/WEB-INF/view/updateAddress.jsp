@@ -46,7 +46,9 @@
                             <input type="text" name="apartment" value="${address.apartment}"/>
                         </td>
                         <td>
-                            <button class="add-button" type="submit">UPDATE</button>
+                            <button class="add-button" type="submit">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </button>
                         </td>
                     </tr>
                     </tbody>

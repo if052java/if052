@@ -20,6 +20,7 @@
                 <table class="table table-hover" id="paginated">
 
                     <thead>
+                    <h4>Показники лічильника: ${waterMeter.name}<c:if test="${waterMeter.description}!=null">, ${waterMeter.description} </c:if></h4>
                     <tr>
                         <th>Дата</th>
                         <th>Значення</th>
@@ -46,14 +47,14 @@
                                     </span>
                             </td>
                             <td>
-                                <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
-                                    <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
-                                        DELETE
-                                    </button>
-                                </a>
                                 <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>">
                                     <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
-                                        UPDATE
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                    </button>
+                                </a>
+                                <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
+                                    <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </button>
                                 </a>
                             </td>
@@ -89,7 +90,9 @@
                             <td><input type="number" step="1" name="value" value="0"/></td>
                             <td><input type="checkbox" name="paid" /></td>
                             <td>
-                                <button class="add-button" type="submit">Add</button>
+                                <button class="add-button" type="submit">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
                             </td>
                         </tr>
                         </tbody>
