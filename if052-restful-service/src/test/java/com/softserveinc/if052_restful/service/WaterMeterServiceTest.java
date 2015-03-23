@@ -63,19 +63,23 @@ public class WaterMeterServiceTest {
         waterMeter.setAddress(addressService.getAddressById(1));
         waterMeter.setMeterType(meterTypeService.getMeterTypeById(1));
         waterMeterService.insertWaterMeter(waterMeter);
+        System.out.println(waterMeter);
         Assert.assertTrue(waterMeter.getWaterMeterId() != 0);
         WaterMeter createdWaterMeter = waterMeterService.getWaterMeterById(waterMeter.getWaterMeterId());
+        System.out.println(createdWaterMeter);
         Assert.assertNotNull(createdWaterMeter);
         Assert.assertEquals(waterMeter.getName(), createdWaterMeter.getName());
         Assert.assertEquals(waterMeter.getDescription(), createdWaterMeter.getDescription());
         Assert.assertEquals(waterMeter.getTariff(), createdWaterMeter.getTariff(), 0.01);
         Assert.assertEquals(waterMeter.getAddress().getAddressId(), createdWaterMeter.getAddress().getAddressId());
+        waterMeterService.deleteWaterMeter(waterMeter.getWaterMeterId());
     }
 
     @Test
     public void testUpdateWaterMeter() {
         long timestamp = System.currentTimeMillis();
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
+        System.out.println(waterMeter);
         waterMeter.setName("name" + timestamp);
         waterMeter.setDescription("description" + timestamp);
         waterMeter.setTariff(timestamp/1000000);

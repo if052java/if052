@@ -39,6 +39,7 @@
         mt.type,
         i.indicator_id,
         i.date,
+        i.tariff_per_date,
         i.value,
         i.is_paid,
         i.is_published,

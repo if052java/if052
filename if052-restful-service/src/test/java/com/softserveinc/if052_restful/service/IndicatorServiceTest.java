@@ -53,21 +53,21 @@ public class IndicatorServiceTest {
     public void testInsertIndicator() {
         Indicator indicator = new Indicator();
         indicator.setDate(new java.util.Date());
-        indicator.setTariffPerDate(0.1);
+        indicator.setTariffPerDate(waterMeterService.getWaterMeterById(1).getTariff());
         indicator.setValue(1001);
         indicator.setPaid(true) ;
         indicator.setPublished(false);
         indicator.setWaterMeter(waterMeterService.getWaterMeterById(1));
         indicatorService.insertIndicator(indicator);
-
         System.out.println(indicator);
 
         Assert.assertTrue(indicator.getIndicatorId() != 0);
         Indicator createdIndicator = indicatorService.getIndicatorById(indicator.getIndicatorId());
+        System.out.println(createdIndicator);
         Assert.assertNotNull(createdIndicator);
         Assert.assertEquals(indicator.getIndicatorId(), createdIndicator.getIndicatorId());
         // Assert.assertEquals(indicator.getDate().getTime(), createdIndicator.getDate().);
-        Assert.assertEquals(indicator.getTariffPerDate(), createdIndicator.getTariffPerDate(), 0.00);
+        Assert.assertEquals(indicator.getTariffPerDate(), createdIndicator.getTariffPerDate(), 0.01);
         Assert.assertEquals(indicator.getValue(), createdIndicator.getValue());
         Assert.assertEquals(indicator.isPaid(), createdIndicator.isPaid());
         Assert.assertEquals(indicator.isPublished(), createdIndicator.isPublished());
