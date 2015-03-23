@@ -62,7 +62,7 @@
                                     </td>
                                     <td> <input type="text" name="description" /></td>
                                     <td>
-                                        <input type="number" step="0.1" name="tariff" />
+                                        <input type="number" step="0.01" name="tariff" />
                                     </td>
                                     <td>
                                         <button class="add-button" type="submit">Add</button>

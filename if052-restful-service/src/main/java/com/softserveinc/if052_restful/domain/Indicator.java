@@ -8,6 +8,7 @@ import java.util.Date;
 public class Indicator {
     private int indicatorId;
     private Date date;
+    private double tariffPerDate;
     private int value;
     private boolean paid;
     private boolean published;
@@ -28,6 +29,10 @@ public class Indicator {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public double getTariffPerDate() { return tariffPerDate; }
+
+    public void setTariffPerDate(double tariffPerDate) { this.tariffPerDate = tariffPerDate; }
 
     public int getValue() {
         return value;
@@ -63,10 +68,13 @@ public class Indicator {
 
     @Override
     public String toString() {
-        return "Indicator [id=" + indicatorId
-                + ", date=" + date + ", value=" + value
-                + ", paid=" + paid + ", published=" + published
-                + ", .";
+        return "Indicator{" +
+                "indicatorId=" + indicatorId +
+                ", date=" + date +
+                ", tariffPerDate=" + tariffPerDate +
+                ", value=" + value +
+                ", paid=" + paid +
+                ", published=" + published +
+                '}';
     }
-
 }

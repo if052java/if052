@@ -53,6 +53,7 @@ public class IndicatorServiceTest {
     public void testInsertIndicator() {
         Indicator indicator = new Indicator();
         indicator.setDate(new java.util.Date());
+        indicator.setTariffPerDate(0.1);
         indicator.setValue(1001);
         indicator.setPaid(true) ;
         indicator.setPublished(false);
@@ -66,6 +67,7 @@ public class IndicatorServiceTest {
         Assert.assertNotNull(createdIndicator);
         Assert.assertEquals(indicator.getIndicatorId(), createdIndicator.getIndicatorId());
         // Assert.assertEquals(indicator.getDate().getTime(), createdIndicator.getDate().);
+        Assert.assertEquals(indicator.getTariffPerDate(), createdIndicator.getTariffPerDate(), 0.00);
         Assert.assertEquals(indicator.getValue(), createdIndicator.getValue());
         Assert.assertEquals(indicator.isPaid(), createdIndicator.isPaid());
         Assert.assertEquals(indicator.isPublished(), createdIndicator.isPublished());
@@ -82,6 +84,7 @@ public class IndicatorServiceTest {
 
         Indicator indicator = indicatorService.getIndicatorById(lastId);
         indicator.setDate(new java.util.Date());
+        indicator.setTariffPerDate(0.09);
         indicator.setValue(1234);
         indicator.setPaid(true);
         indicator.setPublished(false);
@@ -91,6 +94,7 @@ public class IndicatorServiceTest {
         Assert.assertEquals(indicator.isPaid(), updatedIndicator.isPaid());
         Assert.assertEquals(indicator.isPublished(), updatedIndicator.isPublished());
         Assert.assertEquals(indicator.getValue(), updatedIndicator.getValue());
+        Assert.assertEquals(indicator.getTariffPerDate(), updatedIndicator.getTariffPerDate(), 0.00);
     }
 
     @Test

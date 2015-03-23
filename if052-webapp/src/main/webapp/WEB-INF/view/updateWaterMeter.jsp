@@ -40,7 +40,7 @@
                         </td>
                         <td> <input type="text" name="description" value="${waterMeter.description}"/></td>
                         <td>
-                            <input type="number" step="0.1" name="tariff" value="${waterMeter.tariff}"/>
+                            <input type="number" step="0.01" name="tariff" value="${waterMeter.tariff}"/>
                         </td>
                         <td>
                             <button class="add-button" type="submit">update</button>

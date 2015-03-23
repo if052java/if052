@@ -24,7 +24,8 @@
                     <thead>
                         <tr>
                             <th>Дата</th>
-                            <th>Значення</th>
+                            <th>Тариф</th>
+                            <th>Показник</th>
                             <th>Оплачено</th>
                             <th>Дії</th>
                         </tr>
@@ -40,6 +41,9 @@
                                     });
                                 </script>
                                 <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${indicator.date}' pattern='MM/dd/yyyy' />" />
+                            </td>
+                            <td>
+                                <input type="number" step="0.01" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
                             </td>
                             <td>
                                 <input type="number" step="1" name="value" value="${indicator.value}"/>

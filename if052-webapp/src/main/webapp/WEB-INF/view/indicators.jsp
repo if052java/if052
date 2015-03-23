@@ -22,7 +22,8 @@
                     <thead>
                     <tr>
                         <th>Дата</th>
-                        <th>Значення</th>
+                        <th>Тариф</th>
+                        <th>Показник</th>
                         <th>Оплачено</th>
                         <th>Опубліковано</th>
                         <th>Дії</th>
@@ -32,6 +33,7 @@
                     <c:forEach var="indicator" items="${indicators}">
                         <tr>
                             <td><fmt:formatDate value="${indicator.date}" pattern="MM/dd/yyyy" /></td>
+                            <td><c:out value="${indicator.tariffPerDate}"/></td>
                             <td><c:out value="${indicator.value}"/></td>
                             <td>
                                     <span <c:if test="${indicator.paid}">class="glyphicon glyphicon-ok" </c:if>
@@ -71,7 +73,8 @@
                         <thead>
                         <tr>
                             <th>Дата</th>
-                            <th>Значення</th>
+                            <th>Поточний тариф</th>
+                            <th>Показник</th>
                             <th>Оплачено</th>
                         </tr>
                         </thead>
@@ -86,6 +89,7 @@
                                 </script>
                                 <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${currentDate}' pattern='MM/dd/yyyy' />" />
                             </td>
+                            <td><c:out value="${waterMeter.tariff}"/></td>
                             <td><input type="number" step="1" name="value" value="0"/></td>
                             <td><input type="checkbox" name="paid" /></td>
                             <td>

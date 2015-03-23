@@ -8,18 +8,11 @@ import java.util.Date;
 public class Indicator {
     private int indicatorId;
     private Date date;
+    private double tariffPerDate;
     private int value;
     private boolean paid;
     private boolean published;
     private WaterMeter waterMeter;
-
-    @Override
-    public String toString() {
-        return "Indicator [id=" + indicatorId
-                + ", date=" + date + ", value=" + value
-                + ", paid=" + paid + ", published=" + published
-                + ", .";
-    }
 
     public int getIndicatorId() {
         return indicatorId;
@@ -36,6 +29,10 @@ public class Indicator {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public double getTariffPerDate() { return tariffPerDate; }
+
+    public void setTariffPerDate(double tariffPerDate) { this.tariffPerDate = tariffPerDate; }
 
     public int getValue() {
         return value;
@@ -67,5 +64,17 @@ public class Indicator {
 
     public void setWaterMeter(WaterMeter waterMeter) {
         this.waterMeter = waterMeter;
+    }
+
+    @Override
+    public String toString() {
+        return "Indicator{" +
+                "indicatorId=" + indicatorId +
+                ", date=" + date +
+                ", tariffPerDate=" + tariffPerDate +
+                ", value=" + value +
+                ", paid=" + paid +
+                ", published=" + published +
+                '}';
     }
 }

@@ -43,8 +43,9 @@ CREATE TABLE watermeter
 
 CREATE TABLE indicator
 (
-  indicator_id INT AUTO_INCREMENT PRIMARY KEY,
+  indicator_id INT(11) AUTO_INCREMENT PRIMARY KEY,
   date DATETIME,
+  tariff_per_date FLOAT,
   value INT,
   is_paid BIT(1),
   is_published BIT(1),
