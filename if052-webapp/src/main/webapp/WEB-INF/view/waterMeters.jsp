@@ -36,9 +36,9 @@
                         <td><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}"/>">
                             <button>INDICATORS</button></a></td>
                         <td><a href="<c:url value="/updateWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
-                            <button>UPDATE</button></a></td>
+                            <button> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
                         <td><a href="<c:url value="/deleteWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
-                            <button>DELETE</button></a></td>
+                            <button><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
 
                     </tr>
                     </c:forEach>
@@ -65,7 +65,9 @@
                                         <input type="number" step="0.01" name="tariff" />
                                     </td>
                                     <td>
-                                        <button class="add-button" type="submit">Add</button>
+                                        <button class="add-button" type="submit">
+                                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        </button>
                                     </td>
                                 </tr>
                                 </tbody>
