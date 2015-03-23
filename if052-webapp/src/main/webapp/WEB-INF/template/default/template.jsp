@@ -9,12 +9,13 @@
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/pace.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables_themeroller.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables.min.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/tiles.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/graphs.css"/>"/>
 
-    <script type="text/javascript" src="<c:url value="/resources/js/jquery.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery.js"/>"></script>
 
 </head>
 <body>
@@ -34,26 +35,10 @@
     </div>
 </div>
 </body>
+
 <script type="text/javascript" src="<c:url value="/resources/js/pace.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
+<script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery.dataTables.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<script type="text/javascript" >
-    $(document).ready(function() {
-        $('#paginated').dataTable({
-            "lengthMenu":[ [5, 10, 15, 25, -1], [5, 10, 15, 25, "All"]],
-            "info":     false,
-            "columns": [
-                null,
-                null,
-                { "orderable": false },
-                { "orderable": false },
-                { "orderable": false }
-            ],
-            "order": [[ 0, 'desc' ]],
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Ukranian.json"
-            }
-        });
-    });
-</script>
+<script type="text/javascript" src="<c:url value="/resources/js/pagination.js"/>"></script>
+
 </html>

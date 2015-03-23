@@ -9,7 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="<c:url value="/resources/css/jquery.css"/>"/>
+
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
@@ -63,9 +63,8 @@
                 </div>
             </form:form>
         </div>
-        
-        <script src="/resources/js/jquery.js"></script>
-        <script src="/resources/js/jquery-validate.js"></script>
+
+        <script src="/resources/js/jquery/jquery-validate.js"></script>
         <script type="text/javascript">
             var restURL = '${restUrl}';
         </script>

@@ -32,7 +32,7 @@
                         <tr>
                             <td>
                                 <input type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
-                                <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${indicator.date}' pattern='MM/dd/yyyy' />" />
+                                <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${indicator.date}' pattern='dd/MM/yyyy' />" />
                             </td>
                             <td>
                                 <input type="number" step="0.01" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
@@ -52,11 +52,8 @@
             </form:form>
         </div>
 
-        <script src="<c:url value="/resources/js/jquery-ui.js"/>"></script>
-        <script type="text/javascript">
-            $(function() {
-                $( "#datepicker" ).datepicker();
-            });
-        </script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/datepicker.js'/>"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

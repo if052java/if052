@@ -94,6 +94,11 @@ body .page {
 .box-table-a {
     margin-right: auto;
 }
+.box-table-a th{
+    text-align: center;
+    padding-right: 1em;
+    padding-left: 1em;
+}
 .login {
     width:250px;
 }
@@ -113,5 +118,5 @@ button:disabled {
     -webkit-appearance: searchfield;
 }
 button {
-    border-radius: 0;
+    color: #212121;
 }

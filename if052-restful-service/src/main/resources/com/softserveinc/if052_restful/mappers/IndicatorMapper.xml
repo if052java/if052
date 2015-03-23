@@ -73,6 +73,7 @@
         FROM indicator i
         RIGHT JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
         WHERE wm.water_meter_id = #{waterMeterId}
+        ORDER BY i.date ASC
     </select>
 
     <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">

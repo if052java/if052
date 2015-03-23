@@ -23,19 +23,29 @@
                     <h4>Показники лічильника: ${waterMeter.name}<c:if test="${waterMeter.description}!=null">, ${waterMeter.description} </c:if></h4>
                     <tr>
                         <th>Дата</th>
-                        <th>Тариф</th>
                         <th>Показник</th>
+                        <th>Тариф</th>
+                        <th>Вартість</th>
                         <th>Оплачено</th>
                         <th>Опубліковано</th>
                         <th>Дії</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <%--We use "previousValue" to calculate a subtraction of two indicators--%>
+                    <c:set var="previousValue" value="0"/>
                     <c:forEach var="indicator" items="${indicators}">
                         <tr>
-                            <td><fmt:formatDate value="${indicator.date}" pattern="MM/dd/yyyy" /></td>
-                            <td><c:out value="${indicator.tariffPerDate}"/></td>
+                            <td>
+                                <span style='display:none'><fmt:formatDate value="${indicator.date}" pattern="MM/dd/yyyy" /></span>
+                                <fmt:formatDate value="${indicator.date}" pattern="dd/MM/yyyy" />
+                            </td>
                             <td><c:out value="${indicator.value}"/></td>
+                            <td><c:out value="${indicator.tariffPerDate}"/></td>
+                            <td><fmt:formatNumber type="number" maxFractionDigits="3"
+                                                  value="${(indicator.value - previousValue)*indicator.tariffPerDate}"/>
+                                грн.
+                            </td>
                             <td>
                                     <span <c:if test="${indicator.paid}">class="glyphicon glyphicon-ok" </c:if>
                                           <c:if test="${!indicator.paid}">class="glyphicon glyphicon-minus" </c:if>
@@ -61,6 +71,7 @@
                                 </a>
                             </td>
                         </tr>
+                        <c:set var="previousValue" value="${indicator.value}"/>
                     </c:forEach>
                     </tbody>
                 </table>
@@ -82,16 +93,10 @@
                         <tbody>
                         <tr>
                             <td>
-                                <script src="<c:url value="/resources/js/jquery-ui.js"/>" type="text/javascript"></script>
-                                <script type="text/javascript">
-                                    $(function() {
-                                        $( "#datepicker" ).datepicker();
-                                    });
-                                </script>
-                                <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${currentDate}' pattern='MM/dd/yyyy' />" />
+                                <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${currentDate}' pattern='dd/MM/yyyy' />" />
                             </td>
-                            <td><c:out value="${waterMeter.tariff}"/></td>
-                            <td><input type="number" step="1" name="value" value="0"/></td>
+                            <td><input type="number" step="0.1" name="tariffPerDate" value="${waterMeter.tariff}"/></td>
+                            <td><input type="number" step="1" name="value" value="${indicators.get(indicators.size()-1).value}"/></td>
                             <td><input type="checkbox" name="paid" /></td>
                             <td>
                                 <button class="add-button" type="submit">
@@ -103,7 +108,10 @@
                     </table>
                 </form:form>
             </div>
-
         </div>
+
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/datepicker.js'/>"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>
