@@ -22,6 +22,13 @@ public class MeterTypeService {
     private MeterTypeMapper meterTypeMapper;
 
     /**
+     * Get all meter types
+     *
+     * @return List<MeterType>
+     */
+    public List<MeterType> getAllMeterTypes() { return meterTypeMapper.getAllMeterTypes(); }
+
+    /**
      * Get existing meter type by id
      *
      * @param meterTypeId
@@ -30,13 +37,6 @@ public class MeterTypeService {
     public MeterType getMeterTypeById(int meterTypeId) {
         return meterTypeMapper.getMeterTypeById(meterTypeId);
     }
-
-    /**
-     * Get all meter types
-     *
-     * @return List<MeterType>
-     */
-    public List<MeterType> getAllMeterTypes() { return meterTypeMapper.getAllMeterTypes(); }
 
     /**
      * Create new meter type

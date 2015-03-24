@@ -29,6 +29,8 @@ public class Application extends ResourceConfig{
 
         register(IndicatorResource.class);
 
+        register(MeterTypeResource.class);
+
     }
 
 }
