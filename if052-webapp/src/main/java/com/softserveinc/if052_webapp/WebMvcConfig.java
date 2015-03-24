@@ -57,16 +57,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return tilesConfigurer;
     }
 
-//    @Bean
-//    public IndexController indexController(){
-//        return new IndexController();
-//    }
-//
-//    @Bean
-//    public OauthTestController oauthTestController(){
-//        return new OauthTestController();
-//    }
-
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
@@ -136,13 +126,27 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
             return details;
         }
 
+        @Bean
+        public OAuth2ProtectedResourceDetails restRedirect() {
+            AuthorizationCodeResourceDetails details = new AuthorizationCodeResourceDetails();
+            details.setId("rest/webapp-redirect");
+            details.setClientId("webapp-with-redirect");
+            details.setClientSecret("secret");
+            details.setAccessTokenUri(restAddress + accessTokenUri);
+            details.setUserAuthorizationUri(restAddress + userAuthorizationUri);
+            details.setScope(Arrays.asList("read", "write"));
+            details.setUseCurrentUri(false);
+            return details;
+        }
+
         @Autowired
         private OAuth2ClientContext oauth2Context;
 
         @Bean
         @Primary
         public OAuth2RestTemplate oAuthRestTemplate() {
-            return new OAuth2RestTemplate(rest(), oauth2Context);
+            //return new OAuth2RestTemplate(rest(), oauth2Context);
+            return new OAuth2RestTemplate(restRedirect(), oauth2Context);
         }
 
         @Bean
