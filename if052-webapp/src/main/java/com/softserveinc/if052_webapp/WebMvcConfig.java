@@ -57,16 +57,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return tilesConfigurer;
     }
 
-//    @Bean
-//    public IndexController indexController(){
-//        return new IndexController();
-//    }
-//
-//    @Bean
-//    public OauthTestController oauthTestController(){
-//        return new OauthTestController();
-//    }
-
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
@@ -95,20 +85,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		configurer.enable();
 	}
 
-	@Bean
-	public ConversionServiceFactoryBean conversionService() {
-		ConversionServiceFactoryBean conversionService = new ConversionServiceFactoryBean();
-		conversionService.setConverters(Collections.singleton(new AccessTokenRequestConverter()));
-		return conversionService;
-	}
-
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	}
-
-	@Override
-	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(new BufferedImageHttpMessageConverter());
 	}
 
     @Configuration
@@ -136,6 +114,19 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
             return details;
         }
 
+        @Bean
+        public OAuth2ProtectedResourceDetails restRedirect() {
+            AuthorizationCodeResourceDetails details = new AuthorizationCodeResourceDetails();
+            details.setId("rest/webapp-redirect");
+            details.setClientId("webapp-with-redirect");
+            details.setClientSecret("secret");
+            details.setAccessTokenUri(restAddress + accessTokenUri);
+            details.setUserAuthorizationUri(restAddress + userAuthorizationUri);
+            details.setScope(Arrays.asList("read", "write"));
+            details.setUseCurrentUri(false);
+            return details;
+        }
+
         @Autowired
         private OAuth2ClientContext oauth2Context;
 
@@ -143,6 +134,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         @Primary
         public OAuth2RestTemplate oAuthRestTemplate() {
             return new OAuth2RestTemplate(rest(), oauth2Context);
+            //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
         }
 
         @Bean

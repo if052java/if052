@@ -22,6 +22,13 @@ public class OauthTestController {
     @Autowired
     RestServiceTest restServiceTest;
 
+    @RequestMapping("/rest/redirect")
+    public String getRedirected(Model model){
+        String resource = restServiceTest.getResource();
+        model.addAttribute("resource", "Redirected page; received " + resource);
+        return "resource";
+    }
+
     @RequestMapping("/getJersey")
     public String getJersey(Model model){
         String resource = restServiceTest.getJersey();

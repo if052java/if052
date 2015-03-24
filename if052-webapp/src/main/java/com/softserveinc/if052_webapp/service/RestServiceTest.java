@@ -34,6 +34,7 @@ public class RestServiceTest {
 
 
     public String getResource() {
+        //return restTemplate.getForObject("http://192.168.1.100:8080/provider/resource", String.class);
         return restTemplate.getForObject("http://localhost:8080/provider/resource", String.class);
     }
 
