@@ -78,4 +78,12 @@ public class UserService {
     public void deleteUser(int userId) {
         userMapper.deleteUser(userId);
     }
+
+    public List<User> getAllReportUsers() {
+        return userMapper.getAllReportUsers();
+    }
+
+    public User getReportUserByLogin(String login) {
+        return userMapper.getReportUserByLogin(login);
+    }
 }

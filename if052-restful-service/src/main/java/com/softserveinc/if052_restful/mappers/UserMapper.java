@@ -58,4 +58,8 @@ public interface UserMapper {
      */
     public void deleteUser(int UserId);
 
+    public List<User> getAllReportUsers();
+
+    public User getReportUserByLogin(String login);
+
 }

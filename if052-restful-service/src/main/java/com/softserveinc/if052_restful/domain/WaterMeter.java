@@ -71,7 +71,8 @@ public class WaterMeter {
                 "waterMeterId=" + waterMeterId +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", tariff=" + tariff +
+                ", tariff=" + tariff + '\'' +
+                ", type=" + meterType +
                 '}';
     }
 }

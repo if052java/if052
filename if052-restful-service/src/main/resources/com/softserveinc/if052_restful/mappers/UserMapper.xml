@@ -30,6 +30,40 @@
         <result property="email" column="email"/>
     </resultMap>
 
+    <resultMap id="ReportUserResult" type="User">
+        <id property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="surname" column="surname"/>
+        <result property="middleName" column="middle_name"/>
+        <result property="login" column="login"/>
+        <result property="email" column="email"/>
+        <collection property="addresses" column="user_id" javaType="ArrayList" ofType="Address">
+            <id property="addressId" column="address_id"/>
+            <result property="city" column="city"/>
+            <result property="street" column="street"/>
+            <result property="building" column="building"/>
+            <result property="apartment" column="apartment"/>
+            <collection property="waterMeters" column="address_id" javaType="ArrayList" ofType="WaterMeter" columnPrefix="wm_">
+                <id property="waterMeterId" column="water_meter_id"/>
+                <result property="name" column="name"/>
+                <result property="description" column="description"/>
+                <result property="tariff" column="tariff"/>
+                <association property="meterType" column="meter_type_id" javaType="MeterType">
+                    <id property="meterTypeId" column="meter_type_id"/>
+                    <result property="type" column="type"/>
+                </association>
+                <collection property="indicators" column="indicator_id" javaType="ArrayList" ofType="Indicator">
+                    <id property="indicatorId" column="indicator_id"/>
+                    <result property="date" column="date"/>
+                    <result property="tariffPerDate" column="tariffPerDate"/>
+                    <result property="value" column="value"/>
+                    <result property="paid" column="is_paid"/>
+                    <result property="published" column="is_published"/>
+                </collection>
+            </collection>
+        </collection>
+    </resultMap>
+
     <select id="getUserByLogin" parameterType="String" resultMap="UserSimpleResult">
         SELECT
         c.user_id,
@@ -73,6 +107,7 @@
         FROM consumer c
     </select>
 
+
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
         INSERT INTO consumer (name, surname, middle_name, login, password, email)
         VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password}, #{email})
@@ -93,5 +128,79 @@
     <delete id="deleteUser" parameterType="int">
         DELETE FROM consumer WHERE user_id = #{userId}
     </delete>
+
+
+    <select id="getAllReportUsers" resultMap="ReportUserResult">
+        SELECT
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.email,
+        a.city,
+        a.street,
+        a.building,
+        a.address_id,
+        a.city,
+        a.street,
+        a.building,
+        a.apartment,
+        wm.water_meter_id as wm_water_meter_id,
+        wm.name as wm_name,
+        wm.description as wm_description,
+        wm.tariff as wm_tariff,
+        wm.meter_type_id as wm_meter_type_id,
+        mt.meter_type_id as wm_meter_type_id,
+        mt.type as wm_type,
+        i.indicator_id as wm_indicator_id,
+        i.date as wm_date,
+        i.tariff_per_date as wm_tariff_per_date,
+        i.value as wm_value,
+        i.is_paid as wm_is_paid,
+        i.is_published as wm_is_published
+        FROM consumer c
+        LEFT OUTER JOIN address a ON c.user_id = a.user_id
+        LEFT OUTER JOIN watermeter wm ON a.address_id = wm.address_id
+        LEFT OUTER JOIN meter_type mt ON wm.meter_type_id = mt.meter_type_id
+        LEFT OUTER JOIN indicator i ON wm.water_meter_id = i.water_meter_id
+    </select>
+
+    <select id="getReportUserByLogin" parameterType="String" resultMap="ReportUserResult">
+        SELECT
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.email,
+        a.city,
+        a.street,
+        a.building,
+        a.address_id,
+        a.city,
+        a.street,
+        a.building,
+        a.apartment,
+        wm.water_meter_id as wm_water_meter_id,
+        wm.name as wm_name,
+        wm.description as wm_description,
+        wm.tariff as wm_tariff,
+        wm.meter_type_id as wm_meter_type_id,
+        mt.meter_type_id as wm_meter_type_id,
+        mt.type as wm_type,
+        i.indicator_id as wm_indicator_id,
+        i.date as wm_date,
+        i.tariff_per_date as wm_tariff_per_date,
+        i.value as wm_value,
+        i.is_paid as wm_is_paid,
+        i.is_published as wm_is_published
+        FROM consumer c
+        LEFT OUTER JOIN address a ON c.user_id = a.user_id
+        LEFT OUTER JOIN watermeter wm ON a.address_id = wm.address_id
+        LEFT OUTER JOIN meter_type mt ON wm.meter_type_id = mt.meter_type_id
+        LEFT OUTER JOIN indicator i ON wm.water_meter_id = i.water_meter_id
+        WHERE c.login = #{login}
+    </select>
 
 </mapper>

@@ -1,7 +1,9 @@
 package com.softserveinc.if052_restful.service;
 
 import com.softserveinc.if052_restful.domain.Address;
+import com.softserveinc.if052_restful.domain.Indicator;
 import com.softserveinc.if052_restful.domain.User;
+import com.softserveinc.if052_restful.domain.WaterMeter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -109,4 +111,28 @@ public class UserServiceTest {
         User deletedUser = userService.getUserById(lastElement);
         Assert.assertNull(deletedUser);
     }
+
+    @Test
+    public void testGetAllReportUsers() {
+        Assert.assertNotNull(userService.getAllReportUsers());
+        for(User u : userService.getAllReportUsers()) {
+            System.out.println(u);
+            for(Address a : u.getAddresses()) {
+                System.out.println(a);
+                for(WaterMeter wm : a.getWaterMeters()) {
+                    System.out.println(wm);System.out.println(wm.getIndicators());
+                    for(Indicator i : wm.getIndicators()) {
+                        System.out.println(i);
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    public void testReportUserByLogin() {
+        Assert.assertNotNull(userService.getReportUserByLogin(("LOGIN111")));
+        System.out.println(userService.getReportUserByLogin("LOGIN111"));
+    }
+
 }

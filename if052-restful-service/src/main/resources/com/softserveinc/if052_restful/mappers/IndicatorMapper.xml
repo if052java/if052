@@ -26,6 +26,10 @@
         <result property="published" column="is_published"/>
     </resultMap>
 
+    <resultMap id="DateResult" type="java.util.Date">
+        <result property="date" column="min_date"/>
+    </resultMap>
+
     <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">
         SELECT
         i.indicator_id,
@@ -95,5 +99,11 @@
     <delete id="deleteIndicator" parameterType="int">
         DELETE FROM indicator WHERE indicator_id = #{indicatorId}
     </delete>
+
+    <select id="getMinDate" resultMap="DateResult">
+        SELECT
+        min(date) as min_date
+        FROM indicator
+    </select>
 
 </mapper>
