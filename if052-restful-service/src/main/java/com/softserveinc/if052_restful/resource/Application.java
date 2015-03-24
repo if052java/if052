@@ -31,6 +31,9 @@ public class Application extends ResourceConfig{
 
         register(ReportResource.class);
 
+        register(MeterTypeResource.class);
+
+
     }
 
 }

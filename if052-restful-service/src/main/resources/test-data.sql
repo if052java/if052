@@ -5,9 +5,9 @@ INSERT INTO `consumer`
 
 
 INSERT INTO `address`
-    VALUES (1, 'CITY1', 'STREET1', 'BUILDING1', 'APARTMENT1', 1),
-           (2, 'CITY2', 'STREET2', 'BUILDING2', 'APARTMENT2', 1),
-           (3, 'CITY3', 'STREET3', 'BUILDING3', 'APARTMENT3', 1),
+    VALUES (1, 'Івано-Франківськ', 'Шевченка', '1', '2', 1),
+           (2, 'Івано-Франківськ', 'Мазепи', '144', '144', 1),
+           (3, 'Івано-Франківськ', 'Пулюя', '7', '1', 1),
            (4, 'CITY4', 'STREET4', 'BUILDING4', 'APARTMENT4', 2),
            (5, 'CITY5', 'STREET5', 'BUILDING5', 'APARTMENT5', 2),
            (6, 'CITY6', 'STREET6', 'BUILDING6', 'APARTMENT6', 2),
