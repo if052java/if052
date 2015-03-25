@@ -17,7 +17,7 @@
 
             <div class="container">
 
-                <table class="table table-hover" id="paginated">
+                <table class="table table-hover" class="display" id="paginated">
 
                     <thead>
                     <h4>Показники лічильника: ${waterMeter.name}<c:if test="${waterMeter.description}!=null">, ${waterMeter.description} </c:if></h4>

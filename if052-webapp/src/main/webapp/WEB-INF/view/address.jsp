@@ -22,6 +22,9 @@
                         <th>Вулиця</th>
                         <th>Будинок</th>
                         <th>Квартира</th>
+                        <th>Лічильники</th>
+                        <th>Редагування</th>
+                        <th>Видалення</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,11 +35,13 @@
                             <td><c:out value="${address.building}"/></td>
                             <td><c:out value="${address.apartment}"/></td>
                             <td><a href="<c:url value="/watermeter?addressId=${address.addressId}"/>">
-                                <button>Water Meter</button></a></td>
+                                <button class="btn btn-default">
+                                    <span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span>
+                                </button></a></td>
                             <td><a href="<c:url value="/updateAddress?addressId=${address.addressId}"/>">
-                                <button><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
+                                <button class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
                             <td><a href="<c:url value="/deleteAddress?addressId=${address.addressId}"/>">
-                                <button><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
+                                <button class="btn btn-default"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
         
                         </tr>
                     </c:forEach>
@@ -56,19 +61,19 @@
                         <tbody>
                         <tr>
                             <td>
-                                <input type="text" name="city" />
+                                <input class="form-control" type="text" name="city" />
                             </td>
                             <td> 
-                                <input type="text" name="street" />
+                                <input class="form-control" type="text" name="street" />
                             </td>
                             <td>
-                                <input type="text" name="building" />
+                                <input class="form-control" type="text" name="building" />
                             </td>
                             <td>
-                                <input type="text" name="apartment" />
+                                <input class="form-control" type="text" name="apartment" />
                             </td>
                             <td>
-                                <button class="add-button" type="submit">
+                                <button class="btn btn-default" type="submit">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                 </button>
                             </td>

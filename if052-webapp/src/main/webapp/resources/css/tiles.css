@@ -120,3 +120,6 @@ button:disabled {
 button {
     color: #212121;
 }
+#types, #paid {
+    padding-left: 0;
+}

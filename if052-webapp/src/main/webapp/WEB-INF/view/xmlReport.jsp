@@ -38,7 +38,7 @@
                         <input type="text" name="endDate" class="form-control" id="endDate">
                     </div>
 
-
+                    <div class="form-group">
                     <div class="checkbox-inline" id="types">
                         <label for="types">Необхідні види лічильників</label><br>
                         <c:forEach var="meterType" items="${meterTypes}">
@@ -47,23 +47,27 @@
                             </label>
                         </c:forEach>
                     </div>
+                    </div>
 
-                    <br><br>
-                    <div class="checkbox-inline" id="paid">
+                    <%--<br><br>--%>
+                    <div class="form-group">
+                    <div class="radio-inline" id="paid">
                         <label for="paid">Статус оплати</label><br>
-                        <label class="checkbox-inline">
+                        <label class="radio-inline">
                             <input type="radio" name="paidStatus" value="2" checked> Усі
                         </label>
-                        <label class="checkbox-inline">
+                        <label class="radio-inline">
                             <input type="radio" name="paidStatus" value="1"> Оплачені
                         </label>
-                        <label class="checkbox-inline">
+                        <label class="radio-inline">
                             <input type="radio" name="paidStatus" value="0"> Неоплачені
                         </label>
                     </div>
-                    <br><br>
+                    </div>
 
-                    <button type="submit" class="btn btn-default">Скачати xml-звіт</button>
+                    <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Скачати xml-звіт</button>
+                    </div>
                 </form:form>
 
             </div>
