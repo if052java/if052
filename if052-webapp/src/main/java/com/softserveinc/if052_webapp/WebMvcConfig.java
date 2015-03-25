@@ -33,14 +33,10 @@ import java.util.Arrays;
 @PropertySource("classpath:rest.properties")
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
-//    @Value("${restUrl}")
-//    String restUrl;
-
     @Bean
     @Value("${restAddress}")
     public String restUrl(String restUrl){
         return restUrl;
-        //return "http://localhost:8080/";
     }
 
     @Bean
@@ -89,9 +85,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         @Autowired
         @Qualifier("restUrl")
         private String restUrl;
-
-//        @Value("${restUrl}")
-//        private String restUrl;
 
         @Value("${accessTokenUri}")
         private String accessTokenUri;
