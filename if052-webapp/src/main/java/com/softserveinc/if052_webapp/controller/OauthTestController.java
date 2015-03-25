@@ -53,15 +53,6 @@ public class OauthTestController {
         return "profile";
     }
 
-    @RequestMapping("/profile/redirect")
-    public String getProfilePageRedirect(Model model){
-        UserRole userRole = restServiceTest.getUserRole();
-        //UserRole userRole = restServiceTest.getUserRole1();
-        model.addAttribute("role", userRole);
-        return "profile";
-    }
-
-
     @RequestMapping("/login")
     public String getLogInPage(){
         return "login";
