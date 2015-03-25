@@ -114,7 +114,9 @@ public class UserServiceTest {
 
     @Test
     public void testGetAllReportUsers() {
+
         Assert.assertNotNull(userService.getAllReportUsers());
+
         for(User u : userService.getAllReportUsers()) {
             System.out.println(u);
             for(Address a : u.getAddresses()) {

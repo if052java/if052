@@ -1,6 +1,7 @@
 package com.softserveinc.if052_restful.report;
 
 import com.softserveinc.if052_restful.domain.*;
+import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.MeterTypeService;
 import com.softserveinc.if052_restful.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,10 @@ public class ReportConverter {
     private UserService userService;
 
     @Autowired
-    MeterTypeService meterTypeService;
+    private MeterTypeService meterTypeService;
+
+    @Autowired
+    private IndicatorService indicatorService;
 
     private Report report;
 
@@ -118,29 +122,30 @@ public class ReportConverter {
             switch (report.getPaidStatus()) {
                 case 0:
                     if (!i.isPaid()) {
-                        result.append("\t\t\t\t\t<indicator "
-                                + "isPaid=\"" + i.isPaid() + '"' + "> "
-                                + i.getValue() + " </indicator>\n");
-                        i.setPublished(true);
+                        result.append(writeIndicatorValue(i));
                     }
                     break;
                 case 1:
                     if (i.isPaid()) {
-                        result.append("\t\t\t\t\t<indicator "
-                                + "isPaid=\"" + i.isPaid() + '"' + "> "
-                                + i.getValue() + " </indicator>\n");
-                        i.setPublished(true);
+                        result.append(writeIndicatorValue(i));
                     }
                     break;
                 default:
-                    result.append("\t\t\t\t\t<indicator "
-                            + "isPaid=\"" + i.isPaid() + '"' + "> "
-                            + i.getValue() + " </indicator>\n");
-                    i.setPublished(true);
+                    result.append(writeIndicatorValue(i));
                     break;
             }
         }
 
+        return result;
+    }
+
+    public StringBuffer writeIndicatorValue(Indicator i) {
+        StringBuffer result = new StringBuffer();
+        result.append("\t\t\t\t\t<indicator "
+                + "isPaid=\"" + i.isPaid() + '"' + "> "
+                + i.getValue() + " </indicator>\n");
+        i.setPublished(true);
+        indicatorService.updateIndicator(i);
         return result;
     }
 

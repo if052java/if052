@@ -51,24 +51,14 @@ public class XmlReportController {
     }
 
     @RequestMapping(value = "/createXmlReport", method = RequestMethod.GET)
-    public void createReportRequest(@ModelAttribute ReportRequest reportRequest, ModelMap model,
+    public void createReportRequest(@ModelAttribute ReportRequest reportRequest,
                                     HttpServletRequest request, HttpServletResponse response) throws IOException {
         ResponseEntity<String> postResponseEntity = restTemplate.exchange(restUrl + "report", HttpMethod.POST,
                 new HttpEntity<ReportRequest>(reportRequest), String.class);
-        System.out.println(postResponseEntity.getHeaders().get("Location"));
         String uri = postResponseEntity.getHeaders().get("Location").get(0);
-        System.out.println(uri);
         ResponseEntity<String> responseEntity2 = restTemplate.exchange(uri, HttpMethod.GET,
                 null, String.class);
-        System.out.println(responseEntity2.getBody());
-        model.addAttribute("xml", responseEntity2.getBody());
-
         fileDownloader.downloadFile(request, response, responseEntity2.getBody());
-
-
-
-
-
     }
 
 
