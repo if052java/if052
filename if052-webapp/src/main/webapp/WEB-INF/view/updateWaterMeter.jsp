@@ -17,18 +17,17 @@
     <tiles:putAttribute name="body">
         <div class="body">
 
-        <h1> UPDATE FORM WILL BE HERE </h1>
+        <h2> Редагування даних лічильника </h2>
 
 <c:url var="updateUrl" value="/updateWaterMeter"/>
 
             <form:form
                     action="${updateUrl}" method="post" modelAttribute="waterMeter">
                 <table class="box-table-a">
-                    <caption> Update Water Meter</caption>
                     <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
+                        <th>Назва</th>
+                        <th>Опис</th>
                         <th>Тариф</th>
                     </tr>
                     </thead>

@@ -19,38 +19,28 @@
     <tiles:putAttribute name="body">
         <div class="body">
             <script src="<c:url value="/resources/js/jquery/jquery-ui.js"/>" type="text/javascript"></script>
-            <script type="text/javascript">
-                $(function() {
-                    $( "#startDate" ).datepicker({dateFormat:"yy/mm/dd"});
-                });
-                $(function() {
-                    $( "#endDate" ).datepicker({dateFormat:"yy/mm/dd"}).datepicker("setDate", new Date());
-                });
-                $(function() {
-                    var startDate = $("#startDate").val();
-                    var endDate = $("#endDate").val();
-
-                });
-            </script>
+            <script src="<c:url value="/resources/js/xmlReport.js"/>" type="text/javascript"></script>
 
             <div class="container">
-                <h2>Choose filters for the report:</h2>
+                <h2>Оберіть фільтри для звіту:</h2>
                 <c:url var="createXmlUrl" value="/createXmlReport"/>
                 <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest">
                     <div class="form-group">
-                        <label for="users">Users:</label>
+                        <label for="users">Логін користувача ("ALL" для усіх)</label>
                         <input type="text" name="users" class="form-control" id="users" placeholder="Choose users">
                     </div>
                     <div class="form-group">
-                        <label for="startDate">Start Date</label>
+                        <label for="startDate">Початкова дата</label>
                         <input type="text" name="startDate" class="form-control" id="startDate" value="${startDate}"/>
                     </div>
                     <div class="form-group">
-                        <label for="endDate">endDate</label>
+                        <label for="endDate">Кінцева дата</label>
                         <input type="text" name="endDate" class="form-control" id="endDate">
                     </div>
 
-                    <div class="checkbox-inline">
+
+                    <div class="checkbox-inline" id="types">
+                        <label for="types">Необхідні види лічильників</label><br>
                         <c:forEach var="meterType" items="${meterTypes}">
                             <label class="checkbox-inline">
                                 <input type="checkbox" name="types" value="${meterType.meterTypeId}"> ${meterType.type}
@@ -58,20 +48,22 @@
                         </c:forEach>
                     </div>
 
-                    <div class="checkbox-inline">
+                    <br><br>
+                    <div class="checkbox-inline" id="paid">
+                        <label for="paid">Статус оплати</label><br>
                         <label class="checkbox-inline">
-                            <input type="radio" name="paidStatus" value="2" checked> All
+                            <input type="radio" name="paidStatus" value="2" checked> Усі
                         </label>
                         <label class="checkbox-inline">
-                            <input type="radio" name="paidStatus" value="1"> Paid
+                            <input type="radio" name="paidStatus" value="1"> Оплачені
                         </label>
                         <label class="checkbox-inline">
-                            <input type="radio" name="paidStatus" value="0"> Not paid
+                            <input type="radio" name="paidStatus" value="0"> Неоплачені
                         </label>
                     </div>
                     <br><br>
 
-                    <button type="submit" class="btn btn-default">Download XML-Report</button>
+                    <button type="submit" class="btn btn-default">Скачати xml-звіт</button>
                 </form:form>
 
             </div>

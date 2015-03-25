@@ -34,7 +34,7 @@
                         <td><c:out value="${waterMeter.meterType.type}"/></td>
                         <td><c:out value="${waterMeter.tariff}"/></td>
                         <td><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}"/>">
-                            <button>INDICATORS</button></a></td>
+                            <button>Лічильники</button></a></td>
                         <td><a href="<c:url value="/updateWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
                             <button> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
                         <td><a href="<c:url value="/deleteWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
