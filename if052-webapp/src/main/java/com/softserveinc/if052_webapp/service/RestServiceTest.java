@@ -2,6 +2,7 @@ package com.softserveinc.if052_webapp.service;
 
 import com.softserveinc.if052_webapp.domain.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.client.RestOperations;
 
 import java.net.URI;
@@ -12,6 +13,7 @@ import java.net.URI;
 public class RestServiceTest {
 
     @Autowired
+    @Qualifier("restUrl")
     String restUrl;
 
     private RestOperations restTemplate;
@@ -34,11 +36,10 @@ public class RestServiceTest {
 
 
     public String getResource() {
-        //return restTemplate.getForObject("http://192.168.1.100:8080/provider/resource", String.class);
-        return restTemplate.getForObject("http://localhost:8080/provider/resource", String.class);
+        return restTemplate.getForObject(restUrl + "resource", String.class);
     }
 
     public String getJersey(){
-        return restTemplate.getForObject("http://localhost:8080/provider/rest/jersey-hello", String.class);
+        return restTemplate.getForObject(restUrl + "rest/jersey-hello", String.class);
     }
 }
