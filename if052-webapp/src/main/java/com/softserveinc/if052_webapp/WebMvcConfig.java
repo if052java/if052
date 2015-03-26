@@ -141,7 +141,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
         @Bean
         //@Scope("session")
-        @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
+        //@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
         public OAuth2RestOperations oAuthRestTemplatePassword() {
             ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
             resource.setAccessTokenUri(restUrl + accessTokenUri);
@@ -149,8 +149,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
             resource.setId("rest/trusted");
             resource.setScope(Arrays.asList("trust", "read", "write"));
             resource.setClientSecret("somesecret");
-            resource.setUsername("marissa");
-            resource.setPassword("koala");
+//            resource.setUsername("marissa");
+//            resource.setPassword("koala");
             return new OAuth2RestTemplate(resource);
             //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
         }

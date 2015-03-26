@@ -14,6 +14,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.client.token.AccessTokenRequest;
+import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +42,9 @@ public class LoginController {
     @Autowired
     @Qualifier("oAuthRestTemplatePassword")
     RestOperations restTemplate;
+
+    @Autowired
+    OAuth2ClientContext oAuth2ClientContext;
 
 
     private static Logger logger = Logger.getLogger(LoginController.class);
@@ -72,6 +77,21 @@ public class LoginController {
     //@Autowired
     //@Scope("session")
     public String restIn(Model model){
+
+        AccessTokenRequest accessTokenRequest = oAuth2ClientContext.getAccessTokenRequest();
+
+
+//        accessTokenRequest.add("username", "marissa");
+//        accessTokenRequest.add("password", "koala");
+
+//        OAuth2RestTemplate oAuth2RestTemplate = (OAuth2RestTemplate) restTemplate;
+//        OAuth2ProtectedResourceDetails resourceDetails = oAuth2RestTemplate.getResource();
+//        ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
+        ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails)((OAuth2RestTemplate) restTemplate).getResource();
+        passwordResource.setUsername("marissa");
+        passwordResource.setPassword("koala");
+
+
         String resource = restTemplate.getForObject(restUrl + "resource", String.class);
         model.addAttribute("resource", "Password grant; received " + resource+" "+ restTemplate.getClass().getName());
         return "resource";
