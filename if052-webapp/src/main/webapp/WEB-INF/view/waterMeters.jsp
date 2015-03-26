@@ -52,6 +52,7 @@
                                     <th>Назва</th>
                                     <th>Опис</th>
                                     <th>Тариф</th>
+                                    <th>Тип</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -63,6 +64,13 @@
                                     <td> <input type="text" name="description" /></td>
                                     <td>
                                         <input type="number" step="0.01" name="tariff" />
+                                    </td>
+                                    <td>
+                                        <select class="form-control" name="typeId">
+                                            <c:forEach var="metertype" items="${metertypes}">
+                                                <option value="${metertype.meterTypeId}">${metertype.type}</option>
+                                            </c:forEach>
+                                        </select>
                                     </td>
                                     <td>
                                         <button class="add-button" type="submit">

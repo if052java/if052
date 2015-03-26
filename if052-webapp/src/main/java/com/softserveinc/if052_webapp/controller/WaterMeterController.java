@@ -2,6 +2,7 @@ package com.softserveinc.if052_webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_webapp.domain.Address;
+import com.softserveinc.if052_webapp.domain.MeterType;
 import com.softserveinc.if052_webapp.domain.WaterMeter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -59,12 +62,15 @@ public class WaterMeterController {
         } catch (IOException e) {
             logger.warn(e.getMessage(), e);
         }
+        List<MeterType> mt = Arrays.asList(restTemplate.getForObject(restUrl + "metertypes", MeterType[].class));
+        model.addAttribute("metertypes", mt);
         return "waterMeters";
     }
 
     @RequestMapping(value = "/addWaterMeter", method = RequestMethod.POST)
-    public String addWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model) {
+    public String addWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model, @RequestParam int typeId) {
         waterMeter.setName(waterMeter.getName().trim());
+        waterMeter.setMeterType(restTemplate.getForObject(restUrl + "metertypes/" + typeId, MeterType.class));
         if (waterMeter.getName().length() < 1) {
             model.addAttribute("reason", "Watermeter name cannot be empty.");
             return "error400";
