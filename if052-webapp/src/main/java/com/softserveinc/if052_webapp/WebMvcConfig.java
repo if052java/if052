@@ -8,6 +8,7 @@ import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
@@ -26,6 +27,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.json.MappingJacksonJsonView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import java.util.Arrays;
 
 @Configuration
@@ -138,7 +141,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
         @Bean
         //@Scope("session")
-        public OAuth2RestTemplate oAuthRestTemplatePassword() {
+        @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
+        public OAuth2RestOperations oAuthRestTemplatePassword() {
             ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
             resource.setAccessTokenUri(restUrl + accessTokenUri);
             resource.setClientId("trusted");

@@ -1,8 +1,10 @@
 package com.softserveinc.if052_webapp.controller;
 
+import ognl.enhance.ContextClassLoader;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,7 +18,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestOperations;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.HashSet;
@@ -26,6 +30,7 @@ import java.util.Set;
  * Created by nazar on 3/25/15.
  */
 @Controller
+//@Scope("request")
 public class LoginController {
 
     @Autowired
@@ -34,7 +39,7 @@ public class LoginController {
 
     @Autowired
     @Qualifier("oAuthRestTemplatePassword")
-    OAuth2RestTemplate restTemplate;
+    RestOperations restTemplate;
 
 
     private static Logger logger = Logger.getLogger(LoginController.class);
@@ -60,12 +65,15 @@ public class LoginController {
         return "redirect:/";
     }
 
+    @Autowired
+    private ApplicationContext applicationContext;
+
     @RequestMapping("restin")
-//    @Autowired
+    //@Autowired
     //@Scope("session")
     public String restIn(Model model){
         String resource = restTemplate.getForObject(restUrl + "resource", String.class);
-        model.addAttribute("resource", "Password grant; received " + resource);
+        model.addAttribute("resource", "Password grant; received " + resource+" "+ restTemplate.getClass().getName());
         return "resource";
     }
 }
