@@ -23,7 +23,7 @@ public class LoginController {
 
     private static Logger logger = Logger.getLogger(LoginController.class);
 
-    @RequestMapping("/signin")
+    @RequestMapping("/login")
     public String autologin(HttpServletRequest request){
 
 //        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("user", "password");
@@ -43,18 +43,4 @@ public class LoginController {
 
         return "redirect:/";
     }
-
-//    private void doAutoLogin(String username, String password, HttpServletRequest request) {
-//
-//        try {
-//            // Must be called from request filtered by Spring Security, otherwise SecurityContextHolder is not updated
-//            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-//            token.setDetails(new WebAuthenticationDetails(request));
-//            Authentication authentication = this.authenticationProvider.authenticate(token);
-//            //logger.debug("Logging in with [{}]", authentication.getPrincipal());
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
-//        } catch (Exception e) {
-//            SecurityContextHolder.getContext().setAuthentication(null);
-//            //logger.error("Failure in autoLogin", e);
-//        }
 }
