@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.MediaType;
+import org.springframework.security.oauth2.client.DefaultOAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.client.token.DefaultAccessTokenRequest;
+import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsAccessTokenProvider;
+import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.client.RestOperations;
@@ -153,6 +158,24 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 //            resource.setPassword("koala");
             return new OAuth2RestTemplate(resource);
             //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
+        }
+
+        @Bean
+        public OAuth2RestOperations credentialsTemplate(){
+            ClientCredentialsResourceDetails resource = new ClientCredentialsResourceDetails();
+
+            resource.setAccessTokenUri(restUrl + accessTokenUri);
+            resource.setClientId("credentials");
+            resource.setId("rest/credentials");
+            resource.setScope(Arrays.asList("trust", "read"));
+
+            return new OAuth2RestTemplate(resource);
+
+//            ClientCredentialsAccessTokenProvider provider = new ClientCredentialsAccessTokenProvider();
+//            OAuth2AccessToken accessToken = provider.obtainAccessToken(resource, new DefaultAccessTokenRequest());
+
+//            OAuth2RestTemplate template = new OAuth2RestTemplate(resource, new DefaultOAuth2ClientContext(accessToken));
+//            String result = template.getForObject(serverRunning.getUrl("/sparklr2/photos/trusted/message"), String.class);
         }
 
     }

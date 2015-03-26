@@ -1,5 +1,8 @@
 package com.softserveinc.if052_webapp.controller;
 
+import com.softserveinc.if052_webapp.domain.Address;
+import com.softserveinc.if052_webapp.domain.User;
+import com.softserveinc.if052_webapp.domain.UserRole;
 import ognl.enhance.ContextClassLoader;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,9 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestOperations;
 
 import javax.inject.Inject;
@@ -42,9 +47,9 @@ public class LoginController {
     @Autowired
     @Qualifier("oAuthRestTemplatePassword")
     RestOperations restTemplate;
-
-    @Autowired
-    OAuth2ClientContext oAuth2ClientContext;
+//
+//    @Autowired
+//    OAuth2ClientContext oAuth2ClientContext;
 
 
     private static Logger logger = Logger.getLogger(LoginController.class);
@@ -74,26 +79,75 @@ public class LoginController {
     private ApplicationContext applicationContext;
 
     @RequestMapping("restin")
-    //@Autowired
-    //@Scope("session")
     public String restIn(Model model){
 
-        AccessTokenRequest accessTokenRequest = oAuth2ClientContext.getAccessTokenRequest();
 
-
-//        accessTokenRequest.add("username", "marissa");
-//        accessTokenRequest.add("password", "koala");
-
-//        OAuth2RestTemplate oAuth2RestTemplate = (OAuth2RestTemplate) restTemplate;
-//        OAuth2ProtectedResourceDetails resourceDetails = oAuth2RestTemplate.getResource();
-//        ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
-        ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails)((OAuth2RestTemplate) restTemplate).getResource();
+        OAuth2RestTemplate oAuth2RestTemplate = (OAuth2RestTemplate) restTemplate;
+        OAuth2ProtectedResourceDetails resourceDetails = oAuth2RestTemplate.getResource();
+        ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
+        //ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails)((OAuth2RestTemplate) restTemplate).getResource();
         passwordResource.setUsername("marissa");
         passwordResource.setPassword("koala");
+
 
 
         String resource = restTemplate.getForObject(restUrl + "resource", String.class);
         model.addAttribute("resource", "Password grant; received " + resource+" "+ restTemplate.getClass().getName());
         return "resource";
     }
+
+    @Autowired
+    @Qualifier("credentialsTemplate")
+    RestOperations credentialsTemplate;
+
+    @RequestMapping("check")
+    public String check(Model model){
+        String resource = credentialsTemplate.getForObject(restUrl + "rest/check", String.class);
+        model.addAttribute("resource", "received " + resource);
+        return "resource";
+    }
+
+    @RequestMapping("check2")
+    public String check2(Model model){
+        String resource = credentialsTemplate.postForObject(restUrl + "rest/check2", "check message", String.class);
+        model.addAttribute("resource", "received " + resource);
+        return "resource";
+    }
+
+    @RequestMapping(value = "createAddress1", method = RequestMethod.GET)
+    public String createAddress1(Model model){
+        Address address = new Address();
+        //User user = restTemplate.getForObject(restUrl+ "rest/createAddress", User.class);
+        //address.setUser(user);
+
+        credentialsTemplate.postForObject(restUrl+ "rest/createAddress1", address, Address.class);
+
+        model.addAttribute("resource", "address");
+        return "resource";
+    }
+
+    @RequestMapping(value = "createAddress", method = RequestMethod.GET)
+    public String createAddress(Model model){
+        Address address = new Address();
+        address.setAddressId(1);
+        //User user = restTemplate.getForObject(restUrl+ "rest/createAddress", User.class);
+        //address.setUser(user);
+        Address receivedAddress;
+        receivedAddress = credentialsTemplate.postForObject(restUrl+ "rest/createAddress", address, Address.class);
+
+        model.addAttribute("resource", "address " + receivedAddress.getAddressId() + " city " + receivedAddress.getCity());
+        return "resource";
+    }
+
+    @RequestMapping(value = "userRole", method = RequestMethod.GET)
+    public String userRole(Model model){
+        UserRole userRole = new UserRole("USER");
+
+        UserRole receivedUserRole;
+        receivedUserRole = credentialsTemplate.postForObject(restUrl+ "rest/userRole", userRole, UserRole.class);
+
+        model.addAttribute("resource", "user " + receivedUserRole.getRoleName() + " name " + receivedUserRole.getUser());
+        return "resource";
+    }
+
 }
