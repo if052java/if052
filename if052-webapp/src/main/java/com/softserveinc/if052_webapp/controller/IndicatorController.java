@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,9 +41,6 @@ public class IndicatorController {
         model.addAttribute("waterMeter", waterMeter);
         model.addAttribute("indicators", indicators);
 
-        java.util.Date currentDate = new java.util.Date();
-        model.addAttribute("currentDate", currentDate);
-
         return "indicators";
     }
 
@@ -54,7 +55,7 @@ public class IndicatorController {
     }
 
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
-    public String createIndicator(@ModelAttribute Indicator indicator){
+    public String addIndicator(@ModelAttribute Indicator indicator){
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + this.waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
         restTemplate.postForObject(restUrl + "indicators/", indicator, Indicator.class);

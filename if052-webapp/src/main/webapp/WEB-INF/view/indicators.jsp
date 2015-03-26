@@ -16,11 +16,16 @@
         <div class="body">
 
             <div class="container">
+                <button class="btn btn-primary" onclick="history.go(-1);" >
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    Назад
+                </button>
 
                 <table class="table table-hover" class="display" id="paginated">
 
                     <thead>
-                    <h4>Показники лічильника: ${waterMeter.name}<c:if test="${waterMeter.description}!=null">, ${waterMeter.description} </c:if></h4>
+                    <h4>Показники лічильника: ${waterMeter.name}
+                        <c:if test="${waterMeter.description !=null && waterMeter.description !=''}">, ${waterMeter.description} </c:if></h4>
                     <tr>
                         <th>Дата</th>
                         <th>Показник</th>
@@ -37,8 +42,7 @@
                     <c:forEach var="indicator" items="${indicators}">
                         <tr>
                             <td>
-                                <span style='display:none'><fmt:formatDate value="${indicator.date}" pattern="MM/dd/yyyy" /></span>
-                                <fmt:formatDate value="${indicator.date}" pattern="dd/MM/yyyy" />
+                                <fmt:formatDate value="${indicator.date}" pattern="yyyy/MM/dd" />
                             </td>
                             <td><c:out value="${indicator.value}"/></td>
                             <td><c:out value="${indicator.tariffPerDate}"/></td>
@@ -60,12 +64,14 @@
                             </td>
                             <td>
                                 <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>">
-                                    <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
+                                    <button class="btn btn-default"
+                                            <c:if test="${indicator.published}">disabled="disabled"</c:if> >
                                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     </button>
                                 </a>
                                 <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
-                                    <button <c:if test="${indicator.published}">disabled="disabled"</c:if> >
+                                    <button class="btn btn-default"
+                                            <c:if test="${indicator.published}">disabled="disabled"</c:if> >
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </button>
                                 </a>
@@ -83,27 +89,27 @@
                     <table class="box-table-a">
                         <caption> Додати показник </caption>
                         <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Поточний тариф</th>
-                            <th>Показник</th>
-                            <th>Оплачено</th>
-                        </tr>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Поточний тариф</th>
+                                <th>Показник</th>
+                                <th>Оплачено</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${currentDate}' pattern='dd/MM/yyyy' />" />
-                            </td>
-                            <td><input type="number" step="0.1" name="tariffPerDate" value="${waterMeter.tariff}"/></td>
-                            <td><input type="number" step="1" name="value" value="${indicators.get(indicators.size()-1).value}"/></td>
-                            <td><input type="checkbox" name="paid" /></td>
-                            <td>
-                                <button class="add-button" type="submit">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td><input class="form-control" type="text" id="datepicker" name="date"/></td>
+                                <td><input class="form-control" type="number" step="0.1"
+                                           name="tariffPerDate" value="${waterMeter.tariff}"/></td>
+                                <td><input class="form-control" type="number" step="1"
+                                           name="value" value="${indicators.get(indicators.size()-1).value}"/></td>
+                                <td><input class="checkbox" type="checkbox" name="paid" /></td>
+                                <td>
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </form:form>
