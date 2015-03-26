@@ -47,7 +47,7 @@
                     </c:forEach>
                 </table>
                     <%--hard-code url!!!--%>
-                <a href="/map?userId=1">
+                <a href="<c:url value='/map?userId=1'/>">
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default" >

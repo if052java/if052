@@ -16,11 +16,16 @@
         <div class="body">
 
             <div class="container">
+                <button class="btn btn-primary" onclick="history.go(-1);" >
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    Назад
+                </button>
 
                 <table class="table table-hover" class="display" id="paginated">
 
                     <thead>
-                    <h4>Показники лічильника: ${waterMeter.name}<c:if test="${waterMeter.description}!=null">, ${waterMeter.description} </c:if></h4>
+                    <h4>Показники лічильника: ${waterMeter.name}
+                        <c:if test="${waterMeter.description !=null && waterMeter.description !=''}">, ${waterMeter.description} </c:if></h4>
                     <tr>
                         <th>Дата</th>
                         <th>Показник</th>
@@ -37,8 +42,7 @@
                     <c:forEach var="indicator" items="${indicators}">
                         <tr>
                             <td>
-                                <span style='display:none'><fmt:formatDate value="${indicator.date}" pattern="yyyy MM dd" /></span>
-                                <fmt:formatDate value="${indicator.date}" pattern="dd/MM/yyyy" />
+                                <fmt:formatDate value="${indicator.date}" pattern="yyyy/MM/dd" />
                             </td>
                             <td><c:out value="${indicator.value}"/></td>
                             <td><c:out value="${indicator.tariffPerDate}"/></td>
@@ -94,10 +98,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><%--BUGS WITH FORMAT !!!!!!!!!!!!!!--%>
-                                    <input class="form-control" type="text" id="datepicker"
-                                           name="date" value="<fmt:formatDate value='${currentDate}' pattern='dd/MM/yyyy' />" />
-                                </td>
+                                <td><input class="form-control" type="text" id="datepicker" name="date"/></td>
                                 <td><input class="form-control" type="number" step="0.1"
                                            name="tariffPerDate" value="${waterMeter.tariff}"/></td>
                                 <td><input class="form-control" type="number" step="1"
