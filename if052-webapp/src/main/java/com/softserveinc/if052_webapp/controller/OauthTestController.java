@@ -47,8 +47,8 @@ public class OauthTestController {
 
     @RequestMapping("/profile")
     public String getProfilePage(Model model){
-        UserRole userRole = restServiceTest.getUserRole();
-        //UserRole userRole = restServiceTest.getUserRole1();
+        //UserRole userRole = restServiceTest.getUserRole();
+        UserRole userRole = restServiceTest.getUserRole1();
         model.addAttribute("role", userRole);
         return "profile";
     }

@@ -31,7 +31,7 @@ public class RestServiceTest {
         return userRole;
     }
     public UserRole getUserRole1(){
-        return new UserRole("USER");
+        return new UserRole("SOME_ROLE");
     }
 
 
