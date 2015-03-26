@@ -23,6 +23,7 @@ import java.util.List;
 public class AddressController {
 
     @Autowired
+    @Qualifier("oAuthRestTemplate")
     private RestTemplate restTemplate;
 
     @Autowired 

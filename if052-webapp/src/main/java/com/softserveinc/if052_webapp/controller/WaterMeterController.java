@@ -34,6 +34,7 @@ public class WaterMeterController {
     private String restUrl;
 
     @Autowired
+    @Qualifier("oAuthRestTemplate")
     private RestTemplate restTemplate;
 
     private String addressId = "";

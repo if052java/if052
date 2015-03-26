@@ -1,13 +1,20 @@
 package com.softserveinc.if052_webapp.controller;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +28,18 @@ import java.util.Set;
 @Controller
 public class LoginController {
 
+    @Autowired
+    @Qualifier("restUrl")
+    String restUrl;
+
+    @Autowired
+    @Qualifier("oAuthRestTemplatePassword")
+    OAuth2RestTemplate restTemplate;
+
+
     private static Logger logger = Logger.getLogger(LoginController.class);
 
-    @RequestMapping("/login")
+    @RequestMapping("/signin")
     public String autologin(HttpServletRequest request){
 
 //        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("user", "password");
@@ -42,5 +58,14 @@ public class LoginController {
         logger.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities() + "!");
 
         return "redirect:/";
+    }
+
+    @RequestMapping("restin")
+//    @Autowired
+    //@Scope("session")
+    public String restIn(Model model){
+        String resource = restTemplate.getForObject(restUrl + "resource", String.class);
+        model.addAttribute("resource", "Password grant; received " + resource);
+        return "resource";
     }
 }

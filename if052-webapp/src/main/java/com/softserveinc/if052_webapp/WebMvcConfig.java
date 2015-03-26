@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
+import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
 import org.springframework.web.client.RestOperations;
@@ -133,6 +134,23 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
             restServiceTest.setRestTemplate(restOperations);
             return restServiceTest;
         }
+
+
+        @Bean
+        //@Scope("session")
+        public OAuth2RestTemplate oAuthRestTemplatePassword() {
+            ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
+            resource.setAccessTokenUri(restUrl + accessTokenUri);
+            resource.setClientId("trusted");
+            resource.setId("rest/trusted");
+            resource.setScope(Arrays.asList("trust", "read", "write"));
+            resource.setClientSecret("somesecret");
+            resource.setUsername("marissa");
+            resource.setPassword("koala");
+            return new OAuth2RestTemplate(resource);
+            //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
+        }
+
     }
 
 }

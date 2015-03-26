@@ -30,6 +30,7 @@ public class UserController {
     private String restUrl;
 
     @Autowired
+    @Qualifier("oAuthRestTemplate")
     private RestTemplate restTemplate;
     
     @RequestMapping("signup")
