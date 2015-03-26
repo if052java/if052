@@ -46,6 +46,18 @@
                         </tr>
                     </c:forEach>
                 </table>
+                    <%--hard-code url!!!--%>
+                <a href="/map?userId=1">
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" >
+                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                                Подивитись на карті
+                            </button>
+                        </div>
+                    </div>
+                </a>
+
                 <c:url var="addUrl" value="/addAddress"/>
                 <form:form action="${addUrl}" method="post" modelAttribute="address">
                     <table class="box-table-a">

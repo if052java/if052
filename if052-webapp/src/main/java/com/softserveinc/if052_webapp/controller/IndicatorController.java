@@ -54,7 +54,7 @@ public class IndicatorController {
     }
 
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
-    public String createIndicator(@ModelAttribute Indicator indicator){
+    public String addIndicator(@ModelAttribute Indicator indicator){
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + this.waterMeterId, WaterMeter.class);
         indicator.setWaterMeter(waterMeter);
         restTemplate.postForObject(restUrl + "indicators/", indicator, Indicator.class);

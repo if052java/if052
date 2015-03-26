@@ -123,3 +123,10 @@ button {
 #types, #paid {
     padding-left: 0;
 }
+#map-canvas {
+    width: inherit;
+    height: 400px;
+}
+.empty-page {
+    height: 400px;
+}

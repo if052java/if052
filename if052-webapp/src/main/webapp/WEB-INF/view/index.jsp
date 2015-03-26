@@ -11,19 +11,7 @@
     <tiles:putAttribute name="body">
         <div class="body">
             <div class="container">
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
+                <div class="empty-page"></div>
             </div>
         </div>
     </tiles:putAttribute>
