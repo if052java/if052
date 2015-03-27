@@ -34,7 +34,7 @@
                         <td><c:out value="${waterMeter.meterType.type}"/></td>
                         <td><c:out value="${waterMeter.tariff}"/></td>
                         <td><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}"/>">
-                            <button>Лічильники</button></a></td>
+                            <button>Показники</button></a></td>
                         <td><a href="<c:url value="/updateWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
                             <button> <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button></a></td>
                         <td><a href="<c:url value="/deleteWaterMeter?waterMeterId=${waterMeter.waterMeterId}"/>">
@@ -67,7 +67,7 @@
                                     </td>
                                     <td>
                                         <select class="form-control" name="typeId">
-                                            <c:forEach var="meterType" items="${metertypes}">
+                                            <c:forEach var="meterType" items="${meterTypes}">
                                                 <option value="${meterType.meterTypeId}">${meterType.type}</option>
                                             </c:forEach>
                                         </select>
