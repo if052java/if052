@@ -9,7 +9,8 @@ $( document ).ready(function() {
                 type: 'spline'
             },
             title: {
-                text: 'Графік витрат води за поточний рік'
+                text: 'Графік витрат за ' + year + '. Лічильник: ' + meterName
+                                          +', тип - ' + meterType + '.'
             },
             subtitle: {
                 text: ''
@@ -26,7 +27,7 @@ $( document ).ready(function() {
             },
             yAxis: {
                 title: {
-                    text: 'Значення (m^3)'
+                    text: 'Значення'
                 }
             },
             tooltip: {
@@ -42,7 +43,7 @@ $( document ).ready(function() {
             },
 
             series: [{
-                name: 'Indicator',
+                name: 'Значення',
                 data: indicatorsData
             }
             ]
