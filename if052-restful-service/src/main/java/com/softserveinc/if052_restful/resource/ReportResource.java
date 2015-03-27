@@ -41,7 +41,7 @@ public class ReportResource {
     @GET
     @Path("{reportId}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response consumeReportRequest(@PathParam("reportId") int reportId) {
+    public Response getReport(@PathParam("reportId") int reportId) {
 
 
         return Response
@@ -52,7 +52,7 @@ public class ReportResource {
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response insertReportRequest(ReportRequest reportRequest) {
+    public Response insertReport(ReportRequest reportRequest) {
         Report report = reportConverter.createReport(reportRequest);
         report.setReportRequest(reportRequest.toString());
         report.setXmlReport(reportConverter.convertToXml(report).toString());

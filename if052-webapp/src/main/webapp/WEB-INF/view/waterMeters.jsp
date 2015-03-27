@@ -67,8 +67,8 @@
                                     </td>
                                     <td>
                                         <select class="form-control" name="typeId">
-                                            <c:forEach var="metertype" items="${metertypes}">
-                                                <option value="${metertype.meterTypeId}">${metertype.type}</option>
+                                            <c:forEach var="meterType" items="${metertypes}">
+                                                <option value="${meterType.meterTypeId}">${meterType.type}</option>
                                             </c:forEach>
                                         </select>
                                     </td>
