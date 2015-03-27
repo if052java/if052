@@ -41,6 +41,15 @@ http://www.w3.org/2001/XMLSchema-instance ">
     </filter-mapping>
 
     <filter>
+        <filter-name>CORS</filter-name>
+        <filter-class>com.softserveinc.if052_restful.SimpleCORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CORS</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <init-param>
