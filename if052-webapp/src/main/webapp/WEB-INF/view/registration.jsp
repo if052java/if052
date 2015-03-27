@@ -36,6 +36,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-xs-3 control-label">Email</label>
+                    <div class="col-xs-5">
+                        <input type="email" class="form-control" name="email" placeholder="email" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-xs-3 control-label">Login</label>
                     <div class="col-xs-5">
                         <input id="login" type="text" class="form-control" name="login" placeholder="login"/>
