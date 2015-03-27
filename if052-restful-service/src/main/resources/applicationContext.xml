@@ -9,4 +9,10 @@
                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
                 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <!--!!!!keep this file empty.!!!
+    If you don`t, beans you define here won't be exposed in context, loaded from Dispatcher-servlet.xml-->
+
+    <!--You could try to add it to contextLoaderListener, but if I were you - i wouldn't make it-->
+    <!--Nazar Ostryzhniuk-->
+
 </beans>
