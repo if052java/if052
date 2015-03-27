@@ -32,6 +32,12 @@ public class IndicatorController {
 
     private String waterMeterId = "";
 
+    /**
+     *
+     * @param waterMeterId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/indicators{waterMeterId}")
     public String getIndicatorsPage(int waterMeterId, ModelMap model) {
         this.waterMeterId = String.valueOf(waterMeterId);
@@ -44,6 +50,11 @@ public class IndicatorController {
         return "indicators";
     }
 
+    /**
+     *
+     * @param indicatorId
+     * @return
+     */
     @RequestMapping("/deleteIndicator{indicatorId}")
     public String deleteIndicator(int indicatorId) {
         Indicator indicator = restTemplate.getForObject(restUrl + "indicators/getone/"+ indicatorId, Indicator.class);
@@ -54,6 +65,11 @@ public class IndicatorController {
         return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
     }
 
+    /**
+     *
+     * @param indicator
+     * @return
+     */
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
     public String addIndicator(@ModelAttribute Indicator indicator){
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + this.waterMeterId, WaterMeter.class);
@@ -63,6 +79,12 @@ public class IndicatorController {
         return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
     }
 
+    /**
+     *
+     * @param indicatorId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/updateIndicator{indicatorId}")
     public String getUpdateIndicatorPage(int indicatorId, ModelMap model){
         Indicator indicator = restTemplate.getForObject(restUrl + "indicators/getone/" + indicatorId, Indicator.class);
@@ -73,6 +95,11 @@ public class IndicatorController {
         return "updateIndicator";
     }
 
+    /**
+     *
+     * @param indicator
+     * @return
+     */
     @RequestMapping(value = "/updateIndicator", method = RequestMethod.POST)
     public String updateIndicator(@ModelAttribute Indicator indicator){
         WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + waterMeterId, WaterMeter.class);

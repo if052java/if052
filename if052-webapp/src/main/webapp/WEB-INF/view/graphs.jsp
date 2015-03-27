@@ -21,6 +21,7 @@
                 <form:form action="${drawByMonth}">
                         Виберіть опцію :
                     <select name="month"  >
+                        <option value="13">Виберіть місяць</option>
                         <option value="1">Січень</option>
                         <option value="2">Лютий</option>
                         <option value="3">Березень</option>
@@ -59,7 +60,10 @@
         <script src="/resources/js/highcharts/exporting.js" type="text/javascript"></script>
         <script type="text/javascript">
             var indicatorsData = ${indicatorsData}
-            var waterMeters =["bath","garage","toilet"]
+            var year = '${year}'
+            var meterName = '${meterName}'
+            var meterType = '${meterType}'
+            
         </script>
         <script src="/resources/js/highcharts/graphs.js"></script>
     </tiles:putAttribute>
