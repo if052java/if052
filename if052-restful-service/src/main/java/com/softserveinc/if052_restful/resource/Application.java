@@ -21,10 +21,7 @@ public class Application extends ResourceConfig{
         register(JacksonFeature.class); /* feature that registers Jackson JSON providers –
                                    you need it for the application to understand JSON data */
 
-        register(HelloResource.class); /*service component that exposes the REST API via annotations */
-        //register(GreetingResource.class);
-
-        register(AddressResource.class);
+        register(AddressResource.class); /*service component that exposes the REST API via annotations */
 
         register(WaterMeterResource.class);
 

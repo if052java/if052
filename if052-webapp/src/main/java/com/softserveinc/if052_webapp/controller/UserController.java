@@ -227,5 +227,22 @@ public class UserController {
         
         return json;
     }
+
+    @RequestMapping(value = "/map{userId}")
+    public String getAddressPage(int userId, ModelMap model){
+        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
+
+        String gMapData = "";
+        for (int i=0; i<arrayOfAddresses.length; i++) {
+            gMapData+= (arrayOfAddresses[i].getCity() + ", вул. "
+                    + arrayOfAddresses[i].getStreet() + " " + arrayOfAddresses[i].getBuilding() + "~");
+        }
+        // delete last '~' in string
+        gMapData = gMapData.substring(0, gMapData.length()-1);
+
+        model.addAttribute("gMapData", gMapData);
+
+        return "map";
+    }
 }
 
