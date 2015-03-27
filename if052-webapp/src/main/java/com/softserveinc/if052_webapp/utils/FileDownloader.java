@@ -18,7 +18,7 @@ public class FileDownloader {
 
     public void downloadFile(HttpServletRequest request, HttpServletResponse response, String report) throws IOException{
 
-        String filePath = "/downloads/report.xml";
+        String filePath = "/report.xml";
         ServletContext context = request.getServletContext();
         String appPath = context.getRealPath("");
         String fullPath = appPath + filePath;

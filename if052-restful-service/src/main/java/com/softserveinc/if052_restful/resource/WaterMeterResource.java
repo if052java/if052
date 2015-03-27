@@ -69,7 +69,7 @@ public class WaterMeterResource {
             logger.info("INFO: Watermeter has been successfully added with id " + waterMeter.getWaterMeterId() + ".");
             return Response
                     .status(Response.Status.CREATED)
-                    .header("Location", "/watermeters" + waterMeter.getWaterMeterId())
+                    .header("Location", "/rest/watermeters" + waterMeter.getWaterMeterId())
                     .build();
         } catch (DataIntegrityViolationException e) {
             logger.warn("WARNING: Watermeter with this name already exist.", e);
