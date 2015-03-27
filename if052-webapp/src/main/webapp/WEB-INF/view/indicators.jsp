@@ -18,10 +18,11 @@
             <div class="container">
 
                 <a href="<c:url value='/watermeter?addressId=${waterMeter.address.addressId}'/>">
-                <button class="btn btn-default" >
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    Назад
-                </button></a>
+                    <button class="btn btn-default" >
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        Назад
+                    </button>
+                </a>
 
                 <table class="table table-hover" class="display" id="paginated">
 

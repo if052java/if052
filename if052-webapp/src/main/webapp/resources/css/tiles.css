@@ -130,3 +130,6 @@ button {
 .empty-page {
     height: 400px;
 }
+.btn-back {
+    margin-bottom: 1em;
+}

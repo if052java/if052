@@ -11,12 +11,10 @@ function initialize()
     }
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-    var arrayData = $('#gMapData').val().split("~")
-
+    var arrayData = gMapData.split("~")
     for (var i=0; i<arrayData.length; i++){
         codeAddress(arrayData[i])
     }
-
 }
 
 function codeAddress(address)
@@ -33,7 +31,7 @@ function codeAddress(address)
                     position: results[0].geometry.location
                 });
         } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            alert('Одну або декілька адрес вказано некоректно!');
         }
     });
 }

@@ -241,6 +241,7 @@ public class UserController {
         gMapData = gMapData.substring(0, gMapData.length()-1);
 
         model.addAttribute("gMapData", gMapData);
+        model.addAttribute("userId", userId);
 
         return "map";
     }
