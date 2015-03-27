@@ -65,5 +65,8 @@ $(document).ready(function() {
                 }, 
                 500
             );
+            if ($('#login').val().length < 8) {
+                $('#login-errors').html("");
+            }
         });
     });
