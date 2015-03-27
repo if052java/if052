@@ -14,8 +14,7 @@ import java.util.List;
  * Created by Maksym Vynnyk on 02.02.2015.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml",
-                                 "classpath:h2-datasource.xml"})
+@ContextConfiguration(locations={"classpath*:context.xml"})
 public class IndicatorServiceTest {
     @Autowired
     private IndicatorService indicatorService;
