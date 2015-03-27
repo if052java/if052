@@ -16,10 +16,13 @@
         <div class="body">
 
             <div class="container">
-                <button class="btn btn-primary" onclick="history.go(-1);" >
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    Назад
-                </button>
+
+                <a href="<c:url value='/watermeter?addressId=${waterMeter.address.addressId}'/>">
+                    <button class="btn btn-default" >
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        Назад
+                    </button>
+                </a>
 
                 <table class="table table-hover" class="display" id="paginated">
 
@@ -91,7 +94,6 @@
                         <thead>
                             <tr>
                                 <th>Дата</th>
-                                <th>Поточний тариф</th>
                                 <th>Показник</th>
                                 <th>Оплачено</th>
                             </tr>
@@ -99,8 +101,6 @@
                         <tbody>
                             <tr>
                                 <td><input class="form-control" type="text" id="datepicker" name="date"/></td>
-                                <td><input class="form-control" type="number" step="0.1"
-                                           name="tariffPerDate" value="${waterMeter.tariff}"/></td>
                                 <td><input class="form-control" type="number" step="1"
                                            name="value" value="${indicators.get(indicators.size()-1).value}"/></td>
                                 <td><input class="checkbox" type="checkbox" name="paid" /></td>

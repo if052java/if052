@@ -10,15 +10,15 @@ body .page {
     min-height: 100%;
     position: relative;
     background: #e8dbda;
+    background: url("/resources/images/tiles/mooning.png") repeat;
     background: radial-gradient(#37d0ff, #000);
-    /*background: url("/resources/images/tiles/witewall_3.png") repeat;*/
+
 }
 
 /*-----------------------------------HEADER------------*/
 
 .navbar-default {
     background: rgba(255, 255, 255, 0.3);
-    /*background: rgba(58, 58, 58, 0.30);*/
     margin-bottom: 0;
     border: 0;
 }
@@ -129,4 +129,7 @@ button {
 }
 .empty-page {
     height: 400px;
+}
+.btn-back {
+    margin-bottom: 1em;
 }

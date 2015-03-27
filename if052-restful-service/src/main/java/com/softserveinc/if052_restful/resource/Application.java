@@ -4,9 +4,12 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
+import javax.ws.rs.ApplicationPath;
+
 /**
  * Created by Nazar Ostryzhniuk on 2/3/15.
  */
+@ApplicationPath("/rest/*")
 public class Application extends ResourceConfig{
     /**
      * Register JAX-RS application components.
@@ -18,10 +21,7 @@ public class Application extends ResourceConfig{
         register(JacksonFeature.class); /* feature that registers Jackson JSON providers –
                                    you need it for the application to understand JSON data */
 
-        register(HelloResource.class); /*service component that exposes the REST API via annotations */
-        //register(GreetingResource.class);
-
-        register(AddressResource.class);
+        register(AddressResource.class); /*service component that exposes the REST API via annotations */
 
         register(WaterMeterResource.class);
 

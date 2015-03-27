@@ -9,31 +9,10 @@
                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
                 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <mvc:annotation-driven/>
+    <!--!!!!keep this file empty.!!!
+    If you don`t, beans you define here probably won't be exposed in context, loaded from Dispatcher-servlet.xml-->
 
-    <context:annotation-config/>
-    <context:component-scan base-package="com.softserveinc.if052_restful"/>
-
-    <!-- scan for mappers and let them be autowired -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.softserveinc.if052_restful.mappers"/>
-    </bean>
-
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-        <constructor-arg index="0" ref="sqlSessionFactory"/>
-    </bean>
-
-    <!-- define the SqlSessionFactory -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="com.softserveinc.if052_restful.domain"/>
-        <property name="mapperLocations" value="classpath*:com/softserveinc/if052_restful/mappers/**/*.xml" />
-    </bean>
+    <!--You could try to add it to contextLoaderListener, but if I were you - i wouldn't make it-->
+    <!--Nazar Ostryzhniuk-->
 
 </beans>

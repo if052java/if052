@@ -59,7 +59,7 @@ public class ReportResource {
         reportService.insertReport(report);
         return Response
                 .status(Response.Status.CREATED)
-                .header("Location", "/report/" + report.getReportId())
+                .header("Location", "/rest/report/" + report.getReportId())
                 .build();
     }
 

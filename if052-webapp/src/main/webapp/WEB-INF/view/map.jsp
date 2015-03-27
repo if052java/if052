@@ -9,12 +9,20 @@
     <tiles:putAttribute name="body">
         <div class="body">
             <div class="container">
-                <input value="${gMapData}" hidden="hidden" id="gMapData">
+                <a href="<c:url value='/addresses?userId=${userId}'/>">
+                    <button class="btn btn-default btn-back" >
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        Назад
+                    </button>
+                </a>
 
                 <div id="map-canvas"></div>
             </div>
         </div>
 
+        <script type="text/javascript">
+            var gMapData = '${gMapData}'
+        </script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/google-map.js'/>"></script>
     </tiles:putAttribute>

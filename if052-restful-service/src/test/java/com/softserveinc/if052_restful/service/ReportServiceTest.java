@@ -21,8 +21,7 @@ import java.util.Date;
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml",
-        "classpath:h2-datasource.xml"})
+@ContextConfiguration(locations={"classpath*:context.xml"})
 public class ReportServiceTest {
 
     @Autowired

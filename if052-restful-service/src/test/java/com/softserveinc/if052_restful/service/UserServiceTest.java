@@ -13,8 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:applicationContext.xml",
-                                 "classpath:h2-datasource.xml"})
+@ContextConfiguration(locations={"classpath*:context.xml"})
 public class UserServiceTest {
     @Autowired
     private UserService userService;

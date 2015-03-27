@@ -1,57 +1,85 @@
 /**
  * Created by valentyn on 3/2/15.
  */
-$(function () {
-    $('#container').highcharts({
-        chart: {
-            type: 'spline'
-        },
-        title: {
-            text: 'Schedule of water consumption for all time'
-        },
-        subtitle: {
-            text: 'From 2015 year'
-        },
-        xAxis: {
-            type: 'datetime',
-            dateTimeLabelFormats: { // don't display the dummy year
-                month: '%e. %b',
-                year: '%e. %b'
+// A $( document ).ready() block.
+$( document ).ready(function() {
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'spline'
             },
             title: {
-                text: 'Date'
-            }
-        },
-        yAxis: {
-            title: {
-                text: 'Show value (m^3)'
-            }
-        },
-        tooltip: {
-            //headerFormat: '<b>{series.name}</b><br>',
-            pointFormat: '{point.x:%e. %b}: {point.y:.2f} m^3'
-        },
-
-        plotOptions: {
-            spline: {
-                marker: {
-                    enabled: true
+                text: 'Графік витрат за ' + year + '. Лічильник: ' + meterName
+                                          +', тип - ' + meterType + '.'
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: {
+                    month: '%e. %b',
+                    year: '%e. %b'
+                },
+                title: {
+                    text: 'Date'
                 }
-            }
-        },
+            },
+            yAxis: {
+                title: {
+                    text: 'Значення'
+                }
+            },
+            tooltip: {
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f} m^3'
+            },
 
-        series: [{
-            name: 'Indicator',
-            data: indicatorsData
-        }
-        ]
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: true
+                    }
+                }
+            },
+
+            series: [{
+                name: 'Значення',
+                data: indicatorsData
+            }
+            ]
+        });
+
     });
 
+    $("#address").change(function() {
+        $('#waterMeter').empty();
+        addressId = $("#address option:selected").val();
+        var selected = $('#address').find(":selected").text();
+        if (selected == "Виберіть адресу"){
+            $("#submit").attr('disabled', 'disabled');
+            $("#waterMeter").attr('disabled', 'disabled');
+        } else {
+            $("#submit").removeAttr('disabled');
+            $("#waterMeter").removeAttr('disabled');
+        }
+         $.ajax({
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            url: 'http://localhost:9000/watermeterlist?addressId=' + addressId,
+            dataType: 'json',
+            success:(function(data){
+                $.each(data, function(index, value) {
+                    $('#waterMeter')
+                        .append($("<option></option>")
+                            .attr("value",value.waterMeterId)
+                            .text(value.name));
+                });
+            })
+        });
+    });
+
+        $("#submit").attr('disabled', 'disabled');
+        $("#waterMeter").attr('disabled', 'disabled');
+
 });
 
-$.each(waterMeters, function(index, value) {
-    $('#waterMeter')
-        .append($("<option></option>")
-            .attr("value",index)
-            .text(value));
-});

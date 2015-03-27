@@ -12,9 +12,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.2.13.RELEASE</spring.version>
-        <security.version>3.2.5.RELEASE</security.version>
+        <security.version>3.2.6.RELEASE</security.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- Hibernate Validator -->
         <dependency>
             <groupId>javax.validation</groupId>
@@ -181,7 +187,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+
+            <plugin> <!--for heroku-->
                 <groupId>com.heroku.sdk</groupId>
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>0.3.4</version>
@@ -190,7 +197,16 @@
                     <jdkVersion>1.7</jdkVersion>
                 </configuration>
             </plugin>
-            <!--for heroku-->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <!-- web.xml is not mandatory since JavaEE 5 -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
