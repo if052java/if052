@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -34,7 +35,8 @@ public class WaterMeterController {
     private String restUrl;
 
     @Autowired
-    private RestTemplate restTemplate;
+    @Qualifier("credentialsTemplate")
+    private RestOperations restTemplate;
 
     @Autowired
     private ObjectMapper objectMapper;

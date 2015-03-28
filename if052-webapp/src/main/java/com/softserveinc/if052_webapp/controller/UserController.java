@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -31,7 +32,8 @@ public class UserController {
     private String restUrl;
 
     @Autowired
-    private RestTemplate restTemplate;
+    @Qualifier("credentialsTemplate")
+    private RestOperations restTemplate;
 
     @Autowired
     private ObjectMapper objectMapper;
