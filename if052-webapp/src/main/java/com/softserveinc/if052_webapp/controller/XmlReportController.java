@@ -43,12 +43,15 @@ public class XmlReportController {
     @Qualifier("restUrl")
     private String restUrl;
 
+    private final String START_DATE = "startDate";
+    private final String METER_TYPES = "meterTypes";
+
     @RequestMapping("/xmlreport")
     public String getXmlReportPage(ModelMap model) {
         Date minDate = restTemplate.getForObject(restUrl + "report/mindate", Date.class);
         String date = new SimpleDateFormat("yyyy/MM/dd").format(minDate);
-        model.addAttribute("startDate", date);
-        model.addAttribute("meterTypes", Arrays.asList(restTemplate.getForObject(restUrl + "metertypes/", MeterType[].class)));
+        model.addAttribute(START_DATE, date);
+        model.addAttribute(METER_TYPES, Arrays.asList(restTemplate.getForObject(restUrl + "metertypes/", MeterType[].class)));
         return "xmlReport";
     }
 
