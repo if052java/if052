@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -22,7 +23,8 @@ import java.util.List;
 public class AddressController {
 
     @Autowired
-    private RestTemplate restTemplate;
+    @Qualifier("credentialsTemplate")
+    private RestOperations restTemplate;
 
     @Autowired 
     @Qualifier("restUrl")

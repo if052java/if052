@@ -144,7 +144,7 @@ public class OAuth2ServerConfig {
 
 		@Override
 		public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-			oauthServer.realm("provider/client");
+			oauthServer.realm("rest/client");
 		}
 
 	}

@@ -33,7 +33,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     @Value("${restAddress}")
     public String restUrl(String restUrl){
-        return restUrl;
+        return restUrl+"/rest/";
     }
 
     @Bean
