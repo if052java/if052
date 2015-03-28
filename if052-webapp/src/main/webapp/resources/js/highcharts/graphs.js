@@ -31,7 +31,7 @@ $( document ).ready(function() {
                 }
             },
             tooltip: {
-                pointFormat: '{point.x:%e. %b}: {point.y:.2f} m^3'
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
             },
 
             plotOptions: {

@@ -15,7 +15,7 @@
         <div class="body">
             <div id="container" class="graphs-size"></div>
         
-            <c:url var="drawByMonth" value="/graphByMonth" />
+            <c:url var="drawByMonth" value="/graphByOption" />
 
             <div id="chooseMonth" class = "check-box">
                 <form:form action="${drawByMonth}">

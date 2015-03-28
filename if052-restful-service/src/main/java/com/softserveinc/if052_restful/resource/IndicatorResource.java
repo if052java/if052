@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +30,9 @@ public class IndicatorResource {
     public Response getIndicators(@PathParam("waterMeterId") int waterMeterId) {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
         List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
-
+        if (indicators == null) {
+            indicators = new ArrayList<Indicator>();
+        }
         return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
     }
 

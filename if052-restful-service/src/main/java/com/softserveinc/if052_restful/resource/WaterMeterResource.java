@@ -54,6 +54,25 @@ public class WaterMeterResource {
 
     }
 
+    @GET
+    @Path("/firstMeter/{userId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getFirstMeteByUserId(@PathParam("userId") int userId) {
+        LOGGER.info("INFO: Searching for first meter for user with id " + userId+ ".");
+        WaterMeter waterMeter = waterMeterService.getFirstMeterByUserId(userId);
+        if (waterMeter == null) {
+            LOGGER.info("INFO: First meter for user with request " + userId + " has not been found.");
+            return Response
+                .status(Response.Status.NOT_FOUND)
+                .build();
+        }
+        LOGGER.info("INFO:First meter with requested id " + userId + " has been successfully found.");
+        return Response
+            .status(Response.Status.OK)
+            .entity(waterMeter)
+            .build();
+    }
+
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     public Response insertWaterMeter(WaterMeter waterMeter) {
