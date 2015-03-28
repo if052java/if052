@@ -13,21 +13,25 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
+
         <div class="body">
-            <script src="<c:url value="/resources/js/jquery/jquery-ui.js"/>" type="text/javascript"></script>
-            <script src="<c:url value="/resources/js/xmlReport.js"/>" type="text/javascript"></script>
 
             <div class="container">
+
                 <h2>Оберіть фільтри для звіту:</h2>
                 <c:url var="createXmlUrl" value="/createXmlReport"/>
-                <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest">
+                <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest" id="xmlForm">
+
                     <div class="form-group">
-                        <label for="users">Логін користувача ("ALL" для усіх)</label>
-                        <input type="text" name="users" class="form-control" id="users" placeholder="Choose users">
+                        <label for="users">Логін користувача</label>
+                        <div class="checkbox-inline">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" name="users" value="ALL" id="allUsers"/> Усі користувачі
+                            </label>
+                        </div>
+                        <input type="text" name="users" class="form-control" id="users" />
                     </div>
                     <div class="form-group">
                         <label for="startDate">Початкова дата</label>
@@ -35,21 +39,25 @@
                     </div>
                     <div class="form-group">
                         <label for="endDate">Кінцева дата</label>
-                        <input type="text" name="endDate" class="form-control" id="endDate">
+                        <input type="text" name="endDate" class="form-control" id="endDate"/>
                     </div>
 
                     <div class="form-group">
                     <div class="checkbox-inline" id="types">
-                        <label for="types">Необхідні види лічильників</label><br>
+                        <label for="types">Необхідні види лічильників</label>
+                        <div class="checkbox-inline">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="allTypes"/> Усі види
+                            </label>
+                        </div> <br>
                         <c:forEach var="meterType" items="${meterTypes}">
                             <label class="checkbox-inline">
-                                <input type="checkbox" name="types" value="${meterType.meterTypeId}"> ${meterType.type}
+                                <input type="checkbox" name="types" value="${meterType.meterTypeId}"/> ${meterType.type}
                             </label>
                         </c:forEach>
                     </div>
                     </div>
 
-                    <%--<br><br>--%>
                     <div class="form-group">
                     <div class="radio-inline" id="paid">
                         <label for="paid">Статус оплати</label><br>
@@ -69,10 +77,26 @@
                     <button type="submit" class="btn btn-primary">Скачати xml-звіт</button>
                     </div>
                 </form:form>
-
             </div>
 
-
         </div>
+
+
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/xmlReport.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
+        <script>
+            $(document).ready(function() {
+                var logins = [];
+                <c:forEach items="${logins}" var="login">
+                logins.push("<c:out value="${login}" />");
+                </c:forEach>
+                $("#users").autocomplete({
+                    source: logins
+                });
+            });
+        </script>
+
     </tiles:putAttribute>
 </tiles:insertDefinition>
+

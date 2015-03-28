@@ -63,6 +63,8 @@
             </collection>
         </collection>
     </resultMap>
+    
+
 
     <select id="getUserByLogin" parameterType="String" resultMap="UserSimpleResult">
         SELECT
@@ -202,5 +204,12 @@
         LEFT OUTER JOIN indicator i ON wm.water_meter_id = i.water_meter_id
         WHERE c.login = #{login}
     </select>
+    
+    <select id="getLogins" resultType="String">
+        SELECT
+        c.login
+        FROM consumer c
+    </select>
+            
 
 </mapper>

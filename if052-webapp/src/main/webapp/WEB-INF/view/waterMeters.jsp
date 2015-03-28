@@ -12,6 +12,7 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
 
+
         <div class="body">
 
             <div class="container">

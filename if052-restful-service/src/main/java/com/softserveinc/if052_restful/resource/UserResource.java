@@ -55,6 +55,17 @@ public class UserResource {
         }
     }
 
+    @GET
+    @Path("/logins")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getLogins() {
+        List<String> logins = userService.getLogins();
+        return Response
+                .status(Response.Status.OK)
+                .entity(logins)
+                .build();
+    }
+
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     public Response createUser(

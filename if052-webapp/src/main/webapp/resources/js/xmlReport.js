@@ -1,14 +1,23 @@
 /**
  * Created by Danylo Tiahun on 25.03.2015.
  */
-$(function() {
-    $( "#startDate" ).datepicker({dateFormat:"yy/mm/dd"});
-});
-$(function() {
-    $( "#endDate" ).datepicker({dateFormat:"yy/mm/dd"}).datepicker("setDate", new Date());
-});
-$(function() {
-    var startDate = $("#startDate").val();
-    var endDate = $("#endDate").val();
 
-});
+$(document).ready(function () {
+
+
+    $.datepicker.setDefaults($.datepicker.regional[ "uk" ]);
+    $("#startDate").datepicker({dateFormat: "yy/mm/dd"});
+    $("#endDate").datepicker({dateFormat: "yy/mm/dd"}).datepicker("setDate", new Date());
+
+
+    $('#allUsers').change(function () {
+        $('#users').prop('disabled', this.checked);
+    })
+
+
+    $('#allTypes').change(function () {
+        $('[name="types"]').prop("checked", this.checked);
+    })
+
+
+})
