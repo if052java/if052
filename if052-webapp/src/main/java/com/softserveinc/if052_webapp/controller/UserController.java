@@ -80,48 +80,25 @@ public class UserController {
             model.addAttribute("meterName", meter.getName());
             model.addAttribute("meterType", meter.getMeterType().getType());
 
-            Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/" + meter.getWaterMeterId(), Indicator[].class);
-            //- Get all indicators of first meter for graph -//
-            List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
-
-            //- Create simple date format -//
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
             //- Get current year -//
             int year = Calendar.getInstance().get(Calendar.YEAR);
 
-            try {
-                //- Get start and end date-//
-                Date startDate;
-                Date endDate;
-                
-                startDate = sdf.parse(year + "/01/01 00:00:00");
-                endDate = sdf.parse(year + "/12/31 23:59:59");
+            //- Get all indicators of first meter for graph -//
+            Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl
+                + "indicators/byYear/" + meter.getWaterMeterId() + ";year=" + year, Indicator[].class);
+            List < Indicator > indicators = Arrays.asList( arrayOfIndicators );
+            
+            long[][] arrayOfData = new long[indicators.size()][2];
 
-                //- GET current indicators for graph -//
-                List < Indicator > indicatorsData = new ArrayList<Indicator>();
-
-                for(Indicator indicator : indicators){
-                    if(indicator.getDate().compareTo(startDate) >= 0
-                        && indicator.getDate().compareTo(endDate) <= 0) {
-                        indicatorsData.add(indicator);
-                    }
+            if (indicators.get(0).getDate() != null) {
+                for (int i = 0; i < indicators.size(); i++) {
+                    arrayOfData[i][0] = indicators.get(i).getDate().getTime() + 7200000;
+                    arrayOfData[i][1] = indicators.get(i).getValue();
                 }
-
-                long[][] arrayOfData = new long[indicatorsData.size()][2];
-
-                if (indicators.get(0).getDate() != null) {
-                    for (int i = 0; i < indicatorsData.size(); i++) {
-                        arrayOfData[i][0] = indicatorsData.get(i).getDate().getTime() + 7200000;
-                        arrayOfData[i][1] = indicatorsData.get(i).getValue();
-                    }
-                }
-
-                String masAsString = Arrays.deepToString(arrayOfData);
-                model.addAttribute("indicatorsData", masAsString);
-            } catch ( ParseException e){
-                logger.warn(e.getMessage(), e);
             }
+
+            String masAsString = Arrays.deepToString(arrayOfData);
+            model.addAttribute("indicatorsData", masAsString);
 
             model.addAttribute("year", year);
 
@@ -139,10 +116,6 @@ public class UserController {
                                  @RequestParam("month") Integer month,
                                  @RequestParam("year") Integer year,
                                  ModelMap model) {
-        //- Get list of indicators -//
-        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/" + meterId, Indicator[].class);
-        List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
-
         //- Get list of addresses for select-//
         Address[] arrayOfAddress = restTemplate.getForObject(restUrl + "addresses/list/" + 1, Address[].class);
         List<Address> addresses = Arrays.asList(arrayOfAddress);
@@ -164,109 +137,98 @@ public class UserController {
             logger.warn(e.getMessage(), e);
         }
         //- Get start and end date-//
-        Date startDate = null;
-        Date endDate = null;
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String startDate = "";
+        String endDate = "";
 
+        //- Get information for leap of year-//
         GregorianCalendar cal =
             (GregorianCalendar) GregorianCalendar.getInstance();
-        boolean isLeapYear = cal.isLeapYear(year);
-            try{
-                if(month!=13) {
-                    switch (month) {
-                        case 1: {
-                            startDate = sdf.parse(year + "/01/01 00:00:00");
-                            endDate = sdf.parse(year + "/01/31 23:59:59");
-                            break;
-                        }
-                        case 2: {
-                            if (!isLeapYear) {
-                                startDate = sdf.parse(year + "/02/01 00:00:00");
-                                endDate = sdf.parse(year + "/02/28 23:59:59");
-                            } else {
-                                startDate = sdf.parse(year + "/02/01 00:00:00");
-                                endDate = sdf.parse(year + "/02/29 23:59:59");
-                            }
-                            break;
-                        }
-                        case 3: {
-                            startDate = sdf.parse(year + "/03/01 00:00:00");
-                            endDate = sdf.parse(year + "/03/31 23:59:59");
-                            break;
-                        }
-                        case 4: {
-                            startDate = sdf.parse(year + "/04/01 00:00:00");
-                            endDate = sdf.parse(year + "/04/30 23:59:59");
-                            break;
-                        }
-                        case 5: {
-                            startDate = sdf.parse(year + "/05/01 00:00:00");
-                            endDate = sdf.parse(year + "/05/31 23:59:59");
-                            break;
-                        }
-                        case 6: {
-                            startDate = sdf.parse(year + "/06/01 00:00:00");
-                            endDate = sdf.parse(year + "/06/30 23:59:59");
-                            break;
-                        }
-                        case 7: {
-                            startDate = sdf.parse(year + "/07/01 00:00:00");
-                            endDate = sdf.parse(year + "/07/31 23:59:59");
-                            break;
-                        }
-                        case 8: {
-                            startDate = sdf.parse(year + "/08/01 00:00:00");
-                            endDate = sdf.parse(year + "/08/31 23:59:59");
-                            break;
-                        }
-                        case 9: {
-                            startDate = sdf.parse(year + "/09/01 00:00:00");
-                            endDate = sdf.parse(year + "/09/30 23:59:59");
-                            break;
-                        }
-                        case 10: {
-                            startDate = sdf.parse(year + "/10/01 00:00:00");
-                            endDate = sdf.parse(year + "/10/31 23:59:59");
-                            break;
-                        }
-                        case 11: {
-                            startDate = sdf.parse(year + "/11/01 00:00:00");
-                            endDate = sdf.parse(year + "/11/30 23:59:59");
-                            break;
-                        }
-                        case 12: {
-                            startDate = sdf.parse(year + "/12/01 00:00:00");
-                            endDate = sdf.parse(year + "/12/31 23:59:59");
-                            break;
-                        }
-                    }
-                } else{
-                    startDate = sdf.parse(year + "/01/01 00:00:00");
-                    endDate = sdf.parse(year + "/12/31 23:59:59");
-                }
-        } catch(ParseException e){
-                logger.warn(e.getMessage(), e);
-            }
         
-        //- GET current indicators for graph -//
-        List < Indicator > indicatorsData = new ArrayList<Indicator>();
-
-        //- Checking, if list of indicators is empty-//
-        if (indicators.get(0).getDate() != null) {
-            for (Indicator indicator : indicators) {
-                if (indicator.getDate().compareTo(startDate) >= 0
-                    && indicator.getDate().compareTo(endDate) <= 0) {
-                    indicatorsData.add(indicator);
+        boolean isLeapYear = cal.isLeapYear(year);
+            if(month!=13) {
+                switch (month) {
+                    case 1: {
+                        startDate =year + "-01-01 00:00:00";
+                        endDate = year + "-01-31 23:59:59";
+                        break;
+                    }
+                    case 2: {
+                        if (!isLeapYear) {
+                            startDate = year + "-02-01 00:00:00";
+                            endDate = year + "-02-28 23:59:59";
+                        } else {
+                            startDate = year + "-02-01 00:00:00";
+                            endDate = year + "-02-29 23:59:59";
+                        }
+                        break;
+                    }
+                    case 3: {
+                        startDate = year + "-03-01 00:00:00";
+                        endDate = year + "-03-31 23:59:59";
+                        break;
+                    }
+                    case 4: {
+                        startDate = year + "-04-01 00:00:00";
+                        endDate = year + "-04-30 23:59:59";
+                        break;
+                    }
+                    case 5: {
+                        startDate = year + "-05-01 00:00:00";
+                        endDate = year + "-05-31 23:59:59";
+                        break;
+                    }
+                    case 6: {
+                        startDate = year + "-06-01 00:00:00";
+                        endDate = year + "-06-30 23:59:59";
+                        break;
+                    }
+                    case 7: {
+                        startDate = year + "-07-01 00:00:00";
+                        endDate = year + "-07-31 23:59:59";
+                        break;
+                    }
+                    case 8: {
+                        startDate = year + "-08-01 00:00:00";
+                        endDate = year + "-08-31 23:59:59";
+                        break;
+                    }
+                    case 9: {
+                        startDate = year + "-09-01 00:00:00";
+                        endDate = year + "-09-30 23:59:59";
+                        break;
+                    }
+                    case 10: {
+                        startDate = year + "-10-01 00:00:00";
+                        endDate = year + "-10-31 23:59:59";
+                        break;
+                    }
+                    case 11: {
+                        startDate = year + "-11-01 00:00:00";
+                        endDate = year + "-11-30 23:59:59";
+                        break;
+                    }
+                    case 12: {
+                        startDate = year + "-12-01 00:00:00";
+                        endDate = year + "-12-31 23:59:59";
+                        break;
+                    }
                 }
+            } else{
+                startDate = year + "-01-01 00:00:00";
+                endDate = year + "-12-31 23:59:59";
             }
-        }
 
-        long[][] arrayOfData = new long[indicatorsData.size()][2];
+        //- Get list of indicators -//
+        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl 
+            + "indicators/byDates/" + meterId
+            + ";startDate=" + startDate + ";endDate=" + endDate, Indicator[].class);
+        List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
 
-        for (int i = 0; i < indicatorsData.size(); i++) {
-            arrayOfData[ i ] [ 0 ] = indicatorsData.get(i).getDate().getTime() + 7200000;
-            arrayOfData[ i ] [ 1 ] = indicatorsData.get(i).getValue();
+        long[][] arrayOfData = new long[indicators.size()][2];
+
+        for (int i = 0; i < indicators.size(); i++) {
+            arrayOfData[ i ] [ 0 ] = indicators.get(i).getDate().getTime() + 7200000;
+            arrayOfData[ i ] [ 1 ] = indicators.get(i).getValue();
         }
         String masAsString = Arrays.deepToString(arrayOfData);
         

@@ -47,6 +47,26 @@
         WHERE indicator_id = #{indicatorId}
     </select>
 
+    <select id="getIndicatorsByDates" parameterType="map" resultMap="IndicatorResult">
+        SELECT
+        i.indicator_id,
+        i.date,
+        i.tariff_per_date,
+        i.value,
+        i.is_paid,
+        i.is_published,
+        wm.water_meter_id,
+        wm.name,
+        wm.description,
+        wm.tariff
+        FROM indicator i
+        LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
+        WHERE i.date BETWEEN parsedatetime(#{startDate}, 'yyyy-MM-dd HH:mm:ss')
+        AND parsedatetime(#{endDate}, 'yyyy-MM-dd HH:mm:ss')
+        AND i.water_meter_id = #{waterMeterId}
+    </select>
+
+
     <select id="getAllIndicators" resultMap="IndicatorResult">
         SELECT
         i.indicator_id,

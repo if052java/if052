@@ -5,6 +5,7 @@ import com.softserveinc.if052_restful.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,6 +31,37 @@ public class IndicatorResource {
     public Response getIndicators(@PathParam("waterMeterId") int waterMeterId) {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
         List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
+        if (indicators == null) {
+            indicators = new ArrayList<Indicator>();
+        }
+        return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
+    }
+
+    @GET
+    @Path("/byYear/{meterId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getIndicatorsByYear(@PathParam("meterId") int meterId,
+                                  @MatrixParam("year") int year ) {
+        String startDate = year + "-01-01 00:00:00";
+        String endDate = year + "-31-31 23:59:59";
+
+        List < Indicator > indicators = 
+            indicatorService.getIndicatorsByDates(meterId, startDate, endDate);
+        if (indicators == null) {
+            indicators = new ArrayList<Indicator>();
+        }
+        return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
+    }
+
+    @GET
+    @Path("/byDates/{meterId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getIndicatorsByDates(@PathParam("meterId") int meterId,
+                                        @MatrixParam("startDate") String startDate,
+                                        @MatrixParam("endDate") String endDate) {
+
+        List < Indicator > indicators =
+            indicatorService.getIndicatorsByDates(meterId, startDate, endDate);
         if (indicators == null) {
             indicators = new ArrayList<Indicator>();
         }
