@@ -22,7 +22,7 @@
 
                 <h2>Оберіть фільтри для звіту:</h2>
                 <c:url var="createXmlUrl" value="/createXmlReport"/>
-                <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest" id="xmlForm">
+                <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest" id="xmlForm" autocomplete="off">
 
                     <div class="form-group">
                         <label for="users">Логін користувача</label>
@@ -33,6 +33,7 @@
                         </div>
                         <input type="text" name="users" class="form-control" id="users" />
                     </div>
+
                     <div class="form-group">
                         <label for="startDate">Початкова дата</label>
                         <input type="text" name="startDate" class="form-control" id="startDate" value="${startDate}"/>
@@ -82,9 +83,9 @@
         </div>
 
 
+        <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/xmlReport.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
         <script>
             $(document).ready(function() {
                 var logins = [];
