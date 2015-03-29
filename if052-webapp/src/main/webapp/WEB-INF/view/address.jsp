@@ -73,16 +73,16 @@
                         <tbody>
                         <tr>
                             <td>
-                                <input class="form-control" type="text" name="city" />
+                                <input class="form-control" type="text" name="city" required title="Це поле обов'язкове"/>
                             </td>
                             <td> 
-                                <input class="form-control" type="text" name="street" />
+                                <input class="form-control" type="text" name="street" required title="Це поле обов'язкове"/>
                             </td>
                             <td>
-                                <input class="form-control" type="text" name="building" />
+                                <input class="form-control" type="text" name="building" required title="Це поле обов'язкове"/>
                             </td>
                             <td>
-                                <input class="form-control" type="text" name="apartment" />
+                                <input class="form-control" type="text" name="apartment" required title="Це поле обов'язкове"/>
                             </td>
                             <td>
                                 <button class="btn btn-default" type="submit">

@@ -62,9 +62,7 @@ public class IndicatorResource {
 
         List < Indicator > indicators =
             indicatorService.getIndicatorsByDates(meterId, startDate, endDate);
-        if (indicators == null) {
-            indicators = new ArrayList<Indicator>();
-        }
+        
         return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
     }
 

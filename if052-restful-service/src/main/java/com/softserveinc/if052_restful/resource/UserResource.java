@@ -47,9 +47,6 @@ public class UserResource {
             }
             return Response.status(Response.Status.OK).entity(user).build();
         }
-        catch (ConstraintViolationException e){
-            return Response.status(Response.Status.FORBIDDEN).build();
-        }
         catch (Exception e){
             return Response.status(Response.Status.FORBIDDEN).build();
         }
@@ -79,7 +76,7 @@ public class UserResource {
         catch (ConstraintViolationException e){
 
             return Response.status(Response.Status.FORBIDDEN).build();
-        } 
+        }
         catch (Exception e) {
 
              return Response.status(Response.Status.FORBIDDEN).build();

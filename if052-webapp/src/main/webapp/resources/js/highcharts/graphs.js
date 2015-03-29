@@ -68,6 +68,10 @@ $( document ).ready(function() {
             url: 'http://localhost:9000/watermeterlist?addressId=' + addressId,
             dataType: 'json',
             success:(function(data){
+                if(data[0] == undefined){
+                    $("#submit").attr('disabled', 'disabled');
+                    $("#waterMeter").attr('disabled', 'disabled');
+                }
                 $.each(data, function(index, value) {
                     $('#waterMeter')
                         .append($("<option></option>")

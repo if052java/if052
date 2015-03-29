@@ -32,6 +32,35 @@ $(document).ready(function() {
             }
         },
         messages: {
+            "name": {
+                required : "Це поле обов'язкове для запису",
+                rangelength:"Від 2 до 32 символів"
+            },
+            "surname": {
+                required :"Це поле обов'язкове для запису",
+                rangelength:"Від 2 до 32 символів"
+            },
+            "middleName": {
+                required : "Це поле обов'язкове для запису",
+                rangelength: "Від 2 до 32 символів"
+            },
+            "login": {
+                required : "Це поле обов'язкове для запису",
+                rangelength: "Від 8 до 32 символів"
+            },
+            "email":{
+                required : "Це поле обов'язкове для запису",
+                email: "Від 8 до 32 символів"
+            },
+            "password": {
+                required : "Це поле обов'язкове для запису",
+                rangelength: "Від 8 до 32 символів"
+            },
+            "confirmPassword":{
+                required : "Це поле обов'язкове для запису",
+                rangelength: "Від 8 до 32 символів",
+                equalTo:"Пароль не підтверджено"
+            }
         }
     });
 
@@ -52,7 +81,7 @@ $(document).ready(function() {
                             url: restURL + 'users/login/' + $('#login').val(),
                             success: function (Xhr) {
                                 $('#login-errors').html(
-                                    'This login exists'
+                                    'Такий логін вже існує'
                                 );
                                 $("#submit").attr('disabled', 'disabled');
                             },

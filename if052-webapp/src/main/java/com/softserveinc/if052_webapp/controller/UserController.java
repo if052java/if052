@@ -248,15 +248,17 @@ public class UserController {
             HttpMethod.GET, null, String.class);
         String responseBody = responseEntity.getBody();
         String json = "";
+
         try {
             Address address = objectMapper.readValue(responseBody, Address.class);
-            List<WaterMeter> waterMeters = address.getWaterMeters();
+            List < WaterMeter > waterMeters = address.getWaterMeters();
+            System.out.println(waterMeters);
             json = new Gson().toJson(waterMeters);
             return json;
         } catch (IOException e) {
             logger.warn(e.getMessage(), e);
         }
-        
+
         return json;
     }
 
@@ -265,8 +267,9 @@ public class UserController {
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
 
         String gMapData = "";
-        for (int i=0; i<arrayOfAddresses.length; i++) {
-            gMapData+= (arrayOfAddresses[i].getCity() + ", вул. "
+
+        for (int i = 0; i < arrayOfAddresses.length; i++) {
+            gMapData += (arrayOfAddresses[i].getCity() + ", вул. "
                     + arrayOfAddresses[i].getStreet() + " " + arrayOfAddresses[i].getBuilding() + "~");
         }
         // delete last '~' in string

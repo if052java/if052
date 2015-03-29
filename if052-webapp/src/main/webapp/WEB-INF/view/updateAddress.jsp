@@ -34,16 +34,16 @@
                     <tr>
                         <td>
                             <input type="hidden" name="addressId" value="${address.addressId}"/>
-                            <input type="text" name="city" value="${address.city}"/>
+                            <input type="text" name="city" value="${address.city}" required title="Це поле обов'язкове"/>
                         </td>
                         <td> 
-                            <input type="text" name="street" value="${address.street}"/>
+                            <input type="text" name="street" value="${address.street}" required title="Це поле обов'язкове"/>
                         </td>
                         <td>
-                            <input type="text" name="building" value="${address.building}"/>
+                            <input type="text" name="building" value="${address.building} " required title="Це поле обов'язкове"/>
                         </td>
                         <td>
-                            <input type="text" name="apartment" value="${address.apartment}"/>
+                            <input type="text" name="apartment" value="${address.apartment}" required title="Це поле обов'язкове"/>
                         </td>
                         <td>
                             <button class="add-button" type="submit">
