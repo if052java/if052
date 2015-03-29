@@ -20,7 +20,7 @@ import java.util.Arrays;
 @Configuration
 @EnableOAuth2Client
 @PropertySource("classpath:rest.properties")
-public class OauthClientConfig extends WebMvcConfigurerAdapter {
+public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
 
     @Value("${restAddress}")
     private String restAddress;

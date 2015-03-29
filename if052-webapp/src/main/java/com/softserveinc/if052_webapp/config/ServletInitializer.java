@@ -36,7 +36,7 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
         registerCharacterEncodingFilter(servletContext, "encodingFilter");
-		//registerProxyFilter(servletContext, "springSecurityFilterChain");
+		registerProxyFilter(servletContext, "springSecurityFilterChain");
 		registerProxyFilter(servletContext, "oauth2ClientContextFilter");
 	}
 
