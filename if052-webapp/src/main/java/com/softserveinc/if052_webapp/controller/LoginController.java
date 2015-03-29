@@ -1,14 +1,18 @@
 package com.softserveinc.if052_webapp.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.User;
 import com.softserveinc.if052_webapp.domain.UserRole;
+import com.softserveinc.if052_webapp.domain.WaterMeter;
 import ognl.enhance.ContextClassLoader;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +26,7 @@ import org.springframework.security.oauth2.client.token.grant.password.ResourceO
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,9 +34,8 @@ import org.springframework.web.client.RestOperations;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by nazar on 3/25/15.
@@ -147,6 +151,29 @@ public class LoginController {
         receivedUserRole = credentialsTemplate.postForObject(restUrl+ "rest/userRole", userRole, UserRole.class);
 
         model.addAttribute("resource", "user " + receivedUserRole.getRoleName() + " name " + receivedUserRole.getUser());
+        return "resource";
+    }
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @RequestMapping(value = "exchange")
+    public String exchange(Model model) {
+        ResponseEntity<String> responseEntity = credentialsTemplate.exchange(restUrl + "rest/exchange", HttpMethod.GET, null, String.class);
+        String responseBody = responseEntity.getBody();
+        if (responseEntity.getStatusCode().value() == 404) {
+            model.addAttribute("resource", "userRole");
+            return "error404";
+        }
+        try {
+            UserRole userRole = objectMapper.readValue(responseBody, UserRole.class);
+            model.addAttribute("resource", "user " + userRole.getRoleName() + " name " + userRole.getUser());
+            //model.addAttribute("Username", waterMeters);
+        } catch (IOException e) {
+            logger.warn(e.getMessage(), e);
+        }
+//        List<MeterType> mt = Arrays.asList(restTemplate.getForObject(restUrl + "metertypes", MeterType[].class));
+//        model.addAttribute(METER_TYPES, mt);
         return "resource";
     }
 

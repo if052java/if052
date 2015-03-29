@@ -1,5 +1,6 @@
 package com.softserveinc.if052_webapp;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_webapp.service.RestServiceTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -176,6 +177,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 //            OAuth2RestTemplate template = new OAuth2RestTemplate(resource, new DefaultOAuth2ClientContext(accessToken));
 //            String result = template.getForObject(serverRunning.getUrl("/sparklr2/photos/trusted/message"), String.class);
+        }
+
+        @Bean
+        ObjectMapper objectMapper(){
+            return new ObjectMapper();
         }
 
     }
