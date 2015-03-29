@@ -30,13 +30,10 @@ public class AddressResource {
     @Autowired
     IndicatorService indicatorService;
 
-    private static Logger LOGGER = Logger.getLogger(WaterMeterResource.class.getName());
-
     @GET
     @Path("/list/{userId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddressesByUserId(@PathParam("userId") String userId) {
-        LOGGER.info("INFO: Searching for the collection of addresses with user id" + userId);
 
         List < Address > addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
 
