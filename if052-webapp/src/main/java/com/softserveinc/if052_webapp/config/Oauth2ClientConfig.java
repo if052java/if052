@@ -1,5 +1,6 @@
 package com.softserveinc.if052_webapp.config;
 
+import com.softserveinc.if052_webapp.errorHandler.CustomErrorResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +20,7 @@ import java.util.Arrays;
 @Configuration
 @EnableOAuth2Client
 @PropertySource("classpath:rest.properties")
-public class OauthClientConfig extends WebMvcConfigurerAdapter {
+public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
 
     @Value("${restAddress}")
     private String restAddress;
@@ -97,8 +98,9 @@ public class OauthClientConfig extends WebMvcConfigurerAdapter {
         resource.setClientId("credentials");
         resource.setId("rest/credentials");
         resource.setScope(Arrays.asList("trust", "read"));
-
-        return new OAuth2RestTemplate(resource);
+        OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(resource);
+        oAuth2RestTemplate.setErrorHandler(new CustomErrorResponseHandler());
+        return oAuth2RestTemplate;
     }
 
 }

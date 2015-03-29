@@ -28,6 +28,13 @@ import java.util.*;
 @Controller
 public class UserController {
 
+    private final String YEAR= "year";
+    private final String INDICATORS_DATA = "indicatorsData";
+    private final String MONTH = "month";
+    private final String ADDRESSES = "addresses";
+    private final String METER_NAME = "meterName";
+    private final String METER_TYPE = "meterType";
+    
     @Autowired
     @Qualifier("restUrl")
     private String restUrl;
@@ -73,14 +80,14 @@ public class UserController {
         String responseBody = responseEntity.getBody();
 
         if (responseEntity.getStatusCode().value() == 404) {
-            model.addAttribute("resource", "watermeter");
+            model.addAttribute("resource", "There are no meters. Please first add their");
             return "error404";
         }
         try {
             WaterMeter meter = objectMapper.readValue(responseBody, WaterMeter.class);
 
-            model.addAttribute("meterName", meter.getName());
-            model.addAttribute("meterType", meter.getMeterType().getType());
+            model.addAttribute(METER_NAME, meter.getName());
+            model.addAttribute(METER_TYPE, meter.getMeterType().getType());
 
             //- Get current year -//
             int year = Calendar.getInstance().get(Calendar.YEAR);
@@ -100,15 +107,15 @@ public class UserController {
             }
 
             String masAsString = Arrays.deepToString(arrayOfData);
-            model.addAttribute("indicatorsData", masAsString);
+            model.addAttribute(INDICATORS_DATA, masAsString);
 
-            model.addAttribute("year", year);
+            model.addAttribute(YEAR, year);
 
         } catch (IOException e) {
             logger.warn(e.getMessage(), e);
         }
         
-        model.addAttribute("addresses", addresses);
+        model.addAttribute(ADDRESSES, addresses);
         return "graphs";
     }
 
@@ -133,8 +140,8 @@ public class UserController {
         }
         try {
             WaterMeter meter= objectMapper.readValue(responseBody, WaterMeter.class);
-            model.addAttribute("meterName", meter.getName());
-            model.addAttribute("meterType", meter.getMeterType().getType());
+            model.addAttribute(METER_NAME, meter.getName());
+            model.addAttribute(METER_TYPE, meter.getMeterType().getType());
         } catch (IOException e) {
             logger.warn(e.getMessage(), e);
         }
@@ -221,7 +228,7 @@ public class UserController {
             }
 
         //- Get list of indicators -//
-        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl 
+        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl
             + "indicators/byDates/" + meterId
             + ";startDate=" + startDate + ";endDate=" + endDate, Indicator[].class);
         List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
@@ -233,12 +240,12 @@ public class UserController {
             arrayOfData[ i ] [ 1 ] = indicators.get(i).getValue();
         }
         String masAsString = Arrays.deepToString(arrayOfData);
-        
-        model.addAttribute("month", month);
-        model.addAttribute("addresses", addresses);
-        model.addAttribute("indicatorsData", masAsString);
-        model.addAttribute("year", year);
-        
+
+        model.addAttribute(MONTH, month);
+        model.addAttribute(ADDRESSES, addresses);
+        model.addAttribute(INDICATORS_DATA, masAsString);
+        model.addAttribute(YEAR, year);
+
         return "graphs";
     }
 
@@ -248,15 +255,17 @@ public class UserController {
             HttpMethod.GET, null, String.class);
         String responseBody = responseEntity.getBody();
         String json = "";
+
         try {
             Address address = objectMapper.readValue(responseBody, Address.class);
-            List<WaterMeter> waterMeters = address.getWaterMeters();
+            List < WaterMeter > waterMeters = address.getWaterMeters();
+            System.out.println(waterMeters);
             json = new Gson().toJson(waterMeters);
             return json;
         } catch (IOException e) {
             logger.warn(e.getMessage(), e);
         }
-        
+
         return json;
     }
 
@@ -265,8 +274,9 @@ public class UserController {
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
 
         String gMapData = "";
-        for (int i=0; i<arrayOfAddresses.length; i++) {
-            gMapData+= (arrayOfAddresses[i].getCity() + ", вул. "
+
+        for (int i = 0; i < arrayOfAddresses.length; i++) {
+            gMapData += (arrayOfAddresses[i].getCity() + ", вул. "
                     + arrayOfAddresses[i].getStreet() + " " + arrayOfAddresses[i].getBuilding() + "~");
         }
         // delete last '~' in string

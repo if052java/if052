@@ -37,7 +37,7 @@ import java.util.List;
 public class XmlReportController {
 
     @Autowired
-    @Qualifier("restTemplate")
+    @Qualifier("credentialsTemplate")
     private RestOperations restTemplate;
 
     @Autowired
@@ -67,7 +67,7 @@ public class XmlReportController {
     @RequestMapping(value = "/createXmlReport", method = RequestMethod.GET)
     public void createReportRequest(@ModelAttribute ReportRequest reportRequest,
                                     HttpServletRequest request, HttpServletResponse response) throws IOException {
-        ResponseEntity<String> postResponseEntity = restTemplate.exchange(restUrl + "report", HttpMethod.POST,
+        ResponseEntity<String> postResponseEntity = restTemplate.exchange(restUrl + "report/", HttpMethod.POST,
                 new HttpEntity<ReportRequest>(reportRequest), String.class);
         String uri = postResponseEntity.getHeaders().get("Location").get(0);
         ResponseEntity<String> responseEntity2 = restTemplate.exchange(uri, HttpMethod.GET,

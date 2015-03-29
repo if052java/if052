@@ -50,7 +50,7 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @Configuration
 public class OAuth2ServerConfig {
 
-	private static final String RESOURCE_ID = "webapp";
+	private static final String RESOURCE_ID = "if052_rest";
 
 	@Configuration
 	@EnableResourceServer
@@ -69,7 +69,7 @@ public class OAuth2ServerConfig {
 				// session creation to be allowed (it's disabled by default in 2.0.6)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 			.and()
-				.requestMatchers().antMatchers("/rest/*")
+				.requestMatchers().antMatchers("/rest/**")
 			.and()
 				.authorizeRequests()
                     .antMatchers("/rest/**").permitAll();

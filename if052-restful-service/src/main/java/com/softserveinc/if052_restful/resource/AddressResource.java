@@ -6,11 +6,13 @@ import com.softserveinc.if052_restful.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.AddressService;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +34,12 @@ public class AddressResource {
     @Path("/list/{userId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddressesByUserId(@PathParam("userId") String userId) {
+
         List < Address > addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
+
+        if( addresses == null) {
+            addresses = new ArrayList<Address>();
+        }
         return Response.status(Response.Status.OK).entity(addresses).build();
     }
 
