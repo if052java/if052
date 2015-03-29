@@ -59,11 +59,12 @@ public class IndicatorResource {
     public Response getIndicatorsByDates(@PathParam("meterId") int meterId,
                                         @MatrixParam("startDate") String startDate,
                                         @MatrixParam("endDate") String endDate) {
-
         List < Indicator > indicators =
             indicatorService.getIndicatorsByDates(meterId, startDate, endDate);
-        
-        return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
+        if (indicators == null){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(indicators).build();
     }
 
     @GET
