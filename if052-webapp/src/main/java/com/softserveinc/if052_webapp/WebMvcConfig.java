@@ -171,12 +171,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
             resource.setScope(Arrays.asList("trust", "read"));
 
             return new OAuth2RestTemplate(resource);
-
-//            ClientCredentialsAccessTokenProvider provider = new ClientCredentialsAccessTokenProvider();
-//            OAuth2AccessToken accessToken = provider.obtainAccessToken(resource, new DefaultAccessTokenRequest());
-
-//            OAuth2RestTemplate template = new OAuth2RestTemplate(resource, new DefaultOAuth2ClientContext(accessToken));
-//            String result = template.getForObject(serverRunning.getUrl("/sparklr2/photos/trusted/message"), String.class);
         }
 
         @Bean
