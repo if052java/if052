@@ -42,11 +42,15 @@ public class ReportResource {
     @Path("{reportId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getReport(@PathParam("reportId") int reportId) {
-
-
+        Report report = reportService.getReportById(reportId);
+        if (report == null) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .build();
+        }
         return Response
                 .status(Response.Status.OK)
-                .entity(reportService.getReportById(reportId).getXmlReport().toString())
+                .entity(report.getXmlReport().toString())
                 .build();
     }
 
