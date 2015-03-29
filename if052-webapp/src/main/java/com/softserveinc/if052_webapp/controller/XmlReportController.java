@@ -37,7 +37,7 @@ import java.util.List;
 public class XmlReportController {
 
     @Autowired
-    @Qualifier("credentialsTemplate")
+    @Qualifier("restTemplate")
     private RestOperations restTemplate;
 
     @Autowired
