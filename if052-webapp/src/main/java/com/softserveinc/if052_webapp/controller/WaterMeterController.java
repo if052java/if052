@@ -35,7 +35,7 @@ public class WaterMeterController {
     private String restUrl;
 
     @Autowired
-    @Qualifier("restTemplate")
+    @Qualifier("credentialsTemplate")
     private RestOperations restTemplate;
 
     @Autowired
@@ -71,7 +71,7 @@ public class WaterMeterController {
         } catch (IOException e) {
             LOGGER.warn(e.getMessage(), e);
         }
-        List<MeterType> mt = Arrays.asList(restTemplate.getForObject(restUrl + "metertypes", MeterType[].class));
+        List<MeterType> mt = Arrays.asList(restTemplate.getForObject(restUrl + "metertypes/", MeterType[].class));
         model.addAttribute(METER_TYPES, mt);
         return "waterMeters";
     }

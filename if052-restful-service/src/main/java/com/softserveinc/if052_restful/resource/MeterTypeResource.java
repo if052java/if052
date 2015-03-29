@@ -15,7 +15,7 @@ import java.util.List;
  * @author Bogdan Pastushkevych
  * @version 1.0
  */
-@Path("/metertypes")
+@Path("/metertypes/")
 public class MeterTypeResource {
 
     @Autowired
