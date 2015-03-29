@@ -2,20 +2,13 @@ package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.domain.Indicator;
 import com.softserveinc.if052_webapp.domain.WaterMeter;
+import com.softserveinc.if052_webapp.service.IndicatorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,90 +17,55 @@ import java.util.List;
 @Controller
 public class IndicatorController {
 
-    @Autowired
-    @Qualifier("restUrl")
-    private String restUrl;
+    public static final String WATER_METER = "waterMeter";
+    public static final String INDICATORS = "indicators";
+    public static final String REDIRECT = "redirect:/indicators?waterMeterId=";
+    public static final String INDICATOR = "indicator";
+    private String meterId = "";
 
     @Autowired
-    @Qualifier("credentialsTemplate")
-    private RestOperations restTemplate;
+    private IndicatorService indicatorService;
 
-    private String waterMeterId = "";
 
-    /**
-     *
-     * @param waterMeterId
-     * @param model
-     * @return
-     */
     @RequestMapping(value = "/indicators{waterMeterId}")
     public String getIndicatorsPage(int waterMeterId, ModelMap model) {
-        this.waterMeterId = String.valueOf(waterMeterId);
-        WaterMeter waterMeter = restTemplate.getForObject(restUrl + "watermeters/" + waterMeterId, WaterMeter.class);
-        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ waterMeterId, Indicator[].class);
-        List<Indicator> indicators = Arrays.asList(arrayOfIndicators);
-        model.addAttribute("waterMeter", waterMeter);
-        model.addAttribute("indicators", indicators);
+        this.meterId = String.valueOf(waterMeterId);
+        List<Indicator> indicators = indicatorService.getIndicatorList(waterMeterId);
+        WaterMeter waterMeter = indicatorService.getMeterById(waterMeterId);
+        model.addAttribute(WATER_METER, waterMeter);
+        model.addAttribute(INDICATORS, indicators);
 
         return "indicators";
     }
 
-    /**
-     *
-     * @param indicatorId
-     * @return
-     */
-    @RequestMapping("/deleteIndicator{indicatorId}")
+    @RequestMapping(value = "/deleteIndicator{indicatorId}")
     public String deleteIndicator(int indicatorId) {
-        Indicator indicator = restTemplate.getForObject(restUrl + "indicators/getone/"+ indicatorId, Indicator.class);
-        if (!indicator.isPublished()) {
-            restTemplate.delete(restUrl + "indicators/" + indicatorId);
-        }
+        indicatorService.deleteIndicator(indicatorId);
 
-        return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
+        return REDIRECT + this.meterId;
     }
 
-    /**
-     *
-     * @param indicator
-     * @return
-     */
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
     public String addIndicator(@ModelAttribute Indicator indicator){
-        WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + this.waterMeterId, WaterMeter.class);
-        indicator.setWaterMeter(waterMeter);
-        restTemplate.postForObject(restUrl + "indicators/", indicator, Indicator.class);
+        indicatorService.addIndicator(indicator, Integer.parseInt(meterId));
 
-        return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
+        return REDIRECT + this.meterId;
     }
 
-    /**
-     *
-     * @param indicatorId
-     * @param model
-     * @return
-     */
     @RequestMapping(value = "/updateIndicator{indicatorId}")
     public String getUpdateIndicatorPage(int indicatorId, ModelMap model){
-        Indicator indicator = restTemplate.getForObject(restUrl + "indicators/getone/" + indicatorId, Indicator.class);
+        Indicator indicator = indicatorService.getIndicatorById(indicatorId);
         if (!indicator.isPublished()) {
-            model.addAttribute("indicator", indicator);
+            model.addAttribute(INDICATOR, indicator);
         }
 
         return "updateIndicator";
     }
 
-    /**
-     *
-     * @param indicator
-     * @return
-     */
     @RequestMapping(value = "/updateIndicator", method = RequestMethod.POST)
     public String updateIndicator(@ModelAttribute Indicator indicator){
-        WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + waterMeterId, WaterMeter.class);
-        indicator.setWaterMeter(waterMeter);
-        restTemplate.put(restUrl + "indicators/" + indicator.getIndicatorId(), indicator);
+        indicatorService.updateIndicator(indicator, Integer.parseInt(meterId));
 
-        return "redirect:/indicators?waterMeterId=" + this.waterMeterId;
+        return REDIRECT + this.meterId;
     }
 }

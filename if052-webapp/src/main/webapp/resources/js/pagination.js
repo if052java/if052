@@ -3,7 +3,7 @@
  */
 $(document).ready(function() {
     $('#paginated').dataTable({
-        "lengthMenu":[ [5, 10, 15, 25, -1], [5, 10, 15, 25, "All"]],
+        "lengthMenu":[ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Всі"]],
         "info":     false,
         "columns": [
             null,
