@@ -5,6 +5,7 @@ import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.User;
 import com.softserveinc.if052_webapp.domain.UserRole;
 import com.softserveinc.if052_webapp.domain.WaterMeter;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import ognl.enhance.ContextClassLoader;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,6 +175,13 @@ public class LoginController {
         }
 //        List<MeterType> mt = Arrays.asList(restTemplate.getForObject(restUrl + "metertypes", MeterType[].class));
 //        model.addAttribute(METER_TYPES, mt);
+        return "resource";
+    }
+
+    @RequestMapping(value = "param{id}", method = RequestMethod.GET)
+    public String param(Integer id, Model model){
+        String resource = credentialsTemplate.getForObject(restUrl + "rest/param/" + id, String.class);
+        model.addAttribute("resource", "Cred. grant; received  param" + resource);
         return "resource";
     }
 
