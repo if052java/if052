@@ -69,6 +69,21 @@
         WHERE a.address_id = #{addressId}
     </select>
 
+    <select id="getFirstMeterByUserId" parameterType="int" resultMap="WaterMeterSimpleResult">
+        SELECT
+        wm.water_meter_id,
+        wm.name,
+        wm.description,
+        wm.tariff,
+        mt.meter_type_id,
+        mt.type
+        FROM watermeter wm
+        LEFT OUTER JOIN address a on wm.address_id = a.address_id
+        LEFT OUTER JOIN meter_type mt on wm.meter_type_id = mt.meter_type_id
+        WHERE a.user_id = #{userId}
+        LIMIT 1
+    </select>
+
     <select id="getAllWaterMeters" resultMap="WaterMeterSimpleResult">
         SELECT
         wm.water_meter_id,

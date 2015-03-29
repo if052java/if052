@@ -86,4 +86,8 @@ public class UserService {
     public User getReportUserByLogin(String login) {
         return userMapper.getReportUserByLogin(login);
     }
+
+    public List<String> getLogins() {
+        return userMapper.getLogins();
+    }
 }

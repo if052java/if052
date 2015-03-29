@@ -36,7 +36,7 @@
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                             Мої адреси
                         </a></li>
-                        <li><a href="/maingraph">
+                        <li><a href="/defaultgraph">
                             <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
                             Моя статистика
                         </a></li>

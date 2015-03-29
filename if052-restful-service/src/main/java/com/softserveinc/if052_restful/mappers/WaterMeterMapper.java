@@ -51,6 +51,14 @@ public interface WaterMeterMapper {
      */
     public void deleteWaterMeter(int waterMeterId);
 
-    public List<WaterMeter> getWaterMetersByAddressId(int addressId);
+    /**
+     * Get all meters by address Id
+     * 
+     * @param addressId
+     * @return
+     */
+    public List < WaterMeter > getWaterMetersByAddressId(int addressId);
+
+    public WaterMeter getFirstMeterByUserId(int userId);
 
 }

@@ -136,4 +136,13 @@ public class UserServiceTest {
         System.out.println(userService.getReportUserByLogin("LOGIN111"));
     }
 
+    @Test
+    public void testGetLogins() {
+        List<String> logins = userService.getLogins();
+        Assert.assertNotNull(logins);
+        for(String str : logins) {
+            System.out.println(str);
+        }
+    }
+
 }

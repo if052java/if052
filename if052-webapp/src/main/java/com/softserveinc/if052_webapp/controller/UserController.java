@@ -6,6 +6,7 @@ import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.Indicator;
 import com.softserveinc.if052_webapp.domain.User;
 import com.softserveinc.if052_webapp.domain.WaterMeter;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -59,58 +60,70 @@ public class UserController {
         return "redirect:/addresses?userId=" + user.getUserId();
     }
 
-    @RequestMapping("maingraph")
+    @RequestMapping("defaultgraph")
     public String getMainGraph(ModelMap model){
 
-        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ 1, Indicator[].class);
-
+        //- Get all addresses of user for select-//
         Address[] arrayOfAddress = restTemplate.getForObject(restUrl + "addresses/list/" + 1, Address[].class);
-        List<Address> addresses = Arrays.asList(arrayOfAddress);
-        
-        List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
-        List<Integer> indicatorValues = new ArrayList<Integer>();
-        List<Long> indicatorsDate = new ArrayList<Long>();
-        
-        long[][] arrayOfData = new long[indicators.size()][2];
-        
-        for(Indicator indicator : indicators){
-            indicatorValues.add((indicator.getValue()));
-        }
+        List < Address > addresses = Arrays.asList(arrayOfAddress);
 
-        for(Indicator indicator : indicators){
-        indicatorsDate.add(indicator.getDate().getTime() + 7200000);
-        }
-        
-        for (int i = 0; i < indicators.size(); i++) {
-                arrayOfData[ i ] [ 0 ] = indicatorsDate.get(i);
-                arrayOfData[ i ] [ 1 ] = indicatorValues.get(i);
-        }
+        //- Get first meter for user -//
+        ResponseEntity < String > responseEntity = restTemplate.exchange(restUrl + "watermeters/firstMeter/" + 1,
+            HttpMethod.GET, null, String.class);
+        String responseBody = responseEntity.getBody();
 
-        String masAsString = Arrays.deepToString(arrayOfData);
+        if (responseEntity.getStatusCode().value() == 404) {
+            model.addAttribute("resource", "watermeter");
+            return "error404";
+        }
+        try {
+            WaterMeter meter = objectMapper.readValue(responseBody, WaterMeter.class);
+
+            model.addAttribute("meterName", meter.getName());
+            model.addAttribute("meterType", meter.getMeterType().getType());
+
+            //- Get current year -//
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+
+            //- Get all indicators of first meter for graph -//
+            Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl
+                + "indicators/byYear/" + meter.getWaterMeterId() + ";year=" + year, Indicator[].class);
+            List < Indicator > indicators = Arrays.asList( arrayOfIndicators );
+            
+            long[][] arrayOfData = new long[indicators.size()][2];
+
+            if (indicators.get(0).getDate() != null) {
+                for (int i = 0; i < indicators.size(); i++) {
+                    arrayOfData[i][0] = indicators.get(i).getDate().getTime() + 7200000;
+                    arrayOfData[i][1] = indicators.get(i).getValue();
+                }
+            }
+
+            String masAsString = Arrays.deepToString(arrayOfData);
+            model.addAttribute("indicatorsData", masAsString);
+
+            model.addAttribute("year", year);
+
+        } catch (IOException e) {
+            logger.warn(e.getMessage(), e);
+        }
         
-        model.addAttribute("indicatorsData",  "");
         model.addAttribute("addresses", addresses);
-        model.addAttribute("year","2015");
         return "graphs";
     }
 
-    @RequestMapping(value="graphByMonth", method=RequestMethod.POST)
-    public String getGraphByDate(
+    @RequestMapping(value="graphByOption", method=RequestMethod.POST)
+    public String getGraphByOption(
                                  @RequestParam("meter") Integer meterId,
                                  @RequestParam("month") Integer month,
                                  @RequestParam("year") Integer year,
                                  ModelMap model) {
-        //- Get list of indicators -//
-        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/"+ meterId, Indicator[].class);
-        List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
-        List < Indicator > indicatorsData = new ArrayList<Indicator>();
-
-        //- Get list of addresses -//
+        //- Get list of addresses for select-//
         Address[] arrayOfAddress = restTemplate.getForObject(restUrl + "addresses/list/" + 1, Address[].class);
         List<Address> addresses = Arrays.asList(arrayOfAddress);
 
         //- Get watermeter by id-//
-        ResponseEntity<String> responseEntity = restTemplate.exchange(restUrl + "watermeters/" + meterId,
+        ResponseEntity < String > responseEntity = restTemplate.exchange(restUrl + "watermeters/" + meterId,
             HttpMethod.GET, null, String.class);
         String responseBody = responseEntity.getBody();
         
@@ -126,103 +139,98 @@ public class UserController {
             logger.warn(e.getMessage(), e);
         }
         //- Get start and end date-//
-        Date startDate = null;
-        Date endDate = null;
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String startDate = "";
+        String endDate = "";
 
+        //- Get information for leap of year-//
         GregorianCalendar cal =
             (GregorianCalendar) GregorianCalendar.getInstance();
+        
         boolean isLeapYear = cal.isLeapYear(year);
-            try{
-                if(month!=13) {
-                    switch (month) {
-                        case 1: {
-                            startDate = sdf.parse(year + "/01/01 00:00:00");
-                            endDate = sdf.parse(year + "/01/31 23:59:59");
-                            break;
-                        }
-                        case 2: {
-                            if (!isLeapYear) {
-                                startDate = sdf.parse(year + "/02/01 00:00:00");
-                                endDate = sdf.parse(year + "/02/28 23:59:59");
-                            } else {
-                                startDate = sdf.parse(year + "/02/01 00:00:00");
-                                endDate = sdf.parse(year + "/02/29 23:59:59");
-                            }
-                            break;
-                        }
-                        case 3: {
-                            startDate = sdf.parse(year + "/03/01 00:00:00");
-                            endDate = sdf.parse(year + "/03/31 23:59:59");
-                            break;
-                        }
-                        case 4: {
-                            startDate = sdf.parse(year + "/04/01 00:00:00");
-                            endDate = sdf.parse(year + "/04/30 23:59:59");
-                            break;
-                        }
-                        case 5: {
-                            startDate = sdf.parse(year + "/05/01 00:00:00");
-                            endDate = sdf.parse(year + "/05/31 23:59:59");
-                            break;
-                        }
-                        case 6: {
-                            startDate = sdf.parse(year + "/06/01 00:00:00");
-                            endDate = sdf.parse(year + "/06/30 23:59:59");
-                            break;
-                        }
-                        case 7: {
-                            startDate = sdf.parse(year + "/07/01 00:00:00");
-                            endDate = sdf.parse(year + "/07/31 23:59:59");
-                            break;
-                        }
-                        case 8: {
-                            startDate = sdf.parse(year + "/08/01 00:00:00");
-                            endDate = sdf.parse(year + "/08/31 23:59:59");
-                            break;
-                        }
-                        case 9: {
-                            startDate = sdf.parse(year + "/09/01 00:00:00");
-                            endDate = sdf.parse(year + "/09/30 23:59:59");
-                            break;
-                        }
-                        case 10: {
-                            startDate = sdf.parse(year + "/10/01 00:00:00");
-                            endDate = sdf.parse(year + "/10/31 23:59:59");
-                            break;
-                        }
-                        case 11: {
-                            startDate = sdf.parse(year + "/11/01 00:00:00");
-                            endDate = sdf.parse(year + "/11/30 23:59:59");
-                            break;
-                        }
-                        case 12: {
-                            startDate = sdf.parse(year + "/12/01 00:00:00");
-                            endDate = sdf.parse(year + "/12/31 23:59:59");
-                            break;
-                        }
+            if(month!=13) {
+                switch (month) {
+                    case 1: {
+                        startDate =year + "-01-01 00:00:00";
+                        endDate = year + "-01-31 23:59:59";
+                        break;
                     }
-                } else{
-                    startDate = sdf.parse(year + "/01/01 00:00:00");
-                    endDate = sdf.parse(year + "/12/31 23:59:59");
+                    case 2: {
+                        if (!isLeapYear) {
+                            startDate = year + "-02-01 00:00:00";
+                            endDate = year + "-02-28 23:59:59";
+                        } else {
+                            startDate = year + "-02-01 00:00:00";
+                            endDate = year + "-02-29 23:59:59";
+                        }
+                        break;
+                    }
+                    case 3: {
+                        startDate = year + "-03-01 00:00:00";
+                        endDate = year + "-03-31 23:59:59";
+                        break;
+                    }
+                    case 4: {
+                        startDate = year + "-04-01 00:00:00";
+                        endDate = year + "-04-30 23:59:59";
+                        break;
+                    }
+                    case 5: {
+                        startDate = year + "-05-01 00:00:00";
+                        endDate = year + "-05-31 23:59:59";
+                        break;
+                    }
+                    case 6: {
+                        startDate = year + "-06-01 00:00:00";
+                        endDate = year + "-06-30 23:59:59";
+                        break;
+                    }
+                    case 7: {
+                        startDate = year + "-07-01 00:00:00";
+                        endDate = year + "-07-31 23:59:59";
+                        break;
+                    }
+                    case 8: {
+                        startDate = year + "-08-01 00:00:00";
+                        endDate = year + "-08-31 23:59:59";
+                        break;
+                    }
+                    case 9: {
+                        startDate = year + "-09-01 00:00:00";
+                        endDate = year + "-09-30 23:59:59";
+                        break;
+                    }
+                    case 10: {
+                        startDate = year + "-10-01 00:00:00";
+                        endDate = year + "-10-31 23:59:59";
+                        break;
+                    }
+                    case 11: {
+                        startDate = year + "-11-01 00:00:00";
+                        endDate = year + "-11-30 23:59:59";
+                        break;
+                    }
+                    case 12: {
+                        startDate = year + "-12-01 00:00:00";
+                        endDate = year + "-12-31 23:59:59";
+                        break;
+                    }
                 }
-        } catch(ParseException e){
-                logger.warn(e.getMessage(), e);
+            } else{
+                startDate = year + "-01-01 00:00:00";
+                endDate = year + "-12-31 23:59:59";
             }
-        //GET DATA 
-        for(Indicator indicator : indicators){
-            if(indicator.getDate().compareTo(startDate) >= 0
-                && indicator.getDate().compareTo(endDate) <= 0) {
-                    indicatorsData.add(indicator);
-            }
-        }
 
-        long[][] arrayOfData = new long[indicatorsData.size()][2];
+        //- Get list of indicators -//
+        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl 
+            + "indicators/byDates/" + meterId
+            + ";startDate=" + startDate + ";endDate=" + endDate, Indicator[].class);
+        List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
 
-        for (int i = 0; i < indicatorsData.size(); i++) {
-            arrayOfData[ i ] [ 0 ] = indicatorsData.get(i).getDate().getTime() + 7200000;
-            arrayOfData[ i ] [ 1 ] = indicatorsData.get(i).getValue();
+        long[][] arrayOfData = new long[indicators.size()][2];
+
+        for (int i = 0; i < indicators.size(); i++) {
+            arrayOfData[ i ] [ 0 ] = indicators.get(i).getDate().getTime() + 7200000;
+            arrayOfData[ i ] [ 1 ] = indicators.get(i).getValue();
         }
         String masAsString = Arrays.deepToString(arrayOfData);
         
@@ -238,14 +246,12 @@ public class UserController {
     public @ResponseBody String getwatermetersByAddress(ModelMap model, int addressId) {
         ResponseEntity<String> responseEntity = restTemplate.exchange(restUrl + "addresses/" + addressId,
             HttpMethod.GET, null, String.class);
-        model.addAttribute("attr","shjda");
         String responseBody = responseEntity.getBody();
         String json = "";
         try {
             Address address = objectMapper.readValue(responseBody, Address.class);
             List<WaterMeter> waterMeters = address.getWaterMeters();
             json = new Gson().toJson(waterMeters);
-            System.out.println(json);
             return json;
         } catch (IOException e) {
             logger.warn(e.getMessage(), e);

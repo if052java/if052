@@ -52,7 +52,7 @@ $(document).ready(function() {
                             url: restURL + 'users/login/' + $('#login').val(),
                             success: function (Xhr) {
                                 $('#login-errors').html(
-                                    'This login has already exist'
+                                    'This login exists'
                                 );
                                 $("#submit").attr('disabled', 'disabled');
                             },

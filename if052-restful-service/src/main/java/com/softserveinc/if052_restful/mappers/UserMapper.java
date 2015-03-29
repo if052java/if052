@@ -62,4 +62,6 @@ public interface UserMapper {
 
     public User getReportUserByLogin(String login);
 
+    public List<String> getLogins();
+
 }

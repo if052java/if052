@@ -46,5 +46,19 @@ public class IndicatorService {
     public Date getMinDate() {
         return indicatorMapper.getMinDate();
     }
+
+    /**
+     * Get indicators by year
+     *
+     * @param waterMeterId
+     * @param startDate
+     * @param endDate
+     * @return
+     */
+    public List < Indicator > getIndicatorsByDates(int waterMeterId,
+                                                  String startDate,
+                                                  String endDate){
+        return indicatorMapper.getIndicatorsByDates(waterMeterId, startDate, endDate);
+    }
 }
 

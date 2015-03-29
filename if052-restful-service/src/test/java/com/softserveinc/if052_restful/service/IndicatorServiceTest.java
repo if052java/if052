@@ -3,6 +3,7 @@ package com.softserveinc.if052_restful.service;
 import com.softserveinc.if052_restful.domain.Indicator;
 import com.softserveinc.if052_restful.domain.WaterMeter;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,16 @@ public class IndicatorServiceTest {
     }
 
     @Test
+    public void getIndicatorsByDates(){
+        List < Indicator > indicators =
+        indicatorService.getIndicatorsByDates(1, "2015-01-01 00:00:00", "2015-31-31 23:59:59");
+        Assert.assertNotNull(indicators);
+        for (Indicator indicator : indicators) {
+            System.out.println(indicator);
+        }
+    }
+
+    @Test
     public void testInsertIndicator() {
         Indicator indicator = new Indicator();
         indicator.setDate(new java.util.Date());
@@ -73,7 +84,6 @@ public class IndicatorServiceTest {
         Assert.assertEquals(indicator.getWaterMeter().getWaterMeterId(),
                 createdIndicator.getWaterMeter().getWaterMeterId());
     }
-
 
     @Test
     public void testUpdateIndicator() {

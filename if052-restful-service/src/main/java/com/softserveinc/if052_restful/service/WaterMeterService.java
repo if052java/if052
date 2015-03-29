@@ -70,7 +70,23 @@ public class WaterMeterService {
         waterMeterMapper.deleteWaterMeter(waterMeterId);
     }
 
+    /**
+     * Get all meters by address id
+     * 
+     * @param addressId
+     * @return
+     */
     public List<WaterMeter> getWaterMetersByAddressId(int addressId) {
         return waterMeterMapper.getWaterMetersByAddressId(addressId);
+    }
+
+    /**
+     * Get first meter by userId
+     *
+     * @param userId
+     * @return
+     */
+    public WaterMeter getFirstMeterByUserId(int userId){
+        return waterMeterMapper.getFirstMeterByUserId(userId);
     }
 }

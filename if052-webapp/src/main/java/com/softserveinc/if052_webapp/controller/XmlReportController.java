@@ -1,6 +1,8 @@
 package com.softserveinc.if052_webapp.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_webapp.domain.MeterType;
 import com.softserveinc.if052_webapp.utils.FileDownloader;
 import com.softserveinc.if052_webapp.utils.ReportRequest;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +26,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -45,14 +49,19 @@ public class XmlReportController {
 
     private final String START_DATE = "startDate";
     private final String METER_TYPES = "meterTypes";
+    private final String LOGINS = "logins";
 
     @RequestMapping("/xmlreport")
-    public String getXmlReportPage(ModelMap model) {
+    public ModelAndView getXmlReportPage() {
+        ModelAndView model = new ModelAndView("xmlReport");
         Date minDate = restTemplate.getForObject(restUrl + "report/mindate", Date.class);
         String date = new SimpleDateFormat("yyyy/MM/dd").format(minDate);
-        model.addAttribute(START_DATE, date);
-        model.addAttribute(METER_TYPES, Arrays.asList(restTemplate.getForObject(restUrl + "metertypes/", MeterType[].class)));
-        return "xmlReport";
+        List<String> logins = Arrays.asList(restTemplate.getForObject(restUrl + "users/logins", String[].class));
+        List<MeterType> meterTypes = Arrays.asList(restTemplate.getForObject(restUrl + "metertypes/", MeterType[].class));
+        model.addObject(START_DATE, date);
+        model.addObject(METER_TYPES, meterTypes);
+        model.addObject(LOGINS, logins);
+        return model;
     }
 
     @RequestMapping(value = "/createXmlReport", method = RequestMethod.GET)
