@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Created by Danylo Tiahun on 14.03.2015.
  */
 
-@Path("/report")
+@Path("/report/")
 public class ReportResource {
 
     @Autowired
