@@ -15,7 +15,7 @@
     <tiles:putAttribute name="body">
         <div class="body">
 
-            <h1> UPDATE FORM FOR ADDRESS </h1>
+            <h1> Редагування адреси </h1>
 
             <c:url var="updateUrl" value="/updateAddress"/>
 
@@ -23,7 +23,6 @@
                     action="${updateUrl}" method="post" modelAttribute="address">
                 <sec:csrfInput/>
                 <table class="box-table-a">
-                    <caption> Update Address</caption>
                     <thead>
                     <tr>
                         <th>Місто</th>
@@ -36,16 +35,16 @@
                     <tr>
                         <td>
                             <input type="hidden" name="addressId" value="${address.addressId}"/>
-                            <input type="text" name="city" value="${address.city}" required title="Це поле обов'язкове"/>
+                            <input type="text" class="form-control" name="city" value="${address.city}" required title="Це поле обов'язкове"/>
                         </td>
                         <td> 
-                            <input type="text" name="street" value="${address.street}" required title="Це поле обов'язкове"/>
+                            <input type="text" class="form-control" name="street" value="${address.street}" required title="Це поле обов'язкове"/>
                         </td>
                         <td>
-                            <input type="text" name="building" value="${address.building} " required title="Це поле обов'язкове"/>
+                            <input type="text" class="form-control" name="building" value="${address.building} " required title="Це поле обов'язкове"/>
                         </td>
                         <td>
-                            <input type="text" name="apartment" value="${address.apartment}" required title="Це поле обов'язкове"/>
+                            <input type="text" class="form-control" name="apartment" value="${address.apartment}" required title="Це поле обов'язкове"/>
                         </td>
                         <td>
                             <button class="add-button" type="submit">

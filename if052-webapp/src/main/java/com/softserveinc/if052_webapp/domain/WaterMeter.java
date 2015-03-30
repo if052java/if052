@@ -17,6 +17,16 @@ public class WaterMeter {
 
     }
 
+    public WaterMeter(int waterMeterId, String name, String description, double tariff, Address address, MeterType meterType, List<Indicator> indicators) {
+        this.waterMeterId = waterMeterId;
+        this.name = name;
+        this.description = description;
+        this.tariff = tariff;
+        this.address = address;
+        this.meterType = meterType;
+        this.indicators = indicators;
+    }
+
     public int getWaterMeterId() {
         return waterMeterId;
     }

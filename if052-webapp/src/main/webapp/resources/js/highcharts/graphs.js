@@ -65,7 +65,7 @@ $( document ).ready(function() {
          $.ajax({
             type: 'GET',
             contentType: "application/json; charset=utf-8",
-            url: 'http://localhost:9000/watermeterlist?addressId=' + addressId,
+            url: window.location.origin + '/watermeterlist?addressId=' + addressId,
             dataType: 'json',
             success:(function(data){
                 if(data[0] == undefined){

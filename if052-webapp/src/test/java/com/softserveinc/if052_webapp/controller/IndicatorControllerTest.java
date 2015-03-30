@@ -113,28 +113,7 @@ public class IndicatorControllerTest {
         verifyNoMoreInteractions(indicatorServiceMock);
     }
 
-//    @Test
-//    public void add_DescriptionAndTitleAreTooLong_ShouldRenderFormViewAndReturnValidationErrorsForTitleAndDescription() throws Exception {
-//        String title = TestUtil.createStringWithLength(101);
-//        String description = TestUtil.createStringWithLength(501);
-//
-//        mockMvc.perform(post("/todo/add")
-//                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-//                        .param("description", description)
-//                        .param("title", title)
-//                        .sessionAttr("todo", new TodoDTO())
-//        )
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("todo/add"))
-//                .andExpect(forwardedUrl("/WEB-INF/jsp/todo/add.jsp"))
-//                .andExpect(model().attributeHasFieldErrors("todo", "title"))
-//                .andExpect(model().attributeHasFieldErrors("todo", "description"))
-//                .andExpect(model().attribute("todo", hasProperty("id", nullValue())))
-//                .andExpect(model().attribute("todo", hasProperty("description", is(description))))
-//                .andExpect(model().attribute("todo", hasProperty("title", is(title))));
-//
-//        verifyZeroInteractions(todoServiceMock);
-//    }
+
 
     @Test
     public void testAddIndicator() throws Exception {
