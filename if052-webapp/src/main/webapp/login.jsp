@@ -26,8 +26,6 @@
                     <p class="error">You are not permitted to access that resource.</p>
                 </c:if>
 
-                <p>Credentials "user" and "password" </p>
-
                 <form action="${base}login" method="post" role="form">
                     <fieldset>
                         <legend>
@@ -36,12 +34,12 @@
                         <div class="form-group">
                             <label for="username">Username:</label> <input id="username"
                                                                            class="form-control" type='text'
-                                                                           name='username' value="user"/>
+                                                                           name='username' value="LOGIN111"/>
                         </div>
                         <div class="form-group">
                             <label for="password">Password:</label> <input id="password"
-                                                                           class="form-control" type='text'
-                                                                           name='password' value="password"/>
+                                                                           class="form-control" type='password'
+                                                                           name='password' value="PASS1111"/>
                         </div>
                         <button class="btn btn-primary" type="submit">Login</button>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -1,6 +1,7 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.domain.Address;
+import com.softserveinc.if052_webapp.domain.AuthInterface;
 import com.softserveinc.if052_webapp.domain.Indicator;
 import com.softserveinc.if052_webapp.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ public class DetailController {
     public static final String MIDDLE_NAME = "middlename";
     public static final String LAST_INDICATORS = "lastIndicators";
     public static final String LIMIT = "limit";
-    public static final int USER_ID = 1;
 
     @Autowired
     @Qualifier("restUrl")
@@ -36,15 +36,18 @@ public class DetailController {
     @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
+    @Autowired
+    private AuthInterface authBean;
+
     @RequestMapping(value = "/")
     public String getIndexPage( ModelMap model){
-        User user = restTemplate.getForObject(restUrl + "users/" + USER_ID, User.class);
+        User user = restTemplate.getForObject(restUrl + "users/" + authBean.getUserId(), User.class);
 
         model.addAttribute(NAME, user.getName());
         model.addAttribute(SURNAME, user.getSurname());
         model.addAttribute(MIDDLE_NAME, user.getMiddleName());
 
-        Indicator[] arrOfIndicators = restTemplate.getForObject(restUrl + "indicators/list/byuser/" + USER_ID + ";number=" + COUNT, Indicator[].class);
+        Indicator[] arrOfIndicators = restTemplate.getForObject(restUrl + "indicators/list/byuser/" + authBean.getUserId() + ";number=" + COUNT, Indicator[].class);
 
         List<Indicator> indicators = Arrays.asList(arrOfIndicators);
         System.out.println(indicators);

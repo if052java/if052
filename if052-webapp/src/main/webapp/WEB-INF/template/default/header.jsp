@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <c:url value="/" var="base"/>
 
@@ -42,6 +43,10 @@
                         <li><a href="${base}defaultgraph">
                             <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
                             Моя статистика
+                        </a></li>
+                        <li><a href="${base}xmlreport">
+                            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                            XML звіт
                         </a></li>
                         <li><a href="${base}#">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
