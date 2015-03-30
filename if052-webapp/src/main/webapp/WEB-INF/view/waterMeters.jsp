@@ -18,6 +18,12 @@
 
             <div class="container">
 
+                <a href="<c:url value='/addresses?userId=${address.user.userId}'/>"
+                   class="btn btn-default"  role="button">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    Назад
+                </a>
+
                 <table class="table table-hover">
                     <thead>
                     <h4>Лічильники для адреси м. ${address.city}, вул. ${address.street} ${address.building}, кв. ${address.apartment}: </h4>
