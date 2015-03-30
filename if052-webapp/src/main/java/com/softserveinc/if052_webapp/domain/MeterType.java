@@ -15,6 +15,9 @@ public class MeterType {
         this.type = type;
     }
 
+    public MeterType() {
+    }
+
     public int getMeterTypeId() { return meterTypeId; }
 
     public void setMeterTypeId(int meterTypeId) { this.meterTypeId = meterTypeId; }
