@@ -33,7 +33,7 @@
                                 <input type="checkbox" name="users" value="ALL" id="allUsers"/> Усі користувачі
                             </label>
                         </div>
-                        <input type="text" name="users" class="form-control" id="users" />
+                        <input type="text" name="users" class="form-control" id="users" required />
                     </div>
 
                     <div class="form-group">
@@ -46,16 +46,16 @@
                     </div>
 
                     <div class="form-group">
-                    <div class="checkbox-inline" id="types">
+                    <div class="checkbox-inline" id="types" >
                         <label for="types">Необхідні види лічильників</label>
-                        <%--<div class="checkbox-inline">--%>
-                            <%--<label class="checkbox-inline">--%>
-                                <%--<input type="checkbox" id="allTypes"/> Усі види--%>
-                            <%--</label>--%>
-                        <%--</div>--%> <br>
+                        <div class="checkbox-inline">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="allTypes" /> Усі види
+                            </label>
+                        </div><br>
                         <c:forEach var="meterType" items="${meterTypes}">
                             <label class="checkbox-inline">
-                                <input type="checkbox" name="types" class="checkType" value="${meterType.meterTypeId}"/> ${meterType.type}
+                                <input type="checkbox" class="checkType" name="types" value="${meterType.meterTypeId}" /> ${meterType.type}
                             </label>
                         </c:forEach>
                     </div>
@@ -78,7 +78,7 @@
                     <input type="hidden" name="paidStatus" value="1">
 
                     <div class="form-group">
-                    <button type="submit" id="subBtn" class="btn btn-primary">Завантажити xml-звіт</button>
+                    <button type="submit" id="subBtn" class="btn btn-primary" disabled>Завантажити xml-звіт</button>
                     </div>
                 </form:form>
             </div>
