@@ -52,9 +52,8 @@ public class AuthorizationController {
     private ObjectMapper objectMapper;
 
 
-
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginDo(@ModelAttribute Auth auth, ModelMap modelMap, HttpServletRequest request){
+    public String loginDo(@ModelAttribute Auth auth, ModelMap modelMap, HttpServletRequest request) {
         //Auth receivedAuth = restTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
 
         ResponseEntity<String> responseEntity = credentialsTemplate.exchange(restUrl + "auth/checkCredentials",
@@ -70,7 +69,7 @@ public class AuthorizationController {
                 Auth receivedAuth = objectMapper.readValue(responseBody, Auth.class);
 
                 Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-                authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+                authorities.add(new SimpleGrantedAuthority("ROLE_" + receivedAuth.getRole()));
 
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                         receivedAuth.getUsername(), receivedAuth.getPassword(), authorities);
@@ -81,14 +80,10 @@ public class AuthorizationController {
                 LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
                 LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 
-                {
-                    OAuth2ProtectedResourceDetails resourceDetails = passwordTemplate.getResource();
-                    ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
-                    passwordResource.setUsername(receivedAuth.getUsername());
-                    passwordResource.setPassword(receivedAuth.getPassword());
-//                    passwordResource.setUsername("marissa");
-//                    passwordResource.setPassword("koala");
-                }
+                OAuth2ProtectedResourceDetails resourceDetails = passwordTemplate.getResource();
+                ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
+                passwordResource.setUsername(receivedAuth.getUsername());
+                passwordResource.setPassword(receivedAuth.getPassword());
 
             } catch (IOException e) {
                 LOGGER.warn(e.getMessage(), e);
@@ -98,7 +93,7 @@ public class AuthorizationController {
     }
 
     @RequestMapping(value = "checkCredentials", method = RequestMethod.GET)
-    public String checkCredentials(ModelMap modelMap){
+    public String checkCredentials(ModelMap modelMap) {
         Auth auth = new Auth(1, "theUser", "password");
         Auth receivedAuth = credentialsTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
         modelMap.addAttribute("auth", receivedAuth);
@@ -106,7 +101,7 @@ public class AuthorizationController {
     }
 
     @RequestMapping("signin")
-    public String autologin(HttpServletRequest request){
+    public String autologin(HttpServletRequest request) {
 
 //        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("user", "password");
 //        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
