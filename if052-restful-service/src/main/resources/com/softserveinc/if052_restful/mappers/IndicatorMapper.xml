@@ -100,6 +100,27 @@
         ORDER BY i.date ASC
     </select>
 
+    <select id="getIndicatorsByUserId" parameterType="map"  resultMap="IndicatorResult">
+        SELECT
+        i.indicator_id,
+        i.date,
+        i.tariff_per_date,
+        i.value,
+        i.is_paid,
+        i.is_published,
+        wm.water_meter_id,
+        wm.name,
+        wm.description,
+        wm.tariff
+        FROM indicator i
+        LEFT OUTER JOIN watermeter wm on wm.water_meter_id = i.water_meter_id
+        LEFT OUTER JOIN address a on wm.address_id = a.address_id
+        WHERE a.user_id = #{userId}
+        ORDER BY i.date DESC
+        LIMIT #{number}
+    </select>
+
+
     <insert id="insertIndicator" parameterType="Indicator" useGeneratedKeys="true" keyProperty="indicatorId">
         INSERT INTO indicator(date, tariff_per_date, value, is_paid, is_published, water_meter_id)
         VALUES(#{date}, #{waterMeter.tariff}, #{value}, #{paid}, #{published}, #{waterMeter.waterMeterId})

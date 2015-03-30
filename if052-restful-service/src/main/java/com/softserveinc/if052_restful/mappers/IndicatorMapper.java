@@ -33,8 +33,10 @@ public interface IndicatorMapper {
      * @param endDate
      * @return List of indicators
      */
-    public List < Indicator >getIndicatorsByDates(@Param("waterMeterId") int waterMeterId,
+    public List < Indicator > getIndicatorsByDates(@Param("waterMeterId") int waterMeterId,
                                                  @Param("startDate") String startDate,
                                                  @Param("endDate") String endDate);
 
+    public List<Indicator> getIndicatorsByUserId(@Param("userId")int userId,
+                                                 @Param("number") int number);
 }
