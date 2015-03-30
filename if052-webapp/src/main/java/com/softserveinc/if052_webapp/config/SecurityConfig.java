@@ -27,11 +27,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
         http.authorizeRequests()
-                //.antMatchers("/signup").permitAll()
+                .antMatchers("/signup").permitAll()
+                .antMatchers("/addUser").permitAll()
                 .antMatchers("/signin").permitAll()
                 .antMatchers("/**").hasRole("USER")
                 .anyRequest().permitAll()
-            .and()//.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/**")).disable()
+            .and() //.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/**")).disable()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout.do"))
                 .logoutSuccessUrl("/login.jsp")
