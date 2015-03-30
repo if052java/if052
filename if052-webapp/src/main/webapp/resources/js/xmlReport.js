@@ -13,11 +13,24 @@ $(document).ready(function () {
     $('#allUsers').change(function () {
         $('#users').prop('disabled', this.checked);
     });
-    /*
+
     $('#allTypes').change(function () {
-        $('.checkType').prop('disabled', this.checked);
         $('[name="types"]').prop("checked", this.checked);
+        $('#subBtn').prop('disabled', !$('#allTypes').is(':checked'));
     });
-    */
+
+    $('.checkType').change(function () {
+        if($('#allTypes').is(':checked')) {
+            this.checked = !this.checked;
+        }
+        var checkedAtLeastOne = false;
+        $('.checkType').each(function() {
+            if ($(this).is(":checked")) {
+                checkedAtLeastOne = true;
+            }
+            $('#subBtn').prop('disabled', !checkedAtLeastOne);
+        });
+    })
+
 
 })
