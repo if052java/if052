@@ -5,7 +5,8 @@ CREATE TABLE consumer
   middle_name VARCHAR(45),
   login VARCHAR(45),
   password VARCHAR(45),
-  email VARCHAR(45)
+  email VARCHAR(45),
+  role VARCHAR(45)
 );
 
 CREATE TABLE role
