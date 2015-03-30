@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_webapp.domain.MeterType;
 import com.softserveinc.if052_webapp.utils.FileDownloader;
 import com.softserveinc.if052_webapp.utils.ReportRequest;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
@@ -51,6 +52,8 @@ public class XmlReportController {
     private final String METER_TYPES = "meterTypes";
     private final String LOGINS = "logins";
 
+    private static Logger LOGGER = Logger.getLogger(XmlReportController.class);
+
     @RequestMapping("/xmlreport")
     public ModelAndView getXmlReportPage() {
         ModelAndView model = new ModelAndView("xmlReport");
@@ -69,10 +72,14 @@ public class XmlReportController {
                                     HttpServletRequest request, HttpServletResponse response) throws IOException {
         ResponseEntity<String> postResponseEntity = restTemplate.exchange(restUrl + "report/", HttpMethod.POST,
                 new HttpEntity<ReportRequest>(reportRequest), String.class);
-        String uri = postResponseEntity.getHeaders().get("Location").get(0);
-        ResponseEntity<String> responseEntity2 = restTemplate.exchange(uri, HttpMethod.GET,
-                null, String.class);
-        fileDownloader.downloadFile(request, response, responseEntity2.getBody());
+        try {
+            String uri = postResponseEntity.getHeaders().get("Location").get(0);
+            ResponseEntity<String> responseEntity2 = restTemplate.exchange(uri, HttpMethod.GET,
+                    null, String.class);
+            fileDownloader.downloadFile(request, response, responseEntity2.getBody());
+        } catch (NullPointerException e) {
+            LOGGER.warn(e.getMessage(), e);
+        }
     }
 
 
