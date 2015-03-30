@@ -36,14 +36,14 @@
                     <tr>
                         <td>
                             <input type="hidden" name="waterMeterId" value="${waterMeter.waterMeterId}"/>
-                            <input type="text" name="name" value="${waterMeter.name}"/>
+                            <input type="text" class="form-control" name="name" value="${waterMeter.name}"/>
                         </td>
-                        <td> <input type="text" name="description" value="${waterMeter.description}"/></td>
+                        <td> <input type="text" class="form-control" name="description" value="${waterMeter.description}"/></td>
                         <td>
-                            <input type="number" step="0.01" name="tariff" value="${waterMeter.tariff}"/>
+                            <input type="number" class="form-control" step="0.01" name="tariff" value="${waterMeter.tariff}"/>
                         </td>
                         <td>
-                            <button class="add-button" type="submit">
+                            <button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </button>
                         </td>

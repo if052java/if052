@@ -95,7 +95,7 @@
         wm.description,
         wm.tariff
         FROM indicator i
-        RIGHT JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
+        LEFT JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
         WHERE wm.water_meter_id = #{waterMeterId}
         ORDER BY i.date ASC
     </select>

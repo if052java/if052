@@ -71,11 +71,11 @@
                                 <tr>
                                     <td>
 
-                                        <input type="text" name="name" />
+                                        <input class="form-control" type="text" name="name" />
                                     </td>
-                                    <td> <input type="text" name="description" /></td>
+                                    <td> <input class="form-control" type="text" name="description" /></td>
                                     <td>
-                                        <input type="number" step="0.01" name="tariff" />
+                                        <input class="form-control" type="number" step="0.01" name="tariff" />
                                     </td>
                                     <td>
                                         <select class="form-control" name="typeId">
@@ -85,7 +85,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <button class="add-button" type="submit">
+                                        <button class="btn btn-default" type="submit">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
                                     </td>

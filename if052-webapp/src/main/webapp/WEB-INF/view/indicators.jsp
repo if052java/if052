@@ -18,14 +18,13 @@
 
             <div class="container">
 
-                <a href="<c:url value='/watermeter?addressId=${waterMeter.address.addressId}'/>">
-                    <button class="btn btn-default" >
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        Назад
-                    </button>
+                <a href="<c:url value='/watermeter?addressId=${waterMeter.address.addressId}'/>"
+                            class="btn btn-default"  role="button">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    Назад
                 </a>
 
-                <table class="table table-hover" class="display" id="paginated">
+                <table class="table table-hover" class="display" <c:if test="${indicators.size()!=0}">id="paginated"</c:if> >
 
                     <thead>
                     <h4>Показники лічильника: ${waterMeter.name}
@@ -67,17 +66,13 @@
                                     </span>
                             </td>
                             <td>
-                                <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>">
-                                    <button class="btn btn-default"
-                                            <c:if test="${indicator.published}">disabled="disabled"</c:if> >
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                    </button>
+                                <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>"
+                                        class="btn btn-default <c:if test='${indicator.published}'>disabled</c:if>"  role="button">
+                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                 </a>
-                                <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>">
-                                    <button class="btn btn-default"
-                                            <c:if test="${indicator.published}">disabled="disabled"</c:if> >
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </button>
+                                <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>"
+                                   class="btn btn-default <c:if test='${indicator.published}'>disabled</c:if>"  role="button">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </a>
                             </td>
                         </tr>
@@ -104,7 +99,7 @@
                             <tr>
                                 <td><input class="form-control" type="text" id="datepicker" name="date"/></td>
                                 <td><input class="form-control" type="number" step="1"
-                                           name="value" value="${indicators.get(indicators.size()-1).value}"/></td>
+                                           name="value" value="${indicators.size()!=0 ? indicators.get(indicators.size()-1).value : 0}"/></td>
                                 <td><input class="checkbox" type="checkbox" name="paid" /></td>
                                 <td>
                                     <button class="btn btn-default" type="submit">

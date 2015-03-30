@@ -33,41 +33,11 @@ public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
     private String userAuthorizationUri;
 
     @Bean
-    public OAuth2ProtectedResourceDetails rest() {
-        AuthorizationCodeResourceDetails details = new AuthorizationCodeResourceDetails();
-        details.setId("rest/webapp");
-        details.setClientId("webapp");
-        details.setClientSecret("secret");
-        details.setAccessTokenUri(restAddress + accessTokenUri);
-        details.setUserAuthorizationUri(restAddress + userAuthorizationUri);
-        details.setScope(Arrays.asList("read", "write"));
-        return details;
+    public CustomErrorResponseHandler customErrorResponseHandler(){
+        return new CustomErrorResponseHandler();
     }
 
     @Bean
-    public OAuth2ProtectedResourceDetails restRedirect() {
-        AuthorizationCodeResourceDetails details = new AuthorizationCodeResourceDetails();
-        details.setId("rest/webapp-redirect");
-        details.setClientId("webapp-with-redirect");
-        details.setClientSecret("secret");
-        details.setAccessTokenUri(restAddress + accessTokenUri);
-        details.setUserAuthorizationUri(restAddress + userAuthorizationUri);
-        details.setScope(Arrays.asList("read", "write"));
-        details.setUseCurrentUri(false);
-        return details;
-    }
-
-    @Autowired
-    private OAuth2ClientContext oauth2Context;
-
-    @Bean
-    public OAuth2RestTemplate authCodeTemplate() {
-        return new OAuth2RestTemplate(rest(), oauth2Context);
-        //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
-    }
-
-    @Bean
-    //@Scope("session")
     @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
     public OAuth2RestTemplate passwordTemplate() {
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
@@ -77,24 +47,10 @@ public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
         resource.setScope(Arrays.asList("trust", "read", "write"));
         resource.setClientSecret("somesecret");
 
-        return new OAuth2RestTemplate(resource);
+        OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(resource);
+        oAuth2RestTemplate.setErrorHandler(customErrorResponseHandler());
+        return oAuth2RestTemplate;
     }
-
-//    @Bean WORKED EXAMPLE
-//    //@Scope("session")
-//    //@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
-//    public OAuth2RestOperations passwordTemplate() {
-//        ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
-//        resource.setAccessTokenUri(restAddress + accessTokenUri);
-//        resource.setClientId("trusted");
-//        resource.setId("rest/trusted");
-//        resource.setScope(Arrays.asList("trust", "read", "write"));
-//        resource.setClientSecret("somesecret");
-////            resource.setUsername("marissa");
-////            resource.setPassword("koala");
-//        return new OAuth2RestTemplate(resource);
-//        //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
-//    }
 
     @Bean
     public OAuth2RestOperations credentialsTemplate() {
@@ -105,10 +61,9 @@ public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
         resource.setId("rest/credentials");
         resource.setScope(Arrays.asList("trust", "read"));
         OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(resource);
-        oAuth2RestTemplate.setErrorHandler(new CustomErrorResponseHandler());
+        oAuth2RestTemplate.setErrorHandler(customErrorResponseHandler());
         return oAuth2RestTemplate;
     }
-
 }
 
 

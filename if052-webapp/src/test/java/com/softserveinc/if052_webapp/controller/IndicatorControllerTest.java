@@ -1,6 +1,7 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.config.WebMvcConfig;
+import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.Indicator;
 import com.softserveinc.if052_webapp.domain.MeterType;
 import com.softserveinc.if052_webapp.domain.WaterMeter;
@@ -24,7 +25,6 @@ import java.util.Arrays;
 import java.util.Date;
 
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.TestCase.assertNull;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
@@ -58,31 +58,10 @@ public class IndicatorControllerTest {
 
     @Test
     public void testGetIndicatorsPage() throws Exception {
-        MeterType meterType = new MeterType();
-        meterType.setMeterTypeId(1);
-        meterType.setType("вода");
-
-        WaterMeter waterMeter = new WaterMeter();
-        waterMeter.setWaterMeterId(4);
-        waterMeter.setName("ванна");
-        waterMeter.setDescription("червоний");
-        waterMeter.setTariff(0.6);
-        waterMeter.setMeterType(meterType);
-
-        Indicator first = new Indicator();
-        first.setIndicatorId(1);
-        first.setDate(new Date());
-        first.setValue(503);
-        first.setTariffPerDate(0.5);
-        first.setPaid(true);
-        first.setWaterMeter(waterMeter);
-
-        Indicator second = new Indicator();
-        second.setIndicatorId(2);
-        second.setDate(new Date());
-        second.setValue(608);
-        second.setTariffPerDate(0.6);
-        second.setWaterMeter(waterMeter);
+        MeterType meterType = new MeterType(1, "холодна вода");
+        WaterMeter waterMeter = new WaterMeter(4, "ванна", "червоний", 0.6, new Address(), meterType, null);
+        Indicator first = new Indicator(1, new Date(), 0.5, 503, true, false, waterMeter);
+        Indicator second = new Indicator(2, new Date(), 0.6, 608, false, false, waterMeter);
 
         when(indicatorServiceMock.getMeterById(4)).thenReturn(waterMeter);
         when(indicatorServiceMock.getIndicatorList(4)).thenReturn(Arrays.asList(first, second));
@@ -113,49 +92,11 @@ public class IndicatorControllerTest {
         verifyNoMoreInteractions(indicatorServiceMock);
     }
 
-//    @Test
-//    public void add_DescriptionAndTitleAreTooLong_ShouldRenderFormViewAndReturnValidationErrorsForTitleAndDescription() throws Exception {
-//        String title = TestUtil.createStringWithLength(101);
-//        String description = TestUtil.createStringWithLength(501);
-//
-//        mockMvc.perform(post("/todo/add")
-//                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-//                        .param("description", description)
-//                        .param("title", title)
-//                        .sessionAttr("todo", new TodoDTO())
-//        )
-//                .andExpect(status().isOk())
-//                .andExpect(view().name("todo/add"))
-//                .andExpect(forwardedUrl("/WEB-INF/jsp/todo/add.jsp"))
-//                .andExpect(model().attributeHasFieldErrors("todo", "title"))
-//                .andExpect(model().attributeHasFieldErrors("todo", "description"))
-//                .andExpect(model().attribute("todo", hasProperty("id", nullValue())))
-//                .andExpect(model().attribute("todo", hasProperty("description", is(description))))
-//                .andExpect(model().attribute("todo", hasProperty("title", is(title))));
-//
-//        verifyZeroInteractions(todoServiceMock);
-//    }
-
     @Test
     public void testAddIndicator() throws Exception {
-        MeterType meterType = new MeterType();
-        meterType.setMeterTypeId(1);
-        meterType.setType("вода");
-
-        WaterMeter waterMeter = new WaterMeter();
-        waterMeter.setWaterMeterId(4);
-        waterMeter.setName("ванна");
-        waterMeter.setDescription("червоний");
-        waterMeter.setTariff(0.6);
-        waterMeter.setMeterType(meterType);
-
-        Indicator first = new Indicator();
-        first.setIndicatorId(1);
-        first.setDate(new Date());
-        first.setValue(503);
-        first.setTariffPerDate(0.5);
-        first.setPaid(true);
-        first.setWaterMeter(waterMeter);
+        MeterType meterType = new MeterType(1, "холодна вода");
+        WaterMeter waterMeter = new WaterMeter(4, "ванна", "червоний", 0.6, new Address(), meterType, null);
+        Indicator first = new Indicator(1, new Date(), 0.5, 503, true, false, waterMeter);
 
         when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class))).thenReturn(first);
         mockMvc.perform(get("/indicators?waterMeterId=4"));

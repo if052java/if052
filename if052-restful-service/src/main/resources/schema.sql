@@ -29,7 +29,7 @@ CREATE TABLE meter_type (
 CREATE TABLE watermeter
 (
   water_meter_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(45) NOT NULL UNIQUE,
+  name VARCHAR(45) NOT NULL,
   description VARCHAR(45),
   address_id INT(11) NOT NULL,
   meter_type_id INT(11) NOT NULL,

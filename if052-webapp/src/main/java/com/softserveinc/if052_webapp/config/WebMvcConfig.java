@@ -74,13 +74,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	}
 
     @Bean
-    RestTemplate restTemplate(){
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setErrorHandler(new CustomErrorResponseHandler());
-        return restTemplate;
-    }
-
-    @Bean
     ObjectMapper objectMapper(){
         return new ObjectMapper();
     }
