@@ -12,6 +12,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
@@ -23,6 +24,7 @@
                 <h2>Оберіть фільтри для звіту:</h2>
                 <c:url var="createXmlUrl" value="/createXmlReport"/>
                 <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest" id="xmlForm">
+                    <sec:csrfInput/>
 
                     <div class="form-group">
                         <label for="users">Логін користувача</label>

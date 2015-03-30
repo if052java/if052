@@ -9,6 +9,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
@@ -19,6 +20,7 @@
 
             <div id="chooseMonth" class = "check-box">
                 <form:form action="${drawByMonth}">
+                <sec:csrfInput/>
                         Виберіть опцію :
                     <select name="month"  >
                         <option value="13">Виберіть місяць</option>

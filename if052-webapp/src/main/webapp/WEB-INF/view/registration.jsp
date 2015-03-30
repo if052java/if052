@@ -17,6 +17,7 @@
             <c:url var="addUrl" value="/addUser"/>
             <form:form 
                     action="${addUrl}" method="post" modelAttribute="user" id="registrationForm" class="form-horizontal">
+                <sec:csrfInput/>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Прізвище</label>
                     <div class="col-xs-5">
@@ -67,8 +68,6 @@
                         <button id="submit" type="submit" class="btn btn-primary" name="sign up" value="">Зареєструватись</button>
                     </div>
                 </div>
-
-                <sec:csrfInput />
             </form:form>
         </div>
 
