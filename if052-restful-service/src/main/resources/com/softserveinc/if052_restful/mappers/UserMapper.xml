@@ -38,6 +38,7 @@
         <result property="login" column="login"/>
         <result property="password" column="password"/>
         <result property="email" column="email"/>
+        <result property="role" column="role"/>
     </resultMap>
 
     <resultMap id="ReportUserResult" type="User">
@@ -229,7 +230,7 @@
         c.middle_name,
         c.login,
         c.password,
-        c.email
+        c.email,
         c.role
         FROM consumer c
         WHERE c.login = #{login}
