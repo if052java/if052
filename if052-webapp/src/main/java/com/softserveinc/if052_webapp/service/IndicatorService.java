@@ -35,10 +35,10 @@ public class IndicatorService {
         }
     }
 
-    public void addIndicator(Indicator indicator, int meterId){
-        WaterMeter waterMeter = restTemplate.getForObject(restUrl+ "watermeters/" + meterId, WaterMeter.class);
-        indicator.setWaterMeter(waterMeter);
+    public Indicator addIndicator(Indicator indicator){
         restTemplate.postForObject(restUrl + "indicators/", indicator, Indicator.class);
+
+        return indicator;
     }
 
     public void updateIndicator(Indicator indicator, int meterId){

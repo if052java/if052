@@ -9,9 +9,11 @@ import com.softserveinc.if052_webapp.service.IndicatorService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -22,9 +24,13 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 import java.util.Date;
 
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.TestCase.assertNull;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -106,5 +112,73 @@ public class IndicatorControllerTest {
         verify(indicatorServiceMock, times(1)).getIndicatorList(4);
         verify(indicatorServiceMock, times(1)).getMeterById(4);
         verifyNoMoreInteractions(indicatorServiceMock);
+    }
+
+//    @Test
+//    public void add_DescriptionAndTitleAreTooLong_ShouldRenderFormViewAndReturnValidationErrorsForTitleAndDescription() throws Exception {
+//        String title = TestUtil.createStringWithLength(101);
+//        String description = TestUtil.createStringWithLength(501);
+//
+//        mockMvc.perform(post("/todo/add")
+//                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+//                        .param("description", description)
+//                        .param("title", title)
+//                        .sessionAttr("todo", new TodoDTO())
+//        )
+//                .andExpect(status().isOk())
+//                .andExpect(view().name("todo/add"))
+//                .andExpect(forwardedUrl("/WEB-INF/jsp/todo/add.jsp"))
+//                .andExpect(model().attributeHasFieldErrors("todo", "title"))
+//                .andExpect(model().attributeHasFieldErrors("todo", "description"))
+//                .andExpect(model().attribute("todo", hasProperty("id", nullValue())))
+//                .andExpect(model().attribute("todo", hasProperty("description", is(description))))
+//                .andExpect(model().attribute("todo", hasProperty("title", is(title))));
+//
+//        verifyZeroInteractions(todoServiceMock);
+//    }
+
+    @Test
+    public void testAddIndicator() throws Exception {
+        MeterType meterType = new MeterType();
+        meterType.setMeterTypeId(1);
+        meterType.setType("вода");
+
+        WaterMeter waterMeter = new WaterMeter();
+        waterMeter.setWaterMeterId(4);
+        waterMeter.setName("ванна");
+        waterMeter.setDescription("червоний");
+        waterMeter.setTariff(0.6);
+        waterMeter.setMeterType(meterType);
+
+        Indicator first = new Indicator();
+        first.setIndicatorId(1);
+        first.setDate(new Date());
+        first.setValue(503);
+        first.setTariffPerDate(0.5);
+        first.setPaid(true);
+        first.setWaterMeter(waterMeter);
+
+        when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class))).thenReturn(first);
+        mockMvc.perform(get("/indicators?waterMeterId=4"));
+        mockMvc.perform(post("/addIndicator")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("indicatorId", "1")
+                        .param("value", "503")
+                        .param("paid", "true")
+                        .sessionAttr("indicator", new Indicator()))
+                .andExpect(status().isMovedTemporarily())
+                .andExpect(redirectedUrl("/indicators?waterMeterId=4"));
+
+        ArgumentCaptor<Indicator> formObjectArgument = ArgumentCaptor.forClass(Indicator.class);
+        verify(indicatorServiceMock, times(1)).getIndicatorList(4);
+        verify(indicatorServiceMock, times(1)).addIndicator(formObjectArgument.capture());
+        verify(indicatorServiceMock, times(2)).getMeterById(4);
+        verifyNoMoreInteractions(indicatorServiceMock);
+
+        Indicator formObject = formObjectArgument.getValue();
+
+        assertThat(formObject.getValue(), is(503));
+        assertNotNull(formObject.getIndicatorId());
+        assertThat(formObject.isPaid(), is(true));
     }
 }

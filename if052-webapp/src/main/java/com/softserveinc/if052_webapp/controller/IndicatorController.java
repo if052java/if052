@@ -47,7 +47,9 @@ public class IndicatorController {
 
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
     public String addIndicator(@ModelAttribute Indicator indicator){
-        indicatorService.addIndicator(indicator, Integer.parseInt(meterId));
+        WaterMeter waterMeter = indicatorService.getMeterById(Integer.parseInt(meterId));
+        indicator.setWaterMeter(waterMeter);
+        indicatorService.addIndicator(indicator);
 
         return REDIRECT + this.meterId;
     }
