@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestOperations;
@@ -33,6 +34,26 @@ public class AuthorizationController {
     @Autowired
     @Qualifier("restUrl")
     private String restUrl;
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String loginDo(@ModelAttribute Auth auth, ModelMap modelMap, HttpServletRequest request){
+        Auth receivedAuth = restTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
+
+        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                        receivedAuth.getUsername(), receivedAuth.getPassword(), authorities);
+        token.setDetails(new WebAuthenticationDetails(request));
+
+        logger.debug("Logging in with " + token.getPrincipal().toString());
+        SecurityContextHolder.getContext().setAuthentication(token);
+        logger.debug(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        logger.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+
+        modelMap.addAttribute("auth", receivedAuth);
+        return "redirect:/";
+    }
 
     @RequestMapping(value = "checkCredentials", method = RequestMethod.GET)
     public String checkCredentials(ModelMap modelMap){

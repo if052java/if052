@@ -12,11 +12,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
-                .and().withUser("admin").password("admin").roles("ADMIN");
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
+//                .and().withUser("admin").password("admin").roles("ADMIN");
+//    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/addUser").permitAll()
                 .antMatchers("/signin").permitAll()
+                .antMatchers("/login").permitAll()
                 .antMatchers("/checkCredentials").permitAll()
                 .antMatchers("/**").hasRole("USER")
                 .anyRequest().permitAll()
@@ -40,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
             .and()
                 .formLogin()
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/login.do")
                 .loginPage("/login.jsp")
                 .failureUrl("/login.jsp?authentication_error=true")
                 .permitAll();
