@@ -3,6 +3,14 @@ INSERT INTO `consumer`
            (2, 'USER_Name2', 'SURNAME2', 'MIDDLENAME2', 'LOGIN222', 'PASS2222', 'asdf@mail.ru'),
            (3, 'USER_Name3', 'SURNAME3', 'MIDDLENAME3', 'LOGIN333', 'PASS3333', 'zixel@i.ua');
 
+INSERT INTO `role`
+       VALUES (1, 'USER', 'User'),
+               (2, 'ADMIN', 'Admin');
+
+INSERT INTO `role_consumer`
+       VALUES (1, 1, 1),
+              (2, 2, 2),
+              (3, 3, 1);
 
 INSERT INTO `address`
     VALUES (1, 'Івано-Франківськ', 'Шевченка', '1', '2', 1),

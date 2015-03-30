@@ -8,6 +8,26 @@ CREATE TABLE consumer
   email VARCHAR(45)
 );
 
+CREATE TABLE role
+(
+  role_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(20) UNIQUE NOT NULL,
+  description VARCHAR(256)
+);
+
+CREATE TABLE role_consumer
+(
+  role_consumer_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+  user_id INT(11) NOT NULL,
+  role_id INT(11) NOT NULL,
+  CONSTRAINT fk_role_consumer_role FOREIGN KEY (user_id)
+  REFERENCES consumer (user_id)
+  ON UPDATE CASCADE ON DELETE RESTRICT,
+  CONSTRAINT fk_role_consumer_user FOREIGN KEY (role_id)
+  REFERENCES role (role_id)
+  ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
 CREATE TABLE address
 (
   address_id INT(11) AUTO_INCREMENT PRIMARY KEY,
