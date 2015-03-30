@@ -8,6 +8,7 @@ import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -29,6 +30,8 @@ public class AddressResource {
 
     @Autowired
     IndicatorService indicatorService;
+
+    private static Logger LOGGER = Logger.getLogger(WaterMeterResource.class.getName());
 
     @GET
     @Path("/list/{userId}")
@@ -79,17 +82,20 @@ public class AddressResource {
     @DELETE
     @Path("{addressId}")
     public Response deleteAddress(@PathParam("addressId") int addressId) {
-
-        for(WaterMeter waterMeter : waterMeterService.getWaterMetersByAddressId(addressId)){
-
-            for(Indicator indicator : indicatorService.getIndicatorsByWaterMeter(waterMeter)){
-                indicatorService.deleteIndicator(indicator.getIndicatorId());
-            }
-
-            waterMeterService.deleteWaterMeter(waterMeter.getWaterMeterId());
+        LOGGER.info("INFO: Deleting a address with id " + addressId + ".");
+        if (addressService.getAddressById(addressId) == null){
+            LOGGER.info("INFO: Address with requested id " + addressId + " is not found.");
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        addressService.deleteAddress(addressId);
+        try{
+            LOGGER.info("INFO : Meter with id " + addressId + " has been successfully deleted.");
+            addressService.deleteAddress(addressId);
+            return Response.status(Response.Status.OK).build();
+        } catch ( DataIntegrityViolationException e){
+            LOGGER.warn("WARNING: Address with requester id " + addressId
+                + " contains list of meters so it cannot be deleted.", e);  
+        }
 
-        return Response.status(Response.Status.OK).build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }
