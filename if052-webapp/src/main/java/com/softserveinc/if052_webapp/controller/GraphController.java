@@ -26,7 +26,7 @@ import java.util.*;
  * Created by valentyn on 2/11/15.
  */
 @Controller
-public class UserController {
+public class GraphController {
 
     private final String YEAR= "year";
     private final String INDICATORS_DATA = "indicatorsData";
@@ -41,32 +41,14 @@ public class UserController {
     private String restUrl;
 
     @Autowired
-    @Qualifier("credentialsTemplate")
+    @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
     @Autowired
     private ObjectMapper objectMapper;
 
     private static Logger logger = Logger.getLogger(WaterMeterController.class);
-    
-    @RequestMapping("signup")
-    public String registration(ModelMap model){
 
-        model.addAttribute("restUrl", restUrl);
-        return "registration";
-    }
-
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String createAddress(@ModelAttribute User user){
-
-        user.setName(user.getName().trim());
-        user.setSurname(user.getSurname().trim());
-        user.setMiddleName(user.getMiddleName().trim());
-        
-        user = restTemplate.postForObject(restUrl + "users/", user, User.class);
-
-        return "redirect:/addresses?userId=" + user.getUserId();
-    }
 
     @RequestMapping("defaultgraph")
     public String getMainGraph(ModelMap model){
@@ -270,23 +252,5 @@ public class UserController {
         return json;
     }
 
-    @RequestMapping(value = "/map{userId}")
-    public String getAddressPage(int userId, ModelMap model){
-        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
-
-        String gMapData = "";
-
-        for (int i = 0; i < arrayOfAddresses.length; i++) {
-            gMapData += (arrayOfAddresses[i].getCity() + ", вул. "
-                    + arrayOfAddresses[i].getStreet() + " " + arrayOfAddresses[i].getBuilding() + "~");
-        }
-        // delete last '~' in string
-        gMapData = gMapData.substring(0, gMapData.length()-1);
-
-        model.addAttribute("gMapData", gMapData);
-        model.addAttribute("userId", userId);
-
-        return "map";
-    }
 }
 

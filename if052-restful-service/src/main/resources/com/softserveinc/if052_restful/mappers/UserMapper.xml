@@ -30,6 +30,17 @@
         <result property="email" column="email"/>
     </resultMap>
 
+    <resultMap id="UserSimpleResultWithRole" type="User">
+        <id property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="surname" column="surname"/>
+        <result property="middleName" column="middle_name"/>
+        <result property="login" column="login"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+        <result property="role" column="role"/>
+    </resultMap>
+
     <resultMap id="ReportUserResult" type="User">
         <id property="userId" column="user_id"/>
         <result property="name" column="name"/>
@@ -111,8 +122,8 @@
 
 
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId">
-        INSERT INTO consumer (name, surname, middle_name, login, password, email)
-        VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password}, #{email})
+        INSERT INTO consumer (name, surname, middle_name, login, password, email, role)
+        VALUES( #{name}, #{surname}, #{middleName}, #{login}, #{password}, #{email}, #{role})
     </insert>
 
     <update id="updateUser" parameterType="User">
@@ -210,6 +221,18 @@
         c.login
         FROM consumer c
     </select>
-            
 
+    <select id="getAuth" parameterType="String" resultMap="UserSimpleResultWithRole">
+        SELECT
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.password,
+        c.email,
+        c.role
+        FROM consumer c
+        WHERE c.login = #{login}
+    </select>
 </mapper>

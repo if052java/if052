@@ -40,20 +40,20 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Електронна пошта</label>
                     <div class="col-xs-5">
-                        <input type="email" class="form-control" name="email" placeholder="email" />
+                        <input type="email" class="form-control" name="email" placeholder="Email" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Логін</label>
                     <div class="col-xs-5">
-                        <input id="login" type="text" class="form-control" name="login" placeholder="login"/>
+                        <input id="login" type="text" class="form-control" name="login" placeholder="Login"/>
                         <div id="login-errors" class ='login-error'></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Пароль</label>
                     <div class="col-xs-5">
-                        <input type="password" class="form-control" name="password" id = "password" placeholder="password"/>
+                        <input type="password" class="form-control" name="password" id = "password" placeholder="Password"/>
                     </div>
                 </div>
 

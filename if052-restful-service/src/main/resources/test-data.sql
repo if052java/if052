@@ -1,7 +1,7 @@
 INSERT INTO `consumer`
-    VALUES (1, 'USER_Name1', 'SURNAME1', 'MIDDLENAME1', 'LOGIN111', 'PASS1111', 'qwerty@gmail.com'),
-           (2, 'USER_Name2', 'SURNAME2', 'MIDDLENAME2', 'LOGIN222', 'PASS2222', 'asdf@mail.ru'),
-           (3, 'USER_Name3', 'SURNAME3', 'MIDDLENAME3', 'LOGIN333', 'PASS3333', 'zixel@i.ua');
+    VALUES (1, 'USER_Name1', 'SURNAME1', 'MIDDLENAME1', 'LOGIN111', 'PASS1111', 'qwerty@gmail.com', 'USER'),
+           (2, 'USER_Name2', 'SURNAME2', 'MIDDLENAME2', 'LOGIN222', 'PASS2222', 'asdf@mail.ru', 'ADMIN'),
+           (3, 'USER_Name3', 'SURNAME3', 'MIDDLENAME3', 'LOGIN333', 'PASS3333', 'zixel@i.ua', 'USER');
 
 INSERT INTO `role`
        VALUES (1, 'USER', 'User'),

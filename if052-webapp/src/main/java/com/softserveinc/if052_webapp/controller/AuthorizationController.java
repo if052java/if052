@@ -82,8 +82,6 @@ public class AuthorizationController {
                 LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 
                 {
-                    //OAuth2RestTemplate oAuth2RestTemplate = (OAuth2RestTemplate) passwordTemplate;
-//                    OAuth2ProtectedResourceDetails resourceDetails = oAuth2RestTemplate.getResource();
                     OAuth2ProtectedResourceDetails resourceDetails = passwordTemplate.getResource();
                     ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
                     passwordResource.setUsername(receivedAuth.getUsername());

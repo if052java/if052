@@ -40,6 +40,18 @@ public class IndicatorResource {
     }
 
     @GET
+    @Path("/list/byuser/{userId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getIndicatorsByUserId(@PathParam("userId") int userId,
+                                          @MatrixParam("number") int number) {
+        List<Indicator> indicators = indicatorService.getIndicatorsByUserId(userId, number);
+        if (indicators == null) {
+            indicators = new ArrayList<Indicator>();
+        }
+        return Response.status(Response.Status.OK).entity(indicators).build();
+    }
+
+    @GET
     @Path("/byYear/{meterId}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getIndicatorsByYear(@PathParam("meterId") int meterId,

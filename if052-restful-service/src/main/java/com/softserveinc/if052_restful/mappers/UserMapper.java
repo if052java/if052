@@ -3,6 +3,7 @@
  */
 package com.softserveinc.if052_restful.mappers;
 
+import com.softserveinc.if052_restful.domain.Auth;
 import com.softserveinc.if052_restful.domain.User;
 import java.util.List;
 
@@ -63,5 +64,7 @@ public interface UserMapper {
     public User getReportUserByLogin(String login);
 
     public List<String> getLogins();
+
+    public User getAuth(String login);
 
 }
