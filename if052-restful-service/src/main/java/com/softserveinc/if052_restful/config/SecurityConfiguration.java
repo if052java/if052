@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -16,11 +17,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    CustomDetailsService userDetails;
+
+    @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("marissa").password("koala").roles("USER")
-                .and().withUser("paul").password("emu").roles("USER")
-                .and().withUser("user").password("password").roles("USER");
+        auth.userDetailsService(userDetails);
     }
+//    @Autowired
+//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication().withUser("marissa").password("koala").roles("USER")
+//                .and().withUser("paul").password("emu").roles("USER")
+//                .and().withUser("user").password("password").roles("USER");
+//    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
