@@ -2,6 +2,7 @@ package com.softserveinc.if052_webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_webapp.domain.Auth;
+import com.softserveinc.if052_webapp.domain.AuthInterface;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -51,6 +52,9 @@ public class AuthorizationController {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private AuthInterface authBean;
+
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginDo(@ModelAttribute Auth auth, ModelMap modelMap, HttpServletRequest request) {
@@ -84,6 +88,10 @@ public class AuthorizationController {
                 ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
                 passwordResource.setUsername(receivedAuth.getUsername());
                 passwordResource.setPassword(receivedAuth.getPassword());
+
+                authBean.setUserId(receivedAuth.getUserId());
+                authBean.setUsername(receivedAuth.getUsername());
+                authBean.setRole(receivedAuth.getRole());
 
             } catch (IOException e) {
                 LOGGER.warn(e.getMessage(), e);

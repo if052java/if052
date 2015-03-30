@@ -1,5 +1,6 @@
 package com.softserveinc.if052_webapp.config;
 
+import com.softserveinc.if052_webapp.domain.Auth;
 import com.softserveinc.if052_webapp.errorHandler.CustomErrorResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -63,6 +64,13 @@ public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
         OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(resource);
         oAuth2RestTemplate.setErrorHandler(customErrorResponseHandler());
         return oAuth2RestTemplate;
+    }
+
+    @Bean
+    @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
+    public Auth auth(){
+        Auth auth = new Auth();
+        return auth;
     }
 }
 

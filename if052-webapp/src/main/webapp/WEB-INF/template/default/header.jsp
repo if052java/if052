@@ -35,7 +35,7 @@
                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             Головна
                         </a></li>
-                        <li><a href="${base}addresses?userId=1">
+                        <li><a href="${base}addresses">
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                             Мої адреси
                         </a></li>

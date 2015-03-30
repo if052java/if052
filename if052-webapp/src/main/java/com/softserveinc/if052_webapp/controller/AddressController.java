@@ -1,6 +1,7 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.domain.Address;
+import com.softserveinc.if052_webapp.domain.AuthInterface;
 import com.softserveinc.if052_webapp.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +34,9 @@ public class AddressController {
     @Qualifier("restUrl")
     private String restUrl;
 
+    @Autowired
+    private AuthInterface authBean;
+
     private String userId = "";
 
     /**
@@ -41,9 +45,9 @@ public class AddressController {
      * @param model - 
      * @return "address" JSP for showing 
      */
-    @RequestMapping(value = "/addresses{userId}")
-    public String getAddressPage(int userId, ModelMap model){
-        this.userId = String.valueOf(userId);
+    @RequestMapping(value = "/addresses")
+    public String getAddressPage(ModelMap model){
+        this.userId = String.valueOf(authBean.getUserId());
 
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddresses);

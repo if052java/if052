@@ -3,7 +3,7 @@ package com.softserveinc.if052_webapp.domain;
 /**
  * Created by nazar on 3/30/15.
  */
-public class Auth {
+public class Auth implements AuthInterface {
 
     private int userId;
     private String username;
