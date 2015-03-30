@@ -37,19 +37,16 @@ public class AddressController {
     @Autowired
     private AuthInterface authBean;
 
-    private String userId = "";
+    //private String userId = "";
 
     /**
      * Get page with addresses by user id
-     * @param userId - Identificator of user
-     * @param model - 
-     * @return "address" JSP for showing 
+     * @param model -
+     * @return "address" JSP for showing
      */
     @RequestMapping(value = "/addresses")
     public String getAddressPage(ModelMap model){
-        this.userId = String.valueOf(authBean.getUserId());
-
-        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
+        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + authBean.getUserId(), Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddresses);
 
         model.addAttribute(ADDRESSES, addresses);
@@ -61,16 +58,16 @@ public class AddressController {
      * Create new address
      *
      * @param address
-     * @return 
+     * @return
      */
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST)
     public String createAddress(@ModelAttribute Address address){
-        User user = restTemplate.getForObject(restUrl+ "users/" + this.userId, User.class);
+        User user = restTemplate.getForObject(restUrl+ "users/" + authBean.getUserId(), User.class);
         address.setUser(user);
 
         restTemplate.postForObject(restUrl + "addresses/", address, Address.class);
 
-        return "redirect:/addresses?userId=" + this.userId;
+        return "redirect:/addresses";
     }
 
     /**
@@ -91,17 +88,17 @@ public class AddressController {
 
     /**
      * Update exists address
-     * 
+     *
      * @param address
      * @return
      */
     @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
     public String updateAddress(@ModelAttribute Address address){
-        User user = restTemplate.getForObject(restUrl+ "users/" + this.userId, User.class);
+        User user = restTemplate.getForObject(restUrl+ "users/" + authBean.getUserId(), User.class);
         address.setUser(user);
         restTemplate.put(restUrl + "addresses/" + address.getAddressId(), address);
 
-        return "redirect:/addresses?userId=" + this.userId;
+        return "redirect:/addresses";
     }
 
     /**
@@ -119,6 +116,6 @@ public class AddressController {
             model.addAttribute(REASON, "This address has tied meters so it cannot be deleted.");
             return "error400";
         }
-        return "redirect:/addresses?userId=" + this.userId;
+        return "redirect:/addresses";
     }
 }
