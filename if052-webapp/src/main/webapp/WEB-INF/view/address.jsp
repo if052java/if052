@@ -50,7 +50,7 @@
                     <%--hard-code url!!!--%>
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group" role="group">
-                            <a href="<c:url value='/map?userId=1'/>" class="btn btn-default
+                            <a href="<c:url value='/map'/>" class="btn btn-default
                                     <c:if test='${addresses.size()==0}'>disabled</c:if>"  role="button">
                                 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
                                 Подивитись на карті

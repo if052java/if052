@@ -1,6 +1,7 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.domain.Address;
+import com.softserveinc.if052_webapp.domain.AuthInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -22,8 +23,12 @@ public class MapController {
     @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
-    @RequestMapping(value = "/map{userId}")
-    public String getMapPage(int userId, ModelMap model){
+    @Autowired
+    private AuthInterface authBean;
+
+    @RequestMapping(value = "/map")
+    public String getMapPage(ModelMap model){
+        Integer userId = authBean.getUserId();
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
 
         String gMapData = "";

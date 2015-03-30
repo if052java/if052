@@ -9,7 +9,7 @@
     <tiles:putAttribute name="body">
         <div class="body">
             <div class="container">
-                <a href="<c:url value='/addresses?userId=${userId}'/>">
+                <a href="<c:url value='/addresses'/>">
                     <button class="btn btn-default btn-back" >
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         Назад
