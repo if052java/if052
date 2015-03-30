@@ -26,7 +26,7 @@ public class AddressController {
     private final String ADDRESSES = "addresses";
     private final String REASON = "resource";
     @Autowired
-    @Qualifier("credentialsTemplate")
+    @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
     @Autowired 
