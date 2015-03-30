@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/addUser").permitAll()
                 .antMatchers("/signin").permitAll()
+                .antMatchers("/checkCredentials").permitAll()
                 .antMatchers("/**").hasRole("USER")
                 .anyRequest().permitAll()
             .and() //.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/**")).disable()
