@@ -64,7 +64,7 @@
                                     <%--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>--%>
                                     Реєстрація
                                 </a></li>
-                                <li class="log-in"><a href="${base}signin">
+                                <li class="log-in"><a href="${base}login.jsp">
                                     <%--<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>--%>
                                     Вхід
                                 </a></li>

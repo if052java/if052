@@ -12,12 +12,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
-//                .and().withUser("admin").password("admin").roles("ADMIN");
-//    }
-
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**");
@@ -29,11 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/addUser").permitAll()
-                .antMatchers("/signin").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/checkCredentials").permitAll()
                 .antMatchers("/**").hasRole("USER")
-                .anyRequest().permitAll()
+//                .anyRequest().permitAll()
             .and() //.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/**")).disable()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout.do"))

@@ -29,5 +29,5 @@ dependency-reduced-pom.xml
 *.iws
 *.idea
 
-$ Logs
+# Logs
 log.txt

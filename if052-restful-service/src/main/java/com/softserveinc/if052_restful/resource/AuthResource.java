@@ -19,6 +19,7 @@ public class AuthResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response checkCredentials(Auth auth){
         auth.setUserId(48);
+        if (!auth.getPassword().equals("password")) return Response.status(Response.Status.ACCEPTED).build();
         return Response.status(Response.Status.OK).entity(auth).build();
     }
 }
