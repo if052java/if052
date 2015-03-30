@@ -55,7 +55,7 @@
                         </div> <br>
                         <c:forEach var="meterType" items="${meterTypes}">
                             <label class="checkbox-inline">
-                                <input type="checkbox" name="types" value="${meterType.meterTypeId}"/> ${meterType.type}
+                                <input type="checkbox" name="types" class="checkType" value="${meterType.meterTypeId}"/> ${meterType.type}
                             </label>
                         </c:forEach>
                     </div>
@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Скачати xml-звіт</button>
+                    <button type="submit" id="subBtn" class="btn btn-primary">Завантажити xml-звіт</button>
                     </div>
                 </form:form>
             </div>
