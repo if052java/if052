@@ -50,11 +50,13 @@ public class IndicatorServiceTest {
     }
 
     @Test
-    public void getIndicatorsByDates(){
+    public void testGetIndicatorsByDates(){
         List < Indicator > indicators =
         indicatorService.getIndicatorsByDates(1, "2015-01-01 00:00:00", "2015-31-31 23:59:59");
         Assert.assertNotNull(indicators);
         for (Indicator indicator : indicators) {
+        	//CODEREVIEW NO : Consider using hamcrest mathchers to validate collections
+        	//CODEREVIEW NO : Even in tests please use loggers, not sysouts 
             System.out.println(indicator);
         }
     }
