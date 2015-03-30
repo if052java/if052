@@ -120,6 +120,7 @@
 
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/datepicker.js'/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery.dataTables.min.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/indicators.js"/>"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

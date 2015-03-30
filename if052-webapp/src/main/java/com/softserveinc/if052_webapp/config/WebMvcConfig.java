@@ -1,15 +1,13 @@
 package com.softserveinc.if052_webapp.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.softserveinc.if052_webapp.service.IndicatorService;
 import com.softserveinc.if052_webapp.errorHandler.CustomErrorResponseHandler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.http.MediaType;
 import org.springframework.web.accept.ContentNegotiationManagerFactoryBean;
-import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
@@ -86,4 +84,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     ObjectMapper objectMapper(){
         return new ObjectMapper();
     }
+
+	@Bean
+	IndicatorService indicatorService() {return new IndicatorService(); }
 }
