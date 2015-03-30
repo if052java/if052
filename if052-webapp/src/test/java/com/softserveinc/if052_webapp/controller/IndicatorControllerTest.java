@@ -1,6 +1,5 @@
 package com.softserveinc.if052_webapp.controller;
 
-import com.softserveinc.if052_webapp.config.TestContext;
 import com.softserveinc.if052_webapp.config.WebMvcConfig;
 import com.softserveinc.if052_webapp.domain.Indicator;
 import com.softserveinc.if052_webapp.domain.MeterType;

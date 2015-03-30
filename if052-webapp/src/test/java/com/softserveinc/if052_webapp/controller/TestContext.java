@@ -1,4 +1,4 @@
-package com.softserveinc.if052_webapp.config;
+package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_webapp.service.IndicatorService;
 import org.mockito.Mockito;
