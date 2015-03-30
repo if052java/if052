@@ -50,6 +50,15 @@ public class IndicatorServiceTest {
     }
 
     @Test
+    public void testGetIndicatorsByUserId() {
+        List<Indicator> indicators = indicatorService.getIndicatorsByUserId(1, 10);
+        Assert.assertNotNull(indicators);
+        for (Indicator indicator : indicators) {
+            System.out.println(indicator);
+        }
+    }
+
+    @Test
     public void testGetIndicatorsByDates(){
         List < Indicator > indicators =
         indicatorService.getIndicatorsByDates(1, "2015-01-01 00:00:00", "2015-31-31 23:59:59");
