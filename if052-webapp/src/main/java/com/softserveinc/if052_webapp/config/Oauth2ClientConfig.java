@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.Arrays;
@@ -60,35 +61,40 @@ public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
     private OAuth2ClientContext oauth2Context;
 
     @Bean
-    //@Primary
-    public OAuth2RestTemplate oAuthRestTemplate() {
+    public OAuth2RestTemplate authCodeTemplate() {
         return new OAuth2RestTemplate(rest(), oauth2Context);
         //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
     }
 
-//        @Bean
-//        public RestServiceTest restService(@Qualifier("oAuthRestTemplate") RestOperations restOperations) {
-//            RestServiceTest restServiceTest = new RestServiceTest();
-//            restServiceTest.setRestTemplate(restOperations);
-//            return restServiceTest;
-//        }
-
-
     @Bean
     //@Scope("session")
-    //@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
-    public OAuth2RestOperations oAuthRestTemplatePassword() {
+    @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
+    public OAuth2RestTemplate passwordTemplate() {
         ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
         resource.setAccessTokenUri(restAddress + accessTokenUri);
         resource.setClientId("trusted");
         resource.setId("rest/trusted");
         resource.setScope(Arrays.asList("trust", "read", "write"));
         resource.setClientSecret("somesecret");
-//            resource.setUsername("marissa");
-//            resource.setPassword("koala");
+
         return new OAuth2RestTemplate(resource);
-        //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
     }
+
+//    @Bean WORKED EXAMPLE
+//    //@Scope("session")
+//    //@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
+//    public OAuth2RestOperations passwordTemplate() {
+//        ResourceOwnerPasswordResourceDetails resource = new ResourceOwnerPasswordResourceDetails();
+//        resource.setAccessTokenUri(restAddress + accessTokenUri);
+//        resource.setClientId("trusted");
+//        resource.setId("rest/trusted");
+//        resource.setScope(Arrays.asList("trust", "read", "write"));
+//        resource.setClientSecret("somesecret");
+////            resource.setUsername("marissa");
+////            resource.setPassword("koala");
+//        return new OAuth2RestTemplate(resource);
+//        //return new OAuth2RestTemplate(restRedirect(), oauth2Context);
+//    }
 
     @Bean
     public OAuth2RestOperations credentialsTemplate() {

@@ -18,7 +18,7 @@ public class IndicatorService {
     private String restUrl;
 
     @Autowired
-    @Qualifier("credentialsTemplate")
+    @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
     public List<Indicator> getIndicatorList(int meterId){
