@@ -23,7 +23,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img alt="Brand" src="https://softserve.ua/wp-content/uploads/2014/01/logosoftserv.fw_1.png"/>
+                        <img alt="Brand" src="<c:url value='/resources/images/tiles/logosoftserv.fw_1.png'/>"/>
                     </a>
                 </div>
 

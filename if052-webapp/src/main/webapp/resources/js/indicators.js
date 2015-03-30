@@ -14,10 +14,15 @@ $(document).ready(function() {
             { "orderable": false },
             { "orderable": false }
         ],
-        "order": [[ 0, 'desc' ], [ 0, 'desc' ]],
+        "order": [[ 0, 'desc' ], [ 1, 'desc' ]],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Ukranian.json"
         },
         "autoWidth": true
     });
+});
+$(function() {
+    $.datepicker.setDefaults($.datepicker.regional[ "uk" ]);
+    $( "#datepicker").datepicker({dateFormat:"yy/mm/dd"}).datepicker("setDate", new Date());
+
 });

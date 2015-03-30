@@ -37,8 +37,7 @@
 </body>
 
 <script type="text/javascript" src="<c:url value="/resources/js/pace.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery.dataTables.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-<script type="text/javascript" src="<c:url value="/resources/js/pagination.js"/>"></script>
+
 
 </html>

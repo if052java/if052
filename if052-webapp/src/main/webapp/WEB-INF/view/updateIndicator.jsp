@@ -33,19 +33,19 @@
                     <tbody>
                         <tr>
                             <td>
-                                <input type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
-                                <input type="text" id="datepicker" name="date" value="<fmt:formatDate value='${indicator.date}' pattern='dd/MM/yyyy' />" />
+                                <input class="form-control" type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
+                                <input class="form-control" type="text" id="datepicker" name="date" value="<fmt:formatDate value='${indicator.date}' pattern='dd/MM/yyyy' />" />
                             </td>
                             <td>
-                                <input type="number" step="0.01" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
+                                <input class="form-control" type="number" step="0.01" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
                             </td>
                             <td>
-                                <input type="number" step="1" name="value" value="${indicator.value}"/>
+                                <input class="form-control" type="number" step="1" name="value" value="${indicator.value}"/>
                             </td>
                             <td>
-                                <input type="checkbox" name="paid" <c:if test="${indicator.paid}">checked="checked"</c:if> />
+                                <input class="checkbox" type="checkbox" name="paid" <c:if test="${indicator.paid}">checked="checked"</c:if> />
                             </td>
-                            <td><button class="add-button" type="submit">
+                            <td><button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </button></td>
                         </tr>
@@ -56,6 +56,6 @@
 
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/datepicker.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/updateIndicator.js'/>"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>
