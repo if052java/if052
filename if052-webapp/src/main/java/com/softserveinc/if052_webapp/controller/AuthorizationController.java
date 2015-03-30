@@ -1,7 +1,6 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.Auth;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2RestOperations;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
+import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -35,7 +38,11 @@ public class AuthorizationController {
 
     @Autowired
     @Qualifier("credentialsTemplate")
-    private RestOperations restTemplate;
+    private RestOperations credentialsTemplate;
+
+    @Autowired
+    @Qualifier("passwordTemplate")
+    private OAuth2RestOperations passwordTemplate;
 
     @Autowired
     @Qualifier("restUrl")
@@ -44,11 +51,13 @@ public class AuthorizationController {
     @Autowired
     private ObjectMapper objectMapper;
 
+
+
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginDo(@ModelAttribute Auth auth, ModelMap modelMap, HttpServletRequest request){
         //Auth receivedAuth = restTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange(restUrl + "auth/checkCredentials",
+        ResponseEntity<String> responseEntity = credentialsTemplate.exchange(restUrl + "auth/checkCredentials",
                 HttpMethod.POST, new HttpEntity<Auth>(auth), String.class);
 
         if (responseEntity.getStatusCode().value() == 202) {
@@ -72,6 +81,17 @@ public class AuthorizationController {
                 LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
                 LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
 
+                {
+                    //OAuth2RestTemplate oAuth2RestTemplate = (OAuth2RestTemplate) passwordTemplate;
+//                    OAuth2ProtectedResourceDetails resourceDetails = oAuth2RestTemplate.getResource();
+                    OAuth2ProtectedResourceDetails resourceDetails = passwordTemplate.getResource();
+                    ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
+                    passwordResource.setUsername(receivedAuth.getUsername());
+                    passwordResource.setPassword(receivedAuth.getPassword());
+//                    passwordResource.setUsername("marissa");
+//                    passwordResource.setPassword("koala");
+                }
+
             } catch (IOException e) {
                 LOGGER.warn(e.getMessage(), e);
             }
@@ -82,7 +102,7 @@ public class AuthorizationController {
     @RequestMapping(value = "checkCredentials", method = RequestMethod.GET)
     public String checkCredentials(ModelMap modelMap){
         Auth auth = new Auth(1, "theUser", "password");
-        Auth receivedAuth = restTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
+        Auth receivedAuth = credentialsTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
         modelMap.addAttribute("auth", receivedAuth);
         return "JspForTest";
     }

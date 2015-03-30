@@ -23,7 +23,7 @@ import java.util.List;
 public class AddressController {
 
     @Autowired
-    @Qualifier("credentialsTemplate")
+    @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
     @Autowired 

@@ -35,7 +35,7 @@ public class WaterMeterController {
     private String restUrl;
 
     @Autowired
-    @Qualifier("credentialsTemplate")
+    @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
     @Autowired
