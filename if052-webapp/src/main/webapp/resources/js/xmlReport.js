@@ -12,15 +12,12 @@ $(document).ready(function () {
 
     $('#allUsers').change(function () {
         $('#users').prop('disabled', this.checked);
-    })
-
-
+    });
+    /*
     $('#allTypes').change(function () {
+        $('.checkType').prop('disabled', this.checked);
         $('[name="types"]').prop("checked", this.checked);
-    })
-
-
-
-
+    });
+    */
 
 })
