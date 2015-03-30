@@ -4,6 +4,8 @@ import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,9 +23,10 @@ import java.util.List;
  */
 @Controller
 public class AddressController {
-
+    private final String ADDRESSES = "addresses";
+    private final String REASON = "resource";
     @Autowired
-    @Qualifier("passwordTemplate")
+    @Qualifier("credentialsTemplate")
     private RestOperations restTemplate;
 
     @Autowired 
@@ -45,7 +48,7 @@ public class AddressController {
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddresses);
 
-        model.addAttribute("addresses", addresses);
+        model.addAttribute(ADDRESSES, addresses);
 
         return "address";
     }
@@ -77,7 +80,7 @@ public class AddressController {
     public String getUpdateAddressPage(int addressId, ModelMap model){
         Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
 
-        model.addAttribute("address", address);
+        model.addAttribute(ADDRESSES, address);
 
         return "updateAddress";
     }
@@ -104,9 +107,14 @@ public class AddressController {
      * @return
      */
     @RequestMapping("/deleteAddress{addressId}")
-    public String deleteAddress(int addressId) {
-        restTemplate.delete(restUrl + "addresses/" +addressId);
+    public String deleteAddress(int addressId, ModelMap model) {
+        ResponseEntity<String> responseEntity = restTemplate.exchange(restUrl + "addresses/" + addressId,
+            HttpMethod.DELETE, null, String.class);
 
+        if (responseEntity.getStatusCode().value() == 400) {
+            model.addAttribute(REASON, "This address has tied meters so it cannot be deleted.");
+            return "error400";
+        }
         return "redirect:/addresses?userId=" + this.userId;
     }
 }

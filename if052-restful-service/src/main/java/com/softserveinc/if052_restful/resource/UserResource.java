@@ -86,12 +86,12 @@ public class UserResource {
             return Response.status(Response.Status.CREATED).entity(user).build();
         }
         catch (ConstraintViolationException e){
-
+            LOGGER.info("INFO: Invalid users data.");
             return Response.status(Response.Status.FORBIDDEN).build();
         }
         catch (Exception e) {
-
-             return Response.status(Response.Status.FORBIDDEN).build();
+            LOGGER.info("INFO: Internal error");
+            return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
 
@@ -113,11 +113,11 @@ public class UserResource {
             
         }
         catch (ConstraintViolationException e){
-
+            LOGGER.info("INFO: Invalid users data.");
             return Response.status(Response.Status.FORBIDDEN).build();
         }
         catch (Exception e) {
-
+            LOGGER.info("INFO: Internal error");
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     }
@@ -140,7 +140,7 @@ public class UserResource {
             return Response.status(Response.Status.OK).build();
         }
         catch (Exception e){
-
+            LOGGER.info("INFO: Internal error");
             return Response.status(Response.Status.FORBIDDEN).build();
         }
     } 

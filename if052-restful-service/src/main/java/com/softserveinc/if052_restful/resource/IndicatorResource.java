@@ -19,6 +19,8 @@ import java.util.List;
 @Path("/indicators")
 public class IndicatorResource {
 
+    public final String start = "-01-01 00:00:00";
+    public final String end = "-31-31 23:59:59";
     @Autowired
     private IndicatorService indicatorService;
 
@@ -42,8 +44,8 @@ public class IndicatorResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getIndicatorsByYear(@PathParam("meterId") int meterId,
                                   @MatrixParam("year") int year ) {
-        String startDate = year + "-01-01 00:00:00";
-        String endDate = year + "-31-31 23:59:59";
+        String startDate = year + start;
+        String endDate = year + end;
 
         List < Indicator > indicators = 
             indicatorService.getIndicatorsByDates(meterId, startDate, endDate);

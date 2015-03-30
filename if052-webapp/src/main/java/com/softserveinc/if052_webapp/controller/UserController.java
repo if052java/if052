@@ -34,7 +34,8 @@ public class UserController {
     private final String ADDRESSES = "addresses";
     private final String METER_NAME = "meterName";
     private final String METER_TYPE = "meterType";
-    
+    private final String REASON = "resource";
+
     @Autowired
     @Qualifier("restUrl")
     private String restUrl;
@@ -80,7 +81,7 @@ public class UserController {
         String responseBody = responseEntity.getBody();
 
         if (responseEntity.getStatusCode().value() == 404) {
-            model.addAttribute("resource", "There are no meters. Please first add their");
+            model.addAttribute(REASON, "address");
             return "error404";
         }
         try {
@@ -106,8 +107,8 @@ public class UserController {
                 }
             }
 
-            String masAsString = Arrays.deepToString(arrayOfData);
-            model.addAttribute(INDICATORS_DATA, masAsString);
+            String arrAsString = Arrays.deepToString(arrayOfData);
+            model.addAttribute(INDICATORS_DATA, arrAsString);
 
             model.addAttribute(YEAR, year);
 
@@ -135,7 +136,7 @@ public class UserController {
         String responseBody = responseEntity.getBody();
         
         if (responseEntity.getStatusCode().value() == 404) {
-            model.addAttribute("resource", "watermeter");
+            model.addAttribute(REASON, "watermeter");
             return "error404";
         }
         try {
@@ -239,11 +240,11 @@ public class UserController {
             arrayOfData[ i ] [ 0 ] = indicators.get(i).getDate().getTime() + 7200000;
             arrayOfData[ i ] [ 1 ] = indicators.get(i).getValue();
         }
-        String masAsString = Arrays.deepToString(arrayOfData);
+        String arrAsString = Arrays.deepToString(arrayOfData);
 
         model.addAttribute(MONTH, month);
         model.addAttribute(ADDRESSES, addresses);
-        model.addAttribute(INDICATORS_DATA, masAsString);
+        model.addAttribute(INDICATORS_DATA, arrAsString);
         model.addAttribute(YEAR, year);
 
         return "graphs";
