@@ -10,6 +10,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
@@ -89,6 +90,7 @@
             <div class="container" >
                 <c:url var="addUrl" value="/addIndicator"/>
                 <form:form action="${addUrl}" method="post" modelAttribute="indicator">
+                    <sec:csrfInput/>
                     <table class="box-table-a">
                         <caption> Додати показник </caption>
                         <thead>

@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class CustomErrorResponseHandler implements ResponseErrorHandler {
 
-    private static Logger logger = Logger.getLogger(CustomErrorResponseHandler.class);
+    private static Logger LOGGER = Logger.getLogger(CustomErrorResponseHandler.class);
 
     @Override
     public boolean hasError(ClientHttpResponse clientHttpResponse) throws IOException {
@@ -24,7 +24,7 @@ public class CustomErrorResponseHandler implements ResponseErrorHandler {
 
     @Override
     public void handleError(ClientHttpResponse clientHttpResponse) throws IOException {
-        logger.warn("Error response: status code = " + clientHttpResponse.getStatusCode()
+        LOGGER.warn("Error response: status code = " + clientHttpResponse.getStatusCode()
                 + " status text = " + clientHttpResponse.getStatusText());
     }
 }

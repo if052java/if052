@@ -9,6 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <tiles:insertDefinition name="defaultTemplate">
@@ -17,6 +18,7 @@
             <c:url var="addUrl" value="/addUser"/>
             <form:form 
                     action="${addUrl}" method="post" modelAttribute="user" id="registrationForm" class="form-horizontal">
+                <sec:csrfInput/>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Прізвище</label>
                     <div class="col-xs-5">
