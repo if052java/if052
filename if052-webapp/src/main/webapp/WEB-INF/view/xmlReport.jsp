@@ -48,11 +48,11 @@
                     <div class="form-group">
                     <div class="checkbox-inline" id="types">
                         <label for="types">Необхідні види лічильників</label>
-                        <div class="checkbox-inline">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="allTypes"/> Усі види
-                            </label>
-                        </div> <br>
+                        <%--<div class="checkbox-inline">--%>
+                            <%--<label class="checkbox-inline">--%>
+                                <%--<input type="checkbox" id="allTypes"/> Усі види--%>
+                            <%--</label>--%>
+                        <%--</div>--%> <br>
                         <c:forEach var="meterType" items="${meterTypes}">
                             <label class="checkbox-inline">
                                 <input type="checkbox" name="types" class="checkType" value="${meterType.meterTypeId}"/> ${meterType.type}
@@ -61,20 +61,21 @@
                     </div>
                     </div>
 
-                    <div class="form-group">
-                    <div class="radio-inline" id="paid">
-                        <label for="paid">Статус оплати</label><br>
-                        <label class="radio-inline">
-                            <input type="radio" name="paidStatus" value="2" checked> Усі
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="paidStatus" value="1"> Оплачені
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="paidStatus" value="0"> Неоплачені
-                        </label>
-                    </div>
-                    </div>
+                    <%--<div class="form-group">--%>
+                    <%--<div class="radio-inline" id="paid">--%>
+                        <%--<label for="paid">Статус оплати</label><br>--%>
+                        <%--<label class="radio-inline">--%>
+                            <%--<input type="radio" name="paidStatus" value="2" checked> Усі--%>
+                        <%--</label>--%>
+                        <%--<label class="radio-inline">--%>
+                            <%--<input type="radio" name="paidStatus" value="1"> Оплачені--%>
+                        <%--</label>--%>
+                        <%--<label class="radio-inline">--%>
+                            <%--<input type="radio" name="paidStatus" value="0"> Неоплачені--%>
+                        <%--</label>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <input type="hidden" name="paidStatus" value="1">
 
                     <div class="form-group">
                     <button type="submit" id="subBtn" class="btn btn-primary">Завантажити xml-звіт</button>
