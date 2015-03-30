@@ -44,6 +44,8 @@ public class User {
     @Email
     private String email;
 
+    private String role;
+
     private List<Address> addresses;
 
     public User(){
@@ -57,6 +59,17 @@ public class User {
         this.login = login;
         this.password = password;
         this.email = email;
+    }
+
+    public User(String name, String surname, String middleName, String login,
+                String password, String email, String role) {
+        this.name = name;
+        this.surname = surname;
+        this.middleName = middleName;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.role = role;
     }
 
     //- Getters -//
@@ -119,6 +132,14 @@ public class User {
 
     public void setAddresses(List < Address > addresses) {
         this.addresses = addresses;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
                         //- toString -//
