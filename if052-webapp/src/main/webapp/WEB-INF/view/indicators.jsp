@@ -70,7 +70,7 @@
                                         class="btn btn-default <c:if test='${indicator.published}'>disabled</c:if>"  role="button">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                 </a>
-                                <a href="<c:url value="/updateIndicator?indicatorId=${indicator.indicatorId}"/>"
+                                <a href="<c:url value="/deleteIndicator?indicatorId=${indicator.indicatorId}"/>"
                                    class="btn btn-default <c:if test='${indicator.published}'>disabled</c:if>"  role="button">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </a>
