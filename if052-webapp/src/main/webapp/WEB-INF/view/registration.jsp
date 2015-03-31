@@ -22,45 +22,45 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Прізвище</label>
                     <div class="col-xs-5">
-                        <input type="text" class="form-control" name="name" placeholder="First name" />
+                        <input type="text" class="form-control" name="surname" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Ім'я</label>
                     <div class="col-xs-5">
-                        <input type="text" class="form-control" name="surname" placeholder="Last name" />
+                        <input type="text" class="form-control" name="name" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">По-батькові</label>
                     <div class="col-xs-5">
-                        <input type="text" class="form-control" name="middleName" placeholder="Middle name" />
+                        <input type="text" class="form-control" name="middleName" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Електронна пошта</label>
                     <div class="col-xs-5">
-                        <input type="email" class="form-control" name="email" placeholder="Email" />
+                        <input type="email" class="form-control" name="email" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Логін</label>
                     <div class="col-xs-5">
-                        <input id="login" type="text" class="form-control" name="login" placeholder="Login"/>
+                        <input id="login" type="text" class="form-control" name="login"/>
                         <div id="login-errors" class ='login-error'></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Пароль</label>
                     <div class="col-xs-5">
-                        <input type="password" class="form-control" name="password" id = "password" placeholder="Password"/>
+                        <input type="password" class="form-control" name="password" id = "password" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-xs-3 control-label">Підтвердження</label>
                     <div class="col-xs-5">
-                        <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm password"/>
+                        <input type="password" class="form-control" name="confirmPassword" />
                     </div>
                 </div>
 

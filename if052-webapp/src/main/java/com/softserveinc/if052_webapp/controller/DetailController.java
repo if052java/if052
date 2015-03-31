@@ -50,7 +50,6 @@ public class DetailController {
         Indicator[] arrOfIndicators = restTemplate.getForObject(restUrl + "indicators/list/byuser/" + authBean.getUserId() + ";number=" + COUNT, Indicator[].class);
 
         List<Indicator> indicators = Arrays.asList(arrOfIndicators);
-        System.out.println(indicators);
 
         model.addAttribute(LAST_INDICATORS, indicators);
         model.addAttribute(LIMIT, COUNT);

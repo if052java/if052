@@ -1,7 +1,7 @@
 INSERT INTO `consumer`
-    VALUES (1, 'USER_Name1', 'SURNAME1', 'MIDDLENAME1', 'LOGIN111', 'PASS1111', 'qwerty@gmail.com', 'USER'),
-           (2, 'USER_Name2', 'SURNAME2', 'MIDDLENAME2', 'LOGIN222', 'PASS2222', 'asdf@mail.ru', 'ADMIN'),
-           (3, 'USER_Name3', 'SURNAME3', 'MIDDLENAME3', 'LOGIN333', 'PASS3333', 'zixel@i.ua', 'USER');
+    VALUES (1, 'Тарас', 'Шевченко', 'Григорович', 'LOGIN111', 'PASS1111', 'kobzar@gmail.com', 'USER'),
+           (2, 'Франко', 'Іван', 'Якович', 'LOGIN222', 'PASS2222', 'frank@hotmail.com', 'ADMIN'),
+           (3, 'Лариса', 'Косач', 'Петрівна', 'LOGIN333', 'PASS3333', 'lesya@i.ua', 'USER');
 
 INSERT INTO `role`
        VALUES (1, 'USER', 'User'),
@@ -36,7 +36,7 @@ INSERT INTO `watermeter`
            (4,  'туалет',  'китайський',      2, 1, 0.2),
            (5,  'коридор',  'чорний',          2, 4, 0.2),
            (6,  'кухня',  'правий',         3, 3, 0.3),
-           (7,  'кухня',  'старий',           3, 1, 0.3),
+           (7,  'кухня',  'старий',           5, 1, 0.3),
            (8,  'кухня',  'новий',            4, 1, 0.15),
            (9,  'коридор',  'DESCRIPTION9',  4, 4, 0.15),
            (10, 'ванна', 'DESCRIPTION10', 5, 2, 0.16),
@@ -52,8 +52,8 @@ INSERT INTO `watermeter`
            (20, 'WM_NAME20', 'DESCRIPTION20', 6, 1, 0.17),
            (21, 'WM_NAME21', 'DESCRIPTION21', 5, 1, 0.16),
            (22, 'WM_NAME22', 'DESCRIPTION22', 4, 1, 0.15),
-           (23, 'WM_NAME23', 'DESCRIPTION23', 3, 1, 0.3),
-           (24, 'WM_NAME24', 'DESCRIPTION24', 2, 1, 0.2),
+           (23, 'ванна', '', 3, 2, 0.3),
+           (24, 'кухня', 'білий', 2, 2, 0.2),
            (25, 'WM_NAME25', 'DESCRIPTION25', 7, 1, 0.1);
 
 INSERT INTO `indicator`

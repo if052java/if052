@@ -25,6 +25,8 @@ public class RegistrationController {
     private RestOperations restTemplate;
 
 
+
+
     @RequestMapping("signup")
     public String registration(ModelMap model){
 
@@ -38,7 +40,7 @@ public class RegistrationController {
         user.setName(user.getName().trim());
         user.setSurname(user.getSurname().trim());
         user.setMiddleName(user.getMiddleName().trim());
-
+        user.setRole("USER");
         user = restTemplate.postForObject(restUrl + "users/", user, User.class);
 
         return "redirect:/addresses?userId=" + user.getUserId();
