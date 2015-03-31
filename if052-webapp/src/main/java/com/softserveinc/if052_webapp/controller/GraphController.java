@@ -242,7 +242,6 @@ public class GraphController {
         try {
             Address address = objectMapper.readValue(responseBody, Address.class);
             List < WaterMeter > waterMeters = address.getWaterMeters();
-            System.out.println(waterMeters);
             json = new Gson().toJson(waterMeters);
             return json;
         } catch (IOException e) {

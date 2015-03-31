@@ -47,7 +47,7 @@
                             <input type="text" class="form-control" name="apartment" value="${address.apartment}" required title="Це поле обов'язкове"/>
                         </td>
                         <td>
-                            <button class="add-button" type="submit">
+                            <button class="btn btn-default" type="submit">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                             </button>
                         </td>
