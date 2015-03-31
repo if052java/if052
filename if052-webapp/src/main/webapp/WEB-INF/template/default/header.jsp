@@ -44,10 +44,12 @@
                             <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
                             Моя статистика
                         </a></li>
+                            <security:authorize ifAllGranted="ROLE_ADMIN">
                         <li><a href="${base}xmlreport">
                             <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
                             XML звіт
                         </a></li>
+                            </security:authorize>
                         <li><a href="${base}#">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             Інфо
