@@ -32,6 +32,7 @@ public class GraphController {
     private final String METER_NAME = "meterName";
     private final String METER_TYPE = "meterType";
     private final String REASON = "resource";
+    private final String ERROR = "error";
 
     @Autowired
     @Qualifier("restUrl")
@@ -63,7 +64,7 @@ public class GraphController {
         String responseBody = responseEntity.getBody();
 
         if (responseEntity.getStatusCode().value() == 404) {
-            model.addAttribute(REASON, "address");
+            model.addAttribute(REASON, "watermeters");
             return "error404";
         }
         try {
@@ -79,15 +80,17 @@ public class GraphController {
             Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl
                 + "indicators/byYear/" + meter.getWaterMeterId() + ";year=" + year, Indicator[].class);
             List < Indicator > indicators = Arrays.asList( arrayOfIndicators );
-            
+
+            if( indicators.size() == 0){
+                model.addAttribute(ERROR,"Лічильник не має введених показників");
+            }
+
             long[][] arrayOfData = new long[indicators.size()][2];
 
-            if (indicators.get(0).getDate() != null) {
                 for (int i = 0; i < indicators.size(); i++) {
                     arrayOfData[i][0] = indicators.get(i).getDate().getTime() + 7200000;
                     arrayOfData[i][1] = indicators.get(i).getValue();
                 }
-            }
 
             String arrAsString = Arrays.deepToString(arrayOfData);
             model.addAttribute(INDICATORS_DATA, arrAsString);
@@ -218,6 +221,9 @@ public class GraphController {
 
         long[][] arrayOfData = new long[indicators.size()][2];
 
+        if( indicators.size() == 0){
+            model.addAttribute(ERROR,"Лічильник не має введених показників");
+        }
         for (int i = 0; i < indicators.size(); i++) {
             arrayOfData[ i ] [ 0 ] = indicators.get(i).getDate().getTime() + 7200000;
             arrayOfData[ i ] [ 1 ] = indicators.get(i).getValue();

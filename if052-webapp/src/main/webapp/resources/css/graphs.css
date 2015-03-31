@@ -6,4 +6,9 @@
 .check-box{
     margin: 70;
 }
+.error{
+    color:red;
+    font-weight: bold;
+    margin:10 20;
+}
 

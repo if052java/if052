@@ -15,6 +15,7 @@
     <tiles:putAttribute name="body">
         <div class="body">
             <div id="container" class="graphs-size"></div>
+            <div id="error" class="error">${error}</div>
         
             <c:url var="drawByMonth" value="/graphByOption" />
 

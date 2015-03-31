@@ -26,7 +26,7 @@ import java.util.List;
 public class AddressController {
     private final String ADDRESSES = "addresses";
     private final String ADDRESS = "address";
-    private final String REASON = "resource";
+    private final String REASON = "reason";
     @Autowired
     @Qualifier("passwordTemplate")
     private RestOperations restTemplate;

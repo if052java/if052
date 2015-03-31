@@ -4,6 +4,8 @@ import com.softserveinc.if052_restful.domain.User;
 import com.softserveinc.if052_restful.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.ws.rs.*;
@@ -78,7 +80,10 @@ public class UserResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public Response createUser(
         @Valid
-        User user ){
+        User user){
+//        if (result.hasErrors()) {
+//            return Response.status(Response.Status.BAD_REQUEST).entity(user).build();
+//        }
         try {
             LOGGER.info("INFO: Adding a new user.");
             userService.insertUser(user);
