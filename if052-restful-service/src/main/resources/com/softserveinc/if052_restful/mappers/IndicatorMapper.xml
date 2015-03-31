@@ -64,6 +64,7 @@
         WHERE i.date BETWEEN parsedatetime(#{startDate}, 'yyyy-MM-dd HH:mm:ss')
         AND parsedatetime(#{endDate}, 'yyyy-MM-dd HH:mm:ss')
         AND i.water_meter_id = #{waterMeterId}
+        ORDER BY i.date ASC
     </select>
 
 

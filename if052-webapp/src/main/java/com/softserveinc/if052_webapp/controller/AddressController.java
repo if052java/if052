@@ -3,6 +3,7 @@ package com.softserveinc.if052_webapp.controller;
 import com.softserveinc.if052_webapp.domain.Address;
 import com.softserveinc.if052_webapp.domain.AuthInterface;
 import com.softserveinc.if052_webapp.domain.User;
+import com.sun.javafx.sg.PGShape;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,7 @@ import java.util.List;
 @Controller
 public class AddressController {
     private final String ADDRESSES = "addresses";
+    private final String ADDRESS = "address";
     private final String REASON = "resource";
     @Autowired
     @Qualifier("passwordTemplate")
@@ -81,7 +83,7 @@ public class AddressController {
     public String getUpdateAddressPage(int addressId, ModelMap model){
         Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
 
-        model.addAttribute(ADDRESSES, address);
+        model.addAttribute(ADDRESS, address);
 
         return "updateAddress";
     }

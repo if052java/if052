@@ -59,7 +59,7 @@ $(document).ready(function() {
             "confirmPassword":{
                 required : "Це поле обов'язкове для запису",
                 rangelength: "Від 8 до 32 символів",
-                equalTo:"Пароль не підтверджено"
+                equalTo:"Пароль підтверджено невірно"
             }
         }
     });
