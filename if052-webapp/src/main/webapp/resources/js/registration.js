@@ -50,7 +50,7 @@ $(document).ready(function() {
             },
             "email":{
                 required : "Це поле обов'язкове для запису",
-                email: "Від 8 до 32 символів"
+                email: "Невалідний емайл"
             },
             "password": {
                 required : "Це поле обов'язкове для запису",

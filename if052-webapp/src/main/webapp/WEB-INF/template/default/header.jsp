@@ -36,6 +36,7 @@
                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
                             Головна
                         </a></li>
+                        <security:authorize ifAnyGranted="ROLE_ADMIN, ROLE_USER">
                         <li><a href="${base}addresses">
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                             Мої адреси
@@ -44,6 +45,7 @@
                             <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
                             Моя статистика
                         </a></li>
+                            </security:authorize>
                             <security:authorize ifAllGranted="ROLE_ADMIN">
                         <li><a href="${base}xmlreport">
                             <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
