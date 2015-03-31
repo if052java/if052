@@ -67,18 +67,20 @@
                                     Налаштування
                                 </a></li>
                                 <li class="divider"></li>
+                                <security:authorize ifNotGranted="ROLE_ADMIN, ROLE_USER">
                                 <li class="sign-up" ><a href="${base}signup">
-                                    <%--<span class="glyphicon glyphicon-user" aria-hidden="true"></span>--%>
                                     Реєстрація
                                 </a></li>
                                 <li class="log-in"><a href="${base}login.jsp">
-                                    <%--<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>--%>
                                     Вхід
                                 </a></li>
+                                </security:authorize>
+                                <security:authorize ifAnyGranted="ROLE_ADMIN, ROLE_USER">
                                 <li class="log-out"><a href="${base}logout.do">
-                                    <%--<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>--%>
                                     Вихід
                                 </a></li>
+                                </security:authorize>
+
                             </ul>
                         </li>
                     </ul>
