@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Danylo Tiahun on 14.03.2015.
@@ -35,8 +36,24 @@ public class ReportResource {
     @Path("/mindate")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getMinDate() {
-        return Response.status(Response.Status.OK).entity(indicatorService.getMinDate()).build();
+        Date minDate = indicatorService.getMinDate();
+        if (minDate == null) {
+            minDate = new Date();
+        }
+        return Response.status(Response.Status.OK).entity(minDate).build();
     }
+
+    @GET
+    @Path("/maxdate")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getMaxDate() {
+        Date maxDate = indicatorService.getMaxDate();
+        if (maxDate == null) {
+            maxDate = new Date();
+        }
+        return Response.status(Response.Status.OK).entity(maxDate).build();
+    }
+
 
     @GET
     @Path("{reportId}")

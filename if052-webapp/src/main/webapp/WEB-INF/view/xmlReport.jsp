@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label for="endDate">Кінцева дата</label>
-                        <input type="text" name="endDate" class="form-control" id="endDate"/>
+                        <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}"/>
                     </div>
 
                     <div class="form-group">

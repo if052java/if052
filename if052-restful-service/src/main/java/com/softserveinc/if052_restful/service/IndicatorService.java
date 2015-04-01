@@ -47,6 +47,10 @@ public class IndicatorService {
         return indicatorMapper.getMinDate();
     }
 
+    public Date getMaxDate() {
+        return indicatorMapper.getMaxDate();
+    }
+
     /**
      * Get indicators by year
      *
