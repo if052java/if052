@@ -66,7 +66,7 @@
                 <collection property="indicators" column="indicator_id" javaType="ArrayList" ofType="Indicator">
                     <id property="indicatorId" column="indicator_id"/>
                     <result property="date" column="date"/>
-                    <result property="tariffPerDate" column="tariffPerDate"/>
+                    <result property="tariffPerDate" column="tariff_per_date"/>
                     <result property="value" column="value"/>
                     <result property="paid" column="is_paid"/>
                     <result property="published" column="is_published"/>
