@@ -36,7 +36,7 @@ public interface UserMapper {
      *
      * @return List of user
      */
-    public List < User > getAllUsers();
+    public List<User> getAllUsers();
 
     /**
      * Get user by login 

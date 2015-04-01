@@ -24,7 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 import java.util.Date;
 
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;

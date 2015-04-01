@@ -25,7 +25,7 @@ public class UserTest extends AbstractModel{
     @Test
     public void testUserFieldSuccess(){
 
-        Set < ConstraintViolation < User > > constraintViolationSet;
+        Set<ConstraintViolation<User>> constraintViolationSet;
         //- Success -//
         //- Create entity-//
         User userSuccess = new User(
@@ -48,7 +48,7 @@ public class UserTest extends AbstractModel{
     @Test
     public void testUserFieldFailureNotNull(){
 
-        Set < ConstraintViolation < User > > constraintViolationSet;
+        Set<ConstraintViolation<User>> constraintViolationSet;
         //- Failure: Incorrect user -//
         //- Create entity-//
         User userFailureNotNull = new User(
@@ -64,10 +64,10 @@ public class UserTest extends AbstractModel{
 
         assertEquals( 12, constraintViolationSet.size() );
 
-        for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
+        for( ConstraintViolation<User> constraintViolation : constraintViolationSet ) {
             //- Property name -//
             assertTrue(
-                new ArrayList < String >() {{
+                new ArrayList<String>() {{
                     add("name");
                     add("surname");
                     add("middleName");
@@ -82,7 +82,7 @@ public class UserTest extends AbstractModel{
             );
             //- Annotation type -//
             assertTrue(
-                new ArrayList < Class > () {{
+                new ArrayList<Class> () {{
                     add(NotNull.class);
                     add(NotEmpty.class);
                     add(Email.class);
@@ -92,7 +92,7 @@ public class UserTest extends AbstractModel{
             );
             //- Message -//
             assertTrue(
-                new ArrayList < String >() {{
+                new ArrayList<String>() {{
                     add("may not be null");
                     add("may not be empty");
                 }}.contains(constraintViolation.getMessage())
@@ -106,7 +106,7 @@ public class UserTest extends AbstractModel{
     @Test
     public void testUserFieldFailureNotEmpty(){
 
-        Set < ConstraintViolation < User > > constraintViolationSet;
+        Set<ConstraintViolation<User>> constraintViolationSet;
         //- Failure: Empty name, surname, password -//
         //- Create entity-//
         User userFailureNotEmpty = new User(
@@ -122,10 +122,10 @@ public class UserTest extends AbstractModel{
 
         assertEquals( 6, constraintViolationSet.size() );
 
-        for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
+        for( ConstraintViolation<User> constraintViolation : constraintViolationSet ) {
             //- Property name -//
             assertTrue(
-                new ArrayList < String >() {{
+                new ArrayList<String>() {{
                     add("name");
                     add("surname");
                     add("middleName");
@@ -137,7 +137,7 @@ public class UserTest extends AbstractModel{
             );
             //- Annotation type -//
             assertTrue(
-                new ArrayList < Class > () {{
+                new ArrayList<Class> () {{
                     add(NotEmpty.class);
                     add(Length.class);
                 }}.contains(
@@ -146,7 +146,7 @@ public class UserTest extends AbstractModel{
             );
             //- Message -//
             assertTrue(
-                new ArrayList < String >() {{
+                new ArrayList<String>() {{
                     add("may not be empty");
                     add("length must be between 2 and 32");
                 }}.contains(constraintViolation.getMessage())
@@ -166,7 +166,7 @@ public class UserTest extends AbstractModel{
 
         assertEquals( 6, constraintViolationSet.size() );
 
-        for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
+        for( ConstraintViolation<User> constraintViolation : constraintViolationSet ) {
             //- Property name -//
             assertTrue(
                 new ArrayList<String>() {{
@@ -204,7 +204,7 @@ public class UserTest extends AbstractModel{
     @Test
     public void testUserFieldFailureLength() {
 
-        Set < ConstraintViolation < User > > constraintViolationSet;
+        Set<ConstraintViolation<User>> constraintViolationSet;
         //- Failure: Overrun max length for name, surname, middleName-//
         //- Create entity-//
         User userFailureMaxLength = new User(
@@ -220,7 +220,7 @@ public class UserTest extends AbstractModel{
 
         assertEquals( 3, constraintViolationSet.size() );
 
-        for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
+        for( ConstraintViolation<User> constraintViolation : constraintViolationSet ) {
             //- Property name -//
             assertTrue(
                 new ArrayList<String>() {{
@@ -262,7 +262,7 @@ public class UserTest extends AbstractModel{
 
         assertEquals( 3, constraintViolationSet.size() );
 
-        for( ConstraintViolation < User > constraintViolation : constraintViolationSet ) {
+        for( ConstraintViolation<User> constraintViolation : constraintViolationSet ) {
             //- Property name -//
             assertTrue(
                 new ArrayList<String>() {{

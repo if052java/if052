@@ -59,7 +59,7 @@ public class IndicatorService {
      * @param endDate
      * @return
      */
-    public List < Indicator > getIndicatorsByDates(int waterMeterId,
+    public List<Indicator> getIndicatorsByDates(int waterMeterId,
                                                   String startDate,
                                                   String endDate) {
         return indicatorMapper.getIndicatorsByDates(waterMeterId, startDate, endDate);

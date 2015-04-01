@@ -48,7 +48,7 @@ public class AddressController {
     @RequestMapping(value = "/addresses")
     public String getAddressPage(ModelMap model){
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + authBean.getUserId(), Address[].class);
-        List < Address > addresses = Arrays.asList(arrayOfAddresses);
+        List<Address> addresses = Arrays.asList(arrayOfAddresses);
 
         model.addAttribute(ADDRESSES, addresses);
 
