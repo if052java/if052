@@ -6,6 +6,7 @@ import com.softserveinc.if052_webapp.domain.Indicator;
 import com.softserveinc.if052_webapp.domain.MeterType;
 import com.softserveinc.if052_webapp.domain.WaterMeter;
 import com.softserveinc.if052_webapp.service.IndicatorService;
+import com.softserveinc.if052_webapp.service.ServiceResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +25,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 import java.util.Date;
 
-import static junit.framework.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.util.MatcherAssertionErrors.assertThat;
@@ -48,9 +49,9 @@ public class IndicatorControllerTest {
 
     @Before
     public void setUp() {
-        //We have to reset our mock between tests because the mock objects
-        //are managed by the Spring container. If we would not reset them,
-        //stubbing and verified behavior would "leak" from one test to another.
+        /* We have to reset our mock between tests because the mock objects
+          are managed by the Spring container. If we would not reset them,
+          stubbing and verified behavior would "leak" from one test to another. */
         Mockito.reset(indicatorServiceMock);
 
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
@@ -62,9 +63,10 @@ public class IndicatorControllerTest {
         WaterMeter waterMeter = new WaterMeter(4, "ванна", "червоний", 0.6, new Address(), meterType, null);
         Indicator first = new Indicator(1, new Date(), 0.5, 503, true, false, waterMeter);
         Indicator second = new Indicator(2, new Date(), 0.6, 608, false, false, waterMeter);
+        ServiceResponse serviceResponse = new ServiceResponse(Arrays.asList(first, second));
 
         when(indicatorServiceMock.getMeterById(4)).thenReturn(waterMeter);
-        when(indicatorServiceMock.getIndicatorList(4)).thenReturn(Arrays.asList(first, second));
+        when(indicatorServiceMock.getIndicatorList(4)).thenReturn(serviceResponse);
 
         mockMvc.perform(get("/indicators?waterMeterId=4"))
                 .andExpect(status().isOk())
@@ -97,8 +99,11 @@ public class IndicatorControllerTest {
         MeterType meterType = new MeterType(1, "холодна вода");
         WaterMeter waterMeter = new WaterMeter(4, "ванна", "червоний", 0.6, new Address(), meterType, null);
         Indicator first = new Indicator(1, new Date(), 0.5, 503, true, false, waterMeter);
+        ServiceResponse serviceResponse = new ServiceResponse(Arrays.asList(first));
 
-        when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class))).thenReturn(first);
+        when(indicatorServiceMock.getMeterById(4)).thenReturn(waterMeter);
+        when(indicatorServiceMock.getIndicatorList(4)).thenReturn(serviceResponse);
+        when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class))).thenReturn(serviceResponse);
         mockMvc.perform(get("/indicators?waterMeterId=4"));
         mockMvc.perform(post("/addIndicator")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
