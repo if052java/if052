@@ -22,7 +22,7 @@ public class AddressService {
         return addressMapper.getAllAddresses();
     }
 
-    public List < Address > getAllAddressesByUserId(int userId){
+    public List<Address> getAllAddressesByUserId(int userId){
         return addressMapper.getAddressesByUserId( userId );
         
     }

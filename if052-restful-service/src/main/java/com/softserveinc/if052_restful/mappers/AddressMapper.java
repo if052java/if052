@@ -46,7 +46,7 @@ public interface AddressMapper {
 	 * @param userId
 	 * @return List of addresses
 	 */
-	public List < Address > getAddressesByUserId(int userId);
+	public List<Address> getAddressesByUserId(int userId);
 	
 	/**
 	 * Update existing address of user

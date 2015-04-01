@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -47,6 +48,7 @@ public class XmlReportController {
     private String restUrl;
 
     private final String START_DATE = "startDate";
+    private final String END_DATE = "endDate";
     private final String METER_TYPES = "meterTypes";
     private final String LOGINS = "logins";
 
@@ -56,10 +58,12 @@ public class XmlReportController {
     public ModelAndView getXmlReportPage() {
         ModelAndView model = new ModelAndView("xmlReport");
         Date minDate = restTemplate.getForObject(restUrl + "report/mindate", Date.class);
-        String date = new SimpleDateFormat("yyyy/MM/dd").format(minDate);
+        Date maxDate = restTemplate.getForObject(restUrl + "report/maxdate", Date.class);
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         List<String> logins = Arrays.asList(restTemplate.getForObject(restUrl + "users/logins", String[].class));
         List<MeterType> meterTypes = Arrays.asList(restTemplate.getForObject(restUrl + "metertypes/", MeterType[].class));
-        model.addObject(START_DATE, date);
+        model.addObject(START_DATE, df.format(minDate));
+        model.addObject(END_DATE, df.format(maxDate));
         model.addObject(METER_TYPES, meterTypes);
         model.addObject(LOGINS, logins);
         return model;

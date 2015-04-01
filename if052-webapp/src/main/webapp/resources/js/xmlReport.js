@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     $.datepicker.setDefaults($.datepicker.regional[ "uk" ]);
     $("#startDate").datepicker({dateFormat: "yy/mm/dd"});
-    $("#endDate").datepicker({dateFormat: "yy/mm/dd"}).datepicker("setDate", new Date());
+    $("#endDate").datepicker({dateFormat: "yy/mm/dd"});
 
 
     $('#allUsers').change(function () {

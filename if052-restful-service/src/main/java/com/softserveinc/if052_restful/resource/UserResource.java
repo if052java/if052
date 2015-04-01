@@ -28,7 +28,7 @@ public class UserResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddresses() {
         LOGGER.info("INFO: Searching for the whole collection of users.");
-        List< User > users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         LOGGER.info("INFO: The whole collection of users has been found.");
         return Response.status(Response.Status.OK).entity(users).build();
     }

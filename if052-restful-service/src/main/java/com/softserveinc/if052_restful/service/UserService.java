@@ -48,7 +48,7 @@ public class UserService {
      * 
      * @return List of users
      */
-    public List < User > getAllUsers() {
+    public List<User> getAllUsers() {
         return userMapper.getAllUsers();
     }
 

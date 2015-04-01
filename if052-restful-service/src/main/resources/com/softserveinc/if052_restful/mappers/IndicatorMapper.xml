@@ -27,7 +27,7 @@
     </resultMap>
 
     <resultMap id="DateResult" type="java.util.Date">
-        <result property="date" column="min_date"/>
+        <result property="date" column="m_date"/>
     </resultMap>
 
     <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">
@@ -144,7 +144,13 @@
 
     <select id="getMinDate" resultMap="DateResult">
         SELECT
-        min(date) as min_date
+        min(date) as m_date
+        FROM indicator
+    </select>
+
+    <select id="getMaxDate" resultMap="DateResult">
+        SELECT
+        max(date) as m_date
         FROM indicator
     </select>
 

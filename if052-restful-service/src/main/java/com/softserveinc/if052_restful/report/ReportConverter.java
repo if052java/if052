@@ -142,7 +142,8 @@ public class ReportConverter {
     public StringBuffer writeIndicatorValue(Indicator i) {
         StringBuffer result = new StringBuffer();
         result.append("\t\t\t\t\t<indicator "
-                + "isPaid=\"" + i.isPaid() + '"' + "> "
+                + "isPaid=\"" + i.isPaid() + "\" "
+                + "tariffPerDate=\"" + i.getTariffPerDate() + '"' + "> "
                 + i.getValue() + " </indicator>\n");
         i.setPublished(true);
         indicatorService.updateIndicator(i);
