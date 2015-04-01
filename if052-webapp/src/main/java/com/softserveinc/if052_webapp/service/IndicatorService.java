@@ -102,7 +102,7 @@ public class IndicatorService {
     }
 
     private boolean isDateCorrect(Indicator indicator, ServiceResponse serviceResponse) {
-        if (!(indicator.getDate() instanceof Date)) {
+        if (!(indicator.getDate() != null)) {
             serviceResponse.setStatus("error400");
             serviceResponse.setMessage("Дата вказана невірно");
             return true;
