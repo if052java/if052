@@ -131,92 +131,14 @@ public class GraphController {
         } catch (IOException e) {
             logger.warn(e.getMessage(), e);
         }
-        //- Get start and end date-//
-        String startDate = "";
-        String endDate = "";
-
-        //- Get information for leap of year-//
-        GregorianCalendar cal =
-            (GregorianCalendar) GregorianCalendar.getInstance();
-        
-        boolean isLeapYear = cal.isLeapYear(year);
-            if(month!=13) {
-                switch (month) {
-                    case 1: {
-                        startDate =year + "-01-01 00:00:00";
-                        endDate = year + "-01-31 23:59:59";
-                        break;
-                    }
-                    case 2: {
-                        if (!isLeapYear) {
-                            startDate = year + "-02-01 00:00:00";
-                            endDate = year + "-02-28 23:59:59";
-                        } else {
-                            startDate = year + "-02-01 00:00:00";
-                            endDate = year + "-02-29 23:59:59";
-                        }
-                        break;
-                    }
-                    case 3: {
-                        startDate = year + "-03-01 00:00:00";
-                        endDate = year + "-03-31 23:59:59";
-                        break;
-                    }
-                    case 4: {
-                        startDate = year + "-04-01 00:00:00";
-                        endDate = year + "-04-30 23:59:59";
-                        break;
-                    }
-                    case 5: {
-                        startDate = year + "-05-01 00:00:00";
-                        endDate = year + "-05-31 23:59:59";
-                        break;
-                    }
-                    case 6: {
-                        startDate = year + "-06-01 00:00:00";
-                        endDate = year + "-06-30 23:59:59";
-                        break;
-                    }
-                    case 7: {
-                        startDate = year + "-07-01 00:00:00";
-                        endDate = year + "-07-31 23:59:59";
-                        break;
-                    }
-                    case 8: {
-                        startDate = year + "-08-01 00:00:00";
-                        endDate = year + "-08-31 23:59:59";
-                        break;
-                    }
-                    case 9: {
-                        startDate = year + "-09-01 00:00:00";
-                        endDate = year + "-09-30 23:59:59";
-                        break;
-                    }
-                    case 10: {
-                        startDate = year + "-10-01 00:00:00";
-                        endDate = year + "-10-31 23:59:59";
-                        break;
-                    }
-                    case 11: {
-                        startDate = year + "-11-01 00:00:00";
-                        endDate = year + "-11-30 23:59:59";
-                        break;
-                    }
-                    case 12: {
-                        startDate = year + "-12-01 00:00:00";
-                        endDate = year + "-12-31 23:59:59";
-                        break;
-                    }
-                }
-            } else{
-                startDate = year + "-01-01 00:00:00";
-                endDate = year + "-12-31 23:59:59";
-            }
+        //-Get start and end date-//
+        String[] dates = new String[2];
+        dates = getStartEndDate(month, year);
 
         //- Get list of indicators -//
         Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl
             + "indicators/byDates/" + meterId
-            + ";startDate=" + startDate + ";endDate=" + endDate, Indicator[].class);
+            + ";startDate=" + dates[0] + ";endDate=" + dates[1], Indicator[].class);
         List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
 
         long[][] arrayOfData = new long[indicators.size()][2];
@@ -255,6 +177,96 @@ public class GraphController {
         }
 
         return json;
+    }
+
+    /**
+     * Get start and end date
+     *
+     * @param month - from select in graphs.jsp
+     * @param year - from select in graphs.jsp
+     * @return dates[] - array with two dates
+     */
+    public String[] getStartEndDate(int month, int year){
+
+        //- Get information for leap of year-//
+        GregorianCalendar cal =
+            (GregorianCalendar) GregorianCalendar.getInstance();
+        boolean isLeapYear = cal.isLeapYear(year);
+        //- Get start and end date-//
+        String[] dates = new String[2];
+        if(month!=-1) {
+            switch (month) {
+                case 1:{
+                    dates[0] =year + "-01-01 00:00:00";
+                    dates[1]= year + "-01-31 23:59:59";
+                    break;
+                }
+                case 2: {
+                    if (!isLeapYear) {
+                        dates[0] = year + "-02-01 00:00:00";
+                        dates[1] = year + "-02-28 23:59:59";
+                    } else {
+                        dates[0] = year + "-02-01 00:00:00";
+                        dates[1] = year + "-02-29 23:59:59";
+                    }
+                    break;
+                }
+                case 3: {
+                    dates[0] = year + "-03-01 00:00:00";
+                    dates[1] = year + "-03-31 23:59:59";
+                    break;
+                }
+                case 4: {
+                    dates[0] = year + "-04-01 00:00:00";
+                    dates[1] = year + "-04-30 23:59:59";
+                    break;
+                }
+                case 5: {
+                    dates[0] = year + "-05-01 00:00:00";
+                    dates[1] = year + "-05-31 23:59:59";
+                    break;
+                }
+                case 6: {
+                    dates[0] = year + "-06-01 00:00:00";
+                    dates[1] = year + "-06-30 23:59:59";
+                    break;
+                }
+                case 7: {
+                    dates[0] = year + "-07-01 00:00:00";
+                    dates[1] = year + "-07-31 23:59:59";
+                    break;
+                }
+                case 8: {
+                    dates[0] = year + "-08-01 00:00:00";
+                    dates[1] = year + "-08-31 23:59:59";
+                    break;
+                }
+                case 9: {
+                    dates[0] = year + "-09-01 00:00:00";
+                    dates[1] = year + "-09-30 23:59:59";
+                    break;
+                }
+                case 10: {
+                    dates[0] = year + "-10-01 00:00:00";
+                    dates[1] = year + "-10-31 23:59:59";
+                    break;
+                }
+                case 11: {
+                    dates[0] = year + "-11-01 00:00:00";
+                    dates[1] = year + "-11-30 23:59:59";
+                    break;
+                }
+                case 12: {
+                    dates[0] = year + "-12-01 00:00:00";
+                    dates[1] = year + "-12-31 23:59:59";
+                    break;
+                }
+            }
+        } else{
+            dates[0] = year + "-01-01 00:00:00";
+            dates[1] = year + "-12-31 23:59:59";
+        }
+        return dates;
     }
 
 }

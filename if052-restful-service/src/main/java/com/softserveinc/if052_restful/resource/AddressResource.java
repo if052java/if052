@@ -38,7 +38,7 @@ public class AddressResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddressesByUserId(@PathParam("userId") String userId) {
 
-        List < Address > addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
+        List<Address> addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
 
         if( addresses == null) {
             addresses = new ArrayList<Address>();
@@ -59,7 +59,7 @@ public class AddressResource {
     @GET @Path("/list")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAddresses() {
-        List < Address > addresses = addressService.getAllAddresses();
+        List<Address> addresses = addressService.getAllAddresses();
         return Response.status(Response.Status.OK).entity(addresses).build();
     }
 

@@ -24,7 +24,7 @@
                 <sec:csrfInput/>
                         Виберіть опцію :
                     <select name="month"  >
-                        <option value="13">Виберіть місяць</option>
+                        <option value="-1">Виберіть місяць</option>
                         <option value="1">Січень</option>
                         <option value="2">Лютий</option>
                         <option value="3">Березень</option>
