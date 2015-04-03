@@ -1,6 +1,6 @@
 package com.softserveinc.if052_restful.resource;
 
-import com.softserveinc.if052_restful.domain.MeterType;
+import com.softserveinc.if052_core.domain.MeterType;
 import com.softserveinc.if052_restful.service.MeterTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 

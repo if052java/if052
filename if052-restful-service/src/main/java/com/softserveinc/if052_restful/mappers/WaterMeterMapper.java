@@ -3,7 +3,7 @@
  */
 package com.softserveinc.if052_restful.mappers;
 
-import com.softserveinc.if052_restful.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import java.util.List;
 
 /**

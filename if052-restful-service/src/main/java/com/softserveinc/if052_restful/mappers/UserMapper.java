@@ -3,8 +3,7 @@
  */
 package com.softserveinc.if052_restful.mappers;
 
-import com.softserveinc.if052_restful.domain.Auth;
-import com.softserveinc.if052_restful.domain.User;
+import com.softserveinc.if052_core.domain.User;
 import java.util.List;
 
 /**

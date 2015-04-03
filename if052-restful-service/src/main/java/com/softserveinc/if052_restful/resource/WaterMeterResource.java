@@ -1,6 +1,6 @@
 package com.softserveinc.if052_restful.resource;
 
-import com.softserveinc.if052_restful.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

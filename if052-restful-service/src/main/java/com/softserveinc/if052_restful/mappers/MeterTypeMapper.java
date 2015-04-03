@@ -1,6 +1,6 @@
 package com.softserveinc.if052_restful.mappers;
 
-import com.softserveinc.if052_restful.domain.MeterType;
+import com.softserveinc.if052_core.domain.MeterType;
 import java.util.List;
 
 /**

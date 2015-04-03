@@ -1,8 +1,8 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softserveinc.if052_webapp.domain.Auth;
-import com.softserveinc.if052_webapp.domain.AuthInterface;
+import com.softserveinc.if052_core.domain.Auth;
+import com.softserveinc.if052_core.domain.AuthInterface;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +14,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
-import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.client.token.grant.password.ResourceOwnerPasswordResourceDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;

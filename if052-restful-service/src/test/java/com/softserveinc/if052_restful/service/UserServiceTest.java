@@ -1,15 +1,16 @@
 package com.softserveinc.if052_restful.service;
 
-import com.softserveinc.if052_restful.domain.Address;
-import com.softserveinc.if052_restful.domain.Indicator;
-import com.softserveinc.if052_restful.domain.User;
-import com.softserveinc.if052_restful.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.Address;
+import com.softserveinc.if052_core.domain.Indicator;
+import com.softserveinc.if052_core.domain.User;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)

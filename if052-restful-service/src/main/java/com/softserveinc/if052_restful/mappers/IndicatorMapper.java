@@ -1,6 +1,6 @@
 package com.softserveinc.if052_restful.mappers;
 
-import com.softserveinc.if052_restful.domain.Indicator;
+import com.softserveinc.if052_core.domain.Indicator;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;

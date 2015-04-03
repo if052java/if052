@@ -1,11 +1,10 @@
 package com.softserveinc.if052_restful.resource;
 
-import com.softserveinc.if052_restful.domain.Indicator;
-import com.softserveinc.if052_restful.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.Indicator;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

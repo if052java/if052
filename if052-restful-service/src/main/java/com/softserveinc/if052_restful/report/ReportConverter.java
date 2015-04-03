@@ -1,6 +1,6 @@
 package com.softserveinc.if052_restful.report;
 
-import com.softserveinc.if052_restful.domain.*;
+import com.softserveinc.if052_core.domain.*;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.MeterTypeService;
 import com.softserveinc.if052_restful.service.UserService;

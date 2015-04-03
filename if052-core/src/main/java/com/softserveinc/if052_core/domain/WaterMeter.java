@@ -1,4 +1,4 @@
-package com.softserveinc.if052_webapp.domain;
+package com.softserveinc.if052_core.domain;
 
 
 import java.util.List;
@@ -14,7 +14,6 @@ public class WaterMeter {
     private List<Indicator> indicators;
 
     public WaterMeter() {
-
     }
 
     public WaterMeter(int waterMeterId, String name, String description, double tariff, Address address, MeterType meterType, List<Indicator> indicators) {
@@ -51,9 +50,13 @@ public class WaterMeter {
         this.description = description;
     }
 
-    public double getTariff() { return tariff; }
+    public double getTariff() {
+        return tariff;
+    }
 
-    public void setTariff(double tariff) { this.tariff = tariff; }
+    public void setTariff(double tariff) {
+        this.tariff = tariff;
+    }
 
     public Address getAddress() {
         return address;
@@ -63,9 +66,13 @@ public class WaterMeter {
         this.address = address;
     }
 
-    public MeterType getMeterType() { return meterType; }
+    public MeterType getMeterType() {
+        return meterType;
+    }
 
-    public void setMeterType(MeterType meterType) { this.meterType = meterType; }
+    public void setMeterType(MeterType meterType) {
+        this.meterType = meterType;
+    }
 
     public List<Indicator> getIndicators() {
         return indicators;
@@ -82,6 +89,7 @@ public class WaterMeter {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", tariff=" + tariff +
+                ", meterType=" + meterType +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.softserveinc.if052_webapp.controller;
 
-import com.softserveinc.if052_webapp.domain.Address;
-import com.softserveinc.if052_webapp.domain.AuthInterface;
+import com.softserveinc.if052_core.domain.Address;
+import com.softserveinc.if052_core.domain.AuthInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

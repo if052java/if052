@@ -1,13 +1,5 @@
-package com.softserveinc.if052_restful.domain;
+package com.softserveinc.if052_core.domain;
 
-import com.softserveinc.if052_restful.domain.User;
-import com.softserveinc.if052_restful.report.ReportRequest;
-import com.softserveinc.if052_restful.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +7,7 @@ import java.util.List;
  * Created by Danylo Tiahun on 14.03.2015.
  */
 
-
 public class Report {
-
     private int reportId;
     private Date startDate;
     private Date endDate;

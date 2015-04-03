@@ -1,8 +1,6 @@
 package com.softserveinc.if052_restful.resource;
 
-import com.softserveinc.if052_restful.domain.Address;
-import com.softserveinc.if052_restful.domain.Indicator;
-import com.softserveinc.if052_restful.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.Address;
 import com.softserveinc.if052_restful.service.AddressService;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;

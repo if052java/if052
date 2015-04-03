@@ -1,7 +1,7 @@
 package com.softserveinc.if052_restful.resource;
 
 
-import com.softserveinc.if052_restful.domain.Report;
+import com.softserveinc.if052_core.domain.Report;
 import com.softserveinc.if052_restful.report.ReportConverter;
 import com.softserveinc.if052_restful.report.ReportRequest;
 import com.softserveinc.if052_restful.service.IndicatorService;
@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**

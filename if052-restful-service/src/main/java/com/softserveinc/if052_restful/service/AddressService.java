@@ -1,6 +1,6 @@
 package com.softserveinc.if052_restful.service;
 
-import com.softserveinc.if052_restful.domain.Address;
+import com.softserveinc.if052_core.domain.Address;
 import com.softserveinc.if052_restful.mappers.AddressMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

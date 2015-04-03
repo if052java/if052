@@ -1,4 +1,4 @@
-package com.softserveinc.if052_restful.model;
+package com.softserveinc.if052_core.model;
 
 import org.junit.BeforeClass;
 

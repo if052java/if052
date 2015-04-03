@@ -1,9 +1,8 @@
 package com.softserveinc.if052_restful.service;
 
-import com.softserveinc.if052_restful.domain.Indicator;
-import com.softserveinc.if052_restful.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.Indicator;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

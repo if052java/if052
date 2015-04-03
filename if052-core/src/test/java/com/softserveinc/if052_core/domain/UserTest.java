@@ -1,8 +1,8 @@
-package com.softserveinc.if052_restful.domain;
+package com.softserveinc.if052_core.domain;
 
-import com.softserveinc.if052_restful.model.AbstractModel;
+import com.softserveinc.if052_core.domain.User;
+import com.softserveinc.if052_core.model.AbstractModel;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 import org.junit.Test;

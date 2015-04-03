@@ -2,8 +2,7 @@ package com.softserveinc.if052_webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.softserveinc.if052_webapp.domain.*;
-import com.sun.org.apache.xpath.internal.SourceTree;
+import com.softserveinc.if052_core.domain.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,11 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 /**
  * Created by valentyn on 2/11/15.

@@ -1,9 +1,8 @@
 package com.softserveinc.if052_webapp.controller;
 
-import com.softserveinc.if052_webapp.domain.Address;
-import com.softserveinc.if052_webapp.domain.AuthInterface;
-import com.softserveinc.if052_webapp.domain.Indicator;
-import com.softserveinc.if052_webapp.domain.User;
+import com.softserveinc.if052_core.domain.AuthInterface;
+import com.softserveinc.if052_core.domain.Indicator;
+import com.softserveinc.if052_core.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestOperations;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 

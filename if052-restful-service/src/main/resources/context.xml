@@ -18,10 +18,8 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.softserveinc.if052_restful"/>
 
-    <jdbc:embedded-database id="dataSource" type="H2">
-        <jdbc:script location="classpath:schema.sql" encoding="UTF-8"/>
-        <jdbc:script location="classpath:test-data.sql" encoding="UTF-8"/>
-    </jdbc:embedded-database>
+    <import resource="classpath*:h2-datasource.xml"/>
+    <import resource="classpath*:psql-datasource.xml"/>
 
     <!-- scan for mappers and let them be autowired -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -41,7 +39,7 @@
     <!-- define the SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="com.softserveinc.if052_restful.domain"/>
+        <property name="typeAliasesPackage" value="com.softserveinc.if052_core.domain"/>
         <property name="mapperLocations" value="classpath*:com/softserveinc/if052_restful/mappers/**/*.xml" />
     </bean>
 

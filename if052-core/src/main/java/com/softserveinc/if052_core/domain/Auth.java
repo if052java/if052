@@ -1,4 +1,4 @@
-package com.softserveinc.if052_webapp.domain;
+package com.softserveinc.if052_core.domain;
 
 /**
  * Created by nazar on 3/30/15.

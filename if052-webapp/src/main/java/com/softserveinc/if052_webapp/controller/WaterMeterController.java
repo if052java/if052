@@ -1,9 +1,9 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softserveinc.if052_webapp.domain.Address;
-import com.softserveinc.if052_webapp.domain.MeterType;
-import com.softserveinc.if052_webapp.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.Address;
+import com.softserveinc.if052_core.domain.MeterType;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.Arrays;

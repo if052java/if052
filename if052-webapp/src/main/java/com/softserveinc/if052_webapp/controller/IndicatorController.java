@@ -1,7 +1,7 @@
 package com.softserveinc.if052_webapp.controller;
 
-import com.softserveinc.if052_webapp.domain.Indicator;
-import com.softserveinc.if052_webapp.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.Indicator;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_webapp.service.IndicatorService;
 import com.softserveinc.if052_webapp.service.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;

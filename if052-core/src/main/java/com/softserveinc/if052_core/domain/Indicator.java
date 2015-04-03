@@ -1,4 +1,4 @@
-package com.softserveinc.if052_webapp.domain;
+package com.softserveinc.if052_core.domain;
 
 import java.util.Date;
 
@@ -14,6 +14,9 @@ public class Indicator {
     private boolean published;
     private WaterMeter waterMeter;
 
+    public Indicator() {
+    }
+
     public Indicator(int indicatorId, Date date, double tariffPerDate, int value, boolean paid, boolean published, WaterMeter waterMeter) {
         this.indicatorId = indicatorId;
         this.date = date;
@@ -22,9 +25,6 @@ public class Indicator {
         this.paid = paid;
         this.published = published;
         this.waterMeter = waterMeter;
-    }
-
-    public Indicator() {
     }
 
     public int getIndicatorId() {
@@ -43,9 +43,13 @@ public class Indicator {
         this.date = date;
     }
 
-    public double getTariffPerDate() { return tariffPerDate; }
+    public double getTariffPerDate() {
+        return tariffPerDate;
+    }
 
-    public void setTariffPerDate(double tariffPerDate) { this.tariffPerDate = tariffPerDate; }
+    public void setTariffPerDate(double tariffPerDate) {
+        this.tariffPerDate = tariffPerDate;
+    }
 
     public int getValue() {
         return value;

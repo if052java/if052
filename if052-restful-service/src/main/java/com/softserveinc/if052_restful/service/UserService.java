@@ -3,7 +3,7 @@
  */
 package com.softserveinc.if052_restful.service;
 
-import com.softserveinc.if052_restful.domain.User;
+import com.softserveinc.if052_core.domain.User;
 import com.softserveinc.if052_restful.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Service for work with User.
- * @see com.softserveinc.if052_restful.domain.User
+ * @see com.softserveinc.if052_core.domain.domain.User
  *
  * @version 1.0
  */

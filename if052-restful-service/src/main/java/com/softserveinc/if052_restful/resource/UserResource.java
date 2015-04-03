@@ -1,10 +1,9 @@
 package com.softserveinc.if052_restful.resource;
 
-import com.softserveinc.if052_restful.domain.User;
+import com.softserveinc.if052_core.domain.User;
 import com.softserveinc.if052_restful.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;

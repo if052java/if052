@@ -1,7 +1,7 @@
 package com.softserveinc.if052_restful.service;
 
-import com.softserveinc.if052_restful.domain.Indicator;
-import com.softserveinc.if052_restful.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.Indicator;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.mappers.IndicatorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

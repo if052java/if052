@@ -5,7 +5,7 @@
 package com.softserveinc.if052_restful.mappers;
 
 import java.util.List;
-import com.softserveinc.if052_restful.domain.Address;
+import com.softserveinc.if052_core.domain.Address;
 
 /**
  * This interface is for the "ADDRESS" mapper

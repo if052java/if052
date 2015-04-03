@@ -1,5 +1,8 @@
-package com.softserveinc.if052_webapp.domain;
+package com.softserveinc.if052_core.domain;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -8,16 +11,35 @@ public class User {
     //- Properties -//
     private int userId;
 
+    @NotNull
+    @NotEmpty
+    @Length( min = 2 , max = 32)
     private String name;
 
+    @NotNull
+    @NotEmpty
+    @Length( min = 2 , max = 32)
     private String surname;
 
+    @NotNull
+    @NotEmpty
+    @Length( min = 2 , max = 32)
     private String middleName;
 
+    @NotNull
+    @NotEmpty
+    @Length( min = 8 , max = 32)
     private String login;
 
+    @NotNull
+    @NotEmpty
+    @Length( min = 8 , max = 32)
     private String password;
 
+    @NotNull
+    @NotEmpty
+    @Length( min = 8 , max = 32)
+    @Email
     private String email;
 
     private String role;
@@ -73,9 +95,11 @@ public class User {
         return password;
     }
 
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public List < Address > getAddresses() {
+    public List <Address> getAddresses() {
         return addresses;
     }
 
@@ -104,9 +128,11 @@ public class User {
         this.password = password;
     }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setAddresses(List < Address > addresses) {
+    public void setAddresses(List <Address> addresses) {
         this.addresses = addresses;
     }
 

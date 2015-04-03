@@ -1,6 +1,6 @@
 package com.softserveinc.if052_restful.config;
 
-import com.softserveinc.if052_restful.domain.Auth;
+import com.softserveinc.if052_core.domain.Auth;
 import com.softserveinc.if052_restful.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,4 +1,4 @@
-package com.softserveinc.if052_restful.domain;
+package com.softserveinc.if052_core.domain;
 
 /**
  * This class is a model of the datatable "METER_TYPE"
@@ -9,6 +9,14 @@ package com.softserveinc.if052_restful.domain;
 public class MeterType {
     private int meterTypeId;
     private String type;
+
+    public MeterType() {
+    }
+
+    public MeterType(int meterTypeId, String type) {
+        this.meterTypeId = meterTypeId;
+        this.type = type;
+    }
 
     public int getMeterTypeId() {
         return meterTypeId;

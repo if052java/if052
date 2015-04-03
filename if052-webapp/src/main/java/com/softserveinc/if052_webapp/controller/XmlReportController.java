@@ -1,9 +1,7 @@
 package com.softserveinc.if052_webapp.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softserveinc.if052_webapp.domain.MeterType;
+import com.softserveinc.if052_core.domain.MeterType;
 import com.softserveinc.if052_webapp.utils.FileDownloader;
 import com.softserveinc.if052_webapp.utils.ReportRequest;
 import org.apache.log4j.Logger;
@@ -13,12 +11,10 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;

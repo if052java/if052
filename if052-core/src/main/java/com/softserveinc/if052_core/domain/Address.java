@@ -2,7 +2,7 @@
  * Copyright (c) 2015, SoftServe and/or its affiliates. All rights reserved.
  */
 
-package com.softserveinc.if052_webapp.domain;
+package com.softserveinc.if052_core.domain;
 
 import java.util.List;
 
@@ -94,10 +94,16 @@ public final class Address {
 		this.apartment = apartment;
 	}
 
+    /**
+     * @return the user
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * @param user the user to set
+     */
     public void setUser(User user) {
         this.user = user;
     }

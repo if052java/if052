@@ -1,10 +1,8 @@
 package com.softserveinc.if052_webapp.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softserveinc.if052_webapp.controller.WaterMeterController;
-import com.softserveinc.if052_webapp.domain.Address;
-import com.softserveinc.if052_webapp.domain.Indicator;
-import com.softserveinc.if052_webapp.domain.WaterMeter;
+import com.softserveinc.if052_core.domain.Indicator;
+import com.softserveinc.if052_core.domain.WaterMeter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
