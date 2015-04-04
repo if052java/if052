@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Service for work with meter type
- * @see com.softserveinc.if052_core.domain.domain.MeterType
+ * @see com.softserveinc.if052_core.domain.MeterType
  *
  * @author Bogdan Pastushkevych
  * @version 1.0
@@ -26,7 +26,9 @@ public class MeterTypeService {
      *
      * @return List<MeterType>
      */
-    public List<MeterType> getAllMeterTypes() { return meterTypeMapper.getAllMeterTypes(); }
+    public List<MeterType> getAllMeterTypes() {
+        return meterTypeMapper.getAllMeterTypes();
+    }
 
     /**
      * Get existing meter type by id
@@ -43,19 +45,25 @@ public class MeterTypeService {
      *
      * @param meterType
      */
-    public void insertMeterType(MeterType meterType) { meterTypeMapper.insertMeterType(meterType); }
+    public void insertMeterType(MeterType meterType) {
+        meterTypeMapper.insertMeterType(meterType);
+    }
 
     /**
      * Update existing meter type
      *
      * @param meterType
      */
-    public void updateMeterType(MeterType meterType) { meterTypeMapper.updateMeterType(meterType);}
+    public void updateMeterType(MeterType meterType) {
+        meterTypeMapper.updateMeterType(meterType);
+    }
 
     /**
      * Delete existing meter type
      *
      * @param meterTypeId
      */
-    public void deleteMeterType(int meterTypeId) { meterTypeMapper.deleteMeterType(meterTypeId); }
+    public void deleteMeterType(int meterTypeId) {
+        meterTypeMapper.deleteMeterType(meterTypeId);
+    }
 }
