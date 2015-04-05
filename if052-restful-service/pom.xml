@@ -13,7 +13,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.2.13.RELEASE</spring.version>
+        <spring.version>4.0.5.RELEASE</spring.version>
         <jersey.version>2.17</jersey.version>
         <security.version>3.2.6.RELEASE</security.version>
     </properties>
@@ -80,7 +80,16 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <!-- Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -88,16 +97,19 @@
             <version>3.0.1</version>
         </dependency>
 
-        <!-- JSR-303 validation -->
+        <!-- JSON :: JACKSON -->
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.12</version>
         </dependency>
+
+        <!-- Hibernate validation -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.0.1.Final</version>
+            <version>5.1.2.Final</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Test -->
@@ -118,25 +130,6 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>1.2.2</version>
-        </dependency>
-
-        <!-- Jersey -->
-        <dependency>
-            <groupId>org.glassfish.jersey.ext</groupId>
-            <artifactId>jersey-spring3</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-            <version>${jersey.version}</version>
-        </dependency>
-
-        <!-- Jackson JSON providers -->
-        <dependency>
-            <groupId>org.glassfish.jersey.media</groupId>
-            <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${jersey.version}</version>
         </dependency>
 
         <!-- JSR 341 Unified Expression Language -->

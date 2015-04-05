@@ -2,6 +2,7 @@ package com.softserveinc.if052_webapp.controller;
 
 
 import com.softserveinc.if052_core.domain.MeterType;
+import com.softserveinc.if052_core.domain.Report;
 import com.softserveinc.if052_webapp.utils.FileDownloader;
 import com.softserveinc.if052_webapp.utils.ReportRequest;
 import org.apache.log4j.Logger;
@@ -72,9 +73,9 @@ public class XmlReportController {
                 new HttpEntity<ReportRequest>(reportRequest), String.class);
         try {
             String uri = postResponseEntity.getHeaders().get("Location").get(0);
-            ResponseEntity<String> responseEntity2 = restTemplate.exchange(uri, HttpMethod.GET,
-                    null, String.class);
-            fileDownloader.downloadFile(request, response, responseEntity2.getBody());
+            Report responseEntity2 = restTemplate.getForObject(restUrl + uri, Report.class);
+            
+            fileDownloader.downloadFile(request, response, responseEntity2.getXmlReport());
         } catch (NullPointerException e) {
             LOGGER.warn(e.getMessage(), e);
         }

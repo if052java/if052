@@ -74,7 +74,7 @@ public class GraphController {
 
             //- Get all indicators of first meter for graph -//
             Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl
-                + "indicators/byYear/" + meter.getWaterMeterId() + ";year=" + year, Indicator[].class);
+                + "indicators/byYear/" + meter.getWaterMeterId() + "?year=" + year, Indicator[].class);
             List < Indicator > indicators = Arrays.asList( arrayOfIndicators );
 
             if( indicators.size() == 0){
@@ -134,7 +134,7 @@ public class GraphController {
         //- Get list of indicators -//
         Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl
             + "indicators/byDates/" + meterId
-            + ";startDate=" + dates[0] + ";endDate=" + dates[1], Indicator[].class);
+            + "?startDate=" + dates[0] + "&endDate=" + dates[1], Indicator[].class);
         List < Indicator > indicators = Arrays.asList(arrayOfIndicators);
 
         long[][] arrayOfData = new long[indicators.size()][2];

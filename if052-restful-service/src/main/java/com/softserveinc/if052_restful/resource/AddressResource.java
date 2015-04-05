@@ -7,17 +7,17 @@ import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by valentyn on 2/11/15.
- */
-@Path("/addresses")
+* Created by valentyn on 2/11/15.
+*/
+@RestController
+@RequestMapping("/rest/addresses")
 public class AddressResource {
 
     @Autowired
@@ -29,71 +29,81 @@ public class AddressResource {
     @Autowired
     IndicatorService indicatorService;
 
-    private static Logger LOGGER = Logger.getLogger(WaterMeterResource.class.getName());
+    private static Logger LOGGER = Logger.getLogger(AddressResource.class.getName());
 
-    @GET
-    @Path("/list/{userId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getAddressesByUserId(@PathParam("userId") String userId) {
+    @RequestMapping(value = "/list/{userId}", method = RequestMethod.GET, produces = "application/json")
+    public List<Address> getAddressesByUserId(
+        @PathVariable("userId") String userId){
 
         List<Address> addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
 
         if( addresses == null) {
-            addresses = new ArrayList<Address>();
+            return new ArrayList<Address>();
         }
-        return Response.status(Response.Status.OK).entity(addresses).build();
+        return addresses;
     }
 
-    @GET @Path("/{addressId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getAddress(@PathParam("addressId") int addressId) {
+    @RequestMapping(value = "/{addressId}", method = RequestMethod.GET, produces = "application/json")
+    public Address getAddress(
+        @PathVariable("addressId") int addressId,
+        HttpServletResponse response) {
         Address address = addressService.getAddressById(addressId);
         if (address == null) {
-            return Response.status(Response.Status.NOT_FOUND).entity(address).build();
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
         }
-        return Response.status(Response.Status.OK).entity(address).build();
+        return address;
     }
 
-    @GET @Path("/list")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getAddresses() {
+    @RequestMapping("/list")
+    public List<Address> getAddresses() {
         List<Address> addresses = addressService.getAllAddresses();
-        return Response.status(Response.Status.OK).entity(addresses).build();
+
+        if( addresses == null) {
+            return new ArrayList<Address>();
+        }
+        return addresses;
     }
 
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response createAddress(Address address){
+    @RequestMapping(method=RequestMethod.POST, produces = "application/json")
+    public Address createAddress(
+        @RequestBody
+        Address address,
+        HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_CREATED);
         addressService.insertAddress(address);
-        return Response.status(Response.Status.CREATED).build();
+        
+        return address;
     }
 
-    @PUT @Path("{addressId}")
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response updateAddress(
-        @PathParam("addressId") int addressId,
-        Address address){
+    @RequestMapping(value = "{addressId}", method = RequestMethod.PUT, produces = "application/json")
+    public Address updateAddress(
+        @PathVariable("addressId") int addressId,
+        @RequestBody
+        Address address,
+        HttpServletResponse response){
+
         addressService.updateAddress(address);
-        return Response.status(Response.Status.OK).build();
+
+        return address;
     }
 
-    @DELETE
-    @Path("{addressId}")
-    public Response deleteAddress(@PathParam("addressId") int addressId) {
+    @RequestMapping(value = "{addressId}", method = RequestMethod.DELETE)
+    public void deleteAddress(
+        @PathVariable("addressId") int addressId,
+        HttpServletResponse response) {
         LOGGER.info("INFO: Deleting a address with id " + addressId + ".");
         if (addressService.getAddressById(addressId) == null){
             LOGGER.info("INFO: Address with requested id " + addressId + " is not found.");
-            return Response.status(Response.Status.NOT_FOUND).build();
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         try{
             LOGGER.info("INFO : Meter with id " + addressId + " has been successfully deleted.");
             addressService.deleteAddress(addressId);
-            return Response.status(Response.Status.OK).build();
         } catch ( DataIntegrityViolationException e){
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             LOGGER.warn("WARNING: Address with requester id " + addressId
-                + " contains list of meters so it cannot be deleted.", e);  
+                + " contains list of meters so it cannot be deleted.", e);
         }
-
-        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 }

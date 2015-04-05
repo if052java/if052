@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestOperations;
 
 import java.util.Arrays;
@@ -77,8 +78,8 @@ public class AddressController {
      * @param model
      * @return "updateAddress" JSP for showing form to update
      */
-    @RequestMapping(value = "/updateAddress{addressId}")
-    public String getUpdateAddressPage(int addressId, ModelMap model){
+    @RequestMapping(value = "/updateAddress")
+    public String getUpdateAddressPage(@RequestParam("addressId") int addressId, ModelMap model){
         Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
 
         model.addAttribute(ADDRESS, address);
@@ -107,8 +108,8 @@ public class AddressController {
      * @param addressId
      * @return
      */
-    @RequestMapping("/deleteAddress{addressId}")
-    public String deleteAddress(int addressId, ModelMap model) {
+    @RequestMapping("/deleteAddress")
+    public String deleteAddress(@RequestParam("addressId") int addressId, ModelMap model) {
         ResponseEntity<String> responseEntity = restTemplate.exchange(restUrl + "addresses/" + addressId,
             HttpMethod.DELETE, null, String.class);
 

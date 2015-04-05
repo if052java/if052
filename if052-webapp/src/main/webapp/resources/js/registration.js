@@ -2,8 +2,6 @@ $(document).ready(function() {
     $('#registrationForm').validate({
         rules: {
             "name": {
-                required : true,
-                rangelength:[2, 32]
             },
             "surname": {
                 required : true,

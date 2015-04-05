@@ -5,17 +5,17 @@ import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Maksym on 2/12/2015.
- */
-@Path("/indicators")
+* Created by Maksym on 2/12/2015.
+*/
+@RestController
+@RequestMapping("/rest/indicators")
 public class IndicatorResource {
 
     public final String start = "-01-01 00:00:00";
@@ -26,91 +26,83 @@ public class IndicatorResource {
     @Autowired
     private WaterMeterService waterMeterService;
 
-    @GET
-    @Path("{waterMeterId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getIndicators(@PathParam("waterMeterId") int waterMeterId) {
+    @RequestMapping(value = "{waterMeterId}", method = RequestMethod.GET, produces = "application/json")
+    public List<Indicator> getIndicators(@PathVariable("waterMeterId") int waterMeterId) {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
         List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
         if (indicators == null) {
             indicators = new ArrayList<Indicator>();
         }
-        return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
+        return indicators;
     }
 
-    @GET
-    @Path("/list/byuser/{userId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getIndicatorsByUserId(@PathParam("userId") int userId,
-                                          @MatrixParam("number") int number) {
+    @RequestMapping(value = "/list/byuser/{userId}", method = RequestMethod.GET, produces = "application/json")
+    public List<Indicator> getIndicatorsByUserId(@PathVariable("userId") int userId,
+                                          @RequestParam("number") int number) {
         List<Indicator> indicators = indicatorService.getIndicatorsByUserId(userId, number);
         if (indicators == null) {
             indicators = new ArrayList<Indicator>();
         }
-        return Response.status(Response.Status.OK).entity(indicators).build();
+        return indicators;
     }
 
-    @GET
-    @Path("/byYear/{meterId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getIndicatorsByYear(@PathParam("meterId") int meterId,
-                                  @MatrixParam("year") int year ) {
+    @RequestMapping(value = "/byYear/{meterId}", method = RequestMethod.GET, produces = "application/json")
+    public List<Indicator> getIndicatorsByYear(@PathVariable("meterId") int meterId,
+                                  @RequestParam("year") int year ) {
         String startDate = year + start;
         String endDate = year + end;
 
-        List < Indicator > indicators = 
+        List < Indicator > indicators =
             indicatorService.getIndicatorsByDates(meterId, startDate, endDate);
         if (indicators == null) {
             indicators = new ArrayList<Indicator>();
         }
-        return Response.status(Response.Status.ACCEPTED).entity(indicators).build();
+        return indicators;
     }
 
-    @GET
-    @Path("/byDates/{meterId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getIndicatorsByDates(@PathParam("meterId") int meterId,
-                                        @MatrixParam("startDate") String startDate,
-                                        @MatrixParam("endDate") String endDate) {
+    @RequestMapping(value="/byDates/{meterId}", method = RequestMethod.GET, produces = "application/json")
+    public List<Indicator> getIndicatorsByDates(@PathVariable("meterId") int meterId,
+                                        @RequestParam("startDate") String startDate,
+                                        @RequestParam("endDate") String endDate,
+                                        HttpServletResponse response) {
         List < Indicator > indicators =
             indicatorService.getIndicatorsByDates(meterId, startDate, endDate);
         if (indicators == null){
-            return Response.status(Response.Status.NOT_FOUND).build();
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
         }
-        return Response.status(Response.Status.OK).entity(indicators).build();
+        return indicators;
     }
 
-    @GET
-    @Path("/getone/{indicatorId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getIndicator(@PathParam("indicatorId") int indicatorId) {
+    @RequestMapping(value = "/getone/{indicatorId}", method = RequestMethod.GET, produces = "application/json")
+    public Indicator getIndicator(@PathVariable("indicatorId") int indicatorId) {
         Indicator indicator = indicatorService.getIndicatorById(indicatorId);
 
-        return Response.status(Response.Status.ACCEPTED).entity(indicator).build();
+        return indicator;
     }
 
-    @DELETE
-    @Path("{indicatorId}")
-    public Response deleteIndicator(@PathParam("indicatorId") int indicatorId) {
+    @RequestMapping(value = "{indicatorId}", method = RequestMethod.DELETE, produces = "application/json")
+    public void deleteIndicator(@PathVariable("indicatorId") int indicatorId) {
         indicatorService.deleteIndicator(indicatorId);
 
-        return Response.status(Response.Status.ACCEPTED).build();
     }
 
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response createIndicator(Indicator indicator){
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public Indicator createIndicator(
+        @RequestBody
+        Indicator indicator){
         indicatorService.insertIndicator(indicator);
 
-        return Response.status(Response.Status.ACCEPTED).build();
+        return indicator;
     }
 
-    @PUT
-    @Path("{indicatorId}")
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response updateIndicator(@PathParam("indicatorId") int indicatorId, Indicator indicator){
+    @RequestMapping(value = "{indicatorId}", method = RequestMethod.PUT, produces = "application/json")
+    public Indicator updateIndicator(
+        @PathVariable("indicatorId") int indicatorId,
+        @RequestBody
+        Indicator indicator){
         indicatorService.updateIndicator(indicator);
 
-        return Response.status(Response.Status.ACCEPTED).build();
+        return indicator;
     }
 }

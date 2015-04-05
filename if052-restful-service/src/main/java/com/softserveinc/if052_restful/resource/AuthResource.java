@@ -3,36 +3,38 @@ package com.softserveinc.if052_restful.resource;
 import com.softserveinc.if052_core.domain.Auth;
 import com.softserveinc.if052_restful.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by nazar on 3/30/15.
- */
-@Path("/auth")
+* Created by nazar on 3/30/15.
+*/
+@RestController
+@RequestMapping("/rest/auth")
 public class AuthResource {
 
     @Autowired
     AuthService authService;
 
-    @POST
-    @Path("checkCredentials")
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response checkCredentials(Auth param){
-        Auth auth;
+    @RequestMapping(value = "/checkCredentials", method = RequestMethod.POST, produces = "application/json")
+    public Auth checkCredentials(
+        @RequestBody
+        Auth param,
+        HttpServletResponse response){
+        Auth auth = null;
         try {
             auth = authService.getAuth(param.getUsername());
         }catch (NullPointerException e){
-            return Response.status(Response.Status.ACCEPTED).build();
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
         }
         if (!auth.getUsername().equals(param.getUsername()) ||
                 (!auth.getPassword().equals(param.getPassword())) ){
-            return Response.status(Response.Status.ACCEPTED).build();
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
         }
-        return Response.status(Response.Status.OK).entity(auth).build();
+        return auth;
     }
 }

@@ -45,7 +45,7 @@ public class DetailController {
         model.addAttribute(SURNAME, user.getSurname());
         model.addAttribute(MIDDLE_NAME, user.getMiddleName());
 
-        Indicator[] arrOfIndicators = restTemplate.getForObject(restUrl + "indicators/list/byuser/" + authBean.getUserId() + ";number=" + COUNT, Indicator[].class);
+        Indicator[] arrOfIndicators = restTemplate.getForObject(restUrl + "indicators/list/byuser/" + authBean.getUserId() + "?number=" + COUNT, Indicator[].class);
 
         List<Indicator> indicators = Arrays.asList(arrOfIndicators);
 

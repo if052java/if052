@@ -7,17 +7,17 @@ import com.softserveinc.if052_restful.report.ReportRequest;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
- * Created by Danylo Tiahun on 14.03.2015.
- */
+* Created by Danylo Tiahun on 14.03.2015.
+*/
 
-@Path("/report/")
+@RestController
+@RequestMapping("/rest/report/")
 public class ReportResource {
 
     @Autowired
@@ -29,57 +29,49 @@ public class ReportResource {
     @Autowired
     private ReportConverter reportConverter;
 
-
-    @GET
-    @Path("/mindate")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getMinDate() {
+    @RequestMapping(value = "/mindate", method = RequestMethod.GET, produces = "application/json")
+    public  Date getMinDate() {
         Date minDate = indicatorService.getMinDate();
         if (minDate == null) {
             minDate = new Date();
         }
-        return Response.status(Response.Status.OK).entity(minDate).build();
+        return minDate;
     }
 
-    @GET
-    @Path("/maxdate")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getMaxDate() {
+    @RequestMapping(value = "/maxdate", method = RequestMethod.GET, produces = "application/json")
+    public Date getMaxDate() {
         Date maxDate = indicatorService.getMaxDate();
         if (maxDate == null) {
             maxDate = new Date();
         }
-        return Response.status(Response.Status.OK).entity(maxDate).build();
+        return maxDate;
     }
 
 
-    @GET
-    @Path("{reportId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getReport(@PathParam("reportId") int reportId) {
+    @RequestMapping(value = "{reportId}", method = RequestMethod.GET, produces = "application/json")
+    public Report getReport(
+        @PathVariable("reportId") int reportId,
+        HttpServletResponse response) {
         Report report = reportService.getReportById(reportId);
         if (report == null) {
-            return Response
-                    .status(Response.Status.NOT_FOUND)
-                    .build();
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
-        return Response
-                .status(Response.Status.OK)
-                .entity(report.getXmlReport().toString())
-                .build();
+        return report;
     }
 
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response insertReport(ReportRequest reportRequest) {
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public Report insertReport(
+        @RequestBody
+        ReportRequest reportRequest,
+        HttpServletResponse response) {
         Report report = reportConverter.createReport(reportRequest);
         report.setReportRequest(reportRequest.toString());
         report.setXmlReport(reportConverter.convertToXml(report).toString());
         reportService.insertReport(report);
-        return Response
-                .status(Response.Status.CREATED)
-                .header("Location", "/restful/rest/report/" + report.getReportId())
-                .build();
+        response.setStatus(HttpServletResponse.SC_CREATED);
+        response.setHeader("Location", "/report/" + report.getReportId());
+
+        return report;
     }
 
 }

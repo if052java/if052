@@ -3,58 +3,54 @@ package com.softserveinc.if052_restful.resource;
 import com.softserveinc.if052_core.domain.MeterType;
 import com.softserveinc.if052_restful.service.MeterTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * Class of meter type resource
- *
- * @author Bogdan Pastushkevych
- * @version 1.0
- */
-@Path("/metertypes/")
+* Class of meter type resource
+*
+* @author Bogdan Pastushkevych
+* @version 1.0
+*/
+@RestController
+@RequestMapping("/rest/metertypes/")
 public class MeterTypeResource {
 
     @Autowired
     private MeterTypeService meterTypeService;
 
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getAllMeterTypes() {
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public List<MeterType> getAllMeterTypes() {
         List<MeterType> meterTypes = meterTypeService.getAllMeterTypes();
-        return Response.status(Response.Status.OK).entity(meterTypes).build();
+        return meterTypes;
     }
 
-    @GET
-    @Path("{meterTypeId}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getMeterType(@PathParam("meterTypeId") int meterTypeId) {
+    @RequestMapping(value = "{meterTypeId}", method = RequestMethod.GET, produces = "application/json")
+    public MeterType getMeterType(@PathVariable("meterTypeId") int meterTypeId) {
         MeterType meterType = meterTypeService.getMeterTypeById(meterTypeId);
-        return Response.status(Response.Status.ACCEPTED).entity(meterType).build();
+        return meterType;
     }
 
-    @POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response createMeterType(MeterType meterType){
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    public MeterType createMeterType(
+        @RequestBody
+        MeterType meterType){
         meterTypeService.insertMeterType(meterType);
-        return Response.status(Response.Status.ACCEPTED).build();
+        return meterType;
     }
 
-    @PUT
-    @Path("{meterTypeId}")
-    @Consumes({MediaType.APPLICATION_JSON})
-    public Response updateMeterType(@PathParam("meterTypeId") int meterTypeId, MeterType meterType){
+    @RequestMapping(value = "{meterTypeId}", method = RequestMethod.PUT, produces = "application/json")
+    public MeterType updateMeterType(@PathVariable("meterTypeId") int meterTypeId, MeterType meterType){
         meterTypeService.updateMeterType(meterType);
-        return Response.status(Response.Status.ACCEPTED).build();
+        return meterType;
     }
 
-    @DELETE
-    @Path("{meterTypeId}")
-    public Response deleteMeterType(@PathParam("meterTypeId") int meterTypeId) {
+    @RequestMapping(value = "{meterTypeId}", method = RequestMethod.DELETE)
+    public void deleteMeterType(
+        @PathVariable("meterTypeId") int meterTypeId) {
         meterTypeService.deleteMeterType(meterTypeId);
-        return Response.status(Response.Status.ACCEPTED).build();
     }
 }
