@@ -16,6 +16,7 @@
             <div class="container">
                 <H2>Привіт,  ${surname} ${name}!</H2>
 
+                <c:if test="${notification == null}">
                 <table class="table table-hover" class="display">
                     <caption>${limit} останніх занесених показів </caption>
                     <thead>
@@ -55,8 +56,28 @@
                     </c:forEach>
                     </tbody>
                 </table>
+                </c:if>
+                <c:if test="${notification != null}">
+                    <div class="text-center">
+                        <h2>${notification}</h2>
+                        <a href="<c:url value='/addresses'/>"
+                           class="btn btn-default"  role="button">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Додати
+                        </a>
+                    </div>
+                </c:if>
             </div>
         </div>
+        <script type="text/javascript">
+            var untrackedDays;
+            if ('${notification}' == "") {
+                untrackedDays = '${untrackedDays}';
+            } else {
+                untrackedDays = 0;
+            }
+        </script>
+        <script type="text/javascript" src="<c:url value="/resources/js/reminder.js"/>"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>
 

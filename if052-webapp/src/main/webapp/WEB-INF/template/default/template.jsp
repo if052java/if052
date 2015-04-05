@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Water Consumption Tracker</title>
+    <title>Consumption Tracker</title>
 
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/pace.css"/>"/>
