@@ -17,8 +17,7 @@ $(document).ready(function() {
         "order": [[ 0, 'desc' ], [ 1, 'desc' ]],
         "language": {
             "url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Ukranian.json"
-        },
-        "autoWidth": true
+        }
     });
 });
 $(function() {

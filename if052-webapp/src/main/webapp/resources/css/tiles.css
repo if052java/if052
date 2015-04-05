@@ -93,6 +93,7 @@ body .page {
 }
 .box-table-a {
     margin-right: auto;
+    width: inherit;
 }
 .box-table-a th{
     text-align: center;

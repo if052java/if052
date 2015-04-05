@@ -24,7 +24,7 @@
                     Назад
                 </a>
 
-                <table class="table table-hover" class="display" <c:if test="${indicators.size()!=0}">id="paginated"</c:if> >
+                <table class="table table-hover display" <c:if test="${indicators.size()!=0}">id="paginated"</c:if> >
 
                     <thead>
                     <h4>Показники лічильника: ${waterMeter.name}
