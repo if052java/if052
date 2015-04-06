@@ -108,6 +108,7 @@ public class IndicatorControllerTest {
         mockMvc.perform(post("/addIndicator")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("indicatorId", "1")
+                        .param("dateStr", "22-04-2015")
                         .param("value", "503")
                         .param("paid", "true")
                         .sessionAttr("indicator", new Indicator()))
