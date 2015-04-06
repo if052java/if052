@@ -10,6 +10,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Maksym on 2/12/2015.
@@ -52,9 +56,20 @@ public class IndicatorController {
     }
 
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
-    public String addIndicator(@ModelAttribute Indicator indicator, ModelMap model){
+    public String addIndicator(@ModelAttribute Indicator indicator, ModelMap model, @RequestParam String dateStr){
         WaterMeter waterMeter = indicatorService.getMeterById(Integer.parseInt(meterId));
         indicator.setWaterMeter(waterMeter);
+
+        try {
+            System.out.println(dateStr);
+            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = formater.parse(dateStr);
+            indicator.setDate(date);
+        } catch (Exception e) {
+            model.addAttribute(REASON, "Помилка введення дати");
+            return "error400";
+        }
+
         ServiceResponse serviceResponse = indicatorService.addIndicator(indicator);
         if (serviceResponse.getStatus() == "OK" ) {
             return REDIRECT + this.meterId;

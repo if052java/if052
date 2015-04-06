@@ -6,10 +6,9 @@
 <head>
     <title>Consumption Tracker</title>
 
-    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/pace.css"/>"/>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables.min.css"/>"/>
-    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery.dataTables_themeroller.css"/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/dataTables.bootstrap.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/pace.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery-ui.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/jquery.css"/>"/>
     <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/tiles.css"/>"/>

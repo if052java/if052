@@ -22,6 +22,5 @@ $(document).ready(function() {
 });
 $(function() {
     $.datepicker.setDefaults($.datepicker.regional[ "uk" ]);
-    $( "#datepicker").datepicker({dateFormat:"yy/mm/dd"}).datepicker("setDate", new Date());
-
+    $("#datepicker").datepicker({dateFormat:"dd-mm-yy"}).datepicker("setDate", new Date());
 });

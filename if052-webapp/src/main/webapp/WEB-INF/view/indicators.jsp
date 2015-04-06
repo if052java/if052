@@ -24,7 +24,8 @@
                     Назад
                 </a>
 
-                <table class="table table-hover display" <c:if test="${indicators.size()!=0}">id="paginated"</c:if> >
+                <table class="table table-hover" cellspacing="0" width="100%"
+                       <c:if test="${indicators.size()!=0}">id="paginated"</c:if> >
 
                     <thead>
                     <h4>Показники лічильника: ${waterMeter.name}
@@ -34,8 +35,8 @@
                         <th>Показник</th>
                         <th>Тариф</th>
                         <th>Вартість</th>
-                        <th>Оплачено</th>
-                        <th>Опубліковано</th>
+                        <th title="Оплачено">Опл.</th>
+                        <th title="Опубліковано">Опубл.</th>
                         <th>Дії</th>
                     </tr>
                     </thead>
@@ -45,7 +46,10 @@
                     <c:forEach var="indicator" items="${indicators}">
                         <tr>
                             <td>
-                                <fmt:formatDate value="${indicator.date}" pattern="yyyy/MM/dd" />
+                                <span style='display:none'>
+                                     <fmt:formatDate value="${indicator.date}" pattern="yyyy.MM.dd" />
+                                </span>
+                                <fmt:formatDate value="${indicator.date}" pattern="dd-MM-yyyy" />
                             </td>
                             <td><c:out value="${indicator.value}"/></td>
                             <td><c:out value="${indicator.tariffPerDate}"/></td>
@@ -97,7 +101,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text" id="datepicker" name="date"/></td>
+                                <td><input class="form-control" type="text" id="datepicker" name="dateStr"/></td>
                                 <td><input class="form-control" type="number" step="1"
                                            name="value" value="${indicators.size()!=0 ? indicators.get(indicators.size()-1).value : 0}"/></td>
                                 <td><input class="checkbox" type="checkbox" name="paid" /></td>
@@ -116,6 +120,7 @@
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/jquery/jquery.dataTables.min.js"/>"></script>
+        <script type="text/javascript" src="<c:url value="/resources/js/jquery/dataTables.bootstrap.js"/>"></script>
         <script type="text/javascript" src="<c:url value="/resources/js/indicators.js"/>"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

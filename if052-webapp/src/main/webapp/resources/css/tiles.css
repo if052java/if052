@@ -10,7 +10,7 @@ body .page {
     min-height: 100%;
     position: relative;
     background: #e8dbda;
-    background: url("/resources/images/tiles/mooning.png") repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#37d0ff');
     background: radial-gradient(#37d0ff, #000);
 
 }
@@ -115,9 +115,9 @@ button:disabled {
 .text-center .pagination {
     margin: 0px;
 }
-.body input[type=search] {
-    -webkit-appearance: searchfield;
-}
+/*.body input[type=search] {*/
+    /*-webkit-appearance: searchfield;*/
+/*}*/
 button {
     color: #212121;
 }
@@ -133,4 +133,8 @@ button {
 }
 .btn-back {
     margin-bottom: 1em;
+}
+.table {
+    table-layout:fixed;
+    width:100%;
 }
