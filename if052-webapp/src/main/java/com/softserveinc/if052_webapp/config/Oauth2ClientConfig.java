@@ -39,7 +39,7 @@ public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
         resource.setAccessTokenUri(restAddress + accessTokenUri);
         resource.setClientId("trusted");
         resource.setId("rest/trusted");
-        resource.setScope(Arrays.asList("trust", "read", "write"));
+        resource.setScope(Arrays.asList("trust", "client"));
         resource.setClientSecret("somesecret");
 
         OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(resource);
@@ -54,7 +54,7 @@ public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
         resource.setAccessTokenUri(restAddress + accessTokenUri);
         resource.setClientId("credentials");
         resource.setId("rest/credentials");
-        resource.setScope(Arrays.asList("trust", "read"));
+        resource.setScope(Arrays.asList("client"));
         OAuth2RestTemplate oAuth2RestTemplate = new OAuth2RestTemplate(resource);
         oAuth2RestTemplate.setErrorHandler(customErrorResponseHandler());
         return oAuth2RestTemplate;
