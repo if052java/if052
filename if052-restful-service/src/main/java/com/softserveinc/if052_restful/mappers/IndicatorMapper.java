@@ -17,7 +17,7 @@ public interface IndicatorMapper {
 
     public List<Indicator> getAllIndicators();
 
-    public List<Indicator> getIndicatorsByWaterMeter(int waterMeterId);
+    public List<Indicator> getIndicatorsByMeterId(int waterMeterId);
 
     public void updateIndicator(Indicator indicator);
 

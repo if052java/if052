@@ -19,17 +19,13 @@ import java.util.List;
 public class IndicatorResource {
 
     public final String start = "-01-01 00:00:00";
-    public final String end = "-31-31 23:59:59";
+    public final String end = "-12-31 23:59:59";
     @Autowired
     private IndicatorService indicatorService;
 
-    @Autowired
-    private WaterMeterService waterMeterService;
-
-    @RequestMapping(value = "{waterMeterId}", method = RequestMethod.GET, produces = "application/json")
-    public List<Indicator> getIndicators(@PathVariable("waterMeterId") int waterMeterId) {
-        WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
-        List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
+    @RequestMapping(value = "{meterId}", method = RequestMethod.GET, produces = "application/json")
+    public List<Indicator> getIndicators(@PathVariable("meterId") int meterId) {
+        List<Indicator> indicators = indicatorService.getIndicatorsByMeterId(meterId);
         if (indicators == null) {
             indicators = new ArrayList<Indicator>();
         }

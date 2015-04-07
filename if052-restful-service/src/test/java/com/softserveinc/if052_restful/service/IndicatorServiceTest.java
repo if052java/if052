@@ -39,9 +39,8 @@ public class IndicatorServiceTest {
     }
 
     @Test
-    public void testGetIndicatorsByWaterMeter() {
-        WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
-        List<Indicator> indicators = indicatorService.getIndicatorsByWaterMeter(waterMeter);
+    public void testGetIndicatorsByMeterId() {
+        List<Indicator> indicators = indicatorService.getIndicatorsByMeterId(1);
         Assert.assertNotNull(indicators);
         for (Indicator indicator : indicators) {
             System.out.println(indicator);

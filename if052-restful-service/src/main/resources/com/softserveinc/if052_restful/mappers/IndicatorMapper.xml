@@ -83,7 +83,7 @@
         LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
     </select>
 
-    <select id="getIndicatorsByWaterMeter" resultMap="IndicatorResult">
+    <select id="getIndicatorsByMeterId" resultMap="IndicatorResult">
         SELECT
         i.indicator_id,
         i.date,

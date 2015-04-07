@@ -27,8 +27,8 @@ public class IndicatorService {
         return indicatorMapper.getAllIndicators();
     }
 
-    public List<Indicator> getIndicatorsByWaterMeter(WaterMeter waterMeter) {
-        return indicatorMapper.getIndicatorsByWaterMeter(waterMeter.getWaterMeterId());
+    public List<Indicator> getIndicatorsByMeterId(int meterId) {
+        return indicatorMapper.getIndicatorsByMeterId(meterId);
     }
 
     public void insertIndicator(Indicator indicator) {
