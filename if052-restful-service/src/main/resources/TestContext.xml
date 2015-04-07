@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="indicatorServiceMock" name="indicatorService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.softserveinc.if052_restful.service.IndicatorService"/>
+    </bean>
+
+    <bean id="waterMeterServiceMock" name="waterMeterService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.softserveinc.if052_restful.service.WaterMeterService"/>
+    </bean>
+
+</beans>
