@@ -9,7 +9,7 @@
 <div class="popups">
   <div class="container-fluid popups">
 
-      <div class="reminder alert" hidden="hidden">
+      <div class="warning alert reminder" hidden="hidden">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -17,6 +17,15 @@
           <div class="divider"></div>
           Ви не вносили показників більше 7 днів. Будь ласка, внесіть показник.
       </div>
+
+    <div class="warning alert map-warning" hidden="hidden">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Увага!</strong>
+      <div class="divider"></div>
+      Не вдалося знайти одну або декілька адрес.
+    </div>
 
   </div>
 </div>

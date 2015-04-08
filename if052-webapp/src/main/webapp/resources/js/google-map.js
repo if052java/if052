@@ -31,7 +31,7 @@ function codeAddress(address)
                     position: results[0].geometry.location
                 });
         } else {
-            alert('Одну або декілька адрес вказано некоректно!');
+            $(".map-warning").fadeIn();
         }
     });
 }

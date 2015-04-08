@@ -91,7 +91,7 @@ body .page {
 }
 
 /*-------------------------------POPUPS------------*/
-.reminder {
+.warning {
     background: #f0ad4e;
     box-shadow: 0 5px 10px black;
     height: auto;
