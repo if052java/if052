@@ -3,8 +3,8 @@ package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_core.domain.MeterType;
 import com.softserveinc.if052_core.domain.Report;
+import com.softserveinc.if052_core.domain.ReportRequest;
 import com.softserveinc.if052_webapp.utils.FileDownloader;
-import com.softserveinc.if052_webapp.utils.ReportRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

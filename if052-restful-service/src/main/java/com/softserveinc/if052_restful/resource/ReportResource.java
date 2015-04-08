@@ -3,7 +3,7 @@ package com.softserveinc.if052_restful.resource;
 
 import com.softserveinc.if052_core.domain.Report;
 import com.softserveinc.if052_restful.report.ReportConverter;
-import com.softserveinc.if052_restful.report.ReportRequest;
+import com.softserveinc.if052_core.domain.ReportRequest;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;

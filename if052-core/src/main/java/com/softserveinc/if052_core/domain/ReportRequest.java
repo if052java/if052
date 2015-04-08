@@ -1,4 +1,4 @@
-package com.softserveinc.if052_restful.report;
+package com.softserveinc.if052_core.domain;
 
 
 
