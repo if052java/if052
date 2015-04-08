@@ -68,7 +68,7 @@ public class AddressServiceTest {
     @Test
     public void testUpdateAddress() {
         // searching of last record id for update
-        List<Address> addresses = addressService.getAllAddresses();
+        List<Address> addresses = addressService.getAllAddressesByUserId(1);
         int lastId = addresses.get(addresses.size() - 1).getAddressId();
 
         Address address = addressService.getAddressById(lastId);
