@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Service for work with User.
- * @see com.softserveinc.if052_core.domain.domain.User
+ * @see com.softserveinc.if052_core.domain.User
  *
  * @version 1.0
  */

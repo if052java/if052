@@ -42,9 +42,10 @@ CREATE TABLE address
       ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-CREATE TABLE meter_type (
-    meter_type_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    type VARCHAR(45)
+CREATE TABLE meter_type
+(
+  meter_type_id INT(11) AUTO_INCREMENT PRIMARY KEY,
+  type VARCHAR(45) NOT NULL UNIQUE
 );
 
 CREATE TABLE watermeter
