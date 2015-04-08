@@ -23,12 +23,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetails);
     }
-//    @Autowired
-//    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("marissa").password("koala").roles("USER")
-//                .and().withUser("paul").password("emu").roles("USER")
-//                .and().withUser("user").password("password").roles("USER");
-//    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {

@@ -26,10 +26,12 @@ public class CustomDetailsService implements UserDetailsService {
         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             Auth auth = authService.getAuth(username);
             if (auth != null) {
+                System.out.println(auth.getUserId());
                 List<GrantedAuthority> authorities =new ArrayList<GrantedAuthority>();
                 authorities.add(new SimpleGrantedAuthority(auth.getRole()));
+                System.out.println();
                 return new User(
-                        auth.getUsername(),
+                        auth.getUserId(),
                         auth.getPassword(),
                         authorities);
             }

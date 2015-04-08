@@ -2,7 +2,6 @@ package com.softserveinc.if052_webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_core.domain.Auth;
-import com.softserveinc.if052_core.domain.AuthInterface;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,7 +51,7 @@ public class AuthorizationController {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private AuthInterface authBean;
+    private Auth authBean;
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
@@ -85,7 +84,7 @@ public class AuthorizationController {
 
                 OAuth2ProtectedResourceDetails resourceDetails = passwordTemplate.getResource();
                 ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
-                passwordResource.setUsername(receivedAuth.getUsername());
+                passwordResource.setUsername(receivedAuth.getUserId());
                 passwordResource.setPassword(receivedAuth.getPassword());
 
                 authBean.setUserId(receivedAuth.getUserId());
@@ -101,7 +100,7 @@ public class AuthorizationController {
 
     @RequestMapping(value = "checkCredentials", method = RequestMethod.GET)
     public String checkCredentials(ModelMap modelMap) {
-        Auth auth = new Auth(1, "theUser", "password");
+        Auth auth = new Auth("1", "theUser", "password");
         Auth receivedAuth = credentialsTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
         modelMap.addAttribute("auth", receivedAuth);
         return "JspForTest";

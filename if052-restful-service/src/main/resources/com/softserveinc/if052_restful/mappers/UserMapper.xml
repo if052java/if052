@@ -222,7 +222,7 @@
         FROM consumer c
     </select>
 
-    <select id="getAuth" parameterType="String" resultMap="UserSimpleResultWithRole">
+    <select id="getAuthByLogin" parameterType="String" resultMap="UserSimpleResultWithRole">
         SELECT
         c.user_id,
         c.name,
@@ -234,5 +234,19 @@
         c.role
         FROM consumer c
         WHERE c.login = #{login}
+    </select>
+
+    <select id="getAuth" parameterType="String" resultMap="UserSimpleResultWithRole">
+        SELECT
+        c.user_id,
+        c.name,
+        c.surname,
+        c.middle_name,
+        c.login,
+        c.password,
+        c.email,
+        c.role
+        FROM consumer c
+        WHERE c.user_id = #{userId}
     </select>
 </mapper>

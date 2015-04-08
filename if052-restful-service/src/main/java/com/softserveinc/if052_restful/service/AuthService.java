@@ -3,6 +3,7 @@ package com.softserveinc.if052_restful.service;
 import com.softserveinc.if052_core.domain.Auth;
 import com.softserveinc.if052_core.domain.User;
 import com.softserveinc.if052_restful.mappers.UserMapper;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,25 @@ public class AuthService {
     @Autowired
     private UserMapper userMapper;
 
-    public Auth getAuth(String login) {
-        User user = userMapper.getAuth(login);
+    public Auth getAuthByLogin(String login) {
+        User user = userMapper.getAuthByLogin(login);
+
+        if (user == null) return null;
+
         Auth auth = new Auth();
-        if(user == null) throw new NullPointerException();
-        auth.setUserId(user.getUserId());
+        auth.setUserId(Integer.toString(user.getUserId()));
+        auth.setUsername(user.getLogin());
+        auth.setPassword(user.getPassword());
+        auth.setRole(user.getRole());
+        return auth;
+    }
+    public Auth getAuth(String userId) {
+        User user = userMapper.getAuth(userId);
+
+        if (user == null) return null;
+
+        Auth auth = new Auth();
+        auth.setUserId(Integer.toString(user.getUserId()));
         auth.setUsername(user.getLogin());
         auth.setPassword(user.getPassword());
         auth.setRole(user.getRole());

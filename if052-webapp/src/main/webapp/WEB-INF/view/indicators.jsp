@@ -46,7 +46,7 @@
                     <c:forEach var="indicator" items="${indicators}">
                         <tr>
                             <td>
-                                <span style='display:none'>
+                                <span style='display:none'><%--this is for proper sorting by date --%>
                                      <fmt:formatDate value="${indicator.date}" pattern="yyyy.MM.dd" />
                                 </span>
                                 <fmt:formatDate value="${indicator.date}" pattern="dd-MM-yyyy" />

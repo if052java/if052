@@ -70,16 +70,6 @@
         WHERE a.user_id = #{userId}
     </select>
 
-    <select id="getAllAddresses" resultMap="AddressSimpleResult">
-        SELECT
-        a.address_id,
-        a.city,
-        a.street,
-        a.building,
-        a.apartment
-        FROM address a
-    </select>
-
     <insert id="insertAddress" parameterType="Address" useGeneratedKeys="true" keyProperty="addressId">
         INSERT INTO address(city, street, building, apartment, user_id)
         VALUES(#{city}, #{street}, #{building}, #{apartment}, #{user.userId})

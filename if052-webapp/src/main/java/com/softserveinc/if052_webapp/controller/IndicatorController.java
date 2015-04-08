@@ -89,7 +89,15 @@ public class IndicatorController {
     }
 
     @RequestMapping(value = "/updateIndicator", method = RequestMethod.POST)
-    public String updateIndicator(@ModelAttribute Indicator indicator){
+    public String updateIndicator(@ModelAttribute Indicator indicator, @RequestParam String dateStr){
+        try {
+            System.out.println(dateStr);
+            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+            Date date = formater.parse(dateStr);
+            indicator.setDate(date);
+        } catch (Exception e) {
+            return "error400";
+        }
         indicatorService.updateIndicator(indicator, Integer.parseInt(meterId));
 
         return REDIRECT + this.meterId;

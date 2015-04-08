@@ -7,6 +7,8 @@ import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +37,15 @@ public class AddressResource {
     public List<Address> getAddressesByUserId(
         @PathVariable("userId") String userId){
 
-        List<Address> addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) System.out.println("authentication = null");
+        else {
+            System.out.println("authentication not equals null");
+            System.out.println("Username " + authentication.getName());
+        }
+
+        List<Address> addresses = addressService.getAllAddresses();
+//        List<Address> addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
 
         if( addresses == null) {
             return new ArrayList<Address>();

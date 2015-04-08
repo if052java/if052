@@ -1,6 +1,6 @@
 package com.softserveinc.if052_webapp.controller;
 
-import com.softserveinc.if052_core.domain.AuthInterface;
+import com.softserveinc.if052_core.domain.Auth;
 import com.softserveinc.if052_core.domain.Indicator;
 import com.softserveinc.if052_core.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class DetailController {
     private RestOperations restTemplate;
 
     @Autowired
-    private AuthInterface authBean;
+    private Auth authBean;
 
     @RequestMapping(value = "/")
     public String getIndexPage( ModelMap model){

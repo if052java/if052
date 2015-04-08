@@ -69,11 +69,14 @@ public class OAuth2ServerConfig {
 				// session creation to be allowed (it's disabled by default in 2.0.6)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 			.and()
-				.requestMatchers().antMatchers("/rest/**")
+				.requestMatchers().antMatchers("/rest/**", "/rest/auth/checkCredentials", "/rest/report/**", "/rest/report/")
 			.and()
 				.authorizeRequests()
-                    .antMatchers("/rest/**").permitAll();
-			// @formatter:on
+                    .antMatchers("/rest/auth/checkCredentials").access("#oauth2.isClient()")
+                    .antMatchers("/rest/report/**").access("hasRole('ADMIN')")
+                    .antMatchers("/rest/report/").access("hasRole('ADMIN')")
+                    .antMatchers("/rest/**").access("#oauth2.hasScope('trust') and hasAnyRole('USER', 'ADMIN')");
+            // @formatter:on
 		}
 
 	}
@@ -92,42 +95,22 @@ public class OAuth2ServerConfig {
 		@Qualifier("authenticationManagerBean")
 		private AuthenticationManager authenticationManager;
 
-		@Value("${webapp.redirect:http://localhost:8090/rest/redirect}")
-		private String redirectUri;
-
 		@Override
 		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
             // @formatter:off
 			clients.inMemory()
-                    .withClient("webapp")
-                    .resourceIds(RESOURCE_ID)
-                    .authorizedGrantTypes("authorization_code", "implicit")
-                    .authorities("ROLE_CLIENT")
-                    .scopes("read", "write")
-                    .secret("secret")
-                    .autoApprove(true)
-                        .and()
-                    .withClient("webapp-with-redirect")
-                    .resourceIds(RESOURCE_ID)
-                    .authorizedGrantTypes("authorization_code", "implicit")
-                    .authorities("ROLE_CLIENT")
-                    .scopes("read", "write")
-                    .secret("secret")
-                    .redirectUris(redirectUri)
-                        .and()
                     .withClient("trusted")
                     .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
                     .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
-                    .scopes("read", "write", "trust")
+                    .scopes("trust", "client")
                     .secret("somesecret")
                         .and()
                     .withClient("credentials")
                     .resourceIds(RESOURCE_ID)
                     .authorizedGrantTypes("authorization_code", "client_credentials")
-                        .authorities("ROLE_CLIENT")
-                        .scopes("read", "trust");
-//                        .redirectUris("http://anywhere?key=value");
+                    .authorities("ROLE_CLIENT")
+                    .scopes("client");
 			// @formatter:on
 		}
 
@@ -139,7 +122,7 @@ public class OAuth2ServerConfig {
 		@Override
 		public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 			endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
-					.authenticationManager(authenticationManager);
+                    .authenticationManager(authenticationManager);
 		}
 
 		@Override

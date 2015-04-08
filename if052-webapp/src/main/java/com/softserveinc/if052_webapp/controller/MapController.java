@@ -1,7 +1,7 @@
 package com.softserveinc.if052_webapp.controller;
 
 import com.softserveinc.if052_core.domain.Address;
-import com.softserveinc.if052_core.domain.AuthInterface;
+import com.softserveinc.if052_core.domain.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,11 +24,11 @@ public class MapController {
     private RestOperations restTemplate;
 
     @Autowired
-    private AuthInterface authBean;
+    private Auth authBean;
 
     @RequestMapping(value = "/map")
     public String getMapPage(ModelMap model){
-        Integer userId = authBean.getUserId();
+        String userId = authBean.getUserId();
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
 
         String gMapData = "";

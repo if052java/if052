@@ -34,7 +34,7 @@
                         <tr>
                             <td>
                                 <input class="form-control" type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
-                                <input class="form-control" type="text" id="datepicker" name="date" value="<fmt:formatDate value='${indicator.date}' pattern='dd/MM/yyyy' />" />
+                                <input class="form-control" type="text" id="datepicker" name="dateStr" value="<fmt:formatDate value='${indicator.date}' pattern='dd-MM-yyyy' />" />
                             </td>
                             <td>
                                 <input class="form-control" type="number" step="0.01" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
