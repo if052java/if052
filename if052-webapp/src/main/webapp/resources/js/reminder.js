@@ -3,7 +3,15 @@
  */
 $( document).ready(function() {
     if (untrackedDays > 7) {
-        alert("Ви не вносили показників більше 7 днів.\n" +
-        "Будь ласка, внесіть показник.");
+        $('[data-toggle="popover"]').popover('show');
+        $('body').on('click', function (e) {
+            //did not click a popover toggle or popover
+            if ($(e.target).data('toggle') !== 'popover'
+                && $(e.target).parents('.popover.in').length === 0) {
+                $('[data-toggle="popover"]').popover('hide');
+            }
+        });
     }
+
+
 });
