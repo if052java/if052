@@ -34,51 +34,52 @@
                             </label>
                         </div>
                         <input type="text" name="users" class="form-control" id="users" required />
+                        <label hidden="true" id="noLoginLabel"><font color="red">Такого логіна немає. Оберіть варіант зі списку.</font></label>
                     </div>
 
                     <div class="form-group">
                         <label for="startDate">Початкова дата</label>
-                        <input type="text" name="startDate" class="form-control" id="startDate" value="${startDate}"/>
+                        <input type="text" name="startDate" class="form-control" id="startDate" value="${startDate}" required/>
                     </div>
                     <div class="form-group">
                         <label for="endDate">Кінцева дата</label>
-                        <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}"/>
+                        <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}" required/>
                     </div>
 
                     <div class="form-group">
-                    <div class="checkbox-inline" id="types" >
-                        <label for="types">Необхідні види лічильників</label>
-                        <div class="checkbox-inline">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="allTypes" /> Усі види
-                            </label>
-                        </div><br>
-                        <c:forEach var="meterType" items="${meterTypes}">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" class="checkType" name="types" value="${meterType.meterTypeId}" /> ${meterType.type}
-                            </label>
-                        </c:forEach>
-                    </div>
+                        <div class="checkbox-inline" id="types" >
+                            <label for="types">Необхідні види лічильників</label>
+                            <div class="checkbox-inline">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="allTypes" /> Усі види
+                                </label>
+                            </div><br>
+                            <c:forEach var="meterType" items="${meterTypes}">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="checkType" name="types" value="${meterType.meterTypeId}" /> ${meterType.type}
+                                </label>
+                            </c:forEach>
+                        </div>
                     </div>
 
                     <%--<div class="form-group">--%>
                     <%--<div class="radio-inline" id="paid">--%>
-                        <%--<label for="paid">Статус оплати</label><br>--%>
-                        <%--<label class="radio-inline">--%>
-                            <%--<input type="radio" name="paidStatus" value="2" checked> Усі--%>
-                        <%--</label>--%>
-                        <%--<label class="radio-inline">--%>
-                            <%--<input type="radio" name="paidStatus" value="1"> Оплачені--%>
-                        <%--</label>--%>
-                        <%--<label class="radio-inline">--%>
-                            <%--<input type="radio" name="paidStatus" value="0"> Неоплачені--%>
-                        <%--</label>--%>
+                    <%--<label for="paid">Статус оплати</label><br>--%>
+                    <%--<label class="radio-inline">--%>
+                    <%--<input type="radio" name="paidStatus" value="2" checked> Усі--%>
+                    <%--</label>--%>
+                    <%--<label class="radio-inline">--%>
+                    <%--<input type="radio" name="paidStatus" value="1"> Оплачені--%>
+                    <%--</label>--%>
+                    <%--<label class="radio-inline">--%>
+                    <%--<input type="radio" name="paidStatus" value="0"> Неоплачені--%>
+                    <%--</label>--%>
                     <%--</div>--%>
                     <%--</div>--%>
                     <input type="hidden" name="paidStatus" value="1">
 
                     <div class="form-group">
-                    <button type="submit" id="subBtn" class="btn btn-primary" disabled>Завантажити xml-звіт</button>
+                        <button type="submit" id="subBtn" class="btn btn-primary" disabled>Завантажити xml-звіт</button>
                     </div>
                 </form:form>
             </div>
@@ -86,21 +87,20 @@
         </div>
 
 
+
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/xmlReport.js'/>"></script>
         <script>
+            var logins = [];
             $(document).ready(function() {
-                var logins = [];
                 <c:forEach items="${logins}" var="login">
                 logins.push("<c:out value="${login}" />");
                 </c:forEach>
-                $("#users").autocomplete({
-                    source: logins
-                });
+
             });
         </script>
 
+
     </tiles:putAttribute>
 </tiles:insertDefinition>
-
