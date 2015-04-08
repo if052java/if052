@@ -5,24 +5,24 @@ package com.softserveinc.if052_core.domain;
  */
 public class Auth {
 
-    private int userId;
+    private String userId;
     private String username;
     private String password;
     private String role;
 
     public Auth(){}
 
-    public Auth(int userId, String username, String password) {
+    public Auth(String userId, String username, String password) {
         this.userId = userId;
         this.username = username;
         this.password = password;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -28,7 +28,7 @@ public class MapController {
 
     @RequestMapping(value = "/map")
     public String getMapPage(ModelMap model){
-        Integer userId = authBean.getUserId();
+        String userId = authBean.getUserId();
         Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
 
         String gMapData = "";

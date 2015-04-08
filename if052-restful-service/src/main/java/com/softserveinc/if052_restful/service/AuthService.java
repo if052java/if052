@@ -18,7 +18,7 @@ public class AuthService {
         User user = userMapper.getAuth(login);
         Auth auth = new Auth();
         if(user == null) throw new NullPointerException();
-        auth.setUserId(user.getUserId());
+        auth.setUserId(Integer.toString(user.getUserId()));
         auth.setUsername(user.getLogin());
         auth.setPassword(user.getPassword());
         auth.setRole(user.getRole());

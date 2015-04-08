@@ -100,7 +100,7 @@ public class AuthorizationController {
 
     @RequestMapping(value = "checkCredentials", method = RequestMethod.GET)
     public String checkCredentials(ModelMap modelMap) {
-        Auth auth = new Auth(1, "theUser", "password");
+        Auth auth = new Auth("1", "theUser", "password");
         Auth receivedAuth = credentialsTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
         modelMap.addAttribute("auth", receivedAuth);
         return "JspForTest";
