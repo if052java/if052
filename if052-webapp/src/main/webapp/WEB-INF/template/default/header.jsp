@@ -51,6 +51,10 @@
                             <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
                             XML звіт
                         </a></li>
+                        <li><a href="${base}metertypeslist">
+                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            Довідник типів
+                        </a></li>
                             </security:authorize>
                         <li><a href="${base}#">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
