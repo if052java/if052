@@ -69,7 +69,7 @@ public class UserResource {
         return logins;
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
     public User createUser(
         @Valid
         @RequestBody
