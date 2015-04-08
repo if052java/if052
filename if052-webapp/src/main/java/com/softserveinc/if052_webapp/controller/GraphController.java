@@ -42,7 +42,7 @@ public class GraphController {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private AuthInterface authBean;
+    private Auth authBean;
 
     private static Logger logger = Logger.getLogger(WaterMeterController.class);
 

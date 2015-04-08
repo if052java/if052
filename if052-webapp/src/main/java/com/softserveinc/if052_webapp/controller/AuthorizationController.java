@@ -2,7 +2,6 @@ package com.softserveinc.if052_webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_core.domain.Auth;
-import com.softserveinc.if052_core.domain.AuthInterface;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,7 +51,7 @@ public class AuthorizationController {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private AuthInterface authBean;
+    private Auth authBean;
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)

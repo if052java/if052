@@ -61,7 +61,7 @@ public class Oauth2ClientConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    @Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
+    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public Auth auth(){
         Auth auth = new Auth();
         return auth;
