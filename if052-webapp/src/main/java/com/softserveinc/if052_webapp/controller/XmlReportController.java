@@ -74,13 +74,10 @@ public class XmlReportController {
         try {
             String uri = postResponseEntity.getHeaders().get("Location").get(0);
             Report responseEntity2 = restTemplate.getForObject(restUrl + uri, Report.class);
-            
             fileDownloader.downloadFile(request, response, responseEntity2.getXmlReport());
         } catch (NullPointerException e) {
             LOGGER.warn(e.getMessage(), e);
         }
     }
-
-
 
 }

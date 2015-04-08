@@ -13,7 +13,6 @@ public class Report {
     private Date endDate;
     private List<User> users;
     private List<MeterType> meterTypes;
-    private int paidStatus;
     private String reportRequest;
     private String xmlReport;
 
@@ -22,13 +21,12 @@ public class Report {
 
     public Report(int reportId, Date startDate, Date endDate,
                   List<User> users, List<MeterType> meterTypes,
-                  int paidStatus, String reportRequest, String xmlReport) {
+                  String reportRequest, String xmlReport) {
         this.reportId = reportId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.users = users;
         this.meterTypes = meterTypes;
-        this.paidStatus = paidStatus;
         this.reportRequest = reportRequest;
         this.xmlReport = xmlReport;
     }
@@ -71,14 +69,6 @@ public class Report {
 
     public void setMeterTypes(List<MeterType> meterTypes) {
         this.meterTypes = meterTypes;
-    }
-
-    public int getPaidStatus() {
-        return paidStatus;
-    }
-
-    public void setPaidStatus(int paidStatus) {
-        this.paidStatus = paidStatus;
     }
 
     public String getReportRequest() {

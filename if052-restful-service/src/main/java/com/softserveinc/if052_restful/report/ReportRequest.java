@@ -15,9 +15,6 @@ public class ReportRequest {
     private Date endDate;
     private String users;
     private List<Integer> types;
-    private Integer paidStatus;
-
-
 
     public ReportRequest() {
     }
@@ -27,7 +24,6 @@ public class ReportRequest {
         this.endDate = endDate;
         this.users = users;
         this.types = types;
-        this.paidStatus = paidStatus;
     }
 
     public Date getStartDate() {
@@ -62,14 +58,6 @@ public class ReportRequest {
         this.types = types;
     }
 
-    public Integer getPaidStatus() {
-        return paidStatus;
-    }
-
-    public void setPaidStatus(Integer paidStatus) {
-        this.paidStatus = paidStatus;
-    }
-
     @Override
     public String toString() {
         return "ReportRequest{" +
@@ -77,7 +65,6 @@ public class ReportRequest {
                 ", endDate=" + endDate +
                 ", users='" + users + '\'' +
                 ", types=" + types +
-                ", paidStatus=" + paidStatus +
                 '}';
     }
 }

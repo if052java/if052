@@ -62,22 +62,6 @@
                         </div>
                     </div>
 
-                    <%--<div class="form-group">--%>
-                    <%--<div class="radio-inline" id="paid">--%>
-                    <%--<label for="paid">Статус оплати</label><br>--%>
-                    <%--<label class="radio-inline">--%>
-                    <%--<input type="radio" name="paidStatus" value="2" checked> Усі--%>
-                    <%--</label>--%>
-                    <%--<label class="radio-inline">--%>
-                    <%--<input type="radio" name="paidStatus" value="1"> Оплачені--%>
-                    <%--</label>--%>
-                    <%--<label class="radio-inline">--%>
-                    <%--<input type="radio" name="paidStatus" value="0"> Неоплачені--%>
-                    <%--</label>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
-                    <input type="hidden" name="paidStatus" value="1">
-
                     <div class="form-group">
                         <button type="submit" id="subBtn" class="btn btn-primary" disabled>Завантажити xml-звіт</button>
                     </div>

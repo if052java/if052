@@ -45,7 +45,6 @@ public class ReportConverter {
             mt.add(meterTypeService.getMeterTypeById(i));
         }
         report.setMeterTypes(mt);
-        report.setPaidStatus(reportRequest.getPaidStatus());
         report.setReportRequest(reportRequest.toString());
         return report;
     }
@@ -55,7 +54,7 @@ public class ReportConverter {
         StringBuffer result = new StringBuffer();
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         result.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
-        result.append("<report>\n");
+        result.append("\n<report>\n");
         result.append("\t<startDate> " + df.format(report.getStartDate()) + " </startDate>\n");
         result.append("\t<endDate> " + df.format(report.getEndDate()) + " </endDate>\n");
         for (User u : report.getUsers()) {
@@ -116,33 +115,16 @@ public class ReportConverter {
 
     public StringBuffer writeIndicator(Indicator i) {
         StringBuffer result = new StringBuffer();
-
         if (i.getDate().compareTo(report.getStartDate()) >= 0
                 && i.getDate().compareTo(report.getEndDate()) <= 0) {
-            switch (report.getPaidStatus()) {
-                case 0:
-                    if (!i.isPaid()) {
-                        result.append(writeIndicatorValue(i));
-                    }
-                    break;
-                case 1:
-                    if (i.isPaid()) {
-                        result.append(writeIndicatorValue(i));
-                    }
-                    break;
-                default:
-                    result.append(writeIndicatorValue(i));
-                    break;
-            }
+            result.append(writeIndicatorValue(i));
         }
-
         return result;
     }
 
     public StringBuffer writeIndicatorValue(Indicator i) {
         StringBuffer result = new StringBuffer();
         result.append("\t\t\t\t\t<indicator "
-                + "isPaid=\"" + i.isPaid() + "\" "
                 + "tariffPerDate=\"" + i.getTariffPerDate() + '"' + "> "
                 + i.getValue() + " </indicator>\n");
         i.setPublished(true);
