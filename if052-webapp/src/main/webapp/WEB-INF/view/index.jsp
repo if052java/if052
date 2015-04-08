@@ -15,13 +15,7 @@
         <div class="body">
             <div class="container">
 
-                <blockquote><h2>Привіт,  ${surname} ${name}!
-                    <%--Popup for reminding if there aren't recently added indicators is placed here--%>
-                <div class="reminder" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="left"
-                     data-content="Ви не вносили показників більше 7 днів. Будь ласка, внесіть показник.">
-                </div>
-                </h2>
-                </blockquote>
+                <blockquote><h2>Привіт,  ${surname} ${name}!</h2></blockquote>
 
                 <c:if test="${notification == null}">
                 <table class="table table-hover" class="display">

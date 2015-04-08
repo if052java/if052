@@ -90,6 +90,18 @@ body .page {
     color: white;
 }
 
+/*-------------------------------POPUPS------------*/
+.reminder {
+    background: #f0ad4e;
+    box-shadow: 0 5px 10px black;
+    height: auto;
+    width: inherit;
+    padding: 10px;
+    border-radius: 4px;
+}
+.popups {
+    margin-top: 7%;
+}
 /*------------------------------OVERALL------------*/
 
 .col-md-8 .container {
@@ -122,9 +134,6 @@ button:disabled {
 .text-center .pagination {
     margin: 0px;
 }
-/*.body input[type=search] {*/
-    /*-webkit-appearance: searchfield;*/
-/*}*/
 button {
     color: #212121;
 }
@@ -144,17 +153,4 @@ button {
 .table {
     table-layout:fixed;
     width:100%;
-}
-
-.reminder {
-    float: right;
-    width: 1em;
-    height: 1em;
-}
-.popover .popover-content{
-    background: #f0ad4e;
-    border: 0;
-}
-.popover .arrow {
-    visibility: hidden;
 }
