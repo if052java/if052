@@ -2,6 +2,7 @@ package com.softserveinc.if052_restful.resource;
 
 import com.softserveinc.if052_core.domain.Auth;
 import com.softserveinc.if052_restful.service.AuthService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,16 +21,16 @@ public class AuthResource {
     @Autowired
     AuthService authService;
 
+    private static Logger LOGGER = Logger.getLogger(AuthResource.class);
+
     @RequestMapping(value = "/checkCredentials", method = RequestMethod.POST, produces = "application/json")
-    public Auth checkCredentials(
-        @RequestBody
-        Auth param,
-        HttpServletResponse response){
+    public Auth checkCredentials(@RequestBody Auth param, HttpServletResponse response){
         Auth auth = null;
-        try {
-            auth = authService.getAuth(param.getUsername());
-        }catch (NullPointerException e){
+        auth = authService.getAuthByLogin(param.getUsername());
+        if (auth == null) {
+            LOGGER.debug("auth = null");
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            return auth;
         }
         if (!auth.getUsername().equals(param.getUsername()) ||
                 (!auth.getPassword().equals(param.getPassword())) ){

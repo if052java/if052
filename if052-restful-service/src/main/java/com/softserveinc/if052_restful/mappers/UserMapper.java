@@ -64,6 +64,8 @@ public interface UserMapper {
 
     public List<String> getLogins();
 
-    public User getAuth(String login);
+    public User getAuthByLogin(String login);
+
+    public User getAuth(String userId);
 
 }

@@ -15,11 +15,20 @@ public class AuthServiceTest {
     private AuthService authService;
 
     @Test
-    public void testGetAuth() {
-        Auth auth = authService.getAuth("LOGIN111");
+    public void testGetAuthByLogin() {
+        Auth auth = authService.getAuthByLogin("LOGIN111");
 
         Assert.assertNotNull(auth);
-        System.out.println("!--------------!");
-        System.out.println(auth.getUsername() + " " + auth.getRole());
+        System.out.print("testGetAuthByLogin: ");
+        System.out.println(auth.getUserId() + " " + auth.getUsername() + " " + auth.getRole());
+    }
+
+    @Test
+    public void testGetAuth() {
+        Auth auth = authService.getAuth("2");
+
+        Assert.assertNotNull(auth);
+        System.out.print("testGetAuth: ");
+        System.out.println(auth.getUserId() + " " + auth.getUsername() + " " + auth.getRole());
     }
 }

@@ -84,7 +84,7 @@ public class AuthorizationController {
 
                 OAuth2ProtectedResourceDetails resourceDetails = passwordTemplate.getResource();
                 ResourceOwnerPasswordResourceDetails passwordResource = (ResourceOwnerPasswordResourceDetails) resourceDetails;
-                passwordResource.setUsername(receivedAuth.getUsername());
+                passwordResource.setUsername(receivedAuth.getUserId());
                 passwordResource.setPassword(receivedAuth.getPassword());
 
                 authBean.setUserId(receivedAuth.getUserId());
