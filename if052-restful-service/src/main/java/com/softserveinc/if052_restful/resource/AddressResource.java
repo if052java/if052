@@ -44,7 +44,8 @@ public class AddressResource {
             System.out.println("Username " + authentication.getName());
         }
 
-        List<Address> addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
+        List<Address> addresses = addressService.getAllAddresses();
+//        List<Address> addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
 
         if( addresses == null) {
             return new ArrayList<Address>();

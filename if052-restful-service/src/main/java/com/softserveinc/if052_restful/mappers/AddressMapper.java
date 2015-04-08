@@ -33,14 +33,6 @@ public interface AddressMapper {
 	public Address getAddressById(int addressId);
 	
 	/**
-	 * Select all addresses
-	 * 
-	 * @return List of addresses
-	 * 
-	 */
-	public List<Address> getAllAddresses();
-	
-	/**
 	 * Select all addresses (zero or more) of user
 	 * 
 	 * @param userId

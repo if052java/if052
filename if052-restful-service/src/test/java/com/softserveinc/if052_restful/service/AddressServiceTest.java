@@ -40,15 +40,6 @@ public class AddressServiceTest {
     }
 
     @Test
-    public void testGetAllAddresses() {
-        List<Address> addresses = addressService.getAllAddresses();
-        Assert.assertNotNull(addresses);
-        for (Address address : addresses) {
-            System.out.println(address);
-        }
-    }
-
-    @Test
     public void testInsertAddress() {
         long generateOrigin = System.currentTimeMillis();
         Address address = new Address();
