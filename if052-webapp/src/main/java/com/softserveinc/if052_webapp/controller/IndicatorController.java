@@ -3,8 +3,10 @@ package com.softserveinc.if052_webapp.controller;
 import com.softserveinc.if052_core.domain.Indicator;
 import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_webapp.service.IndicatorService;
+import com.softserveinc.if052_webapp.service.MeterService;
 import com.softserveinc.if052_webapp.service.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Maksym on 2/12/2015.
@@ -23,83 +26,76 @@ public class IndicatorController {
 
     public static final String WATER_METER = "waterMeter";
     public static final String INDICATORS = "indicators";
-    public static final String REDIRECT = "redirect:/indicators?waterMeterId=";
+    public static final String REDIRECT = "redirect:/indicators?meterId=";
     public static final String INDICATOR = "indicator";
     public static final String REASON = "reason";
     private String meterId = "";
 
     @Autowired
+    @Qualifier("indicatorService")
     private IndicatorService indicatorService;
+
+    @Autowired
+    @Qualifier("meterService")
+    private MeterService meterService;
 
 
     @RequestMapping(value = "/indicators{waterMeterId}")
     public String getIndicatorsPage(int waterMeterId, ModelMap model) {
         this.meterId = String.valueOf(waterMeterId);
         ServiceResponse serviceResponse = indicatorService.getIndicatorList(waterMeterId);
-        WaterMeter waterMeter = indicatorService.getMeterById(waterMeterId);
-        if (serviceResponse.getStatus()=="OK"){
-            model.addAttribute(WATER_METER, waterMeter);
-            model.addAttribute(INDICATORS, serviceResponse.getResponse());
+        WaterMeter waterMeter = meterService.getMeterById(waterMeterId);
+        if (isError(model, serviceResponse)) return serviceResponse.getStatus();
 
-            return "indicators";
-        }
-        model.addAttribute(REASON, serviceResponse.getStatus());
+        model.addAttribute(WATER_METER, waterMeter);
+        model.addAttribute(INDICATORS, serviceResponse.getResponse());
 
-        return serviceResponse.getStatus();
+        return "indicators";
     }
 
     @RequestMapping(value = "/deleteIndicator{indicatorId}")
-    public String deleteIndicator(int indicatorId) {
-        indicatorService.deleteIndicator(indicatorId);
+    public String deleteIndicator(int indicatorId, ModelMap model) {
+        ServiceResponse serviceResponse = indicatorService.deleteIndicator(indicatorId);
+        if (isError(model, serviceResponse)) return serviceResponse.getStatus();
 
         return REDIRECT + this.meterId;
     }
 
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
-    public String addIndicator(@ModelAttribute Indicator indicator, ModelMap model, @RequestParam String dateStr){
-        WaterMeter waterMeter = indicatorService.getMeterById(Integer.parseInt(meterId));
-        indicator.setWaterMeter(waterMeter);
+    public String addIndicator(@ModelAttribute Indicator indicator,
+                               ModelMap model,
+                               @RequestParam String dateStr){
+        ServiceResponse serviceResponse = indicatorService.addIndicator(indicator, meterId, dateStr);
+        if (isError(model, serviceResponse)) return serviceResponse.getStatus();
 
-        try {
-            System.out.println(dateStr);
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            Date date = formater.parse(dateStr);
-            indicator.setDate(date);
-        } catch (Exception e) {
-            model.addAttribute(REASON, "Помилка введення дати");
-            return "error400";
-        }
-
-        ServiceResponse serviceResponse = indicatorService.addIndicator(indicator);
-        if (serviceResponse.getStatus() == "OK" ) {
-            return REDIRECT + this.meterId;
-        }
-        model.addAttribute(REASON, serviceResponse.getMessage());
-        return serviceResponse.getStatus();
+        return REDIRECT + this.meterId;
     }
 
     @RequestMapping(value = "/updateIndicator{indicatorId}")
     public String getUpdateIndicatorPage(int indicatorId, ModelMap model){
-        Indicator indicator = indicatorService.getIndicatorById(indicatorId);
-        if (!indicator.isPublished()) {
-            model.addAttribute(INDICATOR, indicator);
-        }
+        ServiceResponse serviceResponse = indicatorService.getIndicatorById(indicatorId);
+        if (isError(model, serviceResponse)) return serviceResponse.getStatus();
+        Indicator indicator = (Indicator) serviceResponse.getResponse().get(0);
+        model.addAttribute(INDICATOR, indicator);
 
         return "updateIndicator";
     }
 
     @RequestMapping(value = "/updateIndicator", method = RequestMethod.POST)
-    public String updateIndicator(@ModelAttribute Indicator indicator, @RequestParam String dateStr){
-        try {
-            System.out.println(dateStr);
-            SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
-            Date date = formater.parse(dateStr);
-            indicator.setDate(date);
-        } catch (Exception e) {
-            return "error400";
-        }
-        indicatorService.updateIndicator(indicator, Integer.parseInt(meterId));
+    public String updateIndicator(@ModelAttribute Indicator indicator,
+                                  ModelMap model,
+                                  @RequestParam String dateStr){
+        ServiceResponse serviceResponse = indicatorService.updateIndicator(indicator, meterId, dateStr);
+        if (isError(model, serviceResponse)) return serviceResponse.getStatus();
 
         return REDIRECT + this.meterId;
+    }
+
+    private boolean isError(ModelMap model, ServiceResponse serviceResponse) {
+        if (serviceResponse.getStatus() != "OK"){
+            model.addAttribute(REASON, serviceResponse.getStatus());
+            return true;
+        }
+        return false;
     }
 }
