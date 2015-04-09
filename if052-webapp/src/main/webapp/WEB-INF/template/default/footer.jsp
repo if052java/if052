@@ -9,13 +9,13 @@
 <div class="footer">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-2" id="footer-left"></div>
-            <div class = "col-lg-8" id="footer-center">
+            <div class="col-lg-2"></div>
+            <div class = "col-lg-8">
                 <p>
                     2015 IF-052.Java
                 </p>
             </div>
-            <div class="col-lg-2" id="footer-right"></div>
+            <div class="col-lg-2"></div>
         </div>
     </div>
 </div>

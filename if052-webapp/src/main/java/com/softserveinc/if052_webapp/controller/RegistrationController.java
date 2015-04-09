@@ -41,8 +41,8 @@ public class RegistrationController {
         user.setSurname(user.getSurname().trim());
         user.setMiddleName(user.getMiddleName().trim());
         user.setRole("USER");
-        user = restTemplate.postForObject(restUrl + "users/", user, User.class);
+        user = restTemplate.postForObject(restUrl + "users/create", user, User.class);
 
-        return "redirect:/addresses?userId=" + user.getUserId();
+        return "redirect:/" + user.getUserId();
     }
 }

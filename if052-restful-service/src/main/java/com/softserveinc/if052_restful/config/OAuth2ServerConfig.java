@@ -73,6 +73,7 @@ public class OAuth2ServerConfig {
 			.and()
 				.authorizeRequests()
                     .antMatchers("/rest/auth/checkCredentials").access("#oauth2.isClient()")
+                    .antMatchers("/rest/users/create").access("#oauth2.isClient()")
                     .antMatchers("/rest/report/**").access("hasRole('ADMIN')")
                     .antMatchers("/rest/report/").access("hasRole('ADMIN')")
                     .antMatchers("/rest/**").access("#oauth2.hasScope('trust') and hasAnyRole('USER', 'ADMIN')");
