@@ -103,7 +103,7 @@ public class IndicatorControllerTest {
 
         when(indicatorServiceMock.getMeterById(4)).thenReturn(waterMeter);
         when(indicatorServiceMock.getIndicatorList(4)).thenReturn(serviceResponse);
-        when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class))).thenReturn(serviceResponse);
+        when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class),"4", "10-04-20015")).thenReturn(serviceResponse);
         mockMvc.perform(get("/indicators?waterMeterId=4"));
         mockMvc.perform(post("/addIndicator")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -117,7 +117,7 @@ public class IndicatorControllerTest {
 
         ArgumentCaptor<Indicator> formObjectArgument = ArgumentCaptor.forClass(Indicator.class);
         verify(indicatorServiceMock, times(1)).getIndicatorList(4);
-        verify(indicatorServiceMock, times(1)).addIndicator(formObjectArgument.capture());
+        verify(indicatorServiceMock, times(1)).addIndicator(formObjectArgument.capture(),"4", "10-04-20015");
         verify(indicatorServiceMock, times(2)).getMeterById(4);
         verifyNoMoreInteractions(indicatorServiceMock);
 
