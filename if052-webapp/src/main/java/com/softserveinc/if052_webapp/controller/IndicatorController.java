@@ -43,12 +43,15 @@ public class IndicatorController {
     @RequestMapping(value = "/indicators{meterId}")
     public String getIndicatorsPage(int meterId, ModelMap model) {
         this.meterId = String.valueOf(meterId);
-        ServiceResponse serviceResponse = indicatorService.getIndicatorList(meterId);
-        WaterMeter waterMeter = indicatorService.getMeterById(meterId);
-        if (isError(model, serviceResponse)) return serviceResponse.getStatus();
+        ServiceResponse indServResponse = indicatorService.getIndicatorList(meterId);
+        if (isError(model, indServResponse)) return indServResponse.getStatus();
+
+        ServiceResponse meterServResponce = meterService.getMeterById(meterId);
+        if (isError(model, meterServResponce)) return meterServResponce.getStatus();
+        WaterMeter waterMeter = (WaterMeter) meterServResponce.getResponse().get(0);
 
         model.addAttribute(WATER_METER, waterMeter);
-        model.addAttribute(INDICATORS, serviceResponse.getResponse());
+        model.addAttribute(INDICATORS, indServResponse.getResponse());
 
         return "indicators";
     }
