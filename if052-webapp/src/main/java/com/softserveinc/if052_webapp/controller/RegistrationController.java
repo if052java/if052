@@ -38,8 +38,8 @@ public class RegistrationController {
         user.setSurname(user.getSurname().trim());
         user.setMiddleName(user.getMiddleName().trim());
         user.setRole("USER");
-        user = restTemplate.postForObject(restUrl + "users/create", user, User.class);
+        restTemplate.postForObject(restUrl + "users/create", user, User.class);
 
-        return "redirect:/" + user.getUserId();
+        return "redirect:/";
     }
 }
