@@ -35,11 +35,6 @@ public class AddressController {
     @Qualifier("restUrl")
     private String restUrl;
 
-    @Autowired
-    private Auth authBean;
-
-    //private String userId = "";
-
     /**
      * Get page with addresses by user id
      * @param model -
@@ -61,11 +56,7 @@ public class AddressController {
      */
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST)
     public String createAddress(@ModelAttribute Address address){
-        User user = restTemplate.getForObject(restUrl+ "users/" + authBean.getUserId(), User.class);
-        address.setUser(user);
-
         restTemplate.postForObject(restUrl + "addresses/", address, Address.class);
-
         return "redirect:/addresses";
     }
 
@@ -79,9 +70,7 @@ public class AddressController {
     @RequestMapping(value = "/updateAddress")
     public String getUpdateAddressPage(@RequestParam("addressId") int addressId, ModelMap model){
         Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
-
         model.addAttribute(ADDRESS, address);
-
         return "updateAddress";
     }
 
@@ -93,10 +82,7 @@ public class AddressController {
      */
     @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
     public String updateAddress(@ModelAttribute Address address){
-        User user = restTemplate.getForObject(restUrl+ "users/" + authBean.getUserId(), User.class);
-        address.setUser(user);
         restTemplate.put(restUrl + "addresses/" + address.getAddressId(), address);
-
         return "redirect:/addresses";
     }
 

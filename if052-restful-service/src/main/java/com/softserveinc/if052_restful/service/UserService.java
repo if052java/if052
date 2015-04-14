@@ -6,6 +6,7 @@ package com.softserveinc.if052_restful.service;
 import com.softserveinc.if052_core.domain.User;
 import com.softserveinc.if052_restful.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,11 @@ public class UserService {
      * @return User
      */
     public User getUserById(int userId) {
+        return userMapper.getUserById(userId);
+    }
+
+    public User getCurrentUser() {
+        Integer userId = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName());
         return userMapper.getUserById(userId);
     }
 
