@@ -5,11 +5,9 @@ import com.softserveinc.if052_core.domain.Indicator;
 import com.softserveinc.if052_core.domain.MeterType;
 import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.IndicatorService;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
@@ -23,7 +21,6 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.Arrays;
 import java.util.Date;
 
-import static javax.swing.UIManager.put;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.*;
@@ -91,7 +88,7 @@ public class IndicatorResourceTest {
 
     @Test
     public void testGetIndicatorsByUserId() throws Exception {
-        when(indicatorServiceMock.getIndicatorsByUserId(1, 10)).thenReturn(Arrays.asList(indicator1, indicator2));
+        when(indicatorServiceMock.getIndicatorsForUser(10)).thenReturn(Arrays.asList(indicator1, indicator2));
 
         mockMvc.perform(get("/rest/indicators/list/byuser/1?number=10"))
                 .andExpect(status().isOk())
@@ -104,7 +101,7 @@ public class IndicatorResourceTest {
                 .andExpect(jsonPath("$[1].tariffPerDate", is(0.6)))
                 .andExpect(jsonPath("$[1].value", is(608)));
 
-//        verify(indicatorServiceMock, times(1)).getIndicatorsByUserId(1,10);
+//        verify(indicatorServiceMock, times(1)).getIndicatorsForUser(1,10);
     }
 
     @Test

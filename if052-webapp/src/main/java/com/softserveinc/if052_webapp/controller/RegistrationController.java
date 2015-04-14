@@ -24,9 +24,6 @@ public class RegistrationController {
     @Qualifier("credentialsTemplate")
     private RestOperations restTemplate;
 
-
-
-
     @RequestMapping("signup")
     public String registration(ModelMap model){
 

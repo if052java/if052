@@ -1,12 +1,9 @@
 package com.softserveinc.if052_restful.resource;
 
 import com.softserveinc.if052_core.domain.Indicator;
-import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.IndicatorService;
-import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -40,16 +37,15 @@ public class IndicatorResource {
         return indicators;
     }
 
-    @RequestMapping(value = "/list/byuser/{userId}", method = RequestMethod.GET, produces = "application/json")
-    public List<Indicator> getIndicatorsByUserId(@PathVariable("userId") int userId,
-                                          @RequestParam("number") int number) {
-        LOGGER.info("INFO: Searching for the indicators of user with id " + userId + ".");
-        List<Indicator> indicators = indicatorService.getIndicatorsByUserId(userId, number);
+    @RequestMapping(value = "/list/byuser/{number}", method = RequestMethod.GET, produces = "application/json")
+    public List<Indicator> getIndicatorsByUserId(@PathVariable("number") int number) {
+        LOGGER.info("INFO: Searching for the indicators for current user .");
+        List<Indicator> indicators = indicatorService.getIndicatorsForUser(number);
         if (indicators == null) {
-            LOGGER.info("INFO: The collection of indicators for the user with id " + userId + " has not been found.");
+            LOGGER.info("INFO: The collection of indicators for the current user has not been found.");
             indicators = new ArrayList<Indicator>();
         } else {
-            LOGGER.info("INFO: The collection of indicators has been found for the user with id " + userId + ".");
+            LOGGER.info("INFO: The collection of indicators for the current user has been found");
         }
         return indicators;
     }

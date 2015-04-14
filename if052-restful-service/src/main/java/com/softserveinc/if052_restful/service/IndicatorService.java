@@ -4,6 +4,7 @@ import com.softserveinc.if052_core.domain.Indicator;
 import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.mappers.IndicatorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,8 +66,9 @@ public class IndicatorService {
         return indicatorMapper.getIndicatorsByDates(waterMeterId, startDate, endDate);
     }
 
-    public List<Indicator> getIndicatorsByUserId(int userId, int number){
-        return indicatorMapper.getIndicatorsByUserId(userId,number);
+    public List<Indicator> getIndicatorsForUser(int number){
+        Integer userId = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName());
+        return indicatorMapper.getIndicatorsByUserId(userId, number);
     }
 }
 
