@@ -3,6 +3,7 @@ package com.softserveinc.if052_restful.resource;
 import com.softserveinc.if052_core.domain.Address;
 import com.softserveinc.if052_restful.service.AddressService;
 import com.softserveinc.if052_restful.service.IndicatorService;
+import com.softserveinc.if052_restful.service.UserService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class AddressResource {
     AddressService addressService;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     WaterMeterService waterMeterService;
 
     @Autowired
@@ -33,19 +38,9 @@ public class AddressResource {
 
     private static Logger LOGGER = Logger.getLogger(AddressResource.class.getName());
 
-    @RequestMapping(value = "/list/{userId}", method = RequestMethod.GET, produces = "application/json")
-    public List<Address> getAddressesByUserId(
-        @PathVariable("userId") String userId){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) System.out.println("authentication = null");
-        else {
-            System.out.println("authentication not equals null");
-            System.out.println("Username " + authentication.getName());
-        }
-
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public List<Address> getAddressesByUser(){
         List<Address> addresses = addressService.getAllAddresses();
-//        List<Address> addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
 
         if( addresses == null) {
             return new ArrayList<Address>();
@@ -54,9 +49,7 @@ public class AddressResource {
     }
 
     @RequestMapping(value = "/{addressId}", method = RequestMethod.GET, produces = "application/json")
-    public Address getAddress(
-        @PathVariable("addressId") int addressId,
-        HttpServletResponse response) {
+    public Address getAddress(@PathVariable("addressId") int addressId, HttpServletResponse response) {
         Address address = addressService.getAddressById(addressId);
         if (address == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -77,12 +70,14 @@ public class AddressResource {
 
     @RequestMapping(method=RequestMethod.POST, produces = "application/json")
     public Address createAddress(
+        @Valid
         @RequestBody
         Address address,
         HttpServletResponse response){
         response.setStatus(HttpServletResponse.SC_CREATED);
         addressService.insertAddress(address);
-        
+        response.setStatus(HttpServletResponse.SC_CREATED);
+
         return address;
     }
 
@@ -94,7 +89,6 @@ public class AddressResource {
         HttpServletResponse response){
 
         addressService.updateAddress(address);
-
         return address;
     }
 

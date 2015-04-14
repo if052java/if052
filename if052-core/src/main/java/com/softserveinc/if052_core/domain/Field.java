@@ -9,6 +9,10 @@ public class Field {
 
     protected String message;
 
+    public Field(){
+        
+    }
+
     public Field(
         String field,
         String message

@@ -31,18 +31,16 @@ public class UserResource {
         return users;
     }
 
-    @RequestMapping(value="/{userId}", method = RequestMethod.GET, produces = "application/json")
-    public User getUser(@PathVariable("userId") int userId, HttpServletResponse response) {
-        LOGGER.info("INFO: Searching for the user with id" + userId);
-
-        User user = userService.getUserById(userId);
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public User getUser(HttpServletResponse response) {
+        User user = userService.getCurrentUser();
 
         if (user == null){
-            LOGGER.info("INFO: User with requested id " + userId + " has not been found.");
+            LOGGER.info("INFO: Requested user has not been found.");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
-        LOGGER.info("INFO: User with requested id " + userId + " has been found.");
+        LOGGER.info("INFO: User with requested id " + user.getUserId() + " has been found.");
         return user;
     }
 
@@ -95,12 +93,8 @@ public class UserResource {
     }
 
     @RequestMapping(value="{userId}", method = RequestMethod.PUT)
-    public User updateUser(
-        @PathVariable("userId") int userId,
-        @Valid
-        @RequestBody
-        User user,
-        HttpServletResponse response){
+    public User updateUser(@PathVariable("userId") int userId, @Valid @RequestBody User user,
+                           HttpServletResponse response){
         if (userService.getUserById(userId) == null) {
             LOGGER.info("INFO: User with requested id " + userId + " is not found.");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -130,11 +124,10 @@ public class UserResource {
         @PathVariable("userId") int  userId,
         HttpServletResponse response
     ){
-        //FIXME
-        if (userService.getUserById(userId) == null) {
+        if(userService.getUserById(userId) == null){
             LOGGER.info("INFO: User with requested id " + userId + " is not found.");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+        } else
         try {
             LOGGER.info("INFO: Deleting a user with id " + userId + ".");
             userService.deleteUser(userId);

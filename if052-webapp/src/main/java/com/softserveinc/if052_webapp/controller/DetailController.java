@@ -37,18 +37,16 @@ public class DetailController {
     @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
-    @Autowired
-    private Auth authBean;
 
     @RequestMapping(value = "/")
     public String getIndexPage( ModelMap model){
-        User user = restTemplate.getForObject(restUrl + "users/" + authBean.getUserId(), User.class);
+        User user = restTemplate.getForObject(restUrl + "users/", User.class);
 
         model.addAttribute(NAME, user.getName());
         model.addAttribute(SURNAME, user.getSurname());
         model.addAttribute(MIDDLE_NAME, user.getMiddleName());
 
-        Indicator[] arrOfIndicators = restTemplate.getForObject(restUrl + "indicators/list/byuser/" + authBean.getUserId() + "?number=" + COUNT, Indicator[].class);
+        Indicator[] arrOfIndicators = restTemplate.getForObject(restUrl + "indicators/list/byuser/" + COUNT, Indicator[].class);
 
         List<Indicator> indicators = Arrays.asList(arrOfIndicators);
 

@@ -24,6 +24,7 @@ import java.util.List;
  */
 @Controller
 public class AddressController {
+    public static final String REDIRECT_ADDRESSES = "redirect:/addresses";
     private final String ADDRESSES = "addresses";
     private final String ADDRESS = "address";
     private final String REASON = "reason";
@@ -35,11 +36,6 @@ public class AddressController {
     @Qualifier("restUrl")
     private String restUrl;
 
-    @Autowired
-    private Auth authBean;
-
-    //private String userId = "";
-
     /**
      * Get page with addresses by user id
      * @param model -
@@ -47,11 +43,9 @@ public class AddressController {
      */
     @RequestMapping(value = "/addresses")
     public String getAddressPage(ModelMap model){
-        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + authBean.getUserId(), Address[].class);
+        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/", Address[].class);
         List<Address> addresses = Arrays.asList(arrayOfAddresses);
-
         model.addAttribute(ADDRESSES, addresses);
-
         return "address";
     }
 
@@ -63,12 +57,9 @@ public class AddressController {
      */
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST)
     public String createAddress(@ModelAttribute Address address){
-        User user = restTemplate.getForObject(restUrl+ "users/" + authBean.getUserId(), User.class);
-        address.setUser(user);
-
         restTemplate.postForObject(restUrl + "addresses/", address, Address.class);
 
-        return "redirect:/addresses";
+        return REDIRECT_ADDRESSES;
     }
 
     /**
@@ -81,9 +72,7 @@ public class AddressController {
     @RequestMapping(value = "/updateAddress")
     public String getUpdateAddressPage(@RequestParam("addressId") int addressId, ModelMap model){
         Address address = restTemplate.getForObject(restUrl + "addresses/" + addressId, Address.class);
-
         model.addAttribute(ADDRESS, address);
-
         return "updateAddress";
     }
 
@@ -95,11 +84,9 @@ public class AddressController {
      */
     @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
     public String updateAddress(@ModelAttribute Address address){
-        User user = restTemplate.getForObject(restUrl+ "users/" + authBean.getUserId(), User.class);
-        address.setUser(user);
         restTemplate.put(restUrl + "addresses/" + address.getAddressId(), address);
 
-        return "redirect:/addresses";
+        return REDIRECT_ADDRESSES;
     }
 
     /**
@@ -117,6 +104,6 @@ public class AddressController {
             model.addAttribute(REASON, "This address has tied meters so it cannot be deleted.");
             return "error400";
         }
-        return "redirect:/addresses";
+        return REDIRECT_ADDRESSES;
     }
 }

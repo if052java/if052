@@ -23,13 +23,9 @@ public class MapController {
     @Qualifier("passwordTemplate")
     private RestOperations restTemplate;
 
-    @Autowired
-    private Auth authBean;
-
     @RequestMapping(value = "/map")
     public String getMapPage(ModelMap model){
-        String userId = authBean.getUserId();
-        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/list/" + userId, Address[].class);
+        Address[] arrayOfAddresses= restTemplate.getForObject(restUrl + "addresses/", Address[].class);
 
         String gMapData = "";
 
@@ -41,7 +37,6 @@ public class MapController {
         gMapData = gMapData.substring(0, gMapData.length()-1);
 
         model.addAttribute("gMapData", gMapData);
-        model.addAttribute("userId", userId);
 
         return "map";
     }

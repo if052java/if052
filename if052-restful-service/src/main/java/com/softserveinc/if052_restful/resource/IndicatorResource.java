@@ -1,9 +1,8 @@
 package com.softserveinc.if052_restful.resource;
 
 import com.softserveinc.if052_core.domain.Indicator;
-import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.IndicatorService;
-import com.softserveinc.if052_restful.service.WaterMeterService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,21 +22,30 @@ public class IndicatorResource {
     @Autowired
     private IndicatorService indicatorService;
 
+    private static Logger LOGGER = Logger.getLogger(IndicatorResource.class.getName());
+
     @RequestMapping(value = "{meterId}", method = RequestMethod.GET, produces = "application/json")
     public List<Indicator> getIndicators(@PathVariable("meterId") int meterId) {
+        LOGGER.info("INFO: Searching for the collection of indicators by meter with id " + meterId + ".");
         List<Indicator> indicators = indicatorService.getIndicatorsByMeterId(meterId);
         if (indicators == null) {
+            LOGGER.info("INFO: The collection of indicators for the meter with id " + meterId + " has not been found.");
             indicators = new ArrayList<Indicator>();
+        } else {
+            LOGGER.info("INFO: The collection of indicators has been found for meter with id " + meterId + ".");
         }
         return indicators;
     }
 
-    @RequestMapping(value = "/list/byuser/{userId}", method = RequestMethod.GET, produces = "application/json")
-    public List<Indicator> getIndicatorsByUserId(@PathVariable("userId") int userId,
-                                          @RequestParam("number") int number) {
-        List<Indicator> indicators = indicatorService.getIndicatorsByUserId(userId, number);
+    @RequestMapping(value = "/list/byuser/{number}", method = RequestMethod.GET, produces = "application/json")
+    public List<Indicator> getIndicatorsByUserId(@PathVariable("number") int number) {
+        LOGGER.info("INFO: Searching for the indicators for current user .");
+        List<Indicator> indicators = indicatorService.getIndicatorsForUser(number);
         if (indicators == null) {
+            LOGGER.info("INFO: The collection of indicators for the current user has not been found.");
             indicators = new ArrayList<Indicator>();
+        } else {
+            LOGGER.info("INFO: The collection of indicators for the current user has been found");
         }
         return indicators;
     }
@@ -47,11 +55,14 @@ public class IndicatorResource {
                                   @RequestParam("year") int year ) {
         String startDate = year + start;
         String endDate = year + end;
-
+        LOGGER.info("INFO: Searching for the indicators by year " + year + ".");
         List < Indicator > indicators =
             indicatorService.getIndicatorsByDates(meterId, startDate, endDate);
         if (indicators == null) {
+            LOGGER.info("INFO: The collection of indicators for the year " + year + " has not been found.");
             indicators = new ArrayList<Indicator>();
+        } else {
+            LOGGER.info("INFO: The collection of indicators has been found for the year " + year + ".");
         }
         return indicators;
     }
@@ -61,33 +72,46 @@ public class IndicatorResource {
                                         @RequestParam("startDate") String startDate,
                                         @RequestParam("endDate") String endDate,
                                         HttpServletResponse response) {
+        LOGGER.info("INFO: Searching for the indicators since " + startDate + " till " + endDate + ".");
         List < Indicator > indicators =
             indicatorService.getIndicatorsByDates(meterId, startDate, endDate);
         if (indicators == null){
+            LOGGER.info("INFO: The collection of indicators since " + startDate + " till " + endDate + " has not been found.");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
+        LOGGER.info("INFO: The collection of indicators since " + startDate + " till " + endDate + " has been successfully found.");
         return indicators;
     }
 
     @RequestMapping(value = "/getone/{indicatorId}", method = RequestMethod.GET, produces = "application/json")
-    public Indicator getIndicator(@PathVariable("indicatorId") int indicatorId) {
+    public Indicator getIndicator(
+            @PathVariable("indicatorId") int indicatorId,
+            HttpServletResponse response) {
+        LOGGER.info("INFO: Searching for the indicator with id " + indicatorId + ".");
         Indicator indicator = indicatorService.getIndicatorById(indicatorId);
-
+        if (indicator == null) {
+            LOGGER.info("INFO: Indicator with requested id " + indicatorId + " has not been found.");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+        LOGGER.info("INFO: Indicator with requested id " + indicatorId + " has been successfully found.");
         return indicator;
     }
 
     @RequestMapping(value = "{indicatorId}", method = RequestMethod.DELETE, produces = "application/json")
     public void deleteIndicator(@PathVariable("indicatorId") int indicatorId) {
         indicatorService.deleteIndicator(indicatorId);
-
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public Indicator createIndicator(
         @RequestBody
-        Indicator indicator){
+        Indicator indicator,
+        HttpServletResponse response){
+        LOGGER.info("INFO: Adding a new indicator.");
         indicatorService.insertIndicator(indicator);
+        LOGGER.info("INFO: Indicator has been successfully added with id " + indicator.getIndicatorId() + ".");
 
         return indicator;
     }

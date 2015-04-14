@@ -23,9 +23,8 @@ public class AddressService {
     }
 
     public List<Address> getAllAddresses() {
-        Integer id = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName());
-        LOGGER.debug("id: " + id);
-        return addressMapper.getAddressesByUserId(id);
+        Integer userId = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName());
+        return addressMapper.getAddressesByUserId(userId);
     }
 
     public List<Address> getAllAddressesByUserId(int userId){

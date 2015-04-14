@@ -33,8 +33,8 @@ public class AddressServiceTest {
     @Autowired
     private UserService userService;
 
-    private static Logger LOGGER = Logger.getLogger(AddressServiceTest.class);
 
+    private static Logger LOGGER = Logger.getLogger(AddressServiceTest.class);
 
     @BeforeClass
     public static void setAuth(){

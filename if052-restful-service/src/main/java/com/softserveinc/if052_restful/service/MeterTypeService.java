@@ -5,19 +5,21 @@ import com.softserveinc.if052_restful.mappers.MeterTypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 /**
  * Service for work with meter type
- * @see com.softserveinc.if052_core.domain.MeterType
  *
  * @author Bogdan Pastushkevych
  * @version 1.0
+ * @see com.softserveinc.if052_core.domain.MeterType
  */
 @Service
 @Transactional
 public class MeterTypeService {
 
+    @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     private MeterTypeMapper meterTypeMapper;
 
@@ -33,7 +35,7 @@ public class MeterTypeService {
     /**
      * Get existing meter type by id
      *
-     * @param meterTypeId
+     * @param meterTypeId Id of meter type
      * @return MeterType
      */
     public MeterType getMeterTypeById(int meterTypeId) {
@@ -43,7 +45,7 @@ public class MeterTypeService {
     /**
      * Create new meter type
      *
-     * @param meterType
+     * @param meterType meter type
      */
     public void insertMeterType(MeterType meterType) {
         meterTypeMapper.insertMeterType(meterType);
@@ -52,7 +54,7 @@ public class MeterTypeService {
     /**
      * Update existing meter type
      *
-     * @param meterType
+     * @param meterType meter type
      */
     public void updateMeterType(MeterType meterType) {
         meterTypeMapper.updateMeterType(meterType);
@@ -61,7 +63,7 @@ public class MeterTypeService {
     /**
      * Delete existing meter type
      *
-     * @param meterTypeId
+     * @param meterTypeId Id of meter type
      */
     public void deleteMeterType(int meterTypeId) {
         meterTypeMapper.deleteMeterType(meterTypeId);
