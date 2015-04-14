@@ -2,8 +2,9 @@ package com.softserveinc.if052_restful.resource;
 
 
 import com.softserveinc.if052_core.domain.Report;
-import com.softserveinc.if052_restful.report.ReportConverter;
+import com.softserveinc.if052_restful.report.ExcelReportConverter;
 import com.softserveinc.if052_core.domain.ReportRequest;
+import com.softserveinc.if052_restful.report.XmlReportConverter;
 import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,10 @@ public class ReportResource {
     private ReportService reportService;
 
     @Autowired
-    private ReportConverter reportConverter;
+    private XmlReportConverter xmlReportConverter;
+
+    @Autowired
+    private ExcelReportConverter excelReportConverter;
 
     @RequestMapping(value = "/mindate", method = RequestMethod.GET, produces = "application/json")
     public  Date getMinDate() {
@@ -48,30 +52,32 @@ public class ReportResource {
     }
 
 
-    @RequestMapping(value = "{reportId}", method = RequestMethod.GET, produces = "application/json")
-    public Report getReport(
-        @PathVariable("reportId") int reportId,
-        HttpServletResponse response) {
-        Report report = reportService.getReportById(reportId);
-        if (report == null) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
-        return report;
-    }
-
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public Report insertReport(
+    @RequestMapping(value = "/xml", method = RequestMethod.POST, produces = "application/xml")
+    public byte[] createXmlReport(
         @RequestBody
         ReportRequest reportRequest,
         HttpServletResponse response) {
-        Report report = reportConverter.createReport(reportRequest);
-        report.setReportRequest(reportRequest.toString());
-        report.setXmlReport(reportConverter.convertToXml(report).toString());
+        Report report = xmlReportConverter.createReport(reportRequest);
+        report.setXmlReport(xmlReportConverter.convert(report).toString());
         reportService.insertReport(report);
+        byte[] output = xmlReportConverter.convert(report);
         response.setStatus(HttpServletResponse.SC_CREATED);
-        response.setHeader("Location", "/report/" + report.getReportId());
+        response.setHeader("Content-Disposition", "attachment;filename=report.xml");
+        return output;
+    }
 
-        return report;
+    @RequestMapping(value = "/excel", method = RequestMethod.POST,
+            produces = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    public byte[] createExcelReport(
+            @RequestBody
+            ReportRequest reportRequest,
+            HttpServletResponse response) {
+        Report report = excelReportConverter.createReport(reportRequest);
+        reportService.insertReport(report);
+        byte[] output = excelReportConverter.convert(report);
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setHeader("Content-Disposition", "attachment;filename=report.xlsx");
+        return output;
     }
 
 }

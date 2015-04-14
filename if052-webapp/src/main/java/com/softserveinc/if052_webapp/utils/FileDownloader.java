@@ -16,22 +16,18 @@ import java.io.*;
 @Component
 public class FileDownloader {
 
-    public static final int BUFFER_SIZE = 4096;
+    public void downloadFile(HttpServletRequest request, HttpServletResponse response, byte[] output,
+                             String contentType, String contentDisposition) {
+        response.setContentType(contentType);
+        response.setHeader("Content-Disposition", contentDisposition);
+        try {
+            ServletOutputStream out = response.getOutputStream();
+            out.write(output);
+            out.flush();
+            out.close();
+        } catch (IOException e) {
 
-    public void downloadFile(HttpServletRequest request, HttpServletResponse response, String report) throws IOException {
-
-        response.setContentType("application/xml");
-        response.setHeader("Content-Disposition", "attachment;filename=report.xml");
-        InputStream in = new ByteArrayInputStream(report.getBytes("UTF-8"));
-        ServletOutputStream out = response.getOutputStream();
-        byte[] outputByte = new byte[BUFFER_SIZE];
-        int bytesRead;
-        while ((bytesRead = in.read(outputByte)) != -1) {
-            out.write(outputByte, 0, bytesRead);
         }
-        in.close();
-        out.flush();
-        out.close();
 
     }
 }

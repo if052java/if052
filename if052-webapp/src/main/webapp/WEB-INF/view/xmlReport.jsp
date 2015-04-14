@@ -24,7 +24,7 @@
                 <h2>Оберіть фільтри для звіту:</h2>
                 <c:url var="createXmlUrl" value="/createXmlReport"/>
                 <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest" id="xmlForm" autocomplete="off">
-                    <sec:csrfInput/>
+
 
                     <div class="form-group">
                         <label for="users">Логін користувача</label>
