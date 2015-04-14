@@ -6,6 +6,7 @@ package com.softserveinc.if052_restful.service;
 import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.mappers.WaterMeterMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -83,10 +84,10 @@ public class WaterMeterService {
     /**
      * Get first meter by userId
      *
-     * @param userId
      * @return
      */
-    public WaterMeter getFirstMeterByUserId(int userId){
+    public WaterMeter getFirstMeter(){
+        Integer userId = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName());
         return waterMeterMapper.getFirstMeterByUserId(userId);
     }
 }

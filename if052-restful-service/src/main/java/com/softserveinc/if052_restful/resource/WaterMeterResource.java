@@ -47,18 +47,16 @@ public class WaterMeterResource {
         return waterMeter;
     }
 
-    @RequestMapping(value = "/firstMeter/{userId}", method = RequestMethod.GET, produces = "application/json")
-    public WaterMeter getFirstMeteByUserId(
-        @PathVariable("userId") int userId,
-        HttpServletResponse response) {
-        LOGGER.info("INFO: Searching for first meter for user with id " + userId+ ".");
-        WaterMeter waterMeter = waterMeterService.getFirstMeterByUserId(userId);
+    @RequestMapping(value = "/firstMeter", method = RequestMethod.GET, produces = "application/json")
+    public WaterMeter getFirstMeter(HttpServletResponse response) {
+        LOGGER.info("INFO: Searching for first meter for the requested user.");
+        WaterMeter waterMeter = waterMeterService.getFirstMeter();
         if (waterMeter == null) {
-            LOGGER.info("INFO: First meter for user with request " + userId + " has not been found.");
+            LOGGER.info("INFO: First meter for the requested user has not been found.");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
-        LOGGER.info("INFO:First meter with requested id " + userId + " has been successfully found.");
+        LOGGER.info("INFO:First meter requested user has been successfully found.");
         return waterMeter;
     }
 

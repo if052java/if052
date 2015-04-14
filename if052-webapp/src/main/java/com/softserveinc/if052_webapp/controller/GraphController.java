@@ -41,9 +41,6 @@ public class GraphController {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
-    private Auth authBean;
-
     private static Logger logger = Logger.getLogger(WaterMeterController.class);
 
 
@@ -51,11 +48,11 @@ public class GraphController {
     public String getMainGraph(ModelMap model){
 
         //- Get all addresses of user for select-//
-        Address[] arrayOfAddress = restTemplate.getForObject(restUrl + "addresses/list/" + authBean.getUserId(), Address[].class);
+        Address[] arrayOfAddress = restTemplate.getForObject(restUrl + "addresses/", Address[].class);
         List < Address > addresses = Arrays.asList(arrayOfAddress);
 
         //- Get first meter for user -//
-        ResponseEntity < String > responseEntity = restTemplate.exchange(restUrl + "watermeters/firstMeter/" + authBean.getUserId(),
+        ResponseEntity < String > responseEntity = restTemplate.exchange(restUrl + "watermeters/firstMeter/",
             HttpMethod.GET, null, String.class);
         String responseBody = responseEntity.getBody();
 
@@ -108,7 +105,7 @@ public class GraphController {
                                  @RequestParam("year") Integer year,
                                  ModelMap model) {
         //- Get list of addresses for select-//
-        Address[] arrayOfAddress = restTemplate.getForObject(restUrl + "addresses/list/" + authBean.getUserId(), Address[].class);
+        Address[] arrayOfAddress = restTemplate.getForObject(restUrl + "addresses/", Address[].class);
         List<Address> addresses = Arrays.asList(arrayOfAddress);
 
         //- Get watermeter by id-//

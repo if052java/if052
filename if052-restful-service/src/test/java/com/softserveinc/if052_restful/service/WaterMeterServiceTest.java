@@ -2,14 +2,25 @@ package com.softserveinc.if052_restful.service;
 
 import com.softserveinc.if052_core.domain.Indicator;
 import com.softserveinc.if052_core.domain.WaterMeter;
+import org.apache.log4j.Logger;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath*:context.xml"})
@@ -23,6 +34,26 @@ public class WaterMeterServiceTest {
     @Autowired
     private MeterTypeService meterTypeService;
 
+
+    private static Logger LOGGER = Logger.getLogger(AddressServiceTest.class);
+
+    @BeforeClass
+    public static void setAuth(){
+        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                "1", "PASS1111", authorities);
+        HttpServletRequest request = new MockHttpServletRequest();
+
+        token.setDetails(new WebAuthenticationDetails(request));
+
+        LOGGER.debug("Logging in with " + token.getPrincipal().toString());
+        SecurityContextHolder.getContext().setAuthentication(token);
+        LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+    }
+
     @Test
     public void testGetWaterMeterById() {
         WaterMeter waterMeter = waterMeterService.getWaterMeterById(1);
@@ -35,8 +66,8 @@ public class WaterMeterServiceTest {
     }
 
     @Test
-    public void testGetFirstMeterByUserId(){
-        WaterMeter waterMeter = waterMeterService.getFirstMeterByUserId(1);
+    public void testGetFirstMeter(){
+        WaterMeter waterMeter = waterMeterService.getFirstMeter();
         Assert.assertNotNull(waterMeter);
         System.out.println(waterMeter);
     }
