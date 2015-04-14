@@ -1,5 +1,9 @@
 package com.softserveinc.if052_core.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * This class is a model of the datatable "METER_TYPE"
  *
@@ -8,6 +12,9 @@ package com.softserveinc.if052_core.domain;
  */
 public class MeterType {
     private int meterTypeId;
+
+    @NotNull
+    @NotEmpty
     private String type;
 
     public MeterType() {

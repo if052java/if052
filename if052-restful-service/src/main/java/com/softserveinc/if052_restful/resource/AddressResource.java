@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,9 +69,12 @@ public class AddressResource {
     }
 
     @RequestMapping(method=RequestMethod.POST, produces = "application/json")
-    public Address createAddress(@RequestBody Address address, HttpServletResponse response){
-
-        address.setUser(userService.getCurrentUser());
+    public Address createAddress(
+        @Valid
+        @RequestBody
+        Address address,
+        HttpServletResponse response){
+        response.setStatus(HttpServletResponse.SC_CREATED);
         addressService.insertAddress(address);
         response.setStatus(HttpServletResponse.SC_CREATED);
 
@@ -78,8 +82,12 @@ public class AddressResource {
     }
 
     @RequestMapping(value = "{addressId}", method = RequestMethod.PUT, produces = "application/json")
-    public Address updateAddress(@PathVariable("addressId") int addressId,
-            @RequestBody Address address, HttpServletResponse response){
+    public Address updateAddress(
+        @PathVariable("addressId") int addressId,
+        @RequestBody
+        Address address,
+        HttpServletResponse response){
+
         addressService.updateAddress(address);
         return address;
     }

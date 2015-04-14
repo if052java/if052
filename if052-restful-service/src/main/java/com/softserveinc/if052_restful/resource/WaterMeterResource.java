@@ -6,9 +6,11 @@ import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -64,9 +66,16 @@ public class WaterMeterResource {
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public WaterMeter insertWaterMeter(
+        @Valid
         @RequestBody
         WaterMeter waterMeter,
         HttpServletResponse response) {
+        
+//        if (result.hasErrors()) {
+//            LOGGER.info("Add watermeter validation found errors in request");
+//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//            return null;
+//        }
         LOGGER.info("INFO: Adding a new meter.");
 //        if (waterMeter.getName().length() < 1) {
 //            LOGGER.warn("WARNING: Meter name cannot be empty.");
@@ -146,10 +155,10 @@ public class WaterMeterResource {
         @PathVariable("waterMeterId") int waterMeterId,
         HttpServletResponse response) {
         LOGGER.info("INFO: Deleting a meter with id " + waterMeterId + ".");
-//        if (waterMeterService.getWaterMeterById(waterMeterId) == null) {
-//            LOGGER.info("INFO: Meter with requested id " + waterMeterId + " is not found.");
-//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-//        }
+        if (waterMeterService.getWaterMeterById(waterMeterId) == null) {
+            LOGGER.info("INFO: Meter with requested id " + waterMeterId + " is not found.");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        } else
         try {
             waterMeterService.deleteWaterMeter(waterMeterId);
             LOGGER.info("INFO : Meter with id " + waterMeterId + " has been successfully deleted.");

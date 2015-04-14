@@ -1,16 +1,33 @@
 package com.softserveinc.if052_core.domain;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class WaterMeter {
 
     private int waterMeterId;
+
+    @NotNull
+    @NotEmpty
     private String name;
+
+    @NotNull
+    @NotEmpty
     private String description;
-    private double tariff;
+
+    @Min(0)
+    private Double tariff;
+
+    @NotNull
     private Address address;
+
+    @NotNull
     private MeterType meterType;
+
     private List<Indicator> indicators;
 
     public WaterMeter() {
