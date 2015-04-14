@@ -66,6 +66,6 @@ public interface UserMapper {
 
     public User getAuthByLogin(String login);
 
-    public User getAuth(String userId);
+    public User getAuth(Integer userId);
 
 }

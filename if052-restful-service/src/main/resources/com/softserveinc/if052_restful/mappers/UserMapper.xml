@@ -236,7 +236,7 @@
         WHERE c.login = #{login}
     </select>
 
-    <select id="getAuth" parameterType="String" resultMap="UserSimpleResultWithRole">
+    <select id="getAuth" parameterType="Integer" resultMap="UserSimpleResultWithRole">
         SELECT
         c.user_id,
         c.name,

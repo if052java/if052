@@ -27,7 +27,8 @@ public class AuthService {
         auth.setRole(user.getRole());
         return auth;
     }
-    public Auth getAuth(String userId) {
+    public Auth getAuth(String stringUserId) {
+        Integer userId = Integer.parseInt(stringUserId);
         User user = userMapper.getAuth(userId);
 
         if (user == null) return null;
