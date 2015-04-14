@@ -79,18 +79,20 @@ public class WaterMeterController {
     public String addWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model, @RequestParam int typeId) {
         waterMeter.setName(waterMeter.getName().trim());
         waterMeter.setMeterType(restTemplate.getForObject(restUrl + "metertypes/" + typeId, MeterType.class));
-        if (waterMeter.getName().length() < 1) {
-            model.addAttribute(REASON, "Meter name cannot be empty.");
-            return "error400";
-        }
+//        if (waterMeter.getName().length() < 1) {
+//            model.addAttribute(REASON, "Meter name cannot be empty.");
+//            return "error400";
+//        }
         ResponseEntity addressResponseEntity = restTemplate.getForEntity(restUrl + "addresses/" + addressId, Address.class);
         waterMeter.setAddress((Address) addressResponseEntity.getBody());
         ResponseEntity<String> waterMeterResponseEntity = restTemplate.exchange(restUrl + "watermeters/",
                 HttpMethod.POST, new HttpEntity<WaterMeter>(waterMeter), String.class);
-        if (waterMeterResponseEntity.getStatusCode().value() == 400) {
-            model.addAttribute(REASON, "Meter with this name already exist.");
-            return "error400";
-        }
+
+        
+//        if (waterMeterResponseEntity.getStatusCode().value() == 400) {
+//            model.addAttribute(REASON, "Meter with this name already exist.");
+//            return "error400";
+//        }
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
@@ -105,8 +107,8 @@ public class WaterMeterController {
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
-    @RequestMapping(value = "/updateWaterMeter{waterMeterId}")
-    public String getUpdateWaterMeterPage(int waterMeterId, ModelMap model) {
+    @RequestMapping(value = "/updateWaterMeter")
+    public String getUpdateWaterMeterPage(@RequestParam("waterMeterId")int waterMeterId, ModelMap model) {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(restUrl + "watermeters/"
                 + waterMeterId, String.class);
         try {

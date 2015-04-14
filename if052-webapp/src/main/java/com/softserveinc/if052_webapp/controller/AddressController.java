@@ -24,6 +24,7 @@ import java.util.List;
  */
 @Controller
 public class AddressController {
+    public static final String REDIRECT_ADDRESSES = "redirect:/addresses";
     private final String ADDRESSES = "addresses";
     private final String ADDRESS = "address";
     private final String REASON = "reason";
@@ -57,7 +58,8 @@ public class AddressController {
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST)
     public String createAddress(@ModelAttribute Address address){
         restTemplate.postForObject(restUrl + "addresses/", address, Address.class);
-        return "redirect:/addresses";
+
+        return REDIRECT_ADDRESSES;
     }
 
     /**
@@ -83,7 +85,8 @@ public class AddressController {
     @RequestMapping(value = "/updateAddress", method = RequestMethod.POST)
     public String updateAddress(@ModelAttribute Address address){
         restTemplate.put(restUrl + "addresses/" + address.getAddressId(), address);
-        return "redirect:/addresses";
+
+        return REDIRECT_ADDRESSES;
     }
 
     /**
@@ -101,6 +104,6 @@ public class AddressController {
             model.addAttribute(REASON, "This address has tied meters so it cannot be deleted.");
             return "error400";
         }
-        return "redirect:/addresses";
+        return REDIRECT_ADDRESSES;
     }
 }

@@ -124,11 +124,10 @@ public class UserResource {
         @PathVariable("userId") int  userId,
         HttpServletResponse response
     ){
-        //FIXME
-        if (userService.getUserById(userId) == null) {
+        if(userService.getUserById(userId) == null){
             LOGGER.info("INFO: User with requested id " + userId + " is not found.");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+        } else
         try {
             LOGGER.info("INFO: Deleting a user with id " + userId + ".");
             userService.deleteUser(userId);

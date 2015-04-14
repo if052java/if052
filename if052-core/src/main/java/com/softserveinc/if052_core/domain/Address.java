@@ -4,6 +4,9 @@
 
 package com.softserveinc.if052_core.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -16,11 +19,26 @@ import java.util.List;
 
 public final class Address {
 	private int addressId;
+
+    @NotNull
+    @NotEmpty
 	private String city;
+
+    @NotNull
+    @NotEmpty
 	private String street;
+
+    @NotNull
+    @NotEmpty
 	private String building;
+
+    @NotNull
+    @NotEmpty
 	private String apartment;
+
+    @NotNull
 	private User user;
+
 	private List<WaterMeter> waterMeters;
 
 

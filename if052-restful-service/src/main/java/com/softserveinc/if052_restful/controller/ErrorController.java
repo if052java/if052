@@ -3,6 +3,7 @@ package com.softserveinc.if052_restful.controller;
 import com.softserveinc.if052_core.domain.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,7 +14,6 @@ import java.util.List;
 @ControllerAdvice
 @RequestMapping(value = "/error")
 public class ErrorController {
-
     @Autowired
     protected MessageSource messageSource;
 
@@ -37,7 +37,6 @@ public class ErrorController {
         return this.processFieldErrors(
             exception.getBindingResult().getFieldErrors()
         );
-        
     }
 
     /**
