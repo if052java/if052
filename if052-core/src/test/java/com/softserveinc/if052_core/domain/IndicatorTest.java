@@ -26,8 +26,8 @@ public class IndicatorTest extends AbstractModel {
 
         Indicator indicatorFailureValue = new Indicator(
             new Date(),
-            new Double(5),
-            new Integer(3),
+            new Double(-5),
+            new Integer(-3),
             new Boolean(true),
             new Boolean(true),
             new WaterMeter()
