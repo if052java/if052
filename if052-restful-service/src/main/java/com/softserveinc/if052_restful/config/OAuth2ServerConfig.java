@@ -81,6 +81,7 @@ public class OAuth2ServerConfig {
                     .antMatchers("/rest/report/**").access("hasRole('ADMIN')")
                     .antMatchers("/rest/report/").access("hasRole('ADMIN')")
                     .antMatchers("/rest/users/login/**").permitAll()
+                    .antMatchers("/error").permitAll()
                     .antMatchers("/rest/**").access("#oauth2.hasScope('trust') and hasAnyRole('USER', 'ADMIN')");
             // @formatter:on
 		}

@@ -87,10 +87,10 @@ public class IndicatorResourceTest {
 
 
     @Test
-    public void testGetIndicatorsByUserId() throws Exception {
+    public void testGetIndicatorsForUser() throws Exception {
         when(indicatorServiceMock.getIndicatorsForUser(10)).thenReturn(Arrays.asList(indicator1, indicator2));
 
-        mockMvc.perform(get("/rest/indicators/list/byuser/1?number=10"))
+        mockMvc.perform(get("/rest/indicators/list/byuser/10"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(2)))
