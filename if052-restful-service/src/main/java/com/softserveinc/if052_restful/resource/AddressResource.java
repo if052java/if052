@@ -33,19 +33,10 @@ public class AddressResource {
 
     private static Logger LOGGER = Logger.getLogger(AddressResource.class.getName());
 
-    @RequestMapping(value = "/list/{userId}", method = RequestMethod.GET, produces = "application/json")
-    public List<Address> getAddressesByUserId(
-        @PathVariable("userId") String userId){
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null) System.out.println("authentication = null");
-        else {
-            System.out.println("authentication not equals null");
-            System.out.println("Username " + authentication.getName());
-        }
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public List<Address> getAddressesByUserId(){
 
         List<Address> addresses = addressService.getAllAddresses();
-//        List<Address> addresses = addressService.getAllAddressesByUserId(Integer.valueOf(userId));
 
         if( addresses == null) {
             return new ArrayList<Address>();

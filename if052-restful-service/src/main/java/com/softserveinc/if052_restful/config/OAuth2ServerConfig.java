@@ -69,13 +69,18 @@ public class OAuth2ServerConfig {
 				// session creation to be allowed (it's disabled by default in 2.0.6)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 			.and()
-				.requestMatchers().antMatchers("/rest/**", "/rest/auth/checkCredentials", "/rest/report/**", "/rest/report/")
+				.requestMatchers().antMatchers("/rest/**",
+                    "/rest/auth/checkCredentials",
+                    "/rest/report/**",
+                    "/rest/report/",
+                    "/rest/users/login/**")
 			.and()
 				.authorizeRequests()
                     .antMatchers("/rest/auth/checkCredentials").access("#oauth2.isClient()")
                     .antMatchers("/rest/users/create").access("#oauth2.isClient()")
                     .antMatchers("/rest/report/**").access("hasRole('ADMIN')")
                     .antMatchers("/rest/report/").access("hasRole('ADMIN')")
+                    .antMatchers("/rest/users/login/**").permitAll()
                     .antMatchers("/rest/**").access("#oauth2.hasScope('trust') and hasAnyRole('USER', 'ADMIN')");
             // @formatter:on
 		}
