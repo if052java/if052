@@ -44,7 +44,7 @@
                         <td><c:out value="${waterMeter.description}"/></td>
                         <td><c:out value="${waterMeter.meterType.type}"/></td>
                         <td><c:out value="${waterMeter.tariff}"/></td>
-                        <td><a href="<c:url value="/indicators?waterMeterId=${waterMeter.waterMeterId}"/>">
+                        <td><a href="<c:url value="/indicators?meterId=${waterMeter.waterMeterId}"/>">
                             <button class="btn btn-default">
                                 <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
                             </button></a></td>

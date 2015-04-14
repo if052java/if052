@@ -3,6 +3,7 @@ package com.softserveinc.if052_webapp.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_webapp.service.IndicatorService;
 import com.softserveinc.if052_webapp.errorHandler.CustomErrorResponseHandler;
+import com.softserveinc.if052_webapp.service.MeterService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.*;
@@ -90,4 +91,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	IndicatorService indicatorService() {return new IndicatorService(); }
+
+	@Bean
+	MeterService meterService() {return new MeterService(); }
 }
