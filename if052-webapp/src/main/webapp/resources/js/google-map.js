@@ -15,6 +15,17 @@ function initialize()
     for (var i=0; i<arrayData.length; i++){
         codeAddress(arrayData[i])
     }
+    google.maps.event.addListener(map, 'click', function(e) {
+        placeMarker(e.latLng, map);
+    });
+}
+
+function placeMarker(position, map) {
+    var marker = new google.maps.Marker({
+        position: position,
+        map: map
+    });
+    map.panTo(position);
 }
 
 function codeAddress(address)
@@ -28,8 +39,13 @@ function codeAddress(address)
             var marker = new google.maps.Marker(
                 {
                     map: map,
-                    position: results[0].geometry.location
+                    position: results[0].geometry.location,
+                    title: address
                 });
+            google.maps.event.addListener(marker, 'click', function() {
+                map.setZoom(16);
+                map.setCenter(marker.getPosition());
+            });
         } else {
             $(".map-warning").fadeIn();
         }

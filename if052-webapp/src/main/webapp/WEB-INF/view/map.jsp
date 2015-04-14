@@ -9,13 +9,13 @@
     <tiles:putAttribute name="body">
         <div class="body">
             <div class="container">
-                <a href="<c:url value='/addresses'/>">
-                    <button class="btn btn-default btn-back" >
+                <a href="<c:url value='/addresses'/>" class="btn btn-default btn-back" >
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         Назад
-                    </button>
                 </a>
-
+                <div id="panel">
+                    <button class="btn btn-primary" id="addMarker" onclick="addMarker()">Додати адресу</button>
+                </div>
                 <div id="map-canvas"></div>
             </div>
         </div>
