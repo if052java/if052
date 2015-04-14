@@ -70,18 +70,18 @@ public class OAuth2ServerConfig {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 			.and()
 				.requestMatchers().antMatchers("/rest/**",
-                    "/rest/auth/checkCredentials",
-                    "/rest/report/**",
-                    "/rest/report/",
-                    "/rest/users/login/**")
-			.and()
+					"/rest/auth/checkCredentials",
+					"/rest/users/create",
+					"/rest/report/**",
+					"/rest/report/xml",
+					"/rest/users/login/**")
+					.and()
 				.authorizeRequests()
-                    .antMatchers("/rest/auth/checkCredentials").access("#oauth2.isClient()")
+					.antMatchers("/rest/auth/checkCredentials").access("#oauth2.isClient()")
                     .antMatchers("/rest/users/create").access("#oauth2.isClient()")
-                    .antMatchers("/rest/report/**").access("hasRole('ADMIN')")
-                    .antMatchers("/rest/report/").access("hasRole('ADMIN')")
+					.antMatchers("/rest/report/xml").access("hasRole('ADMIN')")
+                    .antMatchers("/rest/report/**").access("hasAnyRole('ADMIN', 'USER')")
                     .antMatchers("/rest/users/login/**").permitAll()
-                    .antMatchers("/error").permitAll()
                     .antMatchers("/rest/**").access("#oauth2.hasScope('trust') and hasAnyRole('USER', 'ADMIN')");
             // @formatter:on
 		}

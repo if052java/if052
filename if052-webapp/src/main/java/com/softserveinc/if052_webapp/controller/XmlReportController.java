@@ -57,8 +57,23 @@ public class XmlReportController {
     private static Logger LOGGER = Logger.getLogger(XmlReportController.class);
 
     @RequestMapping("/xmlreport")
-    public ModelAndView getXmlReportPage() {
+     public ModelAndView getXmlReportPage() {
         ModelAndView model = new ModelAndView("xmlReport");
+        Date minDate = restTemplate.getForObject(restUrl + "report/mindate", Date.class);
+        Date maxDate = restTemplate.getForObject(restUrl + "report/maxdate", Date.class);
+        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        List<String> logins = Arrays.asList(restTemplate.getForObject(restUrl + "users/logins", String[].class));
+        List<MeterType> meterTypes = Arrays.asList(restTemplate.getForObject(restUrl + "metertypes/", MeterType[].class));
+        model.addObject(START_DATE, df.format(minDate));
+        model.addObject(END_DATE, df.format(maxDate));
+        model.addObject(METER_TYPES, meterTypes);
+        model.addObject(LOGINS, logins);
+        return model;
+    }
+
+    @RequestMapping("/excelreport")
+    public ModelAndView getExcelReportPage() {
+        ModelAndView model = new ModelAndView("excelReport");
         Date minDate = restTemplate.getForObject(restUrl + "report/mindate", Date.class);
         Date maxDate = restTemplate.getForObject(restUrl + "report/maxdate", Date.class);
         DateFormat df = new SimpleDateFormat("yyyy/MM/dd");

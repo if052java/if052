@@ -60,6 +60,12 @@
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             Інфо
                         </a></li>
+                        <security:authorize ifAllGranted="ROLE_USER">
+                            <li><a href="${base}excelreport">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                Exel
+                            </a></li>
+                        </security:authorize>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
