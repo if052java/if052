@@ -89,10 +89,10 @@ public class WaterMeterController {
                 HttpMethod.POST, new HttpEntity<WaterMeter>(waterMeter), String.class);
 
         
-//        if (waterMeterResponseEntity.getStatusCode().value() == 400) {
-//            model.addAttribute(REASON, "Meter with this name already exist.");
-//            return "error400";
-//        }
+        if (waterMeterResponseEntity.getStatusCode().value() == 400) {
+            model.addAttribute(REASON, "Errors");
+            return "error400";
+        }
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 

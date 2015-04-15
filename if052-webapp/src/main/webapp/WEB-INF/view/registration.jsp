@@ -10,8 +10,9 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-
+<!DOCTYPE html>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class ="body">
@@ -20,45 +21,74 @@
                     action="${addUrl}" method="post" modelAttribute="user" id="registrationForm" class="form-horizontal">
                 <sec:csrfInput/>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">Прізвище</label>
+                    <label class="col-xs-3 control-label">
+                        <spring:message 
+                                code="label.firstname">
+                        </spring:message>
+                        
+                    </label>
                     <div class="col-xs-5">
                         <input type="text" class="form-control" name="surname" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">Ім'я</label>
+                    <label class="col-xs-3 control-label">
+                        <spring:message
+                                code="label.surname">
+                        </spring:message>
+                    </label>
                     <div class="col-xs-5">
                         <input type="text" class="form-control" name="name" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">По-батькові</label>
+                    <label class="col-xs-3 control-label">
+                        <spring:message
+                                code="label.middleName">
+                        </spring:message>
+                    </label>
                     <div class="col-xs-5">
                         <input type="text" class="form-control" name="middleName" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">Електронна пошта</label>
+                    <label class="col-xs-3 control-label">
+                        <spring:message
+                                code="label.email">
+                        </spring:message>
+                    </label>
                     <div class="col-xs-5">
                         <input type="email" class="form-control" name="email" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">Логін</label>
+                    <label class="col-xs-3 control-label">
+                        <spring:message
+                                code="label.login">
+                        </spring:message>
+                    </label>
                     <div class="col-xs-5">
                         <input id="login" type="text" class="form-control" name="login"/>
                         <div id="login-errors" class ='login-error'></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">Пароль</label>
+                    <label class="col-xs-3 control-label">
+                        <spring:message
+                                code="label.password">
+                        </spring:message>
+                    </label>
                     <div class="col-xs-5">
                         <input type="password" class="form-control" name="password" id = "password" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">Підтвердження</label>
+                    <label class="col-xs-3 control-label">
+                        <spring:message
+                                code="label.confirmPassword">
+                        </spring:message>
+                    </label>
                     <div class="col-xs-5">
                         <input type="password" class="form-control" name="confirmPassword" />
                     </div>
@@ -66,7 +96,11 @@
 
                 <div class="form-group">
                     <div class="col-xs-9 col-xs-offset-3">
-                        <button id="submit" type="submit" class="btn btn-primary" name="sign up" value="">Зареєструватись</button>
+                        <button id="submit" name="signup" type="submit" class="btn btn-primary" name="sign up" value="">
+                            <spring:message
+                                    code="button.signup">
+                            </spring:message>
+                        </button>
                     </div>
                 </div>
             </form:form>

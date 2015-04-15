@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <div class="popups">
   <div class="container-fluid popups">
 
@@ -13,18 +15,30 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <strong>Увага!</strong>
+        <strong>
+            <%--<spring:message--%>
+                    <%--code="strong.attention">--%>
+            <%--</spring:message>--%>
+        </strong>
           <div class="divider"></div>
-          Ви не вносили показників більше 7 днів. Будь ласка, внесіть показник.
+          <%--<spring:message--%>
+                  <%--code="strong.indicatorsAtt">--%>
+          <%--</spring:message>--%>
       </div>
 
     <div class="warning alert map-warning" hidden="hidden">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <strong>Увага!</strong>
+      <strong>
+          <%--<spring:message--%>
+                  <%--code="strong.attention">--%>
+          <%--</spring:message>--%>
+      </strong>
       <div class="divider"></div>
-      Не вдалося знайти одну або декілька адрес.
+        <%--<spring:message --%>
+            <%--code="strong.addressAtt">--%>
+        <%--</spring:message>--%>
     </div>
 
   </div>

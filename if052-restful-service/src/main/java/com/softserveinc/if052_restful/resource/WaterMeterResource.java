@@ -67,13 +67,14 @@ public class WaterMeterResource {
         @Valid
         @RequestBody
         WaterMeter waterMeter,
+        BindingResult result,
         HttpServletResponse response) {
         
-//        if (result.hasErrors()) {
-//            LOGGER.info("Add watermeter validation found errors in request");
-//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-//            return null;
-//        }
+        if (result.hasErrors()) {
+            LOGGER.info("Add watermeter validation found errors in request");
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return null;
+        }
         LOGGER.info("INFO: Adding a new meter.");
 //        if (waterMeter.getName().length() < 1) {
 //            LOGGER.warn("WARNING: Meter name cannot be empty.");

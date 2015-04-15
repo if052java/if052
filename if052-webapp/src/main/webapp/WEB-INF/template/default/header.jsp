@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <c:url value="/" var="base"/>
 
@@ -66,6 +67,14 @@
                                 Exel
                             </a></li>
                         </security:authorize>
+                            <li>
+                                <span>
+                                    <a href="?lang=en">en</a>
+                                    |
+                                    <a href="?lang=ua">ua</a>
+                                </span>
+                                
+                            </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
