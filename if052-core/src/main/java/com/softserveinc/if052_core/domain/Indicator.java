@@ -39,8 +39,6 @@ public class Indicator {
         Date date, 
         Double tariffPerDate, 
         Integer value, 
-        Boolean paid, 
-        Boolean published, 
         WaterMeter waterMeter) {
             this.indicatorId = indicatorId;
             this.date = date;
@@ -55,8 +53,6 @@ public class Indicator {
         Date date, 
         Double tariffPerDate, 
         Integer value, 
-        Boolean paid, 
-        Boolean published, 
         WaterMeter waterMeter) {
             this.date = date;
             this.tariffPerDate = tariffPerDate;
