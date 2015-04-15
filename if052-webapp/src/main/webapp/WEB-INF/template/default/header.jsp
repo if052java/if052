@@ -67,16 +67,14 @@
                                 Exel
                             </a></li>
                         </security:authorize>
-                            <li>
-                                <span>
-                                    <a href="?lang=en">en</a>
-                                    |
-                                    <a href="?lang=ua">ua</a>
-                                </span>
-                                
-                            </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="?lang=en">en</a>
+                        </li>
+                        <li>
+                            <a href="?lang=ua">ua</a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>

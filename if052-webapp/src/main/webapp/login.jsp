@@ -8,10 +8,11 @@
 <head>
     <title>Login</title>
 </head>
+<body>
 <c:url value="/" var="base"/>
 
-<tiles:insertDefinition name="defaultTemplate">
-    <tiles:putAttribute name="body">
+<%--<tiles:insertDefinition name="defaultTemplate">--%>
+    <%--<tiles:putAttribute name="body">--%>
         <div class="body">
             <div class="container">
 
@@ -52,7 +53,7 @@
                 </form>
             </div>
         </div>
-    </tiles:putAttribute>
-</tiles:insertDefinition>
-
+    <%--</tiles:putAttribute>--%>
+<%--</tiles:insertDefinition>--%>
+</body>
 </html>
