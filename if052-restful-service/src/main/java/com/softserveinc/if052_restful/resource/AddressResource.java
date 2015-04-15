@@ -70,11 +70,9 @@ public class AddressResource {
 
     @RequestMapping(method=RequestMethod.POST, produces = "application/json")
     public Address createAddress(
-        @Valid
         @RequestBody
         Address address,
         HttpServletResponse response){
-        response.setStatus(HttpServletResponse.SC_CREATED);
         addressService.insertAddress(address);
         response.setStatus(HttpServletResponse.SC_CREATED);
 

@@ -9,8 +9,8 @@ $( document ).ready(function() {
                 type: 'spline'
             },
             title: {
-                text: 'Графік витрат за ' + year + '. Лічильник: ' + meterName
-                                          +', тип - ' + meterType + '.'
+                text: messages['graphs.consumption'] + year + '.' + messages['graphs.meter'] + meterName
+                                          + ', ' +  messages['graphs.meter'] + meterType + '.'
             },
             subtitle: {
                 text: ''
@@ -27,7 +27,7 @@ $( document ).ready(function() {
             },
             yAxis: {
                 title: {
-                    text: 'Значення'
+                    text: messages['graphs.value']
                 }
             },
             tooltip: {
@@ -43,7 +43,7 @@ $( document ).ready(function() {
             },
 
             series: [{
-                name: 'Значення',
+                name: messages['graphs.value'],
                 data: indicatorsData
             }
             ]
