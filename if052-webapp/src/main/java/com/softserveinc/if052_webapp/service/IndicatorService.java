@@ -180,14 +180,9 @@ public class IndicatorService {
      */
     private void parseDate(Indicator indicator, String dateStr, ServiceResponse serviceResponse) {
         try {
-            SimpleDateFormat formatter;
-            int strLng = dateStr.length();
-            if (dateStr.substring(strLng-2).equals("uk")) {
-                formatter  = new SimpleDateFormat("dd-MM-yyyy");
-            } else {
-                formatter = new SimpleDateFormat("MM/dd/yyyy");
-            }
-            dateStr = dateStr.substring(0, strLng-2);
+            System.out.println(dateStr);
+
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             Date date = formatter.parse(dateStr);
             indicator.setDate(date);
 
