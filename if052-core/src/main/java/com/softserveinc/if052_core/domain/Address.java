@@ -32,8 +32,6 @@ public final class Address {
     @NotEmpty
 	private String building;
 
-    @NotNull
-    @NotEmpty
 	private String apartment;
 
     @NotNull

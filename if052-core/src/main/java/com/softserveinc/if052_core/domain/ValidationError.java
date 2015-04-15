@@ -7,10 +7,18 @@ import java.util.List;
  */
 public class ValidationError {
 
+    private int responceStatus = 200;
+
     protected List<Field> fieldErrors;
 
     public ValidationError() {
-        this.fieldErrors = new ArrayList<Field>();
+        fieldErrors= new ArrayList<Field>();
+
+    }
+
+    public ValidationError(int response, List<Field> fieldErrors) {
+        this.responceStatus = response;
+        this.fieldErrors = fieldErrors;
     }
 
     public void addFieldError( String field, String message ) {
@@ -28,5 +36,13 @@ public class ValidationError {
 
     public void setFieldErrors( List<Field> fieldErrors ) {
         this.fieldErrors = fieldErrors;
+    }
+
+    public int getResponceStatus() {
+        return responceStatus;
+    }
+
+    public void setResponceStatus(int responceStatus) {
+        this.responceStatus = responceStatus;
     }
 }
