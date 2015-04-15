@@ -15,17 +15,6 @@ function initialize()
     for (var i=0; i<arrayData.length; i++){
         codeAddress(arrayData[i])
     }
-    google.maps.event.addListener(map, 'click', function(e) {
-        placeMarker(e.latLng, map);
-    });
-}
-
-function placeMarker(position, map) {
-    var marker = new google.maps.Marker({
-        position: position,
-        map: map
-    });
-    map.panTo(position);
 }
 
 function codeAddress(address)

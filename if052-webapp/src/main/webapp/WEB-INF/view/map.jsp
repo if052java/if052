@@ -13,13 +13,9 @@
                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                         Назад
                 </a>
-                <div id="panel">
-                    <button class="btn btn-primary" id="addMarker" onclick="addMarker()">Додати адресу</button>
-                </div>
                 <div id="map-canvas"></div>
             </div>
         </div>
-
         <script type="text/javascript">
             var gMapData = '${gMapData}'
         </script>
