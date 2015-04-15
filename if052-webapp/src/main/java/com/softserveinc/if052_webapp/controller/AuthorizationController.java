@@ -55,8 +55,7 @@ public class AuthorizationController {
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginDo(@ModelAttribute Auth auth, ModelMap modelMap, HttpServletRequest request) {
-        //Auth receivedAuth = restTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
+    public String loginDo(@ModelAttribute Auth auth, HttpServletRequest request) {
 
         ResponseEntity<String> responseEntity = credentialsTemplate.exchange(restUrl + "auth/checkCredentials",
                 HttpMethod.POST, new HttpEntity<Auth>(auth), String.class);
@@ -87,7 +86,6 @@ public class AuthorizationController {
                 passwordResource.setUsername(receivedAuth.getUserId());
                 passwordResource.setPassword(receivedAuth.getPassword());
 
-                authBean.setUserId(receivedAuth.getUserId());
                 authBean.setUsername(receivedAuth.getUsername());
                 authBean.setRole(receivedAuth.getRole());
 
@@ -104,26 +102,5 @@ public class AuthorizationController {
         Auth receivedAuth = credentialsTemplate.postForObject(restUrl + "auth/checkCredentials", auth, Auth.class);
         modelMap.addAttribute("auth", receivedAuth);
         return "JspForTest";
-    }
-
-    @RequestMapping("signin")
-    public String autologin(HttpServletRequest request) {
-
-//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken("user", "password");
-//        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
-        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken("someuser", "password", authorities);
-        token.setDetails(new WebAuthenticationDetails(request));
-        //Authentication authentication = new
-        //token.setAuthenticated(true);
-        LOGGER.debug("Logging in with " + token.getPrincipal().toString());
-        SecurityContextHolder.getContext().setAuthentication(token);
-        LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getPrincipal() + "!");
-        LOGGER.debug(SecurityContextHolder.getContext().getAuthentication().getAuthorities() + "!");
-
-        return "redirect:/";
     }
 }

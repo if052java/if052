@@ -69,23 +69,23 @@ public class OAuth2ServerConfig {
 				// session creation to be allowed (it's disabled by default in 2.0.6)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 			.and()
-				.requestMatchers().antMatchers("/rest/**",
+				.requestMatchers().antMatchers("/rest/**", "/**",
 					"/rest/auth/checkCredentials",
 					"/rest/users/create",
 					"/rest/report/**",
 					"/rest/report/xml",
 					"/rest/users/login/**")
-					.and()
+                    .and()
 				.authorizeRequests()
 					.antMatchers("/rest/auth/checkCredentials").access("#oauth2.isClient()")
                     .antMatchers("/rest/users/create").access("#oauth2.isClient()")
 					.antMatchers("/rest/report/xml").access("hasRole('ADMIN')")
                     .antMatchers("/rest/report/**").access("hasAnyRole('ADMIN', 'USER')")
                     .antMatchers("/rest/users/login/**").permitAll()
-                    .antMatchers("/rest/**").access("#oauth2.hasScope('trust') and hasAnyRole('USER', 'ADMIN')");
+                    .antMatchers("/rest/**").access("#oauth2.hasScope('trust') and hasAnyRole('USER', 'ADMIN')")
+                    .antMatchers("/**").denyAll();
             // @formatter:on
 		}
-
 	}
 
 	@Configuration
@@ -104,7 +104,6 @@ public class OAuth2ServerConfig {
 
 		@Override
 		public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
             // @formatter:off
 			clients.inMemory()
                     .withClient("trusted")
@@ -136,7 +135,6 @@ public class OAuth2ServerConfig {
 		public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 			oauthServer.realm("rest/client");
 		}
-
 	}
 
 	protected static class Stuff {
