@@ -2,12 +2,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Login</title>
 </head>
+<body>
 <c:url value="/" var="base"/>
 
 <tiles:insertDefinition name="defaultTemplate">
@@ -30,6 +32,7 @@
                     <fieldset>
                         <legend>
                             <h2>Вхід</h2>
+                            <spring:message code="address.city"/>
                         </legend>
                         <div class="row">
                             <div class="col-lg-4">
@@ -54,5 +57,5 @@
         </div>
     </tiles:putAttribute>
 </tiles:insertDefinition>
-
+</body>
 </html>

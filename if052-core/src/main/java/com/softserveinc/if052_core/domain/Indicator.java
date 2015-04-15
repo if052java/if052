@@ -24,11 +24,9 @@ public class Indicator {
     @Min(0)
     private Integer value;
 
-    @NotNull
-    private Boolean paid;
+    private boolean paid;
 
-    @NotNull
-    private Boolean published;
+    private boolean published;
 
     @NotNull
     private WaterMeter waterMeter;
@@ -41,8 +39,8 @@ public class Indicator {
         Date date, 
         Double tariffPerDate, 
         Integer value, 
-        Boolean paid, 
-        Boolean published, 
+        boolean paid,
+        boolean published,
         WaterMeter waterMeter) {
             this.indicatorId = indicatorId;
             this.date = date;
@@ -57,8 +55,6 @@ public class Indicator {
         Date date, 
         Double tariffPerDate, 
         Integer value, 
-        Boolean paid, 
-        Boolean published, 
         WaterMeter waterMeter) {
             this.date = date;
             this.tariffPerDate = tariffPerDate;
@@ -84,11 +80,11 @@ public class Indicator {
         this.date = date;
     }
 
-    public double getTariffPerDate() {
+    public Double getTariffPerDate() {
         return tariffPerDate;
     }
 
-    public void setTariffPerDate(double tariffPerDate) {
+    public void setTariffPerDate(Double tariffPerDate) {
         this.tariffPerDate = tariffPerDate;
     }
 

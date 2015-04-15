@@ -28,8 +28,13 @@ function codeAddress(address)
             var marker = new google.maps.Marker(
                 {
                     map: map,
-                    position: results[0].geometry.location
+                    position: results[0].geometry.location,
+                    title: address
                 });
+            google.maps.event.addListener(marker, 'click', function() {
+                map.setZoom(16);
+                map.setCenter(marker.getPosition());
+            });
         } else {
             $(".map-warning").fadeIn();
         }

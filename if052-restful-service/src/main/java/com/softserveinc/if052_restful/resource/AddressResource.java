@@ -74,7 +74,6 @@ public class AddressResource {
         @RequestBody
         Address address,
         HttpServletResponse response){
-        response.setStatus(HttpServletResponse.SC_CREATED);
         addressService.insertAddress(address);
         response.setStatus(HttpServletResponse.SC_CREATED);
 
@@ -83,6 +82,7 @@ public class AddressResource {
 
     @RequestMapping(value = "{addressId}", method = RequestMethod.PUT, produces = "application/json")
     public Address updateAddress(
+        @Valid
         @PathVariable("addressId") int addressId,
         @RequestBody
         Address address,

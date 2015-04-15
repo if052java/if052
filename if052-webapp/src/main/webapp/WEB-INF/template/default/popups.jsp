@@ -16,14 +16,14 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <strong>
-            <%--<spring:message--%>
-                    <%--code="strong.attention">--%>
-            <%--</spring:message>--%>
+            <spring:message
+                    code="strong.attention">
+            </spring:message>
         </strong>
           <div class="divider"></div>
-          <%--<spring:message--%>
-                  <%--code="strong.indicatorsAtt">--%>
-          <%--</spring:message>--%>
+          <spring:message
+                  code="strong.indicatorsAtt">
+          </spring:message>
       </div>
 
     <div class="warning alert map-warning" hidden="hidden">
@@ -31,14 +31,14 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <strong>
-          <%--<spring:message--%>
-                  <%--code="strong.attention">--%>
-          <%--</spring:message>--%>
+          <spring:message
+                  code="strong.attention">
+          </spring:message>
       </strong>
       <div class="divider"></div>
-        <%--<spring:message --%>
-            <%--code="strong.addressAtt">--%>
-        <%--</spring:message>--%>
+        <spring:message
+            code="strong.addressAtt">
+        </spring:message>
     </div>
 
   </div>

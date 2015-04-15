@@ -1,11 +1,11 @@
 CREATE TABLE consumer
 (
   user_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(45), surname VARCHAR(45),
-  middle_name VARCHAR(45),
-  login VARCHAR(45),
-  password VARCHAR(45),
-  email VARCHAR(45),
+  name VARCHAR(32), surname VARCHAR(32),
+  middle_name VARCHAR(32),
+  login VARCHAR(32),
+  password VARCHAR(32),
+  email VARCHAR(32),
   role VARCHAR(45)
 );
 

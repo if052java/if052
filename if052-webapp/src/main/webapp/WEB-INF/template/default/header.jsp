@@ -67,16 +67,14 @@
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             Інфо
                         </a></li>
-                            <li>
-                                <span>
-                                    <a href="?lang=en">en</a>
-                                    |
-                                    <a href="?lang=ua">ua</a>
-                                </span>
-                                
-                            </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="${base}?lang=en">EN</a>
+                        </li>
+                        <li>
+                            <a href="${base}?lang=ua">UA</a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
