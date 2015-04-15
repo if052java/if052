@@ -115,22 +115,25 @@ public class IndicatorControllerTest {
     public void testAddIndicator() throws Exception {
         when(meterServiceMock.getMeterById(4)).thenReturn(meterServResponce);
         when(indicatorServiceMock.getIndicatorList(4)).thenReturn(new ServiceResponse());
-        when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class),eq("4"), eq("11-04-2015"))).thenReturn(indServResponse);
+        when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class),eq("4"), eq("11-04-2015uk"))).thenReturn(indServResponse);
         mockMvc.perform(get("/indicators?meterId=4"));
         mockMvc.perform(post("/addIndicator")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("indicatorId", "1")
                         .param("dateStr", "11-04-2015")
+                        .param("locale", "uk")
                         .param("value", "503")
                         .param("paid", "true")
                         .sessionAttr("indicator", new Indicator())
-                        .requestAttr("dateStr", "11-04-2015"))
+                        .requestAttr("dateStr", "11-04-2015")
+                        .requestAttr("locale", "uk")
+        )
                 .andExpect(status().isMovedTemporarily())
                 .andExpect(redirectedUrl("/indicators?meterId=4"));
 
         ArgumentCaptor<Indicator> formObjectArgument = ArgumentCaptor.forClass(Indicator.class);
         verify(indicatorServiceMock, times(1)).getIndicatorList(4);
-        verify(indicatorServiceMock, times(1)).addIndicator(formObjectArgument.capture(), eq("4"), eq("11-04-2015"));
+        verify(indicatorServiceMock, times(1)).addIndicator(formObjectArgument.capture(), eq("4"), eq("11-04-2015uk"));
         verify(meterServiceMock, times(1)).getMeterById(4);
         verifyNoMoreInteractions(indicatorServiceMock);
         verifyNoMoreInteractions(meterServiceMock);
