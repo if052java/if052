@@ -30,13 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and() //.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/**")).disable()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout.do"))
-                .logoutSuccessUrl("/login.jsp")
+                .logoutSuccessUrl("/login")
                 .permitAll()
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/login.do")
-                .loginPage("/login.jsp")
-                .failureUrl("/login.jsp?authentication_error=true")
+                .loginPage("/login")
+                .failureUrl("/login?authentication_error=true")
                 .permitAll();
         // @formatter:on
     }

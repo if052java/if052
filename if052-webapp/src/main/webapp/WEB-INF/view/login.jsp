@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +12,8 @@
 <body>
 <c:url value="/" var="base"/>
 
-<%--<tiles:insertDefinition name="defaultTemplate">--%>
-    <%--<tiles:putAttribute name="body">--%>
+<tiles:insertDefinition name="defaultTemplate">
+    <tiles:putAttribute name="body">
         <div class="body">
             <div class="container">
 
@@ -31,6 +32,7 @@
                     <fieldset>
                         <legend>
                             <h2>Вхід</h2>
+                            <spring:message code="address.city"/>
                         </legend>
                         <div class="row">
                             <div class="col-lg-4">
@@ -53,7 +55,7 @@
                 </form>
             </div>
         </div>
-    <%--</tiles:putAttribute>--%>
-<%--</tiles:insertDefinition>--%>
+    </tiles:putAttribute>
+</tiles:insertDefinition>
 </body>
 </html>

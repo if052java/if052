@@ -53,6 +53,10 @@ public class AuthorizationController {
     @Autowired
     private Auth authBean;
 
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String loginJsp(){
+        return "login";
+    }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginDo(@ModelAttribute Auth auth, HttpServletRequest request) {
