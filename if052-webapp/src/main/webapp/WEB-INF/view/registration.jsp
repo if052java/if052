@@ -28,7 +28,7 @@
                         
                     </label>
                     <div class="col-xs-5">
-                        <input type="text" class="form-control" name="surname" />
+                        <input type="text" class="form-control" name="name" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -38,7 +38,7 @@
                         </spring:message>
                     </label>
                     <div class="col-xs-5">
-                        <input type="text" class="form-control" name="name" />
+                        <input type="text" class="form-control" name="surname" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -109,6 +109,22 @@
         <script src="/resources/js/jquery/jquery-validate.js"></script>
         <script type="text/javascript">
             var restURL = '${restUrl}';
+            var strings =  new Array()
+            strings['required.name'] = "<spring:message code='required.name' javaScriptEscape='true' />"
+            strings['required.surname'] = "<spring:message code='required.surname' javaScriptEscape='true' />"
+            strings['required.middleName'] = "<spring:message code='required.middleName' javaScriptEscape='true' />"
+            strings['required.login'] = "<spring:message code='required.login' javaScriptEscape='true' />"
+            strings['required.email'] = "<spring:message code='required.email' javaScriptEscape='true' />"
+            strings['required.password'] = "<spring:message code='required.password' javaScriptEscape='true' />"
+            strings['required.confirmPassword'] = "<spring:message code='required.confirmPassword' javaScriptEscape='true' />"
+            strings['rangelength.name'] = "<spring:message code='rangelength.name' javaScriptEscape='true' />"
+            strings['rangelength.surname'] = "<spring:message code='rangelength.surname' javaScriptEscape='true' />"
+            strings['rangelength.middleName'] = "<spring:message code='rangelength.middleName' javaScriptEscape='true' />"
+            strings['rangelength.login'] = "<spring:message code='rangelength.login' javaScriptEscape='true' />"
+            strings['rangelength.password'] = "<spring:message code='rangelength.password' javaScriptEscape='true' />"
+            strings['rangelength.confirmPassword'] = "<spring:message code='rangelength.confirmPassword' javaScriptEscape='true' />"
+            strings['equalTo.confirmPassword'] = "<spring:message code='equalTo.confirmPassword' javaScriptEscape='true' />"
+            strings['email.email'] = "<spring:message code='email.email' javaScriptEscape='true' />"
         </script>
         <script src="/resources/js/registration.js"></script>
         

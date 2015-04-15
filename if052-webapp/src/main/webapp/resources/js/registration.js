@@ -2,62 +2,64 @@ $(document).ready(function() {
     $('#registrationForm').validate({
         rules: {
             "name": {
+                required : true,
+                rangelength :[2, 32]
             },
             "surname": {
                 required : true,
-                rangelength:[2, 32]
+                rangelength : [2, 32]
             }, 
             "middleName": {
                 required : true,
-                rangelength:[2, 32]
+                rangelength : [2, 32]
             },
             "login": {
                 required : true,
-                rangelength:[8, 32]
+                rangelength : [8, 32]
             },
             "email":{
                 required : true,
-                email: true
+                email : true
             },
             "password": {
                 required : true,
-                rangelength:[8, 32]
+                rangelength : [8, 32]
             },
             "confirmPassword":{
                 required : true,
-                rangelength:[8, 32],
-                equalTo:"#password"
+                rangelength : [8, 32],
+                equalTo : "#password"
             }
         },
         messages: {
             "name": {
-                required : "Це поле обов'язкове для запису",
-                rangelength:"Від 2 до 32 символів"
+                required : strings['required.name'],
+                rangelength : strings['rangelength.name']
             },
             "surname": {
-                required :"Це поле обов'язкове для запису",
-                rangelength:"Від 2 до 32 символів"
+                required  : strings['required.surname'],
+                rangelength : strings['rangelength.surname']
             },
             "middleName": {
-                required : "Це поле обов'язкове для запису",
-                rangelength: "Від 2 до 32 символів"
+                required : strings['required.middleName'],
+                rangelength : strings['rangelength.middleName']
             },
             "login": {
-                required : "Це поле обов'язкове для запису",
-                rangelength: "Від 8 до 32 символів"
+                required : strings['required.login'],
+                rangelength : strings['rangelength.login']
             },
             "email":{
-                required : "Це поле обов'язкове для запису",
-                email: "Невалідний емайл"
+                required : strings['required.email'],
+                email : strings['email.email']
             },
             "password": {
-                required : "Це поле обов'язкове для запису",
-                rangelength: "Від 8 до 32 символів"
+                required : strings['required.password'],
+                rangelength : strings['rangelength.password']
             },
             "confirmPassword":{
-                required : "Це поле обов'язкове для запису",
-                rangelength: "Від 8 до 32 символів",
-                equalTo:"Пароль підтверджено невірно"
+                required : strings['required.confirmPassword'],
+                rangelength : strings['rangelength.confirmPassword'],
+                equalTo : strings['equalTo.confirmPassword']
             }
         }
     });
