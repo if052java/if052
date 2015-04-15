@@ -14,7 +14,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <fmt:message var="dateFormat" key="local.date.format"/>
-<fmt:message var="locale" key="local.leng"/>
+<fmt:message var="locale" key="local.lang"/>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
@@ -51,7 +51,7 @@
                         </th>
                         <th>
                             <spring:message
-                                    code="th.paid">
+                                    code="indicators.cost">
                             </spring:message>
                         </th>
                         <th title=<spring:message code="th.paid"/> ><spring:message code="indicators.paid.min"/></th>
