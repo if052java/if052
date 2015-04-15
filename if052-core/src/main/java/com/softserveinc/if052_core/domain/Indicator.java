@@ -24,11 +24,9 @@ public class Indicator {
     @Min(0)
     private Integer value;
 
-    @NotNull
-    private Boolean paid;
+    private boolean paid;
 
-    @NotNull
-    private Boolean published;
+    private boolean published;
 
     @NotNull
     private WaterMeter waterMeter;
@@ -84,11 +82,11 @@ public class Indicator {
         this.date = date;
     }
 
-    public double getTariffPerDate() {
+    public Double getTariffPerDate() {
         return tariffPerDate;
     }
 
-    public void setTariffPerDate(double tariffPerDate) {
+    public void setTariffPerDate(Double tariffPerDate) {
         this.tariffPerDate = tariffPerDate;
     }
 

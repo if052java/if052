@@ -70,6 +70,7 @@ public class AddressResource {
 
     @RequestMapping(method=RequestMethod.POST, produces = "application/json")
     public Address createAddress(
+        @Valid
         @RequestBody
         Address address,
         HttpServletResponse response){
@@ -81,6 +82,7 @@ public class AddressResource {
 
     @RequestMapping(value = "{addressId}", method = RequestMethod.PUT, produces = "application/json")
     public Address updateAddress(
+        @Valid
         @PathVariable("addressId") int addressId,
         @RequestBody
         Address address,
