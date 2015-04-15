@@ -33,31 +33,31 @@ $(document).ready(function() {
         },
         messages: {
             "name": {
-                required : strings['required.name'],
+                required : strings['required.field'],
                 rangelength : strings['rangelength.name']
             },
             "surname": {
-                required  : strings['required.surname'],
+                required  : strings['required.field'],
                 rangelength : strings['rangelength.surname']
             },
             "middleName": {
-                required : strings['required.middleName'],
+                required : strings['required.field'],
                 rangelength : strings['rangelength.middleName']
             },
             "login": {
-                required : strings['required.login'],
+                required : strings['required.field'],
                 rangelength : strings['rangelength.login']
             },
             "email":{
-                required : strings['required.email'],
+                required : strings['required.field'],
                 email : strings['email.email']
             },
             "password": {
-                required : strings['required.password'],
+                required : strings['required.field'],
                 rangelength : strings['rangelength.password']
             },
             "confirmPassword":{
-                required : strings['required.confirmPassword'],
+                required : strings['required.field'],
                 rangelength : strings['rangelength.confirmPassword'],
                 equalTo : strings['equalTo.confirmPassword']
             }

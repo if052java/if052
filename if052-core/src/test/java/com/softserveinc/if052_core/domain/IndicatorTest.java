@@ -28,8 +28,6 @@ public class IndicatorTest extends AbstractModel {
             new Date(),
             new Double(-5),
             new Integer(-3),
-            new Boolean(true),
-            new Boolean(true),
             new WaterMeter()
         );
 
@@ -73,13 +71,11 @@ public class IndicatorTest extends AbstractModel {
             null,
             null,
             null,
-            null,
-            null,
             null
         );
 
         constraintViolationSet = validator.validate(indicatorFailureNotNull);
-        assertEquals( 6, constraintViolationSet.size() );
+        assertEquals( 4, constraintViolationSet.size() );
 
         for( ConstraintViolation<Indicator> constraintViolation : constraintViolationSet ) {
             //- Property name -//

@@ -61,7 +61,7 @@
 
 
                 <c:url var="addUrl" value="/addAddress"/>
-                <form:form action="${addUrl}" method="post" modelAttribute="address">
+                <form:form action="${addUrl}" method="post" id="addAddress" modelAttribute="address">
                     <sec:csrfInput/>
                     <table class="box-table-a">
                         <caption><spring:message code="address.addAddress"/></caption>
@@ -76,16 +76,16 @@
                         <tbody>
                         <tr>
                             <td>
-                                <input class="form-control" type="text" name="city" required title=<spring:message code="validation.required"/>/>
+                                <input class="form-control" type="text" name="city" />
                             </td>
                             <td> 
-                                <input class="form-control" type="text" name="street" required title=<spring:message code="validation.required"/>/>
+                                <input class="form-control" type="text" name="street" />
                             </td>
                             <td>
-                                <input class="form-control" type="text" name="building" required title=<spring:message code="validation.required"/>/>
+                                <input class="form-control" type="text" name="building" "/>
                             </td>
                             <td>
-                                <input class="form-control" type="text" name="apartment" required title=<spring:message code="validation.required"/>/>
+                                <input class="form-control" type="number" name="apartment" />
                             </td>
                             <td>
                                 <button class="btn btn-default" type="submit">
@@ -98,5 +98,16 @@
                 </form:form>
             </div>
         </div>
+
+        <script src="/resources/js/jquery/jquery-validate.js"></script>
+        <script type="text/javascript">
+            var messages = new Array();
+            messages['maxlength.city'] = "<spring:message code='maxlength.city' javaScriptEscape='true' />"
+            messages['maxlength.street'] = "<spring:message code='maxlength.street' javaScriptEscape='true' />"
+            messages['maxlength.building'] = "<spring:message code='maxlength.building' javaScriptEscape='true' />"
+            messages['required.field'] = "<spring:message code='required.field' javaScriptEscape='true' />"
+        </script>
+        <script src="/resources/js/address.js"></script>
+
     </tiles:putAttribute>
 </tiles:insertDefinition>
