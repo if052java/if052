@@ -11,6 +11,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<fmt:message var="dateFormat" key="local.date.format"/>
+
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
@@ -67,7 +69,7 @@
                 <c:forEach var="indicator" items="${lastIndicators}">
                     <tr>
                         <td>
-                            <fmt:formatDate value="${indicator.date}" pattern="dd-MM-yyyy" />
+                            <fmt:formatDate value="${indicator.date}" pattern="${dateFormat}" />
                         </td>
                         <td><c:out value="${indicator.value}"/></td>
                         <td><c:out value="${indicator.tariffPerDate}"/></td>
@@ -96,7 +98,7 @@
                         <a href="<c:url value='/addresses'/>"
                            class="btn btn-default"  role="button">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            Додати
+                            <spring:message code="indicators.addIndicator"/>
                         </a>
                     </div>
                 </c:if>
