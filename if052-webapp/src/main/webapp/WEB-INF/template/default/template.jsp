@@ -35,10 +35,7 @@
         </div>
     </div>
 </div>
-</body>
-
 <script type="text/javascript" src="<c:url value="/resources/js/pace.min.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-
-
+</body>
 </html>
