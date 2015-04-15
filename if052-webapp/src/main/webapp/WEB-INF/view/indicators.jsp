@@ -11,7 +11,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<fmt:message var="dateFormat" key="local.date.format"/>
+<fmt:message var="locale" key="local.leng"/>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
@@ -21,23 +24,39 @@
                 <a href="<c:url value='/watermeter?addressId=${waterMeter.address.addressId}'/>"
                             class="btn btn-default"  role="button">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    Назад
+                    <spring:message code="nav.back"/>
                 </a>
 
                 <table class="table table-hover" cellspacing="0" width="100%"
                        <c:if test="${indicators.size()!=0}">id="paginated"</c:if> >
 
                     <thead>
-                    <h4>Показники лічильника: ${waterMeter.name}
+                    <h4><spring:message code="indicators.thead"/>: ${waterMeter.name}
                         <c:if test="${waterMeter.description !=null && waterMeter.description !=''}">, ${waterMeter.description} </c:if></h4>
                     <tr>
-                        <th>Дата</th>
-                        <th>Показник</th>
-                        <th>Тариф</th>
-                        <th>Вартість</th>
-                        <th title="Оплачено">Опл.</th>
-                        <th title="Опубліковано">Опубл.</th>
-                        <th>Дії</th>
+                        <th>
+                            <spring:message
+                                    code="th.date">
+                            </spring:message>
+                        </th>
+                        <th>
+                            <spring:message
+                                    code="th.value">
+                            </spring:message>
+                        </th>
+                        <th>
+                            <spring:message
+                                    code="th.tariff">
+                            </spring:message>
+                        </th>
+                        <th>
+                            <spring:message
+                                    code="th.paid">
+                            </spring:message>
+                        </th>
+                        <th title=<spring:message code="th.paid"/> ><spring:message code="indicators.paid.min"/></th>
+                        <th title=<spring:message code="th.published"/> ><spring:message code="indicators.published.min"/></th>
+                        <th><spring:message code="indicators.actions"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -49,7 +68,7 @@
                                 <span style='display:none'><%--this is for proper sorting by date --%>
                                      <fmt:formatDate value="${indicator.date}" pattern="yyyy.MM.dd" />
                                 </span>
-                                <fmt:formatDate value="${indicator.date}" pattern="dd-MM-yyyy" />
+                                <fmt:formatDate value="${indicator.date}" pattern="${dateFormat}" />
                             </td>
                             <td><c:out value="${indicator.value}"/></td>
                             <td><c:out value="${indicator.tariffPerDate}"/></td>
@@ -91,17 +110,32 @@
                 <form:form action="${addUrl}" method="post" modelAttribute="indicator">
                     <sec:csrfInput/>
                     <table class="box-table-a">
-                        <caption> Додати показник </caption>
+                        <caption> <spring:message code="indicators.addIndicator"/> </caption>
                         <thead>
                             <tr>
-                                <th>Дата</th>
-                                <th>Показник</th>
-                                <th>Оплачено</th>
+                                <th>
+                                    <spring:message
+                                            code="th.date">
+                                    </spring:message>
+                                </th>
+                                <th>
+                                    <spring:message
+                                            code="th.value">
+                                    </spring:message>
+                                </th>
+                                <th>
+                                    <spring:message
+                                            code="th.paid">
+                                    </spring:message>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text" id="datepicker" name="dateStr"/></td>
+                                <td>
+                                    <input class="form-control" type="text" id="datepicker" name="dateStr"/>
+                                    <input hidden="hidden" type="text" name="locale" value="${locale}"/>
+                                </td>
                                 <td><input class="form-control" type="number" step="1"
                                            name="value" value="${indicators.size()!=0 ? indicators.get(indicators.size()-1).value : 0}"/></td>
                                 <td><input class="checkbox" type="checkbox" name="paid" /></td>
@@ -116,6 +150,9 @@
                 </form:form>
             </div>
         </div>
+        <script>
+            var locale = '${locale}'
+        </script>
 
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
