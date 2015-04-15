@@ -3,6 +3,7 @@ package com.softserveinc.if052_webapp.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_core.domain.Address;
 import com.softserveinc.if052_core.domain.MeterType;
+import com.softserveinc.if052_core.domain.ValidationError;
 import com.softserveinc.if052_core.domain.WaterMeter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,10 +89,15 @@ public class WaterMeterController {
         ResponseEntity<String> waterMeterResponseEntity = restTemplate.exchange(restUrl + "watermeters/",
                 HttpMethod.POST, new HttpEntity<WaterMeter>(waterMeter), String.class);
 
-        
-        if (waterMeterResponseEntity.getStatusCode().value() == 400) {
-            model.addAttribute(REASON, "Errors");
-            return "error400";
+        try {
+            ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class);
+
+            if (error.getResponceStatus() == 400) {
+                model.addAttribute(REASON, "Validation errors");
+                return "error400";
+            }
+        } catch (IOException e) {
+            LOGGER.warn(e.getMessage(), e);
         }
         return "redirect:/watermeter?addressId=" + this.addressId;
     }

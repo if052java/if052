@@ -93,12 +93,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return localeResolver;
     }
 
-//    @Bean
-//    public ControllerClassNameHandlerMapping handlerMapping(){
-//        ControllerClassNameHandlerMapping handlerMapping 
-//            = new ControllerClassNameHandlerMapping();
-//        return handlerMapping;
-//    }
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
