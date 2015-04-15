@@ -19,21 +19,29 @@
 
             <div class="container">
 
+                <h2>Оберіть період, за який необхідно сформувати звіт: </h2>
+
                 <c:url var="createExcelUrl" value="/createExcelReport"/>
-                <form:form action="${createExcelUrl}" method="get" modelAttribute="reportRequest" id="excelForm" autocomplete="off">
-
-                    <div class="form-group">
-                        <label for="startDate">Початкова дата</label>
-                        <input type="text" name="startDate" class="form-control" id="startDate" value="${startDate}" required/>
+                <form:form action="${createExcelUrl}" method="get" modelAttribute="reportRequest" id="excelForm"
+                           autocomplete="off">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="startDate">Початкова дата</label>
+                                <input type="text" name="startDate" class="form-control" id="startDate"
+                                       value="${startDate}" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">Кінцева дата</label>
+                                <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}"
+                                       required/>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" id="subBtn" class="btn btn-primary">Завантажити звіт (MS Excel)
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="endDate">Кінцева дата</label>
-                        <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}" required/>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" id="subBtn" class="btn btn-primary">Завантажити звіт</button>
-                    </div>
-
                 </form:form>
 
             </div>
@@ -43,8 +51,7 @@
 
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
-        <script type="text/javascript" src="<c:url value='/resources/js/excelReport.js'/>"></script>
-
+        <script type="text/javascript" src="<c:url value='/resources/js/datepicker.js'/>"></script>
 
 
     </tiles:putAttribute>

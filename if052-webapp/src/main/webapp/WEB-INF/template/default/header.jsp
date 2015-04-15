@@ -47,6 +47,12 @@
                             Моя статистика
                         </a></li>
                             </security:authorize>
+                            <security:authorize ifAllGranted="ROLE_USER">
+                                <li><a href="${base}excelreport">
+                                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                                    Звітність
+                                </a></li>
+                            </security:authorize>
                             <security:authorize ifAllGranted="ROLE_ADMIN">
                         <li><a href="${base}xmlreport">
                             <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
@@ -61,12 +67,6 @@
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             Інфо
                         </a></li>
-                        <security:authorize ifAllGranted="ROLE_USER">
-                            <li><a href="${base}excelreport">
-                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                Exel
-                            </a></li>
-                        </security:authorize>
                             <li>
                                 <span>
                                     <a href="?lang=en">en</a>

@@ -1,5 +1,5 @@
 /**
- * Created by User on 14.04.2015.
+ * Created by Danylo Tiahun on 15.04.2015.
  */
 
 $(document).ready(function () {

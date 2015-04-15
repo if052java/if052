@@ -23,61 +23,70 @@
 
                 <h2>Оберіть фільтри для звіту:</h2>
                 <c:url var="createXmlUrl" value="/createXmlReport"/>
-                <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest" id="xmlForm" autocomplete="off">
+                <form:form action="${createXmlUrl}" method="get" modelAttribute="reportRequest" id="xmlForm"
+                           autocomplete="off">
 
-
-                    <div class="form-group">
-                        <label for="users">Логін користувача</label>
-                        <div class="checkbox-inline">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="users" value="ALL" id="allUsers"/> Усі користувачі
-                            </label>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="users">Логін користувача</label>
+                                <div class="checkbox-inline">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="users" value="ALL" id="allUsers"/> Усі користувачі
+                                    </label>
+                                </div>
+                                <input type="text" name="users" class="form-control" id="users" required/>
+                                <label hidden="true" id="noLoginLabel"><font color="red">Такого логіна немає. Оберіть
+                                    варіант зі списку.</font></label>
+                            </div>
+                            <div class="form-group">
+                                <label for="startDate">Початкова дата</label>
+                                <input type="text" name="startDate" class="form-control" id="startDate"
+                                       value="${startDate}" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="endDate">Кінцева дата</label>
+                                <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}"
+                                       required/>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-inline" id="types">
+                                    <label for="types">Необхідні види лічильників</label>
+                                    <div class="checkbox-inline">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" id="allTypes"/> Усі види
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <c:forEach var="meterType" items="${meterTypes}">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" class="checkType" name="types"
+                                                   value="${meterType.meterTypeId}"/> ${meterType.type}
+                                        </label>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" id="subBtn" class="btn btn-primary" disabled>Завантажити
+                                    xml-звіт
+                                </button>
+                            </div>
                         </div>
-                        <input type="text" name="users" class="form-control" id="users" required />
-                        <label hidden="true" id="noLoginLabel"><font color="red">Такого логіна немає. Оберіть варіант зі списку.</font></label>
                     </div>
-
-                    <div class="form-group">
-                        <label for="startDate">Початкова дата</label>
-                        <input type="text" name="startDate" class="form-control" id="startDate" value="${startDate}" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="endDate">Кінцева дата</label>
-                        <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}" required/>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="checkbox-inline" id="types" >
-                            <label for="types">Необхідні види лічильників</label>
-                            <div class="checkbox-inline">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="allTypes" /> Усі види
-                                </label>
-                            </div><br>
-                            <c:forEach var="meterType" items="${meterTypes}">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" class="checkType" name="types" value="${meterType.meterTypeId}" /> ${meterType.type}
-                                </label>
-                            </c:forEach>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" id="subBtn" class="btn btn-primary" disabled>Завантажити xml-звіт</button>
-                    </div>
+                    
                 </form:form>
             </div>
 
         </div>
 
 
-
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/resources/js/datepicker.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/xmlReport.js'/>"></script>
         <script>
             var logins = [];
-            $(document).ready(function() {
+            $(document).ready(function () {
                 <c:forEach items="${logins}" var="login">
                 logins.push("<c:out value="${login}" />");
                 </c:forEach>

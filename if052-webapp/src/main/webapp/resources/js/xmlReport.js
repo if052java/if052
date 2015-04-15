@@ -19,24 +19,6 @@ $(document).ready(function () {
         $(this).autocomplete("search");
     });
 
-    $.datepicker.setDefaults($.datepicker.regional[ "uk" ]);
-
-    $("#startDate").datepicker({
-        dateFormat: "yy/mm/dd",
-        numberOfMonths: 2,
-        onSelect: function(selected) {
-            $("#endDate").datepicker("option","minDate", selected)
-        }
-    });
-
-    $("#endDate").datepicker({
-        dateFormat: "yy/mm/dd",
-        numberOfMonths: 2,
-        onSelect: function(selected) {
-            $("#startDate").datepicker("option","maxDate", selected)
-        }
-    });
-
     $('#allUsers').change(function () {
         $('#users').val("");
         $('#users').prop('disabled', this.checked);
