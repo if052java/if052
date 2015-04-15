@@ -74,19 +74,8 @@ public class WaterMeterResource {
         @Valid
         @RequestBody
         WaterMeter waterMeter,
-        BindingResult result,
         HttpServletResponse response) {
-        
-        if (result.hasErrors()) {
-            LOGGER.info("Add watermeter validation found errors in request");
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            List< FieldError > errors = result.getFieldErrors();
-            List<Field> fields = errorController.processValidationError(errors);
-            return new ValidationError(
-                response.getStatus(),
-                fields
-            );
-        }
+
 
         LOGGER.info("INFO: Adding a new meter.");
 //        if (waterMeter.getName().length() < 1) {

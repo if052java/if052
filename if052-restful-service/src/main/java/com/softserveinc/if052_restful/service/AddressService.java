@@ -1,6 +1,7 @@
 package com.softserveinc.if052_restful.service;
 
 import com.softserveinc.if052_core.domain.Address;
+import com.softserveinc.if052_core.domain.User;
 import com.softserveinc.if052_restful.mappers.AddressMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,10 @@ public class AddressService {
     }
 
     public void insertAddress(Address address) {
+        Integer userId = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName());
+        User user = new User();
+        user.setUserId(userId);
+        address.setUser(user);
         addressMapper.insertAddress(address);
     }
 

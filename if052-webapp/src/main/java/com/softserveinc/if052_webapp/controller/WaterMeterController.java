@@ -86,19 +86,23 @@ public class WaterMeterController {
 //        }
         ResponseEntity addressResponseEntity = restTemplate.getForEntity(restUrl + "addresses/" + addressId, Address.class);
         waterMeter.setAddress((Address) addressResponseEntity.getBody());
+
         ResponseEntity<String> waterMeterResponseEntity = restTemplate.exchange(restUrl + "watermeters/",
                 HttpMethod.POST, new HttpEntity<WaterMeter>(waterMeter), String.class);
 
-        try {
-            ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class);
 
-            if (error.getResponceStatus() == 400) {
-                model.addAttribute(REASON, "Validation errors");
+        try {
+            ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class );
+            
+            if(error.getFieldErrors().size()>0){
+                model.addAttribute(REASON, "Errors");
                 return "error400";
             }
         } catch (IOException e) {
-            LOGGER.warn(e.getMessage(), e);
+            e.printStackTrace();
         }
+
+
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
