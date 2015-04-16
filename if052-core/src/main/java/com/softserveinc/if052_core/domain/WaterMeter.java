@@ -23,7 +23,6 @@ public class WaterMeter {
     @Length(max=64)
     private String description;
 
-    @DecimalMin(value = "0.00")
     private Double tariff;
 
     @NotNull

@@ -54,34 +54,8 @@ public class RegistrationController {
         user.setSurname(user.getSurname().trim());
         user.setMiddleName(user.getMiddleName().trim());
         user.setRole("USER");
-        user = restTemplate.postForObject(restUrl + "users/create", user, User.class);
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.setErrorHandler(new ResponseErrorHandler() {
-                @Override
-                public boolean hasError(ClientHttpResponse response) throws IOException {
-                    return false;
-                }
+        restTemplate.postForObject(restUrl + "users/create", user, User.class);
 
-                @Override
-                public void handleError(ClientHttpResponse response) throws IOException {
-
-                }
-            });
-            try {
-                ResponseEntity<String> userResponseEntity = restTemplate.postForEntity(restUrl
-                    + "users/", user, String.class);
-
-                if(userResponseEntity.getStatusCode().value() == 400) {
-                    String errorBody = userResponseEntity.getBody();
-
-                    ValidationError validationError = objectMapper.readValue(
-                        errorBody, ValidationError.class);
-                    model.addAttribute(VALIDATIONERROR, validationError.getFieldErrors());
-                }
-
-            } catch (IOException e1) {
-                LOGGER.warn("IO exception. Reason: get validation error from JSON");
-            }
         return "redirect:/";
     }
 }
