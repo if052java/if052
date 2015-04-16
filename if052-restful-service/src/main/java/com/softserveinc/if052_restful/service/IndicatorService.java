@@ -70,5 +70,9 @@ public class IndicatorService {
         Integer userId = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName());
         return indicatorMapper.getIndicatorsByUserId(userId, number);
     }
+
+    public Integer getUserIdForIndicator(int indicatorId){
+        return indicatorMapper.getUserIdForIndicator(indicatorId);
+    }
 }
 

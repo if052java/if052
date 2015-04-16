@@ -90,6 +90,7 @@ public class IndicatorResource {
         return indicators;
     }
 
+    @PreAuthorize("hasPermission(#indicatorId, 'indicator')")
     @RequestMapping(value = "/getone/{indicatorId}", method = RequestMethod.GET, produces = "application/json")
     public Indicator getIndicator(
             @PathVariable("indicatorId") int indicatorId,
@@ -105,6 +106,7 @@ public class IndicatorResource {
         return indicator;
     }
 
+    @PreAuthorize("hasPermission(#indicatorId, 'indicator')")
     @RequestMapping(value = "{indicatorId}", method = RequestMethod.DELETE, produces = "application/json")
     public void deleteIndicator(
             @PathVariable("indicatorId") int indicatorId,
@@ -144,6 +146,7 @@ public class IndicatorResource {
         }
     }
 
+    @PreAuthorize("hasPermission(#indicator.indicatorId, 'indicator')")
     @RequestMapping(value = "{indicatorId}", method = RequestMethod.PUT, produces = "application/json")
     public Indicator updateIndicator(
         @PathVariable("indicatorId") int indicatorId,

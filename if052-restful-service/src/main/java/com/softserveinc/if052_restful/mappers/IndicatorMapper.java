@@ -27,6 +27,8 @@ public interface IndicatorMapper {
 
     public Date getMaxDate();
 
+    public Integer getUserIdForIndicator(int indicatorId);
+
     /**
      * Get indicators by start and end of date
      * 

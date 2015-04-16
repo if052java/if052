@@ -1,8 +1,10 @@
 package com.softserveinc.if052_restful.config;
 
 import com.softserveinc.if052_core.domain.Address;
+import com.softserveinc.if052_core.domain.Indicator;
 import com.softserveinc.if052_core.domain.WaterMeter;
 import com.softserveinc.if052_restful.service.AddressService;
+import com.softserveinc.if052_restful.service.IndicatorService;
 import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
     @Autowired
     WaterMeterService waterMeterService;
+
+    @Autowired
+    IndicatorService indicatorService;
 
     private static Logger LOGGER = Logger.getLogger(CustomPermissionEvaluator.class.getName());
 
@@ -45,6 +50,13 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
             Integer waterMeterId = (Integer) target;
             WaterMeter waterMeter = waterMeterService.getWaterMeterById(waterMeterId);
             return check(waterMeter.getAddress().getUser().getUserId(), authentication);
+        } else
+
+        if (permission.toString().equals("indicator")){
+            LOGGER.debug("indicator");
+            Integer indicatorId = (Integer) target;
+            Integer userId = indicatorService.getUserIdForIndicator(indicatorId);
+            return check(userId, authentication);
         }
 
         return false;

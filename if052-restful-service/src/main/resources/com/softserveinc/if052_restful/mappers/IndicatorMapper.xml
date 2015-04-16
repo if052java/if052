@@ -30,6 +30,21 @@
         <result property="date" column="m_date"/>
     </resultMap>
 
+
+    <resultMap id="UserIdResult" type="java.lang.Integer">
+        <result property="value" column="user_id"/>
+    </resultMap>
+
+    <select id="getUserIdForIndicator" parameterType="int" resultMap="UserIdResult">
+        SELECT
+        c.user_id
+        FROM indicator i
+        LEFT OUTER JOIN watermeter wm on i.water_meter_id = wm.water_meter_id
+        LEFT OUTER JOIN address a on wm.address_id = a.address_id
+        LEFT OUTER JOIN consumer c on a.user_id = c.user_id
+        WHERE indicator_id = #{indicatorId}
+    </select>
+
     <select id="getIndicatorById" parameterType="int" resultMap="IndicatorResult">
         SELECT
         i.indicator_id,
