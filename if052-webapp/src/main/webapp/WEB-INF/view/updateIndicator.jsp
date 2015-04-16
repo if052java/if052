@@ -11,12 +11,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<fmt:message var="dateFormat" key="local.date.format"/>
+<fmt:message var="locale" key="local.lang"/>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
 
-            <h1>Редагування показника</h1>
+            <h1><spring:message code="indicators.editIndicator"/></h1>
 
             <c:url var="updateUrl" value="/updateIndicator"/>
             <form:form action="${updateUrl}" method="post" modelAttribute="indicator">
@@ -24,17 +28,18 @@
                 <table class="box-table-a">
                     <thead>
                         <tr>
-                            <th>Дата</th>
-                            <th>Тариф</th>
-                            <th>Показник</th>
-                            <th>Оплачено</th>
+                            <th><spring:message code="th.date"/></th>
+                            <th><spring:message code="th.tariff"/></th>
+                            <th><spring:message code="th.value"/></th>
+                            <th><spring:message code="th.paid"/></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
                                 <input class="form-control" type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
-                                <input class="form-control" type="text" id="datepicker" name="dateStr" value="<fmt:formatDate value='${indicator.date}' pattern='dd-MM-yyyy' />" />
+                                <input hidden="hidden" type="text" name="locale" value="${locale}"/>
+                                <input class="form-control" type="text" id="datepicker" name="dateStr" value="<fmt:formatDate value='${indicator.date}' pattern='${dateFormat}' />" />
                             </td>
                             <td>
                                 <input class="form-control" type="number" step="0.01" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
@@ -53,6 +58,9 @@
                 </table>
             </form:form>
         </div>
+        <script>
+            var locale = '${locale}'
+        </script>
 
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>

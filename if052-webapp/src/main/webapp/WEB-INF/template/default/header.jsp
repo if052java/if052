@@ -24,7 +24,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="${base}">
                         <img alt="Brand" src="<c:url value='/resources/images/tiles/logosoftserv.fw_1.png'/>"/>
                     </a>
                 </div>

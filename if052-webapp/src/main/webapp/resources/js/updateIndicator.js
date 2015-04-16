@@ -1,8 +1,10 @@
-/**
- * Created by Maxwellt on 30.03.2015.
- */
+if (locale == "uk" ) {
+    var localDateFormat = "dd-mm-yy"
+} else {
+    var localDateFormat = "mm/dd/yy"
+}
 $(function() {
-    $.datepicker.setDefaults($.datepicker.regional[ "uk" ]);
-    $("#datepicker").datepicker({dateFormat:"dd-mm-yy"});
+    $.datepicker.setDefaults($.datepicker.regional[ locale ]);
+    $("#datepicker").datepicker({dateFormat:localDateFormat});
 
 });

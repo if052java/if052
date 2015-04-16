@@ -27,7 +27,7 @@ public class DetailController {
     public static final String LAST_INDICATORS = "lastIndicators";
     public static final String LIMIT = "limit";
     public static final String UNTRACKED_DAYS = "untrackedDays";
-    public static final String NOTIFICATION = "notification";
+    public static final String LIST_IS_EMPTY = "listIsEmpty";
 
     @Autowired
     @Qualifier("restUrl")
@@ -57,7 +57,7 @@ public class DetailController {
             model.addAttribute(LAST_INDICATORS, indicators);
             model.addAttribute(LIMIT, COUNT);
         } else {
-            model.addAttribute(NOTIFICATION, "У Вас немає показників");
+            model.addAttribute(LIST_IS_EMPTY, true);
         }
 
         return "index";

@@ -23,8 +23,8 @@
                         code="blockquote.welcome">
                 </spring:message>,  ${surname} ${name}!</h2></blockquote>
 
-                <c:if test="${notification == null}">
-                <table class="table table-hover" class="display">
+                <c:if test="${listIsEmpry != true}">
+                <table class="table table-hover">
                 <caption>
                 ${limit} <spring:message
                             code="caption.lastIndicator">
@@ -65,7 +65,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <%--We use "previousValue" to calculate a subtraction of two indicators--%>
                 <c:forEach var="indicator" items="${lastIndicators}">
                     <tr>
                         <td>
@@ -92,9 +91,9 @@
                 </tbody>
                 </table>
                 </c:if>
-                <c:if test="${notification != null}">
+                <c:if test="${listIsEmpty == true}">
                     <div class="text-center">
-                        <h2>${notification}</h2>
+                        <h2><spring:message code="indicators.listIsEmpty"/></h2>
                         <a href="<c:url value='/addresses'/>"
                            class="btn btn-default"  role="button">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
