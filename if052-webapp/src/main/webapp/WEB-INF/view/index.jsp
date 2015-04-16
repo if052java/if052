@@ -19,9 +19,8 @@
             <div class="container">
 
                 <blockquote><h2>
-                    <spring:message
-                        code="blockquote.welcome">
-                </spring:message>,  ${surname} ${name}!</h2></blockquote>
+                    <spring:message code="blockquote.welcome"/>, ${surname} ${name}!
+                </h2></blockquote>
 
                 <c:if test="${listSize > 0}">
                 <table class="table table-hover">

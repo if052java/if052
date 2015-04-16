@@ -10,11 +10,12 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
-            <h4>Редагування типу лічильника</h4>
+            <h4><spring:message code="meterType.editMeterType"/></h4>
 
             <c:url var="updateUrl" value="/updateMeterType"/>
 
@@ -23,7 +24,7 @@
                 <table class="box-table-a">
                     <thead>
                     <tr>
-                        <th>Найменування типу</th>
+                        <th><spring:message code="meterType.name"/></th>
                     </tr>
                     </thead>
                     <tbody>
