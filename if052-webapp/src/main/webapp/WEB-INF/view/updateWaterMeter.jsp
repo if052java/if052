@@ -40,7 +40,7 @@
                         </td>
                         <td> <input type="text" class="form-control" name="description" value="${waterMeter.description}"/></td>
                         <td>
-                            <input type="number" class="form-control" step="0.01" name="tariff" value="${waterMeter.tariff}"/>
+                            <input type="number" class="form-control" step="0.01" min="0.00" name="tariff" value="${waterMeter.tariff}"/>
                         </td>
                         <td>
                             <button class="btn btn-default" type="submit">
