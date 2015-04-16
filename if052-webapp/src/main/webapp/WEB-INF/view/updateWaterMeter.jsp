@@ -11,15 +11,15 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
 
-        <h2> Редагування даних лічильника </h2>
+            <h2><spring:message code="meter.update"/></h2>
 
-<c:url var="updateUrl" value="/updateWaterMeter"/>
+            <c:url var="updateUrl" value="/updateWaterMeter"/>
 
             <form:form
                     action="${updateUrl}" method="post" modelAttribute="waterMeter">
@@ -27,9 +27,9 @@
                 <table class="box-table-a">
                     <thead>
                     <tr>
-                        <th>Назва</th>
-                        <th>Опис</th>
-                        <th>Тариф</th>
+                        <th><spring:message code="meter.name"/></th>
+                        <th><spring:message code="meter.description"/></th>
+                        <th><spring:message code="meter.tariff"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,9 +38,11 @@
                             <input type="hidden" name="waterMeterId" value="${waterMeter.waterMeterId}"/>
                             <input type="text" class="form-control" name="name" value="${waterMeter.name}"/>
                         </td>
-                        <td> <input type="text" class="form-control" name="description" value="${waterMeter.description}"/></td>
+                        <td><input type="text" class="form-control" name="description"
+                                   value="${waterMeter.description}"/></td>
                         <td>
-                            <input type="number" class="form-control" step="0.01" name="tariff" value="${waterMeter.tariff}"/>
+                            <input type="number" class="form-control" step="0.01" name="tariff"
+                                   value="${waterMeter.tariff}"/>
                         </td>
                         <td>
                             <button class="btn btn-default" type="submit">
@@ -51,8 +53,6 @@
                     </tbody>
                 </table>
             </form:form>
-
-
 
 
         </div>
