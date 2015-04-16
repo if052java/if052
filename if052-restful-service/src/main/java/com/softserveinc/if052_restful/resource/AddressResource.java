@@ -50,8 +50,7 @@ public class AddressResource {
         return addresses;
     }
 
-//    @PostAuthorize("returnObject.user.userId == principal.username")
-    @PostAuthorize("hasPermission(returnObject, 'get')")
+    @PostAuthorize("hasPermission(returnObject, 'getAddress')")
     @RequestMapping(value = "/{addressId}", method = RequestMethod.GET, produces = "application/json")
     public Address getAddress(@PathVariable("addressId") int addressId, HttpServletResponse response) {
         Address address = addressService.getAddressById(addressId);
@@ -84,6 +83,7 @@ public class AddressResource {
         return address;
     }
 
+    @PreAuthorize("hasPermission(#address.addressId, 'udAddress')")
     @RequestMapping(value = "{addressId}", method = RequestMethod.PUT, produces = "application/json")
     public Address updateAddress(
         @PathVariable("addressId") int addressId,
@@ -97,6 +97,7 @@ public class AddressResource {
         return address;
     }
 
+    @PreAuthorize("hasPermission(#addressId, 'udAddress')")
     @RequestMapping(value = "{addressId}", method = RequestMethod.DELETE)
     public void deleteAddress(
         @PathVariable("addressId") int addressId,
