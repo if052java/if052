@@ -95,7 +95,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input class="form-control" type="number" step="0.01" name="tariff"/>
+                                <input class="form-control" type="number" step="0.01" min="0.00" value="0" name="tariff"/>
                             </td>
                             <td>
                                 <button class="btn btn-default" type="submit">
