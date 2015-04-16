@@ -50,7 +50,7 @@
                             <security:authorize ifAllGranted="ROLE_USER">
                                 <li><a href="${base}excelreport">
                                     <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                                    Звітність
+                                    <spring:message code="header.accounting"/>
                                 </a></li>
                             </security:authorize>
                             <security:authorize ifAllGranted="ROLE_ADMIN">
@@ -67,12 +67,6 @@
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                             <spring:message code="header.info"/>
                         </a></li>
-                        <security:authorize ifAllGranted="ROLE_USER">
-                            <li><a href="${base}excelreport">
-                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                                <spring:message code="header.excel"/>
-                            </a></li>
-                        </security:authorize>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>

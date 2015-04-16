@@ -22,7 +22,7 @@
             <c:url var="updateUrl" value="/updateWaterMeter"/>
 
             <form:form
-                    action="${updateUrl}" method="post" modelAttribute="waterMeter">
+                    action="${updateUrl}" method="post" id="updateMeter" modelAttribute="waterMeter">
                 <sec:csrfInput/>
                 <table class="box-table-a">
                     <thead>
@@ -53,8 +53,14 @@
                     </tbody>
                 </table>
             </form:form>
-
-
         </div>
+        <script src="/resources/js/jquery/jquery-validate.js"></script>
+        <script type="text/javascript">
+            var messages = new Array();
+            messages['maxlength.name'] = "<spring:message code='maxlength.name' javaScriptEscape='true' />"
+            messages['maxlength.description'] = "<spring:message code='maxlength.description' javaScriptEscape='true' />"
+            messages['required.field'] = "<spring:message code='required.field' javaScriptEscape='true' />"
+        </script>
+        <script src="/resources/js/updateMeter.js"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>
