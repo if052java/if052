@@ -1,6 +1,7 @@
 package com.softserveinc.if052_webapp.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.softserveinc.if052_core.domain.Address;
 import com.softserveinc.if052_core.domain.Indicator;
 import com.softserveinc.if052_core.domain.WaterMeter;
 import org.apache.log4j.Logger;
@@ -44,16 +45,9 @@ public class IndicatorService {
      */
     public ServiceResponse getIndicatorList(int meterId) {
         ServiceResponse serviceResponse = new ServiceResponse();
-        ResponseEntity<String> responseEntity = restTemplate.exchange(restUrl + "watermeters/"
-                + meterId, HttpMethod.GET, null, String.class);
-        String responseBody = responseEntity.getBody();
-        if (isError404(serviceResponse, responseEntity)) return serviceResponse;
-        try {
-            WaterMeter meter = objectMapper.readValue(responseBody, WaterMeter.class);
-            serviceResponse.setResponse(meter.getIndicators());
-        } catch (IOException e) {
-            LOGGER.warn(e.getMessage(), e);
-        }
+        Indicator[] arrayOfIndicators = restTemplate.getForObject(restUrl + "indicators/" + meterId, Indicator[].class);
+        List<Indicator> indicators = Arrays.asList(arrayOfIndicators);
+        serviceResponse.setResponse(indicators);
         return serviceResponse;
     }
 
