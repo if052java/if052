@@ -31,11 +31,14 @@
                             <div class="form-group">
                                 <label for="startDate"><sptring:message code="report.startDate"/></label>
                                 <input type="text" name="startDate" class="form-control" id="startDate"
-                                       value="${startDate}" required/>
+                                       value="${startDate}"
+                                       pattern="[0-9]{4}/(0[1-9]|1[012])/(0[1-9]|1[0-9]|2[0-9]|3[01])"
+                                       required/>
                             </div>
                             <div class="form-group">
                                 <label for="endDate"><sptring:message code="report.endDate"/></label>
                                 <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}"
+                                       pattern="[0-9]{4}/(0[1-9]|1[012])/(0[1-9]|1[0-9]|2[0-9]|3[01])"
                                        required/>
                             </div>
                             <input hidden="hidden" type="text" name="dateFormat" value="${dateFormat}"/>
@@ -53,7 +56,9 @@
 
         </div>
 
-
+        <script>
+            var locale = '${locale}'
+        </script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/datepicker.js'/>"></script>
