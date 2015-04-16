@@ -111,7 +111,11 @@
                     </select>
 
                         <div>
-                            <button id = 'submit' type="submit" name="draw" >Змоделювати</button>
+                            <button id = 'submit' type="submit" name="draw" >
+                                <spring:message
+                                        code="graphs.submit">
+                                </spring:message>
+                            </button>
                         </div>
                     </div>
                 </form:form>

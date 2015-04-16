@@ -89,6 +89,7 @@ public class AddressResource {
         HttpServletResponse response){
 
         addressService.updateAddress(address);
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
         return address;
     }
 

@@ -80,10 +80,7 @@ public class WaterMeterController {
     public String addWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model, @RequestParam int typeId) {
         waterMeter.setName(waterMeter.getName().trim());
         waterMeter.setMeterType(restTemplate.getForObject(restUrl + "metertypes/" + typeId, MeterType.class));
-//        if (waterMeter.getName().length() < 1) {
-//            model.addAttribute(REASON, "Meter name cannot be empty.");
-//            return "error400";
-//        }
+
         ResponseEntity addressResponseEntity = restTemplate.getForEntity(restUrl + "addresses/" + addressId, Address.class);
         waterMeter.setAddress((Address) addressResponseEntity.getBody());
 
@@ -91,15 +88,18 @@ public class WaterMeterController {
                 HttpMethod.POST, new HttpEntity<WaterMeter>(waterMeter), String.class);
 
 
-        try {
-            ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class );
-            
-            if(error.getFieldErrors().size()>0){
-                model.addAttribute(REASON, "Errors");
-                return "error400";
+        if(waterMeterResponseEntity.getStatusCode().value()!=201){
+            try {
+                ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class );
+
+                if(error.getFieldErrors().size()>0){
+                    model.addAttribute("fieldErrors", error.getFieldErrors());
+                    return "validationError";
+                }
+            } catch (IOException e) {
+                LOGGER.warn(e.getMessage(), e);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
 
@@ -132,21 +132,27 @@ public class WaterMeterController {
     @RequestMapping(value = "/updateWaterMeter", method = RequestMethod.POST)
     public String updateWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model) {
         waterMeter.setName(waterMeter.getName().trim());
-        if (waterMeter.getName().length() < 1) {
-            model.addAttribute(REASON, "Meter name cannot be empty.");
-            return "error400";
-        }
         ResponseEntity<String> addressResponseEntity = restTemplate.getForEntity(restUrl + "addresses/" + addressId, String.class);
+        
         try {
-        waterMeter.setAddress(objectMapper.readValue(addressResponseEntity.getBody(), Address.class));
+            waterMeter.setAddress(objectMapper.readValue(addressResponseEntity.getBody(), Address.class));
         } catch (IOException e) {
             LOGGER.warn(e.getMessage(), e);
         }
         ResponseEntity<String> waterMeterResponseEntity = restTemplate.exchange(restUrl + "watermeters/" + waterMeter.getWaterMeterId(),
                 HttpMethod.PUT, new HttpEntity<WaterMeter>(waterMeter), String.class);
-        if (waterMeterResponseEntity.getStatusCode().value() == 400) {
-            model.addAttribute(REASON, "Meter with this name already exist.");
-            return "error400";
+        if (waterMeterResponseEntity.getStatusCode().value() != 202) {
+            try {
+                ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class );
+
+                if(error.getFieldErrors().size()>0){
+                    model.addAttribute("fieldErrors", error.getFieldErrors());
+                    return "validationError";
+                }
+                return "error400";
+            } catch (IOException e) {
+                LOGGER.warn(e.getMessage(), e);
+            }
         }
         return "redirect:/watermeter?addressId=" + this.addressId;
     }

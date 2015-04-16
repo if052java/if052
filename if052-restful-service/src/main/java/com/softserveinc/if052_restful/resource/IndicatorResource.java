@@ -120,8 +120,10 @@ public class IndicatorResource {
     public Indicator updateIndicator(
         @PathVariable("indicatorId") int indicatorId,
         @RequestBody
-        Indicator indicator){
+        Indicator indicator,
+        HttpServletResponse response){
         indicatorService.updateIndicator(indicator);
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
 
         return indicator;
     }

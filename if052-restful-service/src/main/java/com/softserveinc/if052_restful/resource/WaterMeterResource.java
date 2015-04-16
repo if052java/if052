@@ -70,7 +70,7 @@ public class WaterMeterResource {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public ValidationError insertWaterMeter(
+    public WaterMeter insertWaterMeter(
         @Valid
         @RequestBody
         WaterMeter waterMeter,
@@ -87,7 +87,8 @@ public class WaterMeterResource {
         try {
             waterMeterService.insertWaterMeter(waterMeter);
             LOGGER.info("INFO: Meter has been successfully added with id " + waterMeter.getWaterMeterId() + ".");
-            return null;
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            return waterMeter;
         } catch (DataIntegrityViolationException e) {
             LOGGER.warn("WARNING: Meter with this name already exist.", e);
         }
@@ -117,17 +118,13 @@ public class WaterMeterResource {
 
     @RequestMapping(value = "{waterMeterId}", method = RequestMethod.PUT, produces = "application/json")
     public WaterMeter updateWaterMeter(
-        @PathVariable("waterMeterId") int waterMeterId, 
+        @PathVariable("waterMeterId") int waterMeterId,
+        @Valid
         @RequestBody
         WaterMeter waterMeter,
         HttpServletResponse response) {
         LOGGER.info("INFO: Updating a meter with id " + waterMeterId + ".");
-//        if (waterMeter.getName().length() < 1) {
-//            LOGGER.warn("WARNIGN: Meter name cannot be empty.");
-//            return Response
-//                    .status(Response.Status.BAD_REQUEST)
-//                    .build();
-//        }
+        
         if (waterMeterService.getWaterMeterById(waterMeterId) == null) {
             LOGGER.info("INFO: Meter with requested id " + waterMeterId + " is not found.");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -136,6 +133,7 @@ public class WaterMeterResource {
         try {
             waterMeterService.updateWaterMeter(waterMeter);
             LOGGER.info("INFO: Meter with id " + waterMeterId + " has been successfully updated.");
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
             return waterMeter;
         } catch (DataIntegrityViolationException e) {
             LOGGER.warn("WARNING: Meter with this name already exist.", e);

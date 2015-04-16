@@ -25,7 +25,6 @@ public class WaterMeter {
     @NotNull
     private Address address;
 
-    @NotNull
     private MeterType meterType;
 
     private List<Indicator> indicators;
