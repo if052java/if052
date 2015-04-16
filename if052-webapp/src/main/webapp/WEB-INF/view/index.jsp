@@ -23,7 +23,7 @@
                         code="blockquote.welcome">
                 </spring:message>,  ${surname} ${name}!</h2></blockquote>
 
-                <c:if test="${listIsEmpry != true}">
+                <c:if test="${listSize > 0}">
                 <table class="table table-hover">
                 <caption>
                 ${limit} <spring:message
@@ -91,7 +91,7 @@
                 </tbody>
                 </table>
                 </c:if>
-                <c:if test="${listIsEmpty == true}">
+                <c:if test="${listSize == 0}">
                     <div class="text-center">
                         <h2><spring:message code="indicators.listIsEmpty"/></h2>
                         <a href="<c:url value='/addresses'/>"
@@ -105,7 +105,7 @@
         </div>
         <script type="text/javascript">
             var untrackedDays;
-            if ('${notification}' == "") {
+            if ('${listSize > 0}') {
                 untrackedDays = '${untrackedDays}';
             } else {
                 untrackedDays = 0;
@@ -114,5 +114,6 @@
         <script type="text/javascript" src="<c:url value="/resources/js/reminder.js"/>"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>
+
 
 

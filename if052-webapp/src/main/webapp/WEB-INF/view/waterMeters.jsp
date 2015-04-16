@@ -82,7 +82,7 @@
                                     </td>
                                     <td> <input class="form-control" type="text" name="description" /></td>
                                     <td>
-                                        <input class="form-control" type="number" step="0.01" name="tariff" />
+                                        <input class="form-control" type="number" step="0.01" min="0.00" name="tariff" />
                                     </td>
                                     <td>
                                         <select class="form-control" name="typeId">
