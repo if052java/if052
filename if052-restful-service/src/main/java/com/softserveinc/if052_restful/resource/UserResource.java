@@ -21,15 +21,14 @@ public class UserResource {
     UserService userService;
 
     private static Logger LOGGER = Logger.getLogger(UserResource.class.getName());
-
     
-    @RequestMapping(value="/list", method = RequestMethod.GET, produces = "application/json")
-    public List<User> getAddresses() {
-        LOGGER.info("Searching for the whole collection of users.");
-        List<User> users = userService.getAllUsers();
-        LOGGER.info("The whole collection of users has been found.");
-        return users;
-    }
+//    @RequestMapping(value="/list", method = RequestMethod.GET, produces = "application/json")
+//    public List<User> getAddresses() {
+//        LOGGER.info("Searching for the whole collection of users.");
+//        List<User> users = userService.getAllUsers();
+//        LOGGER.info("The whole collection of users has been found.");
+//        return users;
+//    }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public User getUser(HttpServletResponse response) {
