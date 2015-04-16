@@ -80,29 +80,21 @@ public class WaterMeterController {
     public String addWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model, @RequestParam int typeId) {
         waterMeter.setName(waterMeter.getName().trim());
         waterMeter.setMeterType(restTemplate.getForObject(restUrl + "metertypes/" + typeId, MeterType.class));
-
         ResponseEntity addressResponseEntity = restTemplate.getForEntity(restUrl + "addresses/" + addressId, Address.class);
         waterMeter.setAddress((Address) addressResponseEntity.getBody());
-
         ResponseEntity<String> waterMeterResponseEntity = restTemplate.exchange(restUrl + "watermeters/",
                 HttpMethod.POST, new HttpEntity<WaterMeter>(waterMeter), String.class);
-
-
-        if(waterMeterResponseEntity.getStatusCode().value()!=201){
+        if(waterMeterResponseEntity.getStatusCode().value() != 201) {
             try {
-                ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class );
-
-                if(error.getFieldErrors().size()>0){
+                ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class);
+                if (error.getFieldErrors().size() > 0) {
                     model.addAttribute("fieldErrors", error.getFieldErrors());
                     return "validationError";
                 }
             } catch (IOException e) {
                 LOGGER.warn(e.getMessage(), e);
             }
-
         }
-
-
         return "redirect:/watermeter?addressId=" + this.addressId;
     }
 
@@ -133,7 +125,6 @@ public class WaterMeterController {
     public String updateWaterMeter(@ModelAttribute WaterMeter waterMeter, ModelMap model) {
         waterMeter.setName(waterMeter.getName().trim());
         ResponseEntity<String> addressResponseEntity = restTemplate.getForEntity(restUrl + "addresses/" + addressId, String.class);
-        
         try {
             waterMeter.setAddress(objectMapper.readValue(addressResponseEntity.getBody(), Address.class));
         } catch (IOException e) {
@@ -144,7 +135,6 @@ public class WaterMeterController {
         if (waterMeterResponseEntity.getStatusCode().value() != 202) {
             try {
                 ValidationError error = objectMapper.readValue(waterMeterResponseEntity.getBody(), ValidationError.class );
-
                 if(error.getFieldErrors().size()>0){
                     model.addAttribute("fieldErrors", error.getFieldErrors());
                     return "validationError";

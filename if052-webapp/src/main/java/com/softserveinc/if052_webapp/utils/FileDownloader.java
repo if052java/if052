@@ -1,9 +1,9 @@
 package com.softserveinc.if052_webapp.utils;
 
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +16,8 @@ import java.io.*;
 @Component
 public class FileDownloader {
 
+    private static Logger LOGGER = Logger.getLogger(FileDownloader.class);
+
     public void downloadFile(HttpServletRequest request, HttpServletResponse response, byte[] output,
                              String contentType, String contentDisposition) {
         response.setContentType(contentType);
@@ -26,7 +28,7 @@ public class FileDownloader {
             out.flush();
             out.close();
         } catch (IOException e) {
-
+            LOGGER.warn(e.getMessage(), e);
         }
 
     }

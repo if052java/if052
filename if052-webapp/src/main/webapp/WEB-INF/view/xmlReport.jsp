@@ -15,6 +15,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <fmt:message var="dateFormat" key="local.date.format"/>
+<fmt:message var="locale" key="local.lang"/>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
 
@@ -45,11 +46,15 @@
                             <div class="form-group">
                                 <label for="startDate"><spring:message code="report.startDate"/></label>
                                 <input type="text" name="startDate" class="form-control" id="startDate"
-                                       value="${startDate}" required/>
+                                       value="${startDate}"
+                                       pattern="[0-9]{4}/(0[1-9]|1[012])/(0[1-9]|1[0-9]|2[0-9]|3[01])"
+                                       required/>
                             </div>
                             <div class="form-group">
                                 <label for="endDate"><spring:message code="report.endDate"/></label>
-                                <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}"
+                                <input type="text" name="endDate" class="form-control" id="endDate"
+                                       value="${endDate}"
+                                       pattern="[0-9]{4}/(0[1-9]|1[012])/(0[1-9]|1[0-9]|2[0-9]|3[01])"
                                        required/>
                             </div>
                             <input hidden="hidden" type="text" name="dateFormat" value="${dateFormat}"/>
@@ -85,20 +90,19 @@
 
         </div>
 
-
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui-i18n.min.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/jquery/jquery-ui.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/datepicker.js'/>"></script>
         <script type="text/javascript" src="<c:url value='/resources/js/xmlReport.js'/>"></script>
         <script>
             var logins = [];
+            var locale = '${locale}';
             $(document).ready(function () {
                 <c:forEach items="${logins}" var="login">
                 logins.push("<c:out value="${login}" />");
                 </c:forEach>
             });
         </script>
-
 
     </tiles:putAttribute>
 </tiles:insertDefinition>

@@ -2,6 +2,7 @@ package com.softserveinc.if052_restful.report;
 
 import com.softserveinc.if052_core.domain.*;
 import com.softserveinc.if052_restful.service.UserService;
+import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -38,14 +39,15 @@ public class ExcelReportConverter extends ReportConverter {
     private final int CELL_RANGE = 14;
 
     private DateFormat df;
-    private String dateFormat;
     private int previousValue = 0;
 
+    private static Logger LOGGER = Logger.getLogger(ExcelReportConverter.class.getName());
 
     @Override
     public byte[] convert(Report report) {
         setLocale(report);
         User user = userService.getReportUserByLogin(report.getUsers().get(0).getLogin());
+        LOGGER.info("Creating new Excel workbook for user with login " + report.getUsers().get(0).getLogin());
         this.workbook = new XSSFWorkbook();
         for (Address a : user.getAddresses()) {
             rowId = 0;
@@ -60,7 +62,7 @@ public class ExcelReportConverter extends ReportConverter {
                 for (Indicator i : wm.getIndicators()) {
                     if (i.getDate().compareTo(report.getStartDate()) >= 0
                             && i.getDate().compareTo(report.getEndDate()) <= 0) {
-                    writeIndicatorData(i);
+                        writeIndicatorData(i);
                     }
                 }
                 merge(rowId);
@@ -74,9 +76,10 @@ public class ExcelReportConverter extends ReportConverter {
             out.flush();
             out.close();
             workbook.close();
+            LOGGER.info("Workbook was written successfully.");
             return outputByte;
         } catch (IOException e) {
-            
+            LOGGER.warn(e.getMessage(), e);
         }
 
         return new byte[]{};
@@ -85,7 +88,7 @@ public class ExcelReportConverter extends ReportConverter {
     private void writeTitleRow(Address a, Date startDate, Date endDate) {
         sheet.addMergedRegion(new CellRangeAddress(rowId, rowId, cellId, CELL_RANGE));
         row = sheet.createRow(rowId++);
-        row.setHeight((short)700);
+        row.setHeight((short) 700);
         cell = row.createCell(cellId++);
         cell.setCellValue(phrases[0] + " " + df.format(startDate) + " - " + df.format(endDate)
                 + " " + phrases[1] + " " + a.getCity() + ", " + a.getStreet() + " " + a.getBuilding() + "/" + a.getApartment());
@@ -97,7 +100,7 @@ public class ExcelReportConverter extends ReportConverter {
         rowId++;
         sheet.addMergedRegion(new CellRangeAddress(rowId, rowId, 0, CELL_RANGE));
         row = sheet.createRow(rowId++);
-        row.setHeight((short)500);
+        row.setHeight((short) 500);
         cellId = 0;
         cell = row.createCell(cellId++);
         cell.setCellValue(wm.getMeterType().getType() + " (" + wm.getName() + "). " + phrases[2] + " = " + wm.getTariff());
@@ -110,7 +113,7 @@ public class ExcelReportConverter extends ReportConverter {
         Map<Integer, String> columnNames = new HashMap<Integer, String>();
         String[] colNames = {phrases[3], phrases[4], phrases[5], phrases[6], phrases[7]};
         for (int i = 0; i < colNames.length; i++) {
-            columnNames.put(i*CELL_STEP, colNames[i]);
+            columnNames.put(i * CELL_STEP, colNames[i]);
         }
         for (Map.Entry<Integer, String> me : columnNames.entrySet()) {
             cell = row.createCell(me.getKey());
@@ -126,13 +129,13 @@ public class ExcelReportConverter extends ReportConverter {
         cell = row.createCell(cellId);
         cell.setCellValue(df.format(i.getDate()));
         cell.setCellStyle(indicatorDataStyle());
-        cell = row.createCell(cellId+=CELL_STEP);
+        cell = row.createCell(cellId += CELL_STEP);
         cell.setCellValue(i.getValue());
-        cell = row.createCell(cellId+=CELL_STEP);
+        cell = row.createCell(cellId += CELL_STEP);
         cell.setCellValue(i.getTariffPerDate());
-        cell = row.createCell(cellId+=CELL_STEP);
+        cell = row.createCell(cellId += CELL_STEP);
         cell.setCellValue((i.getValue() - previousValue) * i.getTariffPerDate());
-        cell = row.createCell(cellId+=CELL_STEP);
+        cell = row.createCell(cellId += CELL_STEP);
         cell.setCellValue(i.isPaid() ? phrases[8] : phrases[9]);
         cell.setCellStyle(indicatorDataStyle());
         previousValue = i.getValue();
@@ -176,7 +179,7 @@ public class ExcelReportConverter extends ReportConverter {
 
     private Font titleRowFont() {
         Font font = workbook.createFont();
-        font.setFontHeightInPoints((short)14);
+        font.setFontHeightInPoints((short) 14);
         font.setFontName("Arial");
         font.setBold(true);
         return font;
@@ -189,13 +192,12 @@ public class ExcelReportConverter extends ReportConverter {
     }
 
     private void setLocale(Report report) {
-        if (report.getLocale().equals("en")) {
-            phrases = ENPhrases;
-        } else {
+        if (report.getLocale().equals("uk")) {
             phrases = UAPhrases;
+        } else {
+            phrases = ENPhrases;
         }
-        dateFormat = report.getDateFormat();
-        df = new SimpleDateFormat(dateFormat);
+        df = new SimpleDateFormat(report.getDateFormat());
     }
 
 }

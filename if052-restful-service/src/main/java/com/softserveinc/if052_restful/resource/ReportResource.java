@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 
 /**
-* Created by Danylo Tiahun on 14.03.2015.
-*/
+ * Created by Danylo Tiahun on 14.03.2015.
+ */
 
 @RestController
 @RequestMapping("/rest/report/")
@@ -34,7 +34,7 @@ public class ReportResource {
     private ExcelReportConverter excelReportConverter;
 
     @RequestMapping(value = "/mindate", method = RequestMethod.GET, produces = "application/json")
-    public  Date getMinDate() {
+    public Date getMinDate() {
         Date minDate = indicatorService.getMinDate();
         if (minDate == null) {
             minDate = new Date();
@@ -51,17 +51,16 @@ public class ReportResource {
         return maxDate;
     }
 
-
     @RequestMapping(value = "/xml", method = RequestMethod.POST, produces = "application/xml")
     public byte[] createXmlReport(
-        @RequestBody
-        ReportRequest reportRequest,
-        HttpServletResponse response) {
+            @RequestBody
+            ReportRequest reportRequest,
+            HttpServletResponse response) {
         Report report = xmlReportConverter.createReport(reportRequest);
-        report.setXmlReport(xmlReportConverter.convert(report).toString());
-        reportService.insertReport(report);
         byte[] output = xmlReportConverter.convert(report);
-        response.setStatus(HttpServletResponse.SC_CREATED);
+        report.setXmlReport(output.toString());
+        reportService.insertReport(report);
+        response.setStatus(HttpServletResponse.SC_OK);
         response.setHeader("Content-Disposition", "attachment;filename=report.xml");
         return output;
     }
