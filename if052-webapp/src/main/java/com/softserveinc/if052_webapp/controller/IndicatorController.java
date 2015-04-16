@@ -122,6 +122,10 @@ public class IndicatorController {
                                   @RequestParam("locale") String locale){
         ServiceResponse serviceResponse = indicatorService.updateIndicator(indicator, meterId, dateStr + locale);
         if (isError(model, serviceResponse)) return serviceResponse.getStatus();
+        
+        if (isValidationError(model, serviceResponse)){
+            return serviceResponse.getStatus();
+        }
 
         return REDIRECT + this.meterId;
     }
