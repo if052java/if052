@@ -32,10 +32,10 @@ CREATE TABLE role_consumer
 CREATE TABLE address
 (
   address_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-  city VARCHAR(45),
-  street VARCHAR(45),
-  building VARCHAR(45),
-  apartment VARCHAR(45),
+  city VARCHAR(32),
+  street VARCHAR(32),
+  building VARCHAR(10),
+  apartment INT(5),
   user_id INT(11),
   CONSTRAINT fk_address_user FOREIGN KEY (user_id)
       REFERENCES consumer (user_id)
@@ -51,8 +51,8 @@ CREATE TABLE meter_type
 CREATE TABLE watermeter
 (
   water_meter_id INT(11) AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(45) NOT NULL,
-  description VARCHAR(45),
+  name VARCHAR(32) NOT NULL,
+  description VARCHAR(64),
   address_id INT(11) NOT NULL,
   meter_type_id INT(11) NOT NULL,
   tariff FLOAT,

@@ -10,6 +10,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
 
@@ -61,7 +62,7 @@
                     </c:forEach>
                 </table>
                         <c:url var="addUrl" value="/addWaterMeter"/>
-                        <form:form action="${addUrl}" method="post" modelAttribute="waterMeter">
+                        <form:form action="${addUrl}" method="post" id="addMeter" modelAttribute="waterMeter">
                             <sec:csrfInput/>
                             <table class="box-table-a">
                                 <caption> Додати лічильник</caption>
@@ -101,7 +102,14 @@
                         </form:form>
             </div>
 
-
+            <script src="/resources/js/jquery/jquery-validate.js"></script>
+            <script type="text/javascript">
+                var messages = new Array();
+                messages['maxlength.name'] = "<spring:message code='maxlength.name' javaScriptEscape='true' />"
+                messages['maxlength.description'] = "<spring:message code='maxlength.description' javaScriptEscape='true' />"
+                messages['required.field'] = "<spring:message code='required.field' javaScriptEscape='true' />"
+            </script>
+            <script src="/resources/js/meter.js"></script>
         </div>
     </tiles:putAttribute>
 </tiles:insertDefinition>
