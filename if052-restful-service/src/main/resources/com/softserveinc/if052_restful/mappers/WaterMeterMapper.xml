@@ -55,7 +55,7 @@
         LEFT OUTER JOIN indicator i on wm.water_meter_id = i.water_meter_id
         LEFT OUTER JOIN address a on wm.address_id = a.address_id
         LEFT OUTER JOIN meter_type mt on wm.meter_type_id = mt.meter_type_id
-        LEFT OUTER JOIN consumer c on a.address_id = c.user_id
+        LEFT OUTER JOIN consumer c on a.user_id = c.user_id
         WHERE wm.water_meter_id = #{waterMeterId}
     </select>
 

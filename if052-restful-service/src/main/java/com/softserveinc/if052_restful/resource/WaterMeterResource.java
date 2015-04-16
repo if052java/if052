@@ -113,7 +113,7 @@ public class WaterMeterResource {
         return waterMeter;
     }
 
-    @PreAuthorize("hasPermission(#waterMeter.waterMeterId, 'udWateMeter')")
+    @PreAuthorize("hasPermission(#waterMeter.waterMeterId, 'udWaterMeter')")
     @RequestMapping(value = "{waterMeterId}", method = RequestMethod.PUT, produces = "application/json")
     public WaterMeter updateWaterMeter(
         @PathVariable("waterMeterId") int waterMeterId,

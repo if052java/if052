@@ -44,7 +44,12 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
         } else
 
         if (permission.toString().equals("getWaterMeter")) {
+            LOGGER.debug("WaterMeter");
             WaterMeter waterMeter = (WaterMeter) target;
+            LOGGER.debug("waterMeterId" + waterMeter.getWaterMeterId());
+            LOGGER.debug("addressId" + waterMeter.getAddress().getAddressId());
+            LOGGER.debug("userId" + waterMeter.getAddress().getAddressId());
+
             return check(waterMeter.getAddress().getUser().getUserId(), authentication);
         } else if (permission.toString().equals("udWaterMeter")) {
             Integer waterMeterId = (Integer) target;
