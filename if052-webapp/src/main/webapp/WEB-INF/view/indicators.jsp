@@ -130,12 +130,13 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input class="form-control" type="text" id="datepicker" name="dateStr"/>
+                                    <input class="form-control" type="text" id="datepicker"
+                                           name="dateStr" pattern='<spring:message code="local.date.parser"/>' required/>
                                     <input hidden="hidden" type="text" name="locale" value="${locale}"/>
                                 </td>
-                                <td><input class="form-control" type="number" step="1"
+                                <td><input class="form-control" type="number" step="1" min="0" required
                                            name="value" value="${indicators.size()!=0 ? indicators.get(indicators.size()-1).value : 0}"/></td>
-                                <td><input class="checkbox" type="checkbox" name="paid" /></td>
+                                <td><input class="checkbox" type="checkbox" name="paid"></td>
                                 <td>
                                     <button class="btn btn-default" type="submit">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
