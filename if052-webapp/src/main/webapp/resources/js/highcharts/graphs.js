@@ -9,8 +9,8 @@ $( document ).ready(function() {
                 type: 'spline'
             },
             title: {
-                text: messages['graphs.consumption'] + year + '.' + messages['graphs.meter'] + meterName
-                                          + ', ' +  messages['graphs.meter'] + meterType + '.'
+                text: messages['graphs.consumption'] + ' ' + year + '. ' + messages['graphs.meter'] + ' ' + meterName
+                                          + ', ' +  messages['graphs.type'] + ' ' + meterType + '.'
             },
             subtitle: {
                 text: ''

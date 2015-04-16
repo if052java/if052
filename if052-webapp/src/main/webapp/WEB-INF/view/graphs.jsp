@@ -23,7 +23,7 @@
             <div id="chooseMonth" class = "check-box">
                 <form:form action="${drawByMonth}">
                 <sec:csrfInput/>
-                        Виберіть опцію :
+                        <spring:message code="graphs.chooseOption"/>
                     <select name="month"  >
                         <option value="-1">
                             <spring:message

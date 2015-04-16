@@ -41,7 +41,7 @@
                                                                                 name='username' value="LOGIN111"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password"><spring:message code="login. password"/></label> <input id="password"
+                                    <label for="password"><spring:message code="login.password"/></label> <input id="password"
                                                                                  class="form-control" type='password'
                                                                                  name='password' value="PASS1111"/>
                                 </div>
