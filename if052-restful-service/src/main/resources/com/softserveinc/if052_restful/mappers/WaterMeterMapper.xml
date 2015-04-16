@@ -14,6 +14,8 @@
                      resultMap="com.softserveinc.if052_restful.mappers.AddressMapper.AddressSimpleResult"/>
         <association property="meterType" javaType="MeterType"
                      resultMap="com.softserveinc.if052_restful.mappers.MeterTypeMapper.MeterTypeSimpleResult"/>
+        <association property="address.user" javaType="User"
+                     resultMap="com.softserveinc.if052_restful.mappers.UserMapper.UserSimpleResult"/>
         <collection property="indicators" column="water_meter_id"
                     javaType="ArrayList" ofType="Indicator"
                     resultMap="com.softserveinc.if052_restful.mappers.IndicatorMapper.IndicatorSimpleResult"/>
@@ -36,7 +38,6 @@
         wm.description,
         wm.tariff,
         mt.meter_type_id,
-        mt.type,
         i.indicator_id,
         i.date,
         i.tariff_per_date,
@@ -47,11 +48,13 @@
         a.city,
         a.street,
         a.building,
-        a.apartment
+        a.apartment,
+        c.user_id
         FROM watermeter wm
         LEFT OUTER JOIN indicator i on wm.water_meter_id = i.water_meter_id
         LEFT OUTER JOIN address a on wm.address_id = a.address_id
         LEFT OUTER JOIN meter_type mt on wm.meter_type_id = mt.meter_type_id
+        LEFT OUTER JOIN consumer c on a.address_id = c.user_id
         WHERE wm.water_meter_id = #{waterMeterId}
     </select>
 
