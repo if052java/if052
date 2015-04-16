@@ -16,7 +16,7 @@
     <tiles:putAttribute name="body">
         <div class="body">
 
-            <h1> Редагування адреси </h1>
+            <h1><spring:message code="address.editAddress"/></h1>
 
             <c:url var="updateUrl" value="/updateAddress"/>
 
@@ -26,10 +26,10 @@
                 <table class="box-table-a">
                     <thead>
                     <tr>
-                        <th>Місто</th>
-                        <th>Вулиця</th>
-                        <th>Будинок</th>
-                        <th>Квартира</th>
+                        <th><spring:message code="address.city"/></th>
+                        <th><spring:message code="address.street"/></th>
+                        <th><spring:message code="address.building"/></th>
+                        <th><spring:message code="address.apartment"/></th>
                     </tr>
                     </thead>
                     <tbody>
