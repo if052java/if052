@@ -73,7 +73,7 @@ public class AddressController {
 
         if (addressResponseEntity.getStatusCode().value() != 201) {
             try {
-                ValidationError error = objectMapper.readValue(addressResponseEntity.getBody(), ValidationError.class);
+                 ValidationError error = objectMapper.readValue(addressResponseEntity.getBody(), ValidationError.class);
 
                 if (error.getFieldErrors().size() > 0) {
                     model.addAttribute("fieldErrors", error.getFieldErrors());

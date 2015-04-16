@@ -85,7 +85,7 @@
                                 <input class="form-control" type="text" name="building" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" name="apartment" value="0"/>
+                                <input class="form-control"  name="apartment" />
                             </td>
                             <td>
                                 <button class="btn btn-default" type="submit">
@@ -106,6 +106,10 @@
             messages['maxlength.street'] = "<spring:message code='maxlength.street' javaScriptEscape='true' />"
             messages['maxlength.building'] = "<spring:message code='maxlength.building' javaScriptEscape='true' />"
             messages['required.field'] = "<spring:message code='required.field' javaScriptEscape='true' />"
+            messages['number.min'] = "<spring:message code='number.min' javaScriptEscape='true' />"
+            messages['number.field'] = "<spring:message code='number.field' javaScriptEscape='true' />"
+            
+            
         </script>
         <script src="/resources/js/address.js"></script>
 

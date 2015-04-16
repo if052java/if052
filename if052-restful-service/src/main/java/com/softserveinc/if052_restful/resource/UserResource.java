@@ -69,6 +69,7 @@ public class UserResource {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
     public User createUser(
+        @Valid
         @RequestBody
         User user, HttpServletResponse response ){
 

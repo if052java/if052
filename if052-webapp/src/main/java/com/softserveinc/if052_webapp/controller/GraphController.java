@@ -75,7 +75,7 @@ public class GraphController {
             List < Indicator > indicators = Arrays.asList( arrayOfIndicators );
 
             if( indicators.size() == 0){
-                model.addAttribute(ERROR,"Лічильник не має введених показників");
+                model.addAttribute(ERROR,"error");
             }
 
             long[][] arrayOfData = new long[indicators.size()][2];

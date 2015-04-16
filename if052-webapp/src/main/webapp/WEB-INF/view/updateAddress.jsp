@@ -45,7 +45,7 @@
                             <input type="text" class="form-control" name="building" value="${address.building} " />
                         </td>
                         <td>
-                            <input type="number" class="form-control" min="0" name="apartment" value="${address.apartment}" />
+                            <input class="form-control" name="apartment" value="${address.apartment}" />
                         </td>
                         <td>
                             <button class="btn btn-default" type="submit">
@@ -65,6 +65,8 @@
             messages['maxlength.street'] = "<spring:message code='maxlength.street' javaScriptEscape='true' />"
             messages['maxlength.building'] = "<spring:message code='maxlength.building' javaScriptEscape='true' />"
             messages['required.field'] = "<spring:message code='required.field' javaScriptEscape='true' />"
+            messages['number.min'] = "<spring:message code='number.min' javaScriptEscape='true' />"
+            messages['number.field'] = "<spring:message code='number.field' javaScriptEscape='true' />"
         </script>
         <script src="/resources/js/updateAddress.js"></script>
     </tiles:putAttribute>

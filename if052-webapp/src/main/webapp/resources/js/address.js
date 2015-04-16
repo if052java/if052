@@ -1,6 +1,6 @@
 /**
- * Created by valentyn on 4/15/15.
- */
+* Created by valentyn on 4/15/15.
+*/
 $(document).ready(function() {
     $('#addAddress').validate({
         rules: {
@@ -15,6 +15,10 @@ $(document).ready(function() {
             "building": {
                 required: true,
                 maxlength:10
+            },
+            "apartment": {
+                number: true,
+                min: 0
             }
         },
         messages: {
@@ -29,6 +33,10 @@ $(document).ready(function() {
             "building": {
                 required: messages['required.field'],
                 maxlength: messages['maxlength.building']
+            },
+            "apartment": {
+                number: messages['number.field'],
+                min: messages['number.min']
             }
         }
     });
