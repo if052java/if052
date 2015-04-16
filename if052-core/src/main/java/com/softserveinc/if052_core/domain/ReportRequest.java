@@ -11,19 +11,31 @@ import java.util.List;
 
 public class ReportRequest {
 
+    private String locale;
     private Date startDate;
     private Date endDate;
+    private String dateFormat;
     private String users;
     private List<Integer> types;
 
     public ReportRequest() {
     }
 
-    public ReportRequest(Date startDate, Date endDate, String users, List<Integer> types, Integer paidStatus) {
+    public ReportRequest(String locale, Date startDate, Date endDate, String dateFormat, String users, List<Integer> types) {
+        this.locale = locale;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.dateFormat = dateFormat;
         this.users = users;
         this.types = types;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
     public Date getStartDate() {
@@ -40,6 +52,14 @@ public class ReportRequest {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
     }
 
     public String getUsers() {
@@ -61,8 +81,10 @@ public class ReportRequest {
     @Override
     public String toString() {
         return "ReportRequest{" +
-                "startDate=" + startDate +
+                "locale='" + locale + '\'' +
+                ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", dateFormat='" + dateFormat + '\'' +
                 ", users='" + users + '\'' +
                 ", types=" + types +
                 '}';

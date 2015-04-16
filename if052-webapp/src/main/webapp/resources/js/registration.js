@@ -81,7 +81,7 @@ $(document).ready(function() {
                             url: restURL + 'users/login/' + $('#login').val(),
                             success: function (Xhr) {
                                 $('#login-errors').html(
-                                    'Такий логін вже існує'
+                                    strings['exist.login']
                                 );
                                 $("#submit").attr('disabled', 'disabled');
                             },

@@ -2,9 +2,6 @@ package com.softserveinc.if052_restful.resource;
 
 import com.softserveinc.if052_core.domain.Address;
 import com.softserveinc.if052_restful.service.AddressService;
-import com.softserveinc.if052_restful.service.IndicatorService;
-import com.softserveinc.if052_restful.service.UserService;
-import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -29,23 +26,17 @@ public class AddressResource {
     @Autowired
     AddressService addressService;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    WaterMeterService waterMeterService;
-
-    @Autowired
-    IndicatorService indicatorService;
-
     private static Logger LOGGER = Logger.getLogger(AddressResource.class.getName());
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public List<Address> getAddressesByUser(){
+    public List<Address> getAddresses(){
+        LOGGER.info("INFO: Searching for the collection of addresses.");
         List<Address> addresses = addressService.getAllAddresses();
-
-        if( addresses == null) {
-            return new ArrayList<Address>();
+        if (addresses == null) {
+            LOGGER.info("INFO: The collection of addresses has not been found.");
+            addresses = new ArrayList<Address>();
+        } else {
+            LOGGER.info("INFO: The collection of addresses has been found.");
         }
         return addresses;
     }
@@ -53,22 +44,15 @@ public class AddressResource {
     @PostAuthorize("hasPermission(returnObject, 'getAddress')")
     @RequestMapping(value = "/{addressId}", method = RequestMethod.GET, produces = "application/json")
     public Address getAddress(@PathVariable("addressId") int addressId, HttpServletResponse response) {
+        LOGGER.info("INFO: Searching for the address with id " + addressId + ".");
         Address address = addressService.getAddressById(addressId);
         if (address == null) {
+            LOGGER.info("INFO: Address with requested id " + addressId + " has not been found.");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return null;
         }
+        LOGGER.info("INFO: Address with requested id " + addressId + " has been successfully found.");
         return address;
-    }
-
-    @RequestMapping("/list")
-    public List<Address> getAddresses() {
-        List<Address> addresses = addressService.getAllAddresses();
-
-        if( addresses == null) {
-            return new ArrayList<Address>();
-        }
-        return addresses;
     }
 
     @RequestMapping(method=RequestMethod.POST, produces = "application/json")
@@ -77,10 +61,18 @@ public class AddressResource {
         @RequestBody
         Address address,
         HttpServletResponse response){
-        addressService.insertAddress(address);
-        response.setStatus(HttpServletResponse.SC_CREATED);
-
-        return address;
+        try {
+            LOGGER.info("INFO: Adding a new address.");
+            addressService.insertAddress(address);
+            LOGGER.info("INFO: Address has been successfully added with id " + address.getAddressId() + ".");
+            response.setStatus(HttpServletResponse.SC_CREATED);
+            return address;
+        }
+        catch (Exception e) {
+            LOGGER.info("INFO: Internal error");
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return null;
+        }
     }
 
     @PreAuthorize("hasPermission(#address.addressId, 'udAddress')")
@@ -91,10 +83,23 @@ public class AddressResource {
         @RequestBody
         Address address,
         HttpServletResponse response){
-
-        addressService.updateAddress(address);
-        response.setStatus(HttpServletResponse.SC_ACCEPTED);
-        return address;
+        if(addressService.getAddressById(addressId) == null){
+            LOGGER.info("INFO: Address with requested id " + addressId + " has not been found.");
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        } else
+            try {
+                LOGGER.info("INFO: Updating an address with id " + addressId + ".");
+                addressService.updateAddress(address);
+                LOGGER.info("INFO: Address with id " + addressId + " has been successfully updated.");
+                response.setStatus(HttpServletResponse.SC_ACCEPTED);
+                return address;
+            }
+            catch (Exception e) {
+                LOGGER.info("INFO: Internal error");
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                return null;
+            }
     }
 
     @PreAuthorize("hasPermission(#addressId, 'udAddress')")
@@ -108,11 +113,11 @@ public class AddressResource {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
         try{
-            LOGGER.info("INFO : Meter with id " + addressId + " has been successfully deleted.");
             addressService.deleteAddress(addressId);
+            LOGGER.info("INFO : Address with id " + addressId + " has been successfully deleted.");
         } catch ( DataIntegrityViolationException e){
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            LOGGER.warn("WARNING: Address with requester id " + addressId
+            LOGGER.warn("WARNING: Address with requested id " + addressId
                 + " contains list of meters so it cannot be deleted.", e);
         }
     }
