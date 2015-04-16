@@ -85,7 +85,7 @@
                                 <input class="form-control" type="text" name="building" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" min="0" name="apartment" />
+                                <input class="form-control" type="number" min="0" name="apartment" value="0"/>
                             </td>
                             <td>
                                 <button class="btn btn-default" type="submit">

@@ -207,7 +207,6 @@ public class IndicatorService {
      */
     private boolean isError404(ServiceResponse serviceResponse, ResponseEntity<String> responseEntity) {
         if (responseEntity.getStatusCode().value() == 404) {
-            System.out.println(404);
             serviceResponse.setStatus("error404");
             return true;
         }
@@ -222,7 +221,6 @@ public class IndicatorService {
      */
     private boolean isError400(ServiceResponse serviceResponse, ResponseEntity<String> indicatorResponseEntity) {
         if (indicatorResponseEntity.getStatusCode().value() == 400) {
-            System.out.println(400);
             serviceResponse.setStatus("error400");
             serviceResponse.setMessage("Некоректний запит. Будь ласка, перевірте правильність введених даних");
             return true;
