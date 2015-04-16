@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/xmlreport").hasRole("ADMIN")
                 .antMatchers("/createXmlReport").hasRole("ADMIN")
+                .antMatchers("/").permitAll()
                 .antMatchers("/**").hasAnyRole("USER", "ADMIN")
             .and() //.csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/**")).disable()
                 .logout()
