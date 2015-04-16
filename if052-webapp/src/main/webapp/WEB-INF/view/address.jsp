@@ -82,10 +82,10 @@
                                 <input class="form-control" type="text" name="street" />
                             </td>
                             <td>
-                                <input class="form-control" type="text" name="building" "/>
+                                <input class="form-control" type="text" name="building" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" name="apartment" />
+                                <input class="form-control" type="number" min="0" name="apartment" />
                             </td>
                             <td>
                                 <button class="btn btn-default" type="submit">

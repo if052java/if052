@@ -79,6 +79,14 @@ body .page {
     .col-md-2 {
         min-height: 0;
     }
+    .col-md-8 {
+        box-shadow: 0px 0px 5px #000;
+        border-radius: 4px;
+        padding-top: 15px;
+    }
+    .body {
+        border-radius: 4px;
+    }
 }
 
 /*-------------------------------FOOTER------------*/
@@ -99,9 +107,20 @@ body .page {
     padding: 10px;
     border-radius: 4px;
 }
-.popups {
-    margin-top: 7%;
+@media (min-width: 992px) {
+    .popups {
+        margin-top: 7%;
+    }
 }
+@media (max-width: 991px) {
+    .popups {
+        margin-top: 0;
+    }
+    .warning {
+        margin-top: 3%;
+    }
+}
+
 /*------------------------------OVERALL------------*/
 
 .col-md-8 .container {

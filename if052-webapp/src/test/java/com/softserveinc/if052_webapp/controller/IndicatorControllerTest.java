@@ -125,8 +125,6 @@ public class IndicatorControllerTest {
                         .param("value", "503")
                         .param("paid", "true")
                         .sessionAttr("indicator", new Indicator())
-                        .requestAttr("dateStr", "11-04-2015")
-                        .requestAttr("locale", "uk")
         )
                 .andExpect(status().isMovedTemporarily())
                 .andExpect(redirectedUrl("/indicators?meterId=4"));

@@ -83,6 +83,7 @@
                         <tr>
                             <td>
 
+
                                 <input class="form-control" type="text" name="name"/>
                             </td>
                             <td><input class="form-control" type="text" name="description"/></td>
@@ -105,6 +106,7 @@
                         </tbody>
                     </table>
                 </form:form>
+
             </div>
         </div>
 

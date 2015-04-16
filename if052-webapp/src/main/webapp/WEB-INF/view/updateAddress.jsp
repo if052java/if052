@@ -45,7 +45,7 @@
                             <input type="text" class="form-control" name="building" value="${address.building} " />
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="apartment" value="${address.apartment}" />
+                            <input type="number" class="form-control" min="0" name="apartment" value="${address.apartment}" />
                         </td>
                         <td>
                             <button class="btn btn-default" type="submit">

@@ -24,7 +24,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="${base}">
                         <img alt="Brand" src="<c:url value='/resources/images/tiles/logosoftserv.fw_1.png'/>"/>
                     </a>
                 </div>
@@ -35,16 +35,16 @@
                         <%--<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>--%>
                         <li><a href="${base}">
                             <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                            Головна
+                            <spring:message code="header.home"/>
                         </a></li>
                         <security:authorize ifAnyGranted="ROLE_ADMIN, ROLE_USER">
                         <li><a href="${base}addresses">
                             <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                            Мої адреси
+                            <spring:message code="header.locations"/>
                         </a></li>
                         <li><a href="${base}defaultgraph">
                             <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
-                            Моя статистика
+                            <spring:message code="header.statistics"/>
                         </a></li>
                             </security:authorize>
                             <security:authorize ifAllGranted="ROLE_USER">
@@ -56,17 +56,23 @@
                             <security:authorize ifAllGranted="ROLE_ADMIN">
                         <li><a href="${base}xmlreport">
                             <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                            XML звіт
+                            <spring:message code="header.XMLReport"/>
                         </a></li>
                         <li><a href="${base}metertypeslist">
                             <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                            Довідник типів
+                            <spring:message code="header.typeInfo"/>
                         </a></li>
                             </security:authorize>
                         <li><a href="${base}#">
                             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                            Інфо
+                            <spring:message code="header.info"/>
                         </a></li>
+                        <security:authorize ifAllGranted="ROLE_USER">
+                            <li><a href="${base}excelreport">
+                                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                                <spring:message code="header.excel"/>
+                            </a></li>
+                        </security:authorize>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -83,20 +89,20 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="${base}#">
                                     <%--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--%>
-                                    Налаштування
+                                    <spring:message code="header.settings"/>
                                 </a></li>
                                 <li class="divider"></li>
                                 <security:authorize ifNotGranted="ROLE_ADMIN, ROLE_USER">
                                 <li class="sign-up" ><a href="${base}signup">
-                                    Реєстрація
+                                    <spring:message code="header.registration"/>
                                 </a></li>
                                 <li class="log-in"><a href="${base}login.jsp">
-                                    Вхід
+                                    <spring:message code="header.login"/>
                                 </a></li>
                                 </security:authorize>
                                 <security:authorize ifAnyGranted="ROLE_ADMIN, ROLE_USER">
                                 <li class="log-out"><a href="${base}logout.do">
-                                    Вихід
+                                    <spring:message code="header.logout"/>
                                 </a></li>
                                 </security:authorize>
 
