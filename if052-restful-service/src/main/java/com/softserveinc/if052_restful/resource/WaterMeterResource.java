@@ -9,6 +9,8 @@ import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -29,15 +31,8 @@ public class WaterMeterResource {
     private WaterMeterService waterMeterService;
 
     private static Logger LOGGER = Logger.getLogger(WaterMeterResource.class.getName());
-
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public List<WaterMeter> getAllWaterMeters() {
-        LOGGER.info("Searching for the whole collection of meters.");
-        List<WaterMeter> waterMeters = waterMeterService.getAllWaterMeters();
-        LOGGER.info("The whole collection of meters has been found.");
-        return waterMeters;
-    }
-
+    
+    @PostAuthorize("hasPermission(returnObject, 'getWaterMeter')")
     @RequestMapping(value = "{waterMeterId}", method = RequestMethod.GET, produces = "application/json")
     public WaterMeter getWaterMeter(
             @PathVariable("waterMeterId") int waterMeterId,
@@ -105,6 +100,7 @@ public class WaterMeterResource {
         return waterMeter;
     }
 
+    @PreAuthorize("hasPermission(#waterMeter.waterMeterId, 'udWateMeter')")
     @RequestMapping(value = "{waterMeterId}", method = RequestMethod.PUT, produces = "application/json")
     public WaterMeter updateWaterMeter(
             @PathVariable("waterMeterId") int waterMeterId,
@@ -137,6 +133,7 @@ public class WaterMeterResource {
 
     }
 
+    @PreAuthorize("hasPermission(#waterMeterId, 'udWaterMeter')")
     @RequestMapping(value = "{waterMeterId}", method = RequestMethod.DELETE, produces = "application/json")
     public void deleteWaterMeter(
             @PathVariable("waterMeterId") int waterMeterId,

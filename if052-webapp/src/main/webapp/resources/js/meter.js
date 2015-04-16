@@ -14,6 +14,11 @@ $(document).ready(function() {
             "description": {
                 required: true,
                 maxlength:64
+            },
+            "tariff": {
+                required: true,
+                number: true,
+                min: 0
             }
         },
         messages: {
@@ -25,9 +30,10 @@ $(document).ready(function() {
                 required: messages['required.field'],
                 maxlength: messages['maxlength.description']
             },
-            "building": {
+            "tariff": {
                 required: messages['required.field'],
-                maxlength: messages['maxlength.building']
+                number: messages['number.field'],
+                min: messages['number.min']
             }
         }
     });

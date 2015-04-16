@@ -16,6 +16,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Bean
+    public CustomPermissionEvaluator customEvaluator(){
+        return new CustomPermissionEvaluator();
+    }
+
     @Autowired
     CustomDetailsService userDetails;
 
