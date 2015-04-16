@@ -42,10 +42,10 @@
                                 <input class="form-control" type="text" id="datepicker" name="dateStr" value="<fmt:formatDate value='${indicator.date}' pattern='${dateFormat}' />" />
                             </td>
                             <td>
-                                <input class="form-control" type="number" step="0.01" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
+                                <input class="form-control" type="number" step="0.01" min="0.00" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" step="1" name="value" value="${indicator.value}"/>
+                                <input class="form-control" type="number" step="1" min="0" name="value" value="${indicator.value}"/>
                             </td>
                             <td>
                                 <input class="checkbox" type="checkbox" name="paid" <c:if test="${indicator.paid}">checked="checked"</c:if> />
