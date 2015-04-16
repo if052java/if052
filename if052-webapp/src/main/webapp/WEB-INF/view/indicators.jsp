@@ -136,7 +136,7 @@
                                 </td>
                                 <td><input class="form-control" type="number" step="1" min="0" required
                                            name="value" value="${indicators.size()!=0 ? indicators.get(indicators.size()-1).value : 0}"/></td>
-                                <td><input class="checkbox" type="checkbox" name="paid"></td>
+                                <td><input class="checkbox" type="checkbox" name="paid"/></td>
                                 <td>
                                     <button class="btn btn-default" type="submit">
                                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
