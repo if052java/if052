@@ -1,0 +1,38 @@
+/**
+ * Created by valentyn on 4/16/15.
+ */
+/**
+ * Created by valentyn on 4/15/15.
+ */
+$(document).ready(function() {
+    $('#updateAddress').validate({
+        rules: {
+            "city": {
+                required: true,
+                maxlength:32
+            },
+            "street": {
+                required: true,
+                maxlength:32
+            },
+            "building": {
+                required: true,
+                maxlength:10
+            }
+        },
+        messages: {
+            "city": {
+                required: messages['required.field'],
+                maxlength: messages['maxlength.city']
+            },
+            "street": {
+                required: messages['required.field'],
+                maxlength: messages['maxlength.street']
+            },
+            "building": {
+                required: messages['required.field'],
+                maxlength: messages['maxlength.building']
+            }
+        }
+    });
+});
