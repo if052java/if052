@@ -82,13 +82,14 @@ public class AddressResource {
 
     @RequestMapping(value = "{addressId}", method = RequestMethod.PUT, produces = "application/json")
     public Address updateAddress(
-        @Valid
         @PathVariable("addressId") int addressId,
+        @Valid
         @RequestBody
         Address address,
         HttpServletResponse response){
 
         addressService.updateAddress(address);
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
         return address;
     }
 

@@ -3,9 +3,11 @@ package com.softserveinc.if052_core.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import org.hibernate.validator.constraints.Length;
 
 public class WaterMeter {
 
@@ -13,19 +15,20 @@ public class WaterMeter {
 
     @NotNull
     @NotEmpty
+    @Length(max=32)
     private String name;
 
     @NotNull
     @NotEmpty
+    @Length(max=64)
     private String description;
 
-    @Min(0)
+    @DecimalMin(value = "0.00")
     private Double tariff;
 
     @NotNull
     private Address address;
 
-    @NotNull
     private MeterType meterType;
 
     private List<Indicator> indicators;

@@ -10,6 +10,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
@@ -20,7 +21,7 @@
             <c:url var="updateUrl" value="/updateAddress"/>
 
             <form:form
-                    action="${updateUrl}" method="post" modelAttribute="address">
+                    action="${updateUrl}" method="post" id="updateAddress" modelAttribute="address">
                 <sec:csrfInput/>
                 <table class="box-table-a">
                     <thead>
@@ -35,16 +36,16 @@
                     <tr>
                         <td>
                             <input type="hidden" name="addressId" value="${address.addressId}"/>
-                            <input type="text" class="form-control" name="city" value="${address.city}" required title="Це поле обов'язкове"/>
+                            <input type="text" class="form-control" name="city" value="${address.city}" />
                         </td>
                         <td> 
-                            <input type="text" class="form-control" name="street" value="${address.street}" required title="Це поле обов'язкове"/>
+                            <input type="text" class="form-control" name="street" value="${address.street}" />
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="building" value="${address.building} " required title="Це поле обов'язкове"/>
+                            <input type="text" class="form-control" name="building" value="${address.building} " />
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="apartment" value="${address.apartment}" required title="Це поле обов'язкове"/>
+                            <input type="text" class="form-control" name="apartment" value="${address.apartment}" />
                         </td>
                         <td>
                             <button class="btn btn-default" type="submit">
@@ -56,5 +57,15 @@
                 </table>
             </form:form>
         </div>
+
+        <script src="/resources/js/jquery/jquery-validate.js"></script>
+        <script type="text/javascript">
+            var messages = new Array();
+            messages['maxlength.city'] = "<spring:message code='maxlength.city' javaScriptEscape='true' />"
+            messages['maxlength.street'] = "<spring:message code='maxlength.street' javaScriptEscape='true' />"
+            messages['maxlength.building'] = "<spring:message code='maxlength.building' javaScriptEscape='true' />"
+            messages['required.field'] = "<spring:message code='required.field' javaScriptEscape='true' />"
+        </script>
+        <script src="/resources/js/updateAddress.js"></script>
     </tiles:putAttribute>
 </tiles:insertDefinition>

@@ -67,8 +67,9 @@ public class IndicatorController {
     @RequestMapping(value = "/addIndicator", method = RequestMethod.POST)
     public String addIndicator(@ModelAttribute Indicator indicator,
                                ModelMap model,
-                               @RequestParam String dateStr){
-        ServiceResponse serviceResponse = indicatorService.addIndicator(indicator, meterId, dateStr);
+                               @RequestParam("dateStr") String dateStr,
+                               @RequestParam("locale") String locale){
+        ServiceResponse serviceResponse = indicatorService.addIndicator(indicator, meterId, dateStr + locale);
         if (isError(model, serviceResponse)) return serviceResponse.getStatus();
 
         return REDIRECT + this.meterId;
@@ -87,8 +88,9 @@ public class IndicatorController {
     @RequestMapping(value = "/updateIndicator", method = RequestMethod.POST)
     public String updateIndicator(@ModelAttribute Indicator indicator,
                                   ModelMap model,
-                                  @RequestParam String dateStr){
-        ServiceResponse serviceResponse = indicatorService.updateIndicator(indicator, meterId, dateStr);
+                                  @RequestParam("dateStr") String dateStr,
+                                  @RequestParam("locale") String locale){
+        ServiceResponse serviceResponse = indicatorService.updateIndicator(indicator, meterId, dateStr + locale);
         if (isError(model, serviceResponse)) return serviceResponse.getStatus();
 
         return REDIRECT + this.meterId;

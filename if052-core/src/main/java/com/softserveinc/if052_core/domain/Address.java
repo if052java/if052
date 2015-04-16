@@ -6,6 +6,7 @@ package com.softserveinc.if052_core.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import org.hibernate.validator.constraints.Length;
@@ -36,9 +37,9 @@ public final class Address {
     @Length(max=10)
 	private String building;
 
-	private String apartment;
+    @Min(0)
+	private Integer apartment;
 
-    @NotNull
 	private User user;
 
 	private List<WaterMeter> waterMeters;
@@ -103,14 +104,14 @@ public final class Address {
 	/**
 	 * @return the apartment
 	 */
-	public String getApartment() {
+	public Integer getApartment() {
 		return apartment;
 	}
 
 	/**
 	 * @param apartment the apartment to set
 	 */
-	public void setApartment(String apartment) {
+	public void setApartment(Integer apartment) {
 		this.apartment = apartment;
 	}
 

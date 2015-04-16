@@ -91,7 +91,7 @@ public class AddressServiceTest {
         address.setCity("Івано-Франківськ");
         address.setStreet("Сахарова");
         address.setBuilding("23");
-        address.setApartment("503");
+        address.setApartment(10);
         address.setUser(userService.getUserById(1));
         addressService.insertAddress(address);
 
@@ -121,7 +121,7 @@ public class AddressServiceTest {
         address.setCity("Львів");
         address.setStreet("Садова");
         address.setBuilding("2а");
-        address.setApartment("1");
+        address.setApartment(10);
         addressService.updateAddress(address);
         Address updatedAddress = addressService.getAddressById(lastId);
 
@@ -137,7 +137,7 @@ public class AddressServiceTest {
         address.setCity("Івано-Франківськ");
         address.setStreet("Сахарова");
         address.setBuilding("23");
-        address.setApartment("503");
+        address.setApartment(10);
         address.setUser(userService.getUserById(1));
         addressService.insertAddress(address);
 
