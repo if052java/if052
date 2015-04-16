@@ -2,6 +2,7 @@ package com.softserveinc.if052_webapp.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.if052_core.domain.Indicator;
+import com.softserveinc.if052_core.domain.ValidationError;
 import com.softserveinc.if052_core.domain.WaterMeter;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,20 +84,36 @@ public class IndicatorService {
      * @return a ServiceResponce instance ( status (by default = "OK" ), status message,
      *          responce (a List with the indicator if status still = "OK") )
      */
-    public ServiceResponse addIndicator(Indicator indicator, String meterId, String dateStr){
+    public ServiceResponse addIndicator(Indicator indicator, String meterId, String dateStr) {
         ServiceResponse serviceResponse = new ServiceResponse();
         parseMeter(indicator, meterId, serviceResponse);
         parseDate(indicator, dateStr, serviceResponse);
         ResponseEntity<String> indicatorResponseEntity = restTemplate.exchange(
-                restUrl + "indicators/",
-                HttpMethod.POST,
-                new HttpEntity<Indicator>(indicator),
-                String.class);
-        if (isError400(serviceResponse, indicatorResponseEntity)) return serviceResponse;
-        if (isError404(serviceResponse, indicatorResponseEntity)) return serviceResponse;
-        serviceResponse.setResponse(Arrays.asList(indicator));
+            restUrl + "indicators/",
+            HttpMethod.POST,
+            new HttpEntity<Indicator>(indicator),
+            String.class);
+            if (isError400(serviceResponse, indicatorResponseEntity))
+                return serviceResponse;
+            if (isError404(serviceResponse, indicatorResponseEntity))
+                return serviceResponse;
+            serviceResponse.setResponse(Arrays.asList(indicator));
 
-        return serviceResponse;
+        if (indicatorResponseEntity.getStatusCode().value() != 201) {
+            try {
+                ValidationError error = objectMapper.readValue(indicatorResponseEntity.getBody(), ValidationError.class);
+
+                if (error.getFieldErrors().size() > 0) {
+                    serviceResponse.setResponse(error.getFieldErrors());
+                    serviceResponse.setStatus("validationError");
+                    return serviceResponse;
+                }
+            } catch (IOException e) {
+                LOGGER.warn(e.getMessage(), e);
+            }
+        }
+            return serviceResponse;
+        
     }
 
     /**
@@ -126,6 +143,19 @@ public class IndicatorService {
         if (isError404(serviceResponse, indicatorResponseEntity)) return serviceResponse;
         serviceResponse.setResponse(Arrays.asList(indicator));
 
+        if (indicatorResponseEntity.getStatusCode().value() != 202) {
+            try {
+                ValidationError error = objectMapper.readValue(indicatorResponseEntity.getBody(), ValidationError.class);
+
+                if (error.getFieldErrors().size() > 0) {
+                    serviceResponse.setResponse(error.getFieldErrors());
+                    serviceResponse.setStatus("validationError");
+                    return serviceResponse;
+                }
+            } catch (IOException e) {
+                LOGGER.warn(e.getMessage(), e);
+            }
+        }
         return serviceResponse;
     }
 

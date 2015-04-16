@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +122,7 @@ public class IndicatorResource {
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public Indicator createIndicator(
+        @Valid
         @RequestBody
         Indicator indicator,
         HttpServletResponse response){
@@ -130,11 +132,6 @@ public class IndicatorResource {
             LOGGER.info("INFO: Indicator has been successfully added with id " + indicator.getIndicatorId() + ".");
             response.setStatus(HttpServletResponse.SC_CREATED);
             return indicator;
-        }
-        catch (ConstraintViolationException e){
-            LOGGER.info("INFO: Invalid indicator's data.");
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return null;
         }
         catch (Exception e) {
             LOGGER.info("INFO: Internal error");
@@ -146,6 +143,7 @@ public class IndicatorResource {
     @RequestMapping(value = "{indicatorId}", method = RequestMethod.PUT, produces = "application/json")
     public Indicator updateIndicator(
         @PathVariable("indicatorId") int indicatorId,
+        @Valid
         @RequestBody
         Indicator indicator,
         HttpServletResponse response){
@@ -160,11 +158,6 @@ public class IndicatorResource {
             LOGGER.info("INFO: Indicator with id " + indicatorId + " has been successfully updated.");
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
             return indicator;
-        }
-        catch (ConstraintViolationException e){
-            LOGGER.info("INFO: Invalid indicator's data.");
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return null;
         }
         catch (Exception e) {
             LOGGER.info("INFO: Internal error");

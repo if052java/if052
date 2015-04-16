@@ -149,7 +149,6 @@ public class WaterMeterController {
                     model.addAttribute("fieldErrors", error.getFieldErrors());
                     return "validationError";
                 }
-                return "error400";
             } catch (IOException e) {
                 LOGGER.warn(e.getMessage(), e);
             }

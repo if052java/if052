@@ -136,7 +136,7 @@
                                     <input class="form-control" type="text" id="datepicker" name="dateStr"/>
                                     <input hidden="hidden" type="text" name="locale" value="${locale}"/>
                                 </td>
-                                <td><input class="form-control" type="number" step="1" min="0"
+                                <td><input class="form-control" type="number" step="1"
                                            name="value" value="${indicators.size()!=0 ? indicators.get(indicators.size()-1).value : 0}"/></td>
                                 <td><input class="checkbox" type="checkbox" name="paid" /></td>
                                 <td>

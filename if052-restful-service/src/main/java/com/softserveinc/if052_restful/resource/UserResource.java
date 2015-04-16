@@ -69,7 +69,6 @@ public class UserResource {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
     public User createUser(
-        @Valid
         @RequestBody
         User user, HttpServletResponse response ){
 
@@ -79,11 +78,6 @@ public class UserResource {
             LOGGER.info("INFO: User has been successfully added with id " + user.getUserId() + ".");
             response.setStatus(HttpServletResponse.SC_CREATED);
             return user;
-        }
-        catch (ConstraintViolationException e){
-            LOGGER.info("INFO: Invalid users data.");
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return null;
         }
         catch (Exception e) {
             LOGGER.info("INFO: Internal error");
@@ -106,11 +100,6 @@ public class UserResource {
             LOGGER.info("INFO: User with id " + userId + " has been successfully updated.");
             return user;
 
-        }
-        catch (ConstraintViolationException e){
-            LOGGER.info("INFO: Invalid users data.");
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return null;
         }
         catch (Exception e) {
             LOGGER.info("INFO: Internal error");

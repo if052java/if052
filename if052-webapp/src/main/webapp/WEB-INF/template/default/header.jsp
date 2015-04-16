@@ -81,10 +81,6 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="${base}#">
-                                    <%--<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>--%>
-                                    <spring:message code="header.settings"/>
-                                </a></li>
                                 <li class="divider"></li>
                                 <security:authorize ifNotGranted="ROLE_ADMIN, ROLE_USER">
                                 <li class="sign-up" ><a href="${base}signup">
