@@ -81,7 +81,6 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li class="divider"></li>
                                 <security:authorize ifNotGranted="ROLE_ADMIN, ROLE_USER">
                                 <li class="sign-up" ><a href="${base}signup">
                                     <spring:message code="header.registration"/>

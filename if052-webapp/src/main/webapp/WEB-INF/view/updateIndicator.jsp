@@ -39,13 +39,14 @@
                             <td>
                                 <input class="form-control" type="hidden" name="indicatorId" value="${indicator.indicatorId}"/>
                                 <input hidden="hidden" type="text" name="locale" value="${locale}"/>
-                                <input class="form-control" type="text" id="datepicker" name="dateStr" value="<fmt:formatDate value='${indicator.date}' pattern='${dateFormat}' />" />
+                                <input class="form-control" type="text" id="datepicker" name="dateStr" required
+                                       value="<fmt:formatDate value='${indicator.date}' pattern='${dateFormat}' />"  pattern='<spring:message code="local.date.parser"/>' />
                             </td>
                             <td>
-                                <input class="form-control" type="number" step="0.01" min="0.00" name="tariffPerDate" value="${indicator.tariffPerDate}"/>
+                                <input class="form-control" type="number" step="0.01" min="0.00" name="tariffPerDate" value="${indicator.tariffPerDate}" required/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" step="1" min="0" name="value" value="${indicator.value}"/>
+                                <input class="form-control" type="number" step="1" min="0" name="value" value="${indicator.value}" required/>
                             </td>
                             <td>
                                 <input class="checkbox" type="checkbox" name="paid" <c:if test="${indicator.paid}">checked="checked"</c:if> />
