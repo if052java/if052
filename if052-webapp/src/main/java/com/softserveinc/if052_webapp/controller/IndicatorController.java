@@ -54,25 +54,27 @@ public class IndicatorController {
 
         // calculating indicator's cost
         List indicators = indServResponse.getResponse();
-        double[] cost = new double[indicators.size()];
-        int previous = 0;
-        for (int i=0; i<indicators.size(); i++) {
-            Indicator indicator = (Indicator) indicators.get(i);
-            System.out.println(indicator);
-            if (indicator.getValue() < previous) {
-                int j=1000;
-                while (j < previous) {
-                    j*=10;
+        if (indicators.size()>0) {
+            double[] cost = new double[indicators.size()];
+            int previous = 0;
+            for (int i = 0; i < indicators.size(); i++) {
+                Indicator indicator = (Indicator) indicators.get(i);
+                System.out.println(indicator);
+                if (indicator.getValue() < previous) {
+                    int j = 1000;
+                    while (j < previous) {
+                        j *= 10;
+                    }
+                    cost[i] = (j - previous + indicator.getValue()) * indicator.getTariffPerDate();
+                } else {
+                    cost[i] = (indicator.getValue() - previous) * indicator.getTariffPerDate();
+                    previous = indicator.getValue();
                 }
-                cost[i] = (j - previous + indicator.getValue())*indicator.getTariffPerDate();
-            } else {
-                cost[i] = (indicator.getValue() - previous) * indicator.getTariffPerDate();
-                previous = indicator.getValue();
+                System.out.println(cost[i]);
             }
-            System.out.println(cost[i]);
-        }
 
-        model.addAttribute(COST, cost);
+            model.addAttribute(COST, cost);
+        }
         model.addAttribute(WATER_METER, waterMeter);
         model.addAttribute(INDICATORS, indicators);
 

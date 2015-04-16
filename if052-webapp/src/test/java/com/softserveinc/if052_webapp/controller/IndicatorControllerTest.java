@@ -114,7 +114,7 @@ public class IndicatorControllerTest {
     @Test
     public void testAddIndicator() throws Exception {
         when(meterServiceMock.getMeterById(4)).thenReturn(meterServResponce);
-        when(indicatorServiceMock.getIndicatorList(4)).thenReturn(new ServiceResponse());
+        when(indicatorServiceMock.getIndicatorList(4)).thenReturn(indServResponse);
         when(indicatorServiceMock.addIndicator(org.mockito.Mockito.isA(Indicator.class),eq("4"), eq("11-04-2015uk"))).thenReturn(indServResponse);
         mockMvc.perform(get("/indicators?meterId=4"));
         mockMvc.perform(post("/addIndicator")
