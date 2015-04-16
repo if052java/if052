@@ -93,7 +93,12 @@ public class IndicatorController {
                                @RequestParam("dateStr") String dateStr,
                                @RequestParam("locale") String locale){
         ServiceResponse serviceResponse = indicatorService.addIndicator(indicator, meterId, dateStr + locale);
-        if (isError(model, serviceResponse)) return serviceResponse.getStatus();
+        if (isError(model, serviceResponse)){
+            return serviceResponse.getStatus();
+        }
+        if (isValidationError(model, serviceResponse)){
+            return serviceResponse.getStatus();
+        }
 
         return REDIRECT + this.meterId;
     }
@@ -120,8 +125,16 @@ public class IndicatorController {
     }
 
     private boolean isError(ModelMap model, ServiceResponse serviceResponse) {
-        if (serviceResponse.getStatus() != "OK"){
+        if (serviceResponse.getStatus() != "OK" && serviceResponse.getStatus() != "validationError"){
             model.addAttribute(REASON, serviceResponse.getStatus());
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isValidationError(ModelMap model, ServiceResponse serviceResponse) {
+        if (serviceResponse.getStatus() == "validationError"){
+            model.addAttribute("fieldErrors", serviceResponse.getResponse());
             return true;
         }
         return false;

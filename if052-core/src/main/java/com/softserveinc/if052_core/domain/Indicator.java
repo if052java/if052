@@ -16,7 +16,6 @@ public class Indicator {
     @NotNull
     private Date date;
 
-    @NotNull
     @Min(0)
     private Double tariffPerDate;
 

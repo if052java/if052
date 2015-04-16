@@ -8,6 +8,8 @@ import com.softserveinc.if052_restful.service.WaterMeterService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +50,8 @@ public class AddressResource {
         return addresses;
     }
 
+//    @PostAuthorize("returnObject.user.userId == principal.username")
+    @PostAuthorize("hasPermission(returnObject, 'get')")
     @RequestMapping(value = "/{addressId}", method = RequestMethod.GET, produces = "application/json")
     public Address getAddress(@PathVariable("addressId") int addressId, HttpServletResponse response) {
         Address address = addressService.getAddressById(addressId);

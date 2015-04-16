@@ -35,6 +35,15 @@ public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
     @Override
     protected MethodSecurityExpressionHandler createExpressionHandler() {
-        return new OAuth2MethodSecurityExpressionHandler();
+//        DefaultMethodSecurityExpressionHandler expressionHandler =
+//                new DefaultMethodSecurityExpressionHandler();
+//        expressionHandler.setPermissionEvaluator(
+//                new SpittlePermissionEvaluator());
+//        return expressionHandler;
+
+        OAuth2MethodSecurityExpressionHandler handler = new OAuth2MethodSecurityExpressionHandler();
+        handler.setPermissionEvaluator(new CustomPermissonEvaluator());
+        return handler;
+//        return new OAuth2MethodSecurityExpressionHandler();
     }
 }
