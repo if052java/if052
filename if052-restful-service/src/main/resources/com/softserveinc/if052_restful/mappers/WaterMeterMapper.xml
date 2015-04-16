@@ -38,6 +38,7 @@
         wm.description,
         wm.tariff,
         mt.meter_type_id,
+        mt.type,
         i.indicator_id,
         i.date,
         i.tariff_per_date,
