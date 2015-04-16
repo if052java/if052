@@ -6,6 +6,7 @@ package com.softserveinc.if052_core.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import org.hibernate.validator.constraints.Length;
@@ -36,6 +37,7 @@ public final class Address {
     @Length(max=10)
 	private String building;
 
+    @Min(0)
 	private Integer apartment;
 
 	private User user;
