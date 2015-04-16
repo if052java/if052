@@ -78,12 +78,6 @@ public class WaterMeterResource {
 
 
         LOGGER.info("INFO: Adding a new meter.");
-//        if (waterMeter.getName().length() < 1) {
-//            LOGGER.warn("WARNING: Meter name cannot be empty.");
-//            return Response
-//                    .status(Response.Status.BAD_REQUEST)
-//                    .build();
-//        }
         try {
             waterMeterService.insertWaterMeter(waterMeter);
             LOGGER.info("INFO: Meter has been successfully added with id " + waterMeter.getWaterMeterId() + ".");
