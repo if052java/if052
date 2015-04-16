@@ -12,7 +12,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="sptring" uri="http://www.springframework.org/tags" %>
-
+<fmt:message var="dateFormat" key="local.date.format"/>
+<fmt:message var="locale" key="local.lang"/>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
 
@@ -37,6 +38,8 @@
                                 <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}"
                                        required/>
                             </div>
+                            <input hidden="hidden" type="text" name="dateFormat" value="${dateFormat}"/>
+                            <input hidden="hidden" type="text" name="locale" value="${locale}"/>
                             <div class="form-group">
                                 <button type="submit" id="subBtn" class="btn btn-primary">
                                     <sptring:message code="report.downloadReport"/> (MS Excel)

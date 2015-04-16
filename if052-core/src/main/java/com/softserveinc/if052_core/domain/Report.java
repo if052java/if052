@@ -8,9 +8,12 @@ import java.util.List;
  */
 
 public class Report {
+
     private int reportId;
+    private String locale;
     private Date startDate;
     private Date endDate;
+    private String dateFormat;
     private List<User> users;
     private List<MeterType> meterTypes;
     private String reportRequest;
@@ -19,12 +22,12 @@ public class Report {
     public Report() {
     }
 
-    public Report(int reportId, Date startDate, Date endDate,
-                  List<User> users, List<MeterType> meterTypes,
-                  String reportRequest, String xmlReport) {
+    public Report(int reportId, String locale, Date startDate, Date endDate, String dateFormat, List<User> users, List<MeterType> meterTypes, String reportRequest, String xmlReport) {
         this.reportId = reportId;
+        this.locale = locale;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.dateFormat = dateFormat;
         this.users = users;
         this.meterTypes = meterTypes;
         this.reportRequest = reportRequest;
@@ -37,6 +40,14 @@ public class Report {
 
     public void setReportId(int reportId) {
         this.reportId = reportId;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
     public Date getStartDate() {
@@ -53,6 +64,14 @@ public class Report {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
     }
 
     public List<User> getUsers() {

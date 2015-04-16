@@ -41,7 +41,7 @@
                         <td><input type="text" class="form-control" name="description"
                                    value="${waterMeter.description}"/></td>
                         <td>
-                            <input type="number" class="form-control" step="0.01" min="0.00" name="tariff"
+                            <input class="form-control" name="tariff"
                                    value="${waterMeter.tariff}"/>
                         </td>
                         <td>
@@ -60,6 +60,8 @@
             messages['maxlength.name'] = "<spring:message code='maxlength.name' javaScriptEscape='true' />"
             messages['maxlength.description'] = "<spring:message code='maxlength.description' javaScriptEscape='true' />"
             messages['required.field'] = "<spring:message code='required.field' javaScriptEscape='true' />"
+            messages['number.min'] = "<spring:message code='number.min' javaScriptEscape='true' />"
+            messages['number.field'] = "<spring:message code='number.field' javaScriptEscape='true' />"
         </script>
         <script src="/resources/js/updateMeter.js"></script>
     </tiles:putAttribute>

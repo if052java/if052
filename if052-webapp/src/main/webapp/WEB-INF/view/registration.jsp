@@ -118,6 +118,7 @@
             strings['rangelength.confirmPassword'] = "<spring:message code='rangelength.confirmPassword' javaScriptEscape='true' />"
             strings['equalTo.confirmPassword'] = "<spring:message code='equalTo.confirmPassword' javaScriptEscape='true' />"
             strings['email.email'] = "<spring:message code='email.email' javaScriptEscape='true' />"
+            strings['exist.login'] = "<spring:message code='exist.login' javaScriptEscape='true' />"
         </script>
         <script src="/resources/js/registration.js"></script>
         

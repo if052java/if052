@@ -95,7 +95,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input class="form-control" type="number" step="0.01" min="0.00" value="0" name="tariff"/>
+                                <input class="form-control" name="tariff"/>
                             </td>
                             <td>
                                 <button class="btn btn-default" type="submit">
@@ -116,6 +116,8 @@
             messages['maxlength.name'] = "<spring:message code='maxlength.name' javaScriptEscape='true' />"
             messages['maxlength.description'] = "<spring:message code='maxlength.description' javaScriptEscape='true' />"
             messages['required.field'] = "<spring:message code='required.field' javaScriptEscape='true' />"
+            messages['number.min'] = "<spring:message code='number.min' javaScriptEscape='true' />"
+            messages['number.field'] = "<spring:message code='number.field' javaScriptEscape='true' />"
         </script>
         <script src="/resources/js/meter.js"></script>
 

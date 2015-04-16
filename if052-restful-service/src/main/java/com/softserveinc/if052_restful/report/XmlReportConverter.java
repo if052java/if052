@@ -20,14 +20,15 @@ public class XmlReportConverter extends ReportConverter {
     private IndicatorService indicatorService;
 
     private Report report;
+    private DateFormat df;
 
-    private StringBuffer result = new StringBuffer();
+    private StringBuffer result;
 
     @Override
     public byte[] convert(Report report) {
         this.report = report;
         result = new StringBuffer();
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+        df = new SimpleDateFormat(report.getDateFormat());
         result.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
         result.append("\n<report>\n");
         result.append("\t<startDate> " + df.format(report.getStartDate()) + " </startDate>\n");
