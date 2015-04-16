@@ -18,6 +18,10 @@ $(document).ready(function() {
             "building": {
                 required: true,
                 maxlength:10
+            },
+            "apartment": {
+                number: true,
+                min: 0
             }
         },
         messages: {
@@ -32,6 +36,10 @@ $(document).ready(function() {
             "building": {
                 required: messages['required.field'],
                 maxlength: messages['maxlength.building']
+            },
+            "apartment": {
+                number: messages['number.field'],
+                min: messages['number.min']
             }
         }
     });

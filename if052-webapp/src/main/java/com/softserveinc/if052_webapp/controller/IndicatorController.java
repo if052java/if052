@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class IndicatorController {
     public static final String REDIRECT = "redirect:/indicators?meterId=";
     public static final String INDICATOR = "indicator";
     public static final String REASON = "reason";
+    public static final String COST = "cost";
     private String meterId = "";
 
     @Autowired
@@ -50,8 +52,31 @@ public class IndicatorController {
         if (isError(model, meterServResponce)) return meterServResponce.getStatus();
         WaterMeter waterMeter = (WaterMeter) meterServResponce.getResponse().get(0);
 
+        // calculating indicator's cost
+        List indicators = indServResponse.getResponse();
+        if (indicators.size()>0) {
+            double[] cost = new double[indicators.size()];
+            int previous = 0;
+            for (int i = 0; i < indicators.size(); i++) {
+                Indicator indicator = (Indicator) indicators.get(i);
+                System.out.println(indicator);
+                if (indicator.getValue() < previous) {
+                    int j = 1000;
+                    while (j < previous) {
+                        j *= 10;
+                    }
+                    cost[i] = (j - previous + indicator.getValue()) * indicator.getTariffPerDate();
+                } else {
+                    cost[i] = (indicator.getValue() - previous) * indicator.getTariffPerDate();
+                    previous = indicator.getValue();
+                }
+                System.out.println(cost[i]);
+            }
+
+            model.addAttribute(COST, cost);
+        }
         model.addAttribute(WATER_METER, waterMeter);
-        model.addAttribute(INDICATORS, indServResponse.getResponse());
+        model.addAttribute(INDICATORS, indicators);
 
         return "indicators";
     }
@@ -70,7 +95,12 @@ public class IndicatorController {
                                @RequestParam("dateStr") String dateStr,
                                @RequestParam("locale") String locale){
         ServiceResponse serviceResponse = indicatorService.addIndicator(indicator, meterId, dateStr + locale);
-        if (isError(model, serviceResponse)) return serviceResponse.getStatus();
+        if (isError(model, serviceResponse)){
+            return serviceResponse.getStatus();
+        }
+        if (isValidationError(model, serviceResponse)){
+            return serviceResponse.getStatus();
+        }
 
         return REDIRECT + this.meterId;
     }
@@ -97,8 +127,16 @@ public class IndicatorController {
     }
 
     private boolean isError(ModelMap model, ServiceResponse serviceResponse) {
-        if (serviceResponse.getStatus() != "OK"){
+        if (serviceResponse.getStatus() != "OK" && serviceResponse.getStatus() != "validationError"){
             model.addAttribute(REASON, serviceResponse.getStatus());
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isValidationError(ModelMap model, ServiceResponse serviceResponse) {
+        if (serviceResponse.getStatus() == "validationError"){
+            model.addAttribute("fieldErrors", serviceResponse.getResponse());
             return true;
         }
         return false;

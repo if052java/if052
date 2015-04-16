@@ -69,13 +69,13 @@ public class IndicatorTest extends AbstractModel {
 
         Indicator indicatorFailureNotNull = new Indicator(
             null,
-            null,
+            12.00,
             null,
             null
         );
 
         constraintViolationSet = validator.validate(indicatorFailureNotNull);
-        assertEquals( 4, constraintViolationSet.size() );
+        assertEquals( 3, constraintViolationSet.size() );
 
         for( ConstraintViolation<Indicator> constraintViolation : constraintViolationSet ) {
             //- Property name -//

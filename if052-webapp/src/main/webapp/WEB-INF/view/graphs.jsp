@@ -15,9 +15,13 @@
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
         <div class="body">
+            <div id="error" class="error">
+                <c:if test="${error!=null}">
+                    <spring:message code="indicators.nodata"/>
+                </c:if>
+            </div>
             <div id="container" class="graphs-size"></div>
-            <div id="error" class="error">${error}</div>
-        
+            
             <c:url var="drawByMonth" value="/graphByOption" />
 
             <div id="chooseMonth" class = "check-box">

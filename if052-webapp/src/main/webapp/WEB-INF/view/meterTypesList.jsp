@@ -10,6 +10,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
@@ -18,11 +19,11 @@
 
                 <table class="table table-hover">
                     <thead>
-                    <h4>Довідник типів лічильників</h4>
+                    <h4><spring:message code="meter.types.list"/></h4>
                     <tr>
-                        <th>Тип лічильника</th>
-                        <th>Редагувати</th>
-                        <th>Видалити</th>
+                        <th><spring:message code="meter.meterType"/></th>
+                        <th><spring:message code="meter.edit"/></th>
+                        <th><spring:message code="meter.remove"/></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,10 +49,10 @@
                 <form:form action="${addUrl}" method="post" modelAttribute="meterType">
                     <sec:csrfInput/>
                     <table class="box-table-a">
-                        <caption>Додати тип лічильника</caption>
+                        <caption><spring:message code="meterType.addMeterType"/></caption>
                         <thead>
                         <tr>
-                            <th>Найменування типу</th>
+                            <th><spring:message code="meterType.name"/></th>
                         </tr>
                         </thead>
                         <tbody>
