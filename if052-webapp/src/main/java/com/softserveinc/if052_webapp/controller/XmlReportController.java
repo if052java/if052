@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,6 +90,7 @@ public class XmlReportController {
     @RequestMapping(value = "/createXmlReport", method = RequestMethod.GET)
     public void createXmlReport(@ModelAttribute ReportRequest reportRequest,
                                 HttpServletRequest request, HttpServletResponse response) {
+        reportRequest.setLocale("en");
         ResponseEntity<byte[]> postResponseEntity = restTemplate.exchange(restUrl + "report/xml", HttpMethod.POST,
                 new HttpEntity<ReportRequest>(reportRequest), byte[].class);
         String contentType = postResponseEntity.getHeaders().get("Content-Type").get(0);
@@ -100,7 +102,7 @@ public class XmlReportController {
     @RequestMapping(value = "/createExcelReport", method = RequestMethod.GET)
     public void createExcelReport(@ModelAttribute ReportRequest reportRequest,
                                   HttpServletRequest request, HttpServletResponse response) {
-        reportRequest.setUsers(auth.getUsername());
+        reportRequest.setUsers(SecurityContextHolder.getContext().getAuthentication().getName());
         reportRequest.setTypes(new ArrayList<Integer>());
         ResponseEntity<byte[]> postResponseEntity = restTemplate.exchange(restUrl + "report/excel", HttpMethod.POST,
                 new HttpEntity<ReportRequest>(reportRequest), byte[].class);

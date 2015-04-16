@@ -14,7 +14,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-
+<fmt:message var="dateFormat" key="local.date.format"/>
 <tiles:insertDefinition name="defaultTemplate">
     <tiles:putAttribute name="body">
 
@@ -52,6 +52,7 @@
                                 <input type="text" name="endDate" class="form-control" id="endDate" value="${endDate}"
                                        required/>
                             </div>
+                            <input hidden="hidden" type="text" name="dateFormat" value="${dateFormat}"/>
                             <div class="form-group">
                                 <div class="checkbox-inline" id="types">
                                     <label for="types"><spring:message code="report.meterTypes"/></label>

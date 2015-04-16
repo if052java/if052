@@ -23,8 +23,10 @@ public abstract class ReportConverter {
 
     public Report createReport(ReportRequest reportRequest) {
         Report report = new Report();
+        report.setLocale(reportRequest.getLocale());
         report.setStartDate(reportRequest.getStartDate());
         report.setEndDate(reportRequest.getEndDate());
+        report.setDateFormat(reportRequest.getDateFormat());
         if (reportRequest.getUsers().trim().equals("ALL")) {
             report.setUsers(userService.getAllReportUsers());
         } else {
