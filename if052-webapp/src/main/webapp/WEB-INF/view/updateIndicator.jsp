@@ -46,7 +46,7 @@
                                 <input class="form-control" type="number" step="0.01" min="0.00" name="tariffPerDate" value="${indicator.tariffPerDate}" required/>
                             </td>
                             <td>
-                                <input class="form-control" type="number" step="1" min="0" name="value" value="${indicator.value}" required/>
+                                <input class="form-control" type="number" step="1" min="0" max="999999999" name="value" value="${indicator.value}" required/>
                             </td>
                             <td>
                                 <input class="checkbox" type="checkbox" name="paid" <c:if test="${indicator.paid}">checked="checked"</c:if> />

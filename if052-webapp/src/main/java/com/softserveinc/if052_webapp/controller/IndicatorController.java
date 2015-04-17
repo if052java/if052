@@ -59,7 +59,6 @@ public class IndicatorController {
             int previous = 0;
             for (int i = 0; i < indicators.size(); i++) {
                 Indicator indicator = (Indicator) indicators.get(i);
-                System.out.println(indicator);
                 if (indicator.getValue() < previous) {
                     int j = 1000;
                     while (j < previous) {
@@ -70,7 +69,6 @@ public class IndicatorController {
                     cost[i] = (indicator.getValue() - previous) * indicator.getTariffPerDate();
                     previous = indicator.getValue();
                 }
-                System.out.println(cost[i]);
             }
 
             model.addAttribute(COST, cost);

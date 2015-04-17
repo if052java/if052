@@ -134,7 +134,7 @@
                                            name="dateStr" pattern='<spring:message code="local.date.parser"/>' required/>
                                     <input hidden="hidden" type="text" name="locale" value="${locale}"/>
                                 </td>
-                                <td><input class="form-control" type="number" step="1" min="0" required
+                                <td><input class="form-control" type="number" step="1" min="0" max="999999999" required
                                            name="value" value="${indicators.size()!=0 ? indicators.get(indicators.size()-1).value : 0}"/></td>
                                 <td><input class="checkbox" type="checkbox" name="paid"/></td>
                                 <td>

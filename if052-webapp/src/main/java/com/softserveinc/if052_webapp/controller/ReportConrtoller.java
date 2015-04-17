@@ -80,6 +80,7 @@ public class ReportConrtoller {
         byte[] output = getFileEntity(reportRequest, "xml").getBody();
         fileDownloader.downloadFile(request, response, output,
                 contentType, contentDisposition);
+        LOGGER.info("Downloading xml report for " + reportRequest.getUsers());
     }
 
     @RequestMapping(value = "/createExcelReport", method = RequestMethod.GET)
@@ -90,6 +91,7 @@ public class ReportConrtoller {
         byte[] output = getFileEntity(reportRequest, "excel").getBody();
         fileDownloader.downloadFile(request, response, output,
                 contentType, contentDisposition);
+        LOGGER.info("Downloading excel report for " + reportRequest.getUsers());
     }
 
     private void setDate(ModelAndView model) {

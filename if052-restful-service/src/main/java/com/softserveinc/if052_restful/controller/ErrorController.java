@@ -16,13 +16,6 @@ import java.util.List;
 @ControllerAdvice
 public class ErrorController {
 
-    @Autowired
-    protected MessageSource messageSource;
-
-    public ErrorController() {
-
-    }
-
     /**
      * Handle validation errors
      *

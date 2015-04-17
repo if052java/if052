@@ -31,27 +31,45 @@
                 <form action="${base}login" method="post" role="form">
                     <fieldset>
                         <legend>
-                            <h2><spring:message code="header.login"/></h2>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-4">
+                                        <h2><spring:message code="header.login"/></h2>
+                                    </div>
+                                    <div class="col-md-6"></div>
+                                </div>
+                            </div>
                         </legend>
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label for="username"><spring:message code="login.login"/></label> <input id="username"
-                                                                                class="form-control" type='text'
-                                                                                name='username' value="LOGIN111"/>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="username"><spring:message code="login.login"/></label> <input id="username"
+                                                                                    class="form-control" type='text' name='username'/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password"><spring:message code="login.password"/></label> <input id="password"
+                                                                                     class="form-control" type='password' name='password'/>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit"><spring:message code="login.siginin"/></button>
+                                    <a href="${base}signup" class="btn btn-primary">
+                                        <spring:message code="header.registration"/>
+                                    </a>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                 </div>
-                                <div class="form-group">
-                                    <label for="password"><spring:message code="login.password"/></label> <input id="password"
-                                                                                 class="form-control" type='password'
-                                                                                 name='password' value="PASS1111"/>
+                                <div class="col-md-4">
+                                    <blockquote>
+                                        <spring:message code="info.message"/>
+                                    </blockquote>
                                 </div>
-                                <button class="btn btn-primary" type="submit"><spring:message code="login.siginin"/></button>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                <div class="col-md-2"></div>
                             </div>
                         </div>
-
                     </fieldset>
                 </form>
+
             </div>
         </div>
     </tiles:putAttribute>
